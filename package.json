@@ -3,11 +3,22 @@
   "version": "0.0.1",
   "description": "TCG deck building tool",
   "main": "src/main.ts",
+  "type": "module",
   "scripts": {
     "start": "node src/main.ts"
   },
-  "keywords": ["tcg", "deck", "builder"],
+  "keywords": [
+    "tcg",
+    "deck",
+    "builder"
+  ],
   "author": "bengeendokter",
   "license": "MIT",
-  "packageManager": "pnpm@10.12.2"
+  "packageManager": "pnpm@10.12.2",
+  "dependencies": {
+    "jsdom": "^27.1.0"
+  },
+  "devDependencies": {
+    "@types/jsdom": "^27.0.0"
+  }
 }
