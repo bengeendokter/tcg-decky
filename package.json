@@ -1,0 +1,13 @@
+{
+  "name": "tcg-decky",
+  "version": "0.0.1",
+  "description": "TCG deck building tool",
+  "main": "src/main.ts",
+  "scripts": {
+    "start": "node src/main.ts"
+  },
+  "keywords": ["tcg", "deck", "builder"],
+  "author": "bengeendokter",
+  "license": "MIT",
+  "packageManager": "pnpm@10.12.2"
+}
