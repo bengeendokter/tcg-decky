@@ -123,17 +123,7 @@ export function parseUrlDeckName(url: string): string {
     return pathName.replaceAll('_(TCG)', '').toLocaleLowerCase();
 }
 
-
-async function main(url: string): Promise<Deck> {
-    const pageText: string = await fetch(url).then(result => result.text());
-    const dom: JSDOM = new JSDOM(pageText);
-
-    const table: Element | null = dom.window.document.querySelector('h2:has(#Deck_list) + table');
-
-    if (!table) {
-        throw Error('Deck list table not found');
-    }
-
+function covertTableToDeck(table: Element): Deck {
     const cards: CardWithQuantity[] = [];
     const name: string = parseUrlDeckName(url);
 
@@ -168,7 +158,26 @@ async function main(url: string): Promise<Deck> {
         return cards.push({ card, quantity });
     });
 
-    return { name, cards }
+    return { name, cards };
+}
+
+async function main(url: string): Promise<Deck[]> {
+    const pageText: string = await fetch(url).then(result => result.text());
+    const dom: JSDOM = new JSDOM(pageText);
+
+    const table: Element | null = dom.window.document.querySelector('h2:has(#Deck_list) + table');
+    const tables: NodeListOf<Element> = dom.window.document.querySelectorAll('h2:has(#Deck_lists) ~ table');
+
+    if (table) {
+        return [covertTableToDeck(table)];
+    }
+
+    if (tables.length === 0) {
+        throw Error('Deck list table not found');
+    }
+
+    console.log(tables.length);
+    return [];
 }
 
 const CONFIG = {
@@ -179,8 +188,11 @@ const CONFIG = {
     BATTLE_ACADEMY_2024_DECKS_URL: 'https://bulbapedia.bulbagarden.net/wiki/Battle_Academy_2024_(TCG)'
 } as const satisfies Record<Uppercase<string>, string>;
 
-const url: string = CONFIG.MARNIE_RIVAL_DECK_URL;
-const deck: Deck = await main(url);
+const url: string = CONFIG.BATTLE_ACADEMY_2024_DECKS_URL;
+const decks: Deck[] = await main(url);
 const outputDirectory: string = CONFIG.DEFAULT_OUTPUT_DIRECTORY;
-const deckFileName = `${outputDirectory}/${deck.name}.json`;
-fs.writeFileSync(deckFileName, JSON.stringify(deck, null, 2), { encoding: 'utf-8' });
+
+decks.forEach(deck => {
+    const deckFileName = `${outputDirectory}/${deck.name}.json`;
+    fs.writeFileSync(deckFileName, JSON.stringify(deck, null, 2), { encoding: 'utf-8' });
+});
