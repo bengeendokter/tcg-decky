@@ -1,6 +1,6 @@
 import * as fs from 'fs';
-import { extractPrebuildDeck } from './extract-prebuild-deck.ts';
-import type { Deck } from './model/prebuild-deck.ts';
+import { extractPrebuildDeck } from './prebuild/feature/extract-prebuild-deck.ts';
+import type { Deck } from './prebuild/model/prebuild-deck.ts';
 
 const CONFIG = {
 	DEFAULT_OUTPUT_DIRECTORY: './output',
