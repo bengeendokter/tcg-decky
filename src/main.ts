@@ -134,7 +134,7 @@ function covertTableToDeck({ table, name }: CovertTableToDeckParams): Deck {
     const rows: NodeListOf<Element> = table.querySelectorAll('tr:has(td:nth-of-type(3))');
 
     rows.forEach(row => {
-        const cardTableData: Element | null = row.querySelector('td:nth-of-type(3) a');
+        const cardTableData: Element | null = row.querySelector('td:nth-of-type(3) > a');
         const quantityTableData: Element | null = row.querySelector('td:nth-of-type(4)');
 
         if (!cardTableData || !quantityTableData) {
