@@ -4,11 +4,11 @@ export function parseUrlDeckName(url: string): string {
 	}
 
 	const parsableUrl: URL = new URL(url);
-	const pathName: string | undefined = parsableUrl.pathname.split("/").at(-1);
+	const pathName: string | undefined = parsableUrl.pathname.split('/').at(-1);
 
 	if (!pathName) {
 		throw Error(`Unable to parse deck name from URL: ${url}`);
 	}
 
-	return pathName.replace("_(TCG)", "").toLocaleLowerCase();
+	return pathName.replace('_(TCG)', '').toLocaleLowerCase();
 }
