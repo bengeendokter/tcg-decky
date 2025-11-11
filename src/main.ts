@@ -120,7 +120,7 @@ export function parseUrlDeckName(url: string): string {
         throw Error(`Unable to parse deck name from URL: ${url}`);
     }
 
-    return pathName.replaceAll('_(TCG)', '').toLocaleLowerCase();
+    return pathName.replace('_(TCG)', '').toLocaleLowerCase();
 }
 
 interface CovertTableToDeckParams {
@@ -128,7 +128,7 @@ interface CovertTableToDeckParams {
     name: string;
 }
 
-function covertTableToDeck({table, name}: CovertTableToDeckParams): Deck {
+function covertTableToDeck({ table, name }: CovertTableToDeckParams): Deck {
     const cards: CardWithQuantity[] = [];
 
     const rows: NodeListOf<Element> = table.querySelectorAll('tr:has(td:nth-of-type(3))');
@@ -170,20 +170,30 @@ async function main(url: string): Promise<Deck[]> {
     const dom: JSDOM = new JSDOM(pageText);
 
     const table: Element | null = dom.window.document.querySelector('h2:has(#Deck_list) + table');
-    const tables: NodeListOf<Element> = dom.window.document.querySelectorAll('h2:has(#Deck_lists) ~ table');
+    const tables: NodeListOf<Element> = dom.window.document.querySelectorAll('h2:has(#Deck_lists) + table td table:has(th:nth-of-type(5))');
 
-    const name: string = parseUrlDeckName(url);
+    const urlName: string = parseUrlDeckName(url);
 
     if (table) {
-        return [covertTableToDeck({table, name})];
+        return [covertTableToDeck({ table, name: urlName })];
     }
 
     if (tables.length === 0) {
         throw Error('Deck list table not found');
     }
 
-    console.log(tables.length);
-    return [];
+    const decks: Deck[] = Array.from(tables.values()).map((table) => {
+        const tableTitle: HTMLElement | null = table.querySelector('b');
+
+        if (!tableTitle) {
+            throw Error('Deck name not found in table');
+        }
+
+        const deckName: string = tableTitle.textContent.trim().toLocaleLowerCase().replaceAll(' ', '_');
+
+        return covertTableToDeck({ table, name: `${urlName}_${deckName}` });
+    });
+    return decks;
 }
 
 const CONFIG = {
