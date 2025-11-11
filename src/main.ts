@@ -1,3 +1,4 @@
+import * as fs from 'fs';
 import { JSDOM } from 'jsdom';
 
 interface SetCard {
@@ -32,7 +33,7 @@ function isEnergyTitle(text: string): text is EnergyTitle {
 function parseEnergyType(text: string): EnergyType | undefined {
     const energyTypes: EnergyType[] = Object.values(ENERGY_TYPES);
     for (const energyType of energyTypes) {
-        if(text.includes(energyType)) {
+        if (text.includes(energyType)) {
             return energyType;
         }
     }
@@ -59,11 +60,11 @@ function parseSetCard(title: CardTitle): SetCard {
     if (!name || !setAndId) {
         throw Error(`Unable to parse set card from title: ${title}`);
     }
-    
+
     const setName: string = setAndId.split(' ').slice(0, -1).join(' ');
     const localIdText: string | undefined = setAndId.split(' ').at(-1);
 
-    if(!localIdText || setName === ' ') {
+    if (!localIdText || setName === ' ') {
         throw Error(`Unable to parse set card from title: ${title}`);
     }
 
@@ -95,9 +96,9 @@ interface Deck {
 
 function parseCard(title: Title): Card {
     if (isEnergyTitle(title)) {
-        const energyType: EnergyType  | undefined = parseEnergyType(title);
+        const energyType: EnergyType | undefined = parseEnergyType(title);
 
-        if(!energyType) {
+        if (!energyType) {
             throw Error(`Unable to parse energy type from title: ${title}`);
         }
 
@@ -164,13 +165,22 @@ async function main(url: string): Promise<Deck> {
         const quantity: number = parseInt(quantityText.replace('×', ''));
         const card: Card = parseCard(title);
 
-        return cards.push({ card, quantity});
+        return cards.push({ card, quantity });
     });
 
     return { name, cards }
 }
 
+const CONFIG = {
+    DEFAULT_OUTPUT_DIRECTORY: "./output",
+    MEGA_GENGAR_EX_DECK_URL: 'https://bulbapedia.bulbagarden.net/wiki/Mega_Gengar_ex_Mega_Battle_Deck_(TCG)',
+    DRAGAPULT_EX_DECK_URL: 'https://bulbapedia.bulbagarden.net/wiki/Dragapult_ex_League_Battle_Deck_(TCG)',
+    MARNIE_RIVAL_DECK_URL: 'https://bulbapedia.bulbagarden.net/wiki/Marnie_Rival_Battle_Deck_(TCG)',
+    BATTLE_ACADEMY_2024_DECKS_URL: 'https://bulbapedia.bulbagarden.net/wiki/Battle_Academy_2024_(TCG)'
+} as const satisfies Record<Uppercase<string>, string>;
 
-const url: string = 'https://bulbapedia.bulbagarden.net/wiki/Mega_Gengar_ex_Mega_Battle_Deck_(TCG)';
+const url: string = CONFIG.MARNIE_RIVAL_DECK_URL;
 const deck: Deck = await main(url);
-console.log(JSON.stringify(deck, null, 2));
+const outputDirectory: string = CONFIG.DEFAULT_OUTPUT_DIRECTORY;
+const deckFileName = `${outputDirectory}/${deck.name}.json`;
+fs.writeFileSync(deckFileName, JSON.stringify(deck, null, 2), { encoding: 'utf-8' });
