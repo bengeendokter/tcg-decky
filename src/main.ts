@@ -123,9 +123,13 @@ export function parseUrlDeckName(url: string): string {
     return pathName.replaceAll('_(TCG)', '').toLocaleLowerCase();
 }
 
-function covertTableToDeck(table: Element): Deck {
+interface CovertTableToDeckParams {
+    table: Element;
+    name: string;
+}
+
+function covertTableToDeck({table, name}: CovertTableToDeckParams): Deck {
     const cards: CardWithQuantity[] = [];
-    const name: string = parseUrlDeckName(url);
 
     const rows: NodeListOf<Element> = table.querySelectorAll('tr:has(td:nth-of-type(3))');
 
@@ -168,8 +172,10 @@ async function main(url: string): Promise<Deck[]> {
     const table: Element | null = dom.window.document.querySelector('h2:has(#Deck_list) + table');
     const tables: NodeListOf<Element> = dom.window.document.querySelectorAll('h2:has(#Deck_lists) ~ table');
 
+    const name: string = parseUrlDeckName(url);
+
     if (table) {
-        return [covertTableToDeck(table)];
+        return [covertTableToDeck({table, name})];
     }
 
     if (tables.length === 0) {
