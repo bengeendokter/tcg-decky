@@ -107,6 +107,22 @@ function parseCard(title: Title): Card {
     return parseSetCard(title);
 }
 
+export function parseUrlDeckName(url: string): string {
+    if (!URL.canParse(url)) {
+        throw Error(`${url} is not a valid URL`);
+    }
+
+    const parsableUrl: URL = new URL(url);
+    const pathName: string | undefined = parsableUrl.pathname.split('/').at(-1);
+
+    if (!pathName) {
+        throw Error(`Unable to parse deck name from URL: ${url}`);
+    }
+
+    return pathName.replaceAll('_(TCG)', '').toLocaleLowerCase();
+}
+
+
 async function main(url: string): Promise<Deck> {
     const pageText: string = await fetch(url).then(result => result.text());
     const dom: JSDOM = new JSDOM(pageText);
@@ -118,7 +134,7 @@ async function main(url: string): Promise<Deck> {
     }
 
     const cards: CardWithQuantity[] = [];
-    const name: string = "Mega_Gengar_ex_Mega_Battle_Deck";
+    const name: string = parseUrlDeckName(url);
 
     const rows: NodeListOf<Element> = table.querySelectorAll('tr:has(td:nth-of-type(3))');
 
