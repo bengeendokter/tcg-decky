@@ -18,7 +18,8 @@ const ENERGY_TYPES = {
 } as const satisfies Record<Uppercase<string>, string>;
 
 type EnergyType = typeof ENERGY_TYPES[keyof typeof ENERGY_TYPES];
-type EnergyTitle = `Basic ${EnergyType} Energy (TCG)`;
+type EnergyCard = `Basic ${EnergyType} Energy`;
+type EnergyTitle = `${EnergyCard} (TCG)`;
 
 function isEnergyTitle(text: string): text is EnergyTitle {
     return Object.values(ENERGY_TYPES)
@@ -28,8 +29,21 @@ function isEnergyTitle(text: string): text is EnergyTitle {
         });
 }
 
+function parseEnergyType(text: string): EnergyType | undefined {
+    const energyTypes: EnergyType[] = Object.values(ENERGY_TYPES);
+    for (const energyType of energyTypes) {
+        if(text.includes(energyType)) {
+            return energyType;
+        }
+    }
+
+    return undefined;
+}
+
+type Card = SetCard | EnergyCard;
+
 interface CardWithQuantity {
-    card: SetCard | EnergyType;
+    card: Card;
     quantity: number;
 }
 
@@ -39,21 +53,72 @@ function isCardTitle(text: string): text is CardTitle {
     return /.+ \(.+ \d+\)$/.test(text);
 }
 
+function parseSetCard(title: CardTitle): SetCard {
+    const [name, setAndId]: string[] = title.replace(')', '').split(' (');
+
+    if (!name || !setAndId) {
+        throw Error(`Unable to parse set card from title: ${title}`);
+    }
+    
+    const setName: string = setAndId.split(' ').slice(0, -1).join(' ');
+    const localIdText: string | undefined = setAndId.split(' ').at(-1);
+
+    if(!localIdText || setName === ' ') {
+        throw Error(`Unable to parse set card from title: ${title}`);
+    }
+
+    const localId: number = parseInt(localIdText);
+
+    return {
+        name,
+        setName,
+        localId,
+    };
+}
+
+type Title = CardTitle | EnergyTitle;
+
+function isTitle(text: string): text is Title {
+    return isCardTitle(text) || isEnergyTitle(text);
+}
+
 type QuantityText = `${number}×`;
 
-async function main(): Promise<void> {
-    const url: string = 'https://bulbapedia.bulbagarden.net/wiki/Mega_Gengar_ex_Mega_Battle_Deck_(TCG)';
-    const pageText: string = await fetch(url).then(res => res.text());
+function isQuantityText(text: string): text is QuantityText {
+    return /^\d+×$/.test(text);
+}
+
+interface Deck {
+    cards: CardWithQuantity[];
+    name: string;
+}
+
+function parseCard(title: Title): Card {
+    if (isEnergyTitle(title)) {
+        const energyType: EnergyType  | undefined = parseEnergyType(title);
+
+        if(!energyType) {
+            throw Error(`Unable to parse energy type from title: ${title}`);
+        }
+
+        return `Basic ${energyType} Energy`;
+    }
+
+    return parseSetCard(title);
+}
+
+async function main(url: string): Promise<Deck> {
+    const pageText: string = await fetch(url).then(result => result.text());
     const dom: JSDOM = new JSDOM(pageText);
 
     const table: Element | null = dom.window.document.querySelector('h2:has(#Deck_list) + table');
 
     if (!table) {
-        console.log('Deck list table not found');
-        return;
+        throw Error('Deck list table not found');
     }
 
-    const deck: CardWithQuantity[] = [];
+    const cards: CardWithQuantity[] = [];
+    const name: string = "Mega_Gengar_ex_Mega_Battle_Deck";
 
     const rows: NodeListOf<Element> = table.querySelectorAll('tr:has(td:nth-of-type(3))');
 
@@ -72,9 +137,24 @@ async function main(): Promise<void> {
             return;
         }
 
-        console.log(isCardTitle(title) || isEnergyTitle(title));
-        console.log(quantityText);
+        if (!isTitle(title)) {
+            return;
+        }
+
+        if (!isQuantityText(quantityText)) {
+            return;
+        }
+
+        const quantity: number = parseInt(quantityText.replace('×', ''));
+        const card: Card = parseCard(title);
+
+        return cards.push({ card, quantity});
     });
+
+    return { name, cards }
 }
 
-await main();
+
+const url: string = 'https://bulbapedia.bulbagarden.net/wiki/Mega_Gengar_ex_Mega_Battle_Deck_(TCG)';
+const deck: Deck = await main(url);
+console.log(JSON.stringify(deck, null, 2));
