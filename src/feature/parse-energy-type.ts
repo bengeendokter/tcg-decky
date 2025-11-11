@@ -1,4 +1,4 @@
-import { ENERGY_TYPES, type EnergyType } from "../model/energy.js";
+import { ENERGY_TYPES, type EnergyType } from "../model/energy.ts";
 
 
 export function parseEnergyType(text: string): EnergyType | undefined {

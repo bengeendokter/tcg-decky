@@ -1,7 +1,7 @@
-import { type Deck, type CardWithQuantity, type Card } from "../model/prebuild-deck.js";
-import { parseCard } from "./parse-card.js";
-import { isQuantityText } from "../model/quantity.js";
-import { isTitle } from "../model/title.js";
+import { type Deck, type CardWithQuantity, type Card } from "../model/prebuild-deck.ts";
+import { parseCard } from "./parse-card.ts";
+import { isQuantityText } from "../model/quantity.ts";
+import { isTitle } from "../model/title.ts";
 
 export interface CovertTableToDeckParams {
     table: Element;

@@ -1,4 +1,4 @@
-import { type EnergyCard } from "./energy.js";
+import { type EnergyCard } from "./energy.ts";
 
 export interface SetCard {
     name: string;

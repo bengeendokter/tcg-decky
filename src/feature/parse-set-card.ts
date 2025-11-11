@@ -1,5 +1,5 @@
-import type { SetCard } from "../model/prebuild-deck.js";
-import type { CardTitle } from "../model/title.js";
+import type { SetCard } from "../model/prebuild-deck.ts";
+import type { CardTitle } from "../model/title.ts";
 
 
 export function parseSetCard(title: CardTitle): SetCard {

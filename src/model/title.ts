@@ -1,4 +1,4 @@
-import { ENERGY_TYPES, type EnergyCard } from "./energy.js";
+import { ENERGY_TYPES, type EnergyCard } from "./energy.ts";
 
 export type EnergyTitle = `${EnergyCard} (TCG)`;
 

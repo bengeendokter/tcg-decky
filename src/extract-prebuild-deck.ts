@@ -1,7 +1,7 @@
 import { JSDOM } from 'jsdom';
-import { type Deck } from './model/prebuild-deck.js';
-import { covertTableToDeck } from './feature/convert-table-to-deck.js';
-import { parseUrlDeckName } from './feature/parse-url-deck-name.js';
+import { type Deck } from './model/prebuild-deck.ts';
+import { covertTableToDeck } from './feature/convert-table-to-deck.ts';
+import { parseUrlDeckName } from './feature/parse-url-deck-name.ts';
 
 export async function extractPrebuildDeck(url: string): Promise<Deck[]> {
     const pageText: string = await fetch(url).then(result => result.text());
