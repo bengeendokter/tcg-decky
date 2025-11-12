@@ -1,6 +1,6 @@
 import { extractPrebuildDeck } from './prebuild/feature/extract-prebuild-deck.ts';
 import type { Deck } from './prebuild/model/prebuild-deck.ts';
-import { exportDecks } from './prebuild/data-access/export-decks.ts';
+import { exportDecksToJson } from './prebuild/data-access/export-decks-to-json.ts';
 
 const CONFIG = {
 	DEFAULT_OUTPUT_DIRECTORY: './output',
@@ -17,4 +17,4 @@ const CONFIG = {
 const url: string = CONFIG.MEGA_GENGAR_EX_DECK_URL;
 const outputDirectory: string = CONFIG.DEFAULT_OUTPUT_DIRECTORY;
 const decks: Deck[] = await extractPrebuildDeck(url);
-exportDecks({ decks, outputDirectory });
+exportDecksToJson({ decks, outputDirectory });

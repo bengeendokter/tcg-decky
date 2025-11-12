@@ -6,7 +6,10 @@ export interface ExportDecksParams {
 	outputDirectory: string;
 }
 
-export function exportDecks({decks, outputDirectory}: ExportDecksParams): void {
+export function exportDecksToJson({
+	decks,
+	outputDirectory,
+}: ExportDecksParams): void {
 	decks.forEach((deck) => {
 		const deckFileName = `${outputDirectory}/${deck.name}.json`;
 		fs.writeFileSync(deckFileName, JSON.stringify(deck, null, 2), {
