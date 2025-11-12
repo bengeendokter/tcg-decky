@@ -1,6 +1,7 @@
 import { extractPrebuildDecks } from './prebuild/feature/extract-prebuild-deck.ts';
 import type { PrebuildDeck } from './prebuild/model/prebuild-deck.ts';
 import { exportPrebuildDecksToJson } from './prebuild/data-access/export-prebuild-decks-to-json.ts';
+import { convertPrebuildToLimitlessDeck } from './limitless/feature/convert-prebuild-to-limitless-deck.ts';
 
 const CONFIG = {
 	DEFAULT_OUTPUT_DIRECTORY: './output',
@@ -16,5 +17,9 @@ const CONFIG = {
 
 const url: string = CONFIG.MARNIE_RIVAL_DECK_URL;
 const outputDirectory: string = CONFIG.DEFAULT_OUTPUT_DIRECTORY;
+
 const decks: PrebuildDeck[] = await extractPrebuildDecks(url);
-exportPrebuildDecksToJson({ decks, outputDirectory });
+// exportPrebuildDecksToJson({ decks, outputDirectory });
+decks.forEach(async (deck) => {
+	await convertPrebuildToLimitlessDeck(deck);
+});
