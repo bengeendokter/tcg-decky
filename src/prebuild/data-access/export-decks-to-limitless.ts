@@ -1,8 +1,8 @@
 import * as fs from 'fs';
-import type { Deck } from '../model/prebuild-deck.ts';
+import type { PrebuildDeck } from '../model/prebuild-deck.ts';
 
 export interface ExportDecksToLimitlessParams {
-	decks: Deck[];
+	decks: PrebuildDeck[];
 	outputDirectory: string;
 }
 

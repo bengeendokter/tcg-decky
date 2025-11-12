@@ -1,19 +1,19 @@
 import { type EnergyCard } from './energy.ts';
 
-export interface SetCard {
+export interface PrebuildSetCard {
 	name: string;
 	localId: number;
 	setName: string;
 }
 
-export type Card = SetCard | EnergyCard;
+export type PrebuildCard = PrebuildSetCard | EnergyCard;
 
-export interface CardWithQuantity {
-	card: Card;
+export interface PrebuildCardWithQuantity {
+	card: PrebuildCard;
 	quantity: number;
 }
 
-export interface Deck {
-	cards: CardWithQuantity[];
+export interface PrebuildDeck {
+	cards: PrebuildCardWithQuantity[];
 	name: string;
 }

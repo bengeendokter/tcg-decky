@@ -1,15 +1,15 @@
 import * as fs from 'fs';
-import type { Deck } from '../model/prebuild-deck.ts';
+import type { PrebuildDeck } from '../model/prebuild-deck.ts';
 
-export interface ExportDecksToJsonParams {
-	decks: Deck[];
+export interface ExportPrebuildDecksToJsonParams {
+	decks: PrebuildDeck[];
 	outputDirectory: string;
 }
 
-export function exportDecksToJson({
+export function exportPrebuildDecksToJson({
 	decks,
 	outputDirectory,
-}: ExportDecksToJsonParams): void {
+}: ExportPrebuildDecksToJsonParams): void {
 	decks.forEach((deck) => {
 		const deckFileName = `${outputDirectory}/${deck.name}.json`;
 		fs.writeFileSync(deckFileName, JSON.stringify(deck, null, 2), {

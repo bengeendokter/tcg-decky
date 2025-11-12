@@ -1,10 +1,10 @@
 import { parseEnergyType } from './parse-energy-type.ts';
 import type { EnergyType } from '../model/energy.ts';
-import type { Card } from '../model/prebuild-deck.ts';
+import type { PrebuildCard } from '../model/prebuild-deck.ts';
 import { type Title, isEnergyTitle } from '../model/title.ts';
-import { parseSetCard } from './parse-set-card.ts';
+import { parsePrebuildSetCard } from './parse-prebuild-set-card.ts';
 
-export function parseCard(title: Title): Card {
+export function parsePrebuildCard(title: Title): PrebuildCard {
 	if (isEnergyTitle(title)) {
 		const energyType: EnergyType | undefined = parseEnergyType(title);
 
@@ -15,5 +15,5 @@ export function parseCard(title: Title): Card {
 		return `Basic ${energyType} Energy`;
 	}
 
-	return parseSetCard(title);
+	return parsePrebuildSetCard(title);
 }

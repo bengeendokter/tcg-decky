@@ -1,9 +1,9 @@
 import {
-	type Deck,
-	type CardWithQuantity,
-	type Card,
+	type PrebuildDeck,
+	type PrebuildCardWithQuantity,
+	type PrebuildCard,
 } from '../model/prebuild-deck.ts';
-import { parseCard } from './parse-card.ts';
+import { parsePrebuildCard } from './parse-prebuild-card.ts';
 import { isQuantityText } from '../model/quantity.ts';
 import { isTitle } from '../model/title.ts';
 
@@ -15,8 +15,8 @@ export interface CovertTableToDeckParams {
 export function covertTableToDeck({
 	table,
 	name,
-}: CovertTableToDeckParams): Deck {
-	const cards: CardWithQuantity[] = [];
+}: CovertTableToDeckParams): PrebuildDeck {
+	const cards: PrebuildCardWithQuantity[] = [];
 
 	const rows: NodeListOf<Element> = table.querySelectorAll(
 		'tr:has(td:nth-of-type(3))',
@@ -49,7 +49,7 @@ export function covertTableToDeck({
 		}
 
 		const quantity: number = parseInt(quantityText.replace('×', ''));
-		const card: Card = parseCard(title);
+		const card: PrebuildCard = parsePrebuildCard(title);
 
 		return cards.push({ card, quantity });
 	});

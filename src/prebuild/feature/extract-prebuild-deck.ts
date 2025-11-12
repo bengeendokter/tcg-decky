@@ -1,10 +1,12 @@
 import { JSDOM } from 'jsdom';
-import { type Deck } from '../model/prebuild-deck.ts';
+import { type PrebuildDeck } from '../model/prebuild-deck.ts';
 import { covertTableToDeck } from './convert-table-to-deck.ts';
 import { parseUrlDeckName } from './parse-url-deck-name.ts';
 import { getPage } from '../data-access/get-page.ts';
 
-export async function extractPrebuildDeck(url: string): Promise<Deck[]> {
+export async function extractPrebuildDeck(
+	url: string,
+): Promise<PrebuildDeck[]> {
 	const pageText: string = await getPage(url);
 	const dom: JSDOM = new JSDOM(pageText);
 
@@ -25,7 +27,7 @@ export async function extractPrebuildDeck(url: string): Promise<Deck[]> {
 		throw Error('Deck list table not found');
 	}
 
-	const decks: Deck[] = Array.from(tables.values()).map((table) => {
+	const decks: PrebuildDeck[] = Array.from(tables.values()).map((table) => {
 		const tableTitle: HTMLElement | null = table.querySelector('b');
 
 		if (!tableTitle) {
