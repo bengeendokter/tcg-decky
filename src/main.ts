@@ -1,4 +1,4 @@
-import { extractPrebuildDeck } from './prebuild/feature/extract-prebuild-deck.ts';
+import { extractPrebuildDecks } from './prebuild/feature/extract-prebuild-deck.ts';
 import type { PrebuildDeck } from './prebuild/model/prebuild-deck.ts';
 import { exportPrebuildDecksToJson } from './prebuild/data-access/export-prebuild-decks-to-json.ts';
 
@@ -16,5 +16,5 @@ const CONFIG = {
 
 const url: string = CONFIG.MARNIE_RIVAL_DECK_URL;
 const outputDirectory: string = CONFIG.DEFAULT_OUTPUT_DIRECTORY;
-const decks: PrebuildDeck[] = await extractPrebuildDeck(url);
+const decks: PrebuildDeck[] = await extractPrebuildDecks(url);
 exportPrebuildDecksToJson({ decks, outputDirectory });

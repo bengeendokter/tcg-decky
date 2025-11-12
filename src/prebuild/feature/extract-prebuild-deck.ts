@@ -4,7 +4,7 @@ import { covertTableToDeck } from './convert-table-to-deck.ts';
 import { parseUrlDeckName } from './parse-url-deck-name.ts';
 import { getPage } from '../data-access/get-page.ts';
 
-export async function extractPrebuildDeck(
+export async function extractPrebuildDecks(
 	url: string,
 ): Promise<PrebuildDeck[]> {
 	const pageText: string = await getPage(url);
