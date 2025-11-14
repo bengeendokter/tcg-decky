@@ -3,26 +3,59 @@ import type { PrebuildDeck } from './prebuild/model/prebuild-deck.ts';
 import { exportPrebuildDecksToJson } from './prebuild/data-access/export-prebuild-decks-to-json.ts';
 import { convertPrebuildToLimitlessDeck } from './limitless/feature/convert-prebuild-to-limitless-deck.ts';
 import type { LimitlessDeck } from './limitless/model/limitless-deck.ts';
-import { exportLimitlessDeckToTxt } from "./limitless/data-access/export-limitless-deck-to-txt.ts";
+import { exportLimitlessDeckToTxt } from './limitless/data-access/export-limitless-deck-to-txt.ts';
+import { importPrebuildDeckFromJson } from './prebuild/data-access/import-prebuild-deck-from-json.ts';
 
-const CONFIG = {
-	DEFAULT_OUTPUT_DIRECTORY: './output',
-	MEGA_GENGAR_EX_DECK_URL:
+const PREBUILD_DECKS_URL = {
+	MEGA_GENGAR_EX_DECK:
 		'https://bulbapedia.bulbagarden.net/wiki/Mega_Gengar_ex_Mega_Battle_Deck_(TCG)',
-	DRAGAPULT_EX_DECK_URL:
+	DRAGAPULT_EX_DECK:
 		'https://bulbapedia.bulbagarden.net/wiki/Dragapult_ex_League_Battle_Deck_(TCG)',
-	MARNIE_RIVAL_DECK_URL:
+	MARNIE_RIVAL_DECK:
 		'https://bulbapedia.bulbagarden.net/wiki/Marnie_Rival_Battle_Deck_(TCG)',
-	BATTLE_ACADEMY_2024_DECKS_URL:
+	BATTLE_ACADEMY_2024_DECKS:
 		'https://bulbapedia.bulbagarden.net/wiki/Battle_Academy_2024_(TCG)',
 } as const satisfies Record<Uppercase<string>, string>;
 
-const url: string = CONFIG.MARNIE_RIVAL_DECK_URL;
-const outputDirectory: string = CONFIG.DEFAULT_OUTPUT_DIRECTORY;
+const JSON_FILE_NAME = {
+	MEGA_GENGAR_EX_DECK: 'mega_gengar_ex_mega_battle_deck.json',
+	DRAGAPULT_EX_DECK: 'dragapult_ex_league_battle_deck.json',
+	MARNIE_RIVAL_DECK: 'marnie_rival_battle_deck.json',
+	BATTLE_ACADEMY_2024_ARMAROUGE: 'battle_academy_2024_armarouge_deck.json',
+	BATTLE_ACADEMY_2024_DARKRAI: 'battle_academy_2024_darkrai_deck.json',
+	BATTLE_ACADEMY_2024_PIKACHU: 'battle_academy_2024_pikachu_deck.json',
+} as const satisfies Record<Uppercase<string>, string>;
 
-const decks: PrebuildDeck[] = await extractPrebuildDecks(url);
+const DEFAULT_OUTPUT_DIRECTORY = './output';
+
+const CONFIG = {
+	DEFAULT_OUTPUT_DIRECTORY,
+	PREBUILD_DECKS_URL,
+} as const satisfies Record<Uppercase<string>, string | object>;
+
+const url: string = CONFIG.PREBUILD_DECKS_URL.MARNIE_RIVAL_DECK;
+const outputDirectory: string = CONFIG.DEFAULT_OUTPUT_DIRECTORY;
+const jsonFilePath: string = `${outputDirectory}/${JSON_FILE_NAME.MARNIE_RIVAL_DECK}`;
+
+// Extract prebuild decks from webpage
+// const decks: PrebuildDeck[] = await extractPrebuildDecks(url);
+
+// Export prebuild decks to JSON
 // exportPrebuildDecksToJson({ decks, outputDirectory });
-decks.forEach(async (deck) => {
-	const limitlessDeck: LimitlessDeck = await convertPrebuildToLimitlessDeck(deck);
-	exportLimitlessDeckToTxt({limitlessDeck, outputDirectory});
-});
+
+// Convert prebuild decks to Limitless decks and export to TXT
+// decks.forEach(async (deck) => {
+// 	const limitlessDeck: LimitlessDeck =
+// 		await convertPrebuildToLimitlessDeck(deck);
+// 	exportLimitlessDeckToTxt({ limitlessDeck, outputDirectory });
+// });
+
+// Import prebuild decks from JSON
+const prebuildDeck: PrebuildDeck = importPrebuildDeckFromJson(jsonFilePath);
+
+// Convert prebuild deck to Limitless deck
+const limitlessDeck: LimitlessDeck =
+	await convertPrebuildToLimitlessDeck(prebuildDeck);
+
+// Export limitless deck to TXT
+exportLimitlessDeckToTxt({ limitlessDeck, outputDirectory });
