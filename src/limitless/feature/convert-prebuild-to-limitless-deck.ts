@@ -115,7 +115,7 @@ export async function convertPrebuildToLimitlessDeck({
 					category,
 					quantity,
 					name,
-					tcgOnline,
+					tcgOnline: tcgOnline === 'SV' ? 'SVI' : tcgOnline,
 					localId,
 				};
 			}),

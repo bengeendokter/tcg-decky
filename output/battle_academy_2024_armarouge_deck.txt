@@ -1,25 +1,25 @@
 Pokémon: 22
-3 Houndour SV 33
-2 Houndoom SV 34
-2 Torkoal SV 35
+3 Houndour SVI 33
+2 Houndoom SVI 34
+2 Torkoal SVI 35
 2 Larvesta OBF 40
 1 Volcarona OBF 41
 4 Fuecoco PAR 23
 3 Crocalor PAL 36
-1 Skeledirge SV 38
+1 Skeledirge SVI 38
 3 Charcadet PAL 39
 1 Armarouge ex SVP 105
 
 Trainer: 20
 4 Great Ball PAL 183
-1 Jacq SV 175
+1 Jacq SVI 175
 1 Mela PAR 167
-4 Nemona SV 180
-1 Nest Ball SV 181
+4 Nemona SVI 180
+1 Nest Ball SVI 181
 2 Picnicker SVP 114
-2 Potion SV 188
-2 Switch SV 194
-3 Youngster SV 198
+2 Potion SVI 188
+2 Switch SVI 194
+3 Youngster SVI 198
 
 Energy: 18
 18 Basic Fire Energy SVE 2

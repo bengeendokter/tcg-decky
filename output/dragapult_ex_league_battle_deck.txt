@@ -9,17 +9,17 @@ Pokémon: 21
 
 Trainer: 29
 3 Iono PAL 185
-3 Arven SV 166
+3 Arven SVI 166
 1 Boss's Orders PAL 172
 1 Mela PAR 167
 1 Professor Turo's Scenario PAR 171
 4 Buddy-Buddy Poffin TEF 144
-4 Ultra Ball SV 196
+4 Ultra Ball SVI 196
 2 Earthen Vessel PAR 163
-2 Rare Candy SV 191
+2 Rare Candy SVI 191
 1 Counter Catcher PAR 160
 1 Super Rod PAL 188
-1 Switch SV 194
+1 Switch SVI 194
 1 Unfair Stamp TWM 165
 2 Rescue Board TEF 159
 1 Technical Machine: Devolution PAR 177

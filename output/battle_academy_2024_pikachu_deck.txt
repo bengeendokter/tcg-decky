@@ -5,21 +5,21 @@ Pokémon: 22
 4 Mareep SVP 107
 3 Flaaffy SVP 108
 2 Ampharos SVP 109
-1 Rotom SV 69
-2 Wattrel SV 77
+1 Rotom SVI 69
+2 Wattrel SVI 77
 1 Kilowattrel PAL 82
 1 Miraidon SVP 148
 
 Trainer: 20
-1 Electric Generator SV 170
+1 Electric Generator SVI 170
 4 Great Ball PAL 183
-1 Jacq SV 175
-4 Nemona SV 180
-1 Nest Ball SV 181
+1 Jacq SVI 175
+4 Nemona SVI 180
+1 Nest Ball SVI 181
 2 Picnicker SVP 114
-2 Potion SV 188
-2 Switch SV 194
-3 Youngster SV 198
+2 Potion SVI 188
+2 Switch SVI 194
+3 Youngster SVI 198
 
 Energy: 18
 18 Basic Lightning Energy SVE 4
