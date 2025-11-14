@@ -17,3 +17,14 @@ export interface PrebuildDeck {
 	cards: PrebuildCardWithQuantity[];
 	name: string;
 }
+
+export interface PrebuildSetCardWithQuantity {
+	card: PrebuildSetCard;
+	quantity: number;
+}
+
+export interface PrebuildEnergyCardWithQuantity {
+	card: EnergyCard;
+	quantity: number;
+}
+
