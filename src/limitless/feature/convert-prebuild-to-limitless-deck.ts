@@ -23,6 +23,12 @@ import TCGdex, {
 	type Set,
 } from '@tcgdex/sdk';
 
+interface SetWithAbbreviation extends Set {
+	abbreviation?: {
+		official?: string;
+	};
+}
+
 const tcgdex = new TCGdex('en');
 
 export async function convertPrebuildToLimitlessDeck({
@@ -88,18 +94,18 @@ export async function convertPrebuildToLimitlessDeck({
 					throw Error('Invalid category');
 				}
 
-				const set: Set | null = await tcgdex.set.get(card.set.id);
+				const set: SetWithAbbreviation | null = await tcgdex.set.get(
+					card.set.id,
+				);
 
 				if (!set) {
 					throw Error('Set not found');
 				}
 
-				const tcgOnline: string | undefined = set.tcgOnline;
-				// TODO refactor
-				const abbreviation: string | undefined = (set as any)?.abbreviation
-					?.official;
+				const abbreviation: string | undefined = set?.abbreviation?.official;
+				const tcgOnline: string | undefined = set.tcgOnline ?? abbreviation;
 
-				if (!tcgOnline && !abbreviation) {
+				if (!tcgOnline) {
 					throw Error(
 						`Set TCG Online code not found for ${set.name} with ID ${set.id} and abbreviation ${abbreviation}`,
 					);
@@ -109,7 +115,7 @@ export async function convertPrebuildToLimitlessDeck({
 					category,
 					quantity,
 					name,
-					tcgOnline: tcgOnline ?? abbreviation!,
+					tcgOnline,
 					localId,
 				};
 			}),
