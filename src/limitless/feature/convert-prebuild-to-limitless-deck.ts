@@ -103,7 +103,7 @@ export async function convertPrebuildToLimitlessDeck({
 				}
 
 				const abbreviation: string | undefined = set?.abbreviation?.official;
-				const tcgOnline: string | undefined = set.tcgOnline ?? abbreviation;
+				let tcgOnline: string | undefined = set.tcgOnline ?? abbreviation;
 
 				if (!tcgOnline) {
 					throw Error(
@@ -111,11 +111,19 @@ export async function convertPrebuildToLimitlessDeck({
 					);
 				}
 
+				// handle exceptions
+				const exeptionMap: Map<string, string> = new Map([
+					['SVP', 'PR-SV'],
+					['SV', 'SVI'],
+				]);
+
+				tcgOnline = exeptionMap.get(tcgOnline) ?? tcgOnline;
+
 				return {
 					category,
 					quantity,
 					name,
-					tcgOnline: tcgOnline === 'SV' ? 'SVI' : tcgOnline,
+					tcgOnline,
 					localId,
 				};
 			}),

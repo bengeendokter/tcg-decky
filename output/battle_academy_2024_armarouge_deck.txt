@@ -8,7 +8,7 @@ Pokémon: 22
 3 Crocalor PAL 36
 1 Skeledirge SVI 38
 3 Charcadet PAL 39
-1 Armarouge ex SVP 105
+1 Armarouge ex PR-SV 105
 
 Trainer: 20
 4 Great Ball PAL 183
@@ -16,7 +16,7 @@ Trainer: 20
 1 Mela PAR 167
 4 Nemona SVI 180
 1 Nest Ball SVI 181
-2 Picnicker SVP 114
+2 Picnicker PR-SV 114
 2 Potion SVI 188
 2 Switch SVI 194
 3 Youngster SVI 198

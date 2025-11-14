@@ -1,9 +1,9 @@
 Pokémon: 22
 2 Seviper PAL 137
-1 Darkrai ex SVP 110
-4 Pawniard SVP 111
-3 Bisharp SVP 112
-2 Kingambit SVP 113
+1 Darkrai ex PR-SV 110
+4 Pawniard PR-SV 111
+3 Bisharp PR-SV 112
+2 Kingambit PR-SV 113
 2 Yveltal PAR 118
 4 Salandit OBF 139
 3 Salazzle OBF 140
@@ -15,7 +15,7 @@ Trainer: 20
 1 Jacq SVI 175
 4 Nemona SVI 180
 1 Nest Ball SVI 181
-2 Picnicker SVP 114
+2 Picnicker PR-SV 114
 2 Potion SVI 188
 2 Switch SVI 194
 3 Youngster SVI 198
