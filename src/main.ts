@@ -2,6 +2,8 @@ import { extractPrebuildDecks } from './prebuild/feature/extract-prebuild-deck.t
 import type { PrebuildDeck } from './prebuild/model/prebuild-deck.ts';
 import { exportPrebuildDecksToJson } from './prebuild/data-access/export-prebuild-decks-to-json.ts';
 import { convertPrebuildToLimitlessDeck } from './limitless/feature/convert-prebuild-to-limitless-deck.ts';
+import type { LimitlessDeck } from './limitless/model/limitless-deck.ts';
+import { exportLimitlessDeckToTxt } from "./limitless/data-access/export-limitless-deck-to-txt.js";
 
 const CONFIG = {
 	DEFAULT_OUTPUT_DIRECTORY: './output',
@@ -21,5 +23,6 @@ const outputDirectory: string = CONFIG.DEFAULT_OUTPUT_DIRECTORY;
 const decks: PrebuildDeck[] = await extractPrebuildDecks(url);
 // exportPrebuildDecksToJson({ decks, outputDirectory });
 decks.forEach(async (deck) => {
-	await convertPrebuildToLimitlessDeck(deck);
+	const limitlessDeck: LimitlessDeck = await convertPrebuildToLimitlessDeck(deck);
+	exportLimitlessDeckToTxt({limitlessDeck, outputDirectory});
 });

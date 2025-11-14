@@ -35,6 +35,7 @@ export type EnergyTypeLocalId = typeof ENERGY_TYPES_LOCAL_ID_MAP[EnergyType];
 export const energyTypeLocalIdMap: Map<EnergyType, EnergyTypeLocalId> = new Map(
 	Object.entries(ENERGY_TYPES_LOCAL_ID_MAP).filter((entry): entry is [EnergyType, EnergyTypeLocalId] => isEnergyType(entry[0])),
 );
+// TODO update type to be an object with name, tcgOnline, and localId
 export type EnergyCard = `Basic ${EnergyType} Energy`;
 
 export function isEnergyCard(text: string): text is EnergyCard {

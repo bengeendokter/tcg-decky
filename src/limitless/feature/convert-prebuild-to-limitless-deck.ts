@@ -141,6 +141,7 @@ export async function convertPrebuildToLimitlessDeck({
 				throw Error('Invalid energy type');
 			}
 
+			// TODO remove these hardcoded values when EnergyCard type is updated with these extra fields
 			const tcgOnline: string = 'SVE';
 			const localId: number | undefined = energyTypeLocalIdMap.get(energyType);
 
