@@ -1,0 +1,27 @@
+Pokémon: 18
+2 Marnie's Purrloin DRI 130
+2 Marnie's Liepard DRI 131
+2 Marnie's Scraggy DRI 132
+1 Marnie's Scrafty DRI 133
+4 Marnie's Impidimp DRI 134
+3 Marnie's Morgrem DRI 135
+2 Marnie's Grimmsnarl ex DRI 136
+1 Marnie's Morpeko DRI 137
+1 Marnie's Morpeko SVP 206
+
+Trainer: 28
+3 Buddy-Buddy Poffin TEF 144
+1 Energy Recycler DRI 164
+1 Exp. Share SV 174
+3 Rare Candy PAF 89
+1 Super Rod PAL 188
+2 Switch SV 194
+4 Ultra Ball PAF 91
+2 Boss's Orders PAL 172
+3 Drayton SSP 174
+2 Iono PAL 185
+4 Professor's Research JTG 155
+2 Spikemuth Gym DRI 169
+
+Energy: 14
+14 Basic Darkness Energy SVE 7

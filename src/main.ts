@@ -3,7 +3,7 @@ import type { PrebuildDeck } from './prebuild/model/prebuild-deck.ts';
 import { exportPrebuildDecksToJson } from './prebuild/data-access/export-prebuild-decks-to-json.ts';
 import { convertPrebuildToLimitlessDeck } from './limitless/feature/convert-prebuild-to-limitless-deck.ts';
 import type { LimitlessDeck } from './limitless/model/limitless-deck.ts';
-import { exportLimitlessDeckToTxt } from "./limitless/data-access/export-limitless-deck-to-txt.js";
+import { exportLimitlessDeckToTxt } from "./limitless/data-access/export-limitless-deck-to-txt.ts";
 
 const CONFIG = {
 	DEFAULT_OUTPUT_DIRECTORY: './output',
