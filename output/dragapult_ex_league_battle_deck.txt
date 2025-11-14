@@ -1,0 +1,30 @@
+Pokémon: 21
+4 Dragapult ex TWM 130
+4 Drakloak TWM 129
+4 Dreepy TWM 128
+3 Xatu PAR 72
+3 Natu PAR 71
+2 Tatsugiri TWM 131
+1 Fezandipiti ex SFA 38
+
+Trainer: 29
+3 Iono PAL 185
+3 Arven SV 166
+1 Boss's Orders PAL 172
+1 Mela PAR 167
+1 Professor Turo's Scenario PAR 171
+4 Buddy-Buddy Poffin TEF 144
+4 Ultra Ball SV 196
+2 Earthen Vessel PAR 163
+2 Rare Candy SV 191
+1 Counter Catcher PAR 160
+1 Super Rod PAL 188
+1 Switch SV 194
+1 Unfair Stamp TWM 165
+2 Rescue Board TEF 159
+1 Technical Machine: Devolution PAR 177
+1 Technical Machine: Evolution PAR 178
+
+Energy: 10
+6 Basic Psychic Energy SVE 5
+4 Basic Fire Energy SVE 2

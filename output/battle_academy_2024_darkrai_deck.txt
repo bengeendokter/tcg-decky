@@ -1,0 +1,24 @@
+Pokémon: 22
+2 Seviper PAL 137
+1 Darkrai ex SVP 110
+4 Pawniard SVP 111
+3 Bisharp SVP 112
+2 Kingambit SVP 113
+2 Yveltal PAR 118
+4 Salandit OBF 139
+3 Salazzle OBF 140
+1 Cyclizar SV 164
+
+Trainer: 20
+1 Boss's Orders PAL 172
+4 Great Ball PAL 183
+1 Jacq SV 175
+4 Nemona SV 180
+1 Nest Ball SV 181
+2 Picnicker SVP 114
+2 Potion SV 188
+2 Switch SV 194
+3 Youngster SV 198
+
+Energy: 18
+18 Basic Darkness Energy SVE 7

@@ -1,0 +1,25 @@
+Pokémon: 22
+1 Pikachu ex SVP 106
+4 Voltorb PAL 66
+3 Electrode PAL 67
+4 Mareep SVP 107
+3 Flaaffy SVP 108
+2 Ampharos SVP 109
+1 Rotom SV 69
+2 Wattrel SV 77
+1 Kilowattrel PAL 82
+1 Miraidon SVP 148
+
+Trainer: 20
+1 Electric Generator SV 170
+4 Great Ball PAL 183
+1 Jacq SV 175
+4 Nemona SV 180
+1 Nest Ball SV 181
+2 Picnicker SVP 114
+2 Potion SV 188
+2 Switch SV 194
+3 Youngster SV 198
+
+Energy: 18
+18 Basic Lightning Energy SVE 4
