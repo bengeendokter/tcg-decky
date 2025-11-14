@@ -1,3 +1,8 @@
+import { parseEnergyType } from '../../prebuild/feature/parse-energy-type.ts';
+import {
+	energyTypeLocalIdMap,
+	type EnergyType,
+} from '../../prebuild/model/energy.ts';
 import type {
 	PrebuildCard,
 	PrebuildDeck,
@@ -48,16 +53,23 @@ export async function convertPrebuildToLimitlessDeck({
 			setCardsWithQuantity.map(async (setCardWithQuantity) => {
 				const { card: setCard, quantity } = setCardWithQuantity;
 
+				// if setName end with Promo, replace it with Black Star Promos
+				const unvalidatedSetName: string = setCard.setName;
+
+				const setName: string = unvalidatedSetName.endsWith('Promo')
+					? unvalidatedSetName.replace('Promo', 'Black Star Promos')
+					: unvalidatedSetName;
+
 				const cardResumes: CardResume[] = await tcgdex.card.list(
 					Query.create()
 						.like('localId', setCard.localId.toString())
-						.like('set.name', setCard.setName),
+						.like('set.name', setName),
 				);
 
 				const cardResume: CardResume | undefined = cardResumes[0];
 
 				if (!cardResume) {
-					throw Error('Card not found');
+					throw Error(`Card not found: ${setCard.setName} #${setCard.localId}`);
 				}
 
 				const cardId: string = cardResume.id;
@@ -83,16 +95,21 @@ export async function convertPrebuildToLimitlessDeck({
 				}
 
 				const tcgOnline: string | undefined = set.tcgOnline;
+				// TODO refactor
+				const abbreviation: string | undefined = (set as any)?.abbreviation
+					?.official;
 
-				if (!tcgOnline) {
-					throw Error('Set TCG Online code not found');
+				if (!tcgOnline && !abbreviation) {
+					throw Error(
+						`Set TCG Online code not found for ${set.name} with ID ${set.id} and abbreviation ${abbreviation}`,
+					);
 				}
 
 				return {
 					category,
 					quantity,
 					name,
-					tcgOnline,
+					tcgOnline: tcgOnline ?? abbreviation!,
 					localId,
 				};
 			}),
@@ -103,14 +120,36 @@ export async function convertPrebuildToLimitlessDeck({
 			return limitlessCardWithCategory.category === CATEGORY.POKEMON;
 		},
 	);
-	// TODO Check if item and supporter cards are handled correctly
 	const trainer: LimitlessCard[] = limitlessCardsWithCategory.filter(
 		(limitlessCardWithCategory) => {
 			return limitlessCardWithCategory.category === CATEGORY.TRAINER;
 		},
 	);
-	// TODO handle energy cards properly
-	const energy: LimitlessCard[] = [];
+	const energy: LimitlessCard[] = energyCardsWithQuantity.map(
+		(energyCardWithQuantity) => {
+			const { card: name, quantity } = energyCardWithQuantity;
+
+			const energyType: EnergyType | undefined = parseEnergyType(name);
+
+			if (!energyType) {
+				throw Error('Invalid energy type');
+			}
+
+			const tcgOnline: string = 'SVE';
+			const localId: number | undefined = energyTypeLocalIdMap.get(energyType);
+
+			if (!localId) {
+				throw Error('Energy local ID not found');
+			}
+
+			return {
+				name,
+				quantity,
+				tcgOnline,
+				localId,
+			};
+		},
+	);
 
 	return {
 		name,
