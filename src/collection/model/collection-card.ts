@@ -1,10 +1,10 @@
 export interface CollectionCard {
-	id: string;
+	_id: string;
 	variants: {
-		firstEdition: number;
-		holo: number;
-		normal: number;
-		reverse: number;
-		wPromo: number;
+		firstEdition?: number;
+		holo?: number;
+		normal?: number;
+		reverse?: number;
+		wPromo?: number;
 	};
 }

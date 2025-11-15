@@ -15,10 +15,11 @@
 	],
 	"author": "bengeendokter",
 	"license": "MIT",
-	"packageManager": "pnpm@10.12.2",
+	"packageManager": "pnpm@10.22.0",
 	"dependencies": {
 		"@tcgdex/sdk": "^2.7.1",
-		"jsdom": "^27.1.0"
+		"jsdom": "^27.1.0",
+		"mongodb": "^7.0.0"
 	},
 	"devDependencies": {
 		"@types/jsdom": "^27.0.0",

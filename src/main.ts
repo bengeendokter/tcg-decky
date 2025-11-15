@@ -5,6 +5,7 @@ import { convertPrebuildToLimitlessDeck } from './limitless/feature/convert-preb
 import type { LimitlessDeck } from './limitless/model/limitless-deck.ts';
 import { exportLimitlessDeckToTxt } from './limitless/data-access/export-limitless-deck-to-txt.ts';
 import { importPrebuildDeckFromJson } from './prebuild/data-access/import-prebuild-deck-from-json.ts';
+import { connectToDatabase } from './collection/data-access/connect-to-database.ts';
 
 const PREBUILD_DECKS_URL = {
 	MEGA_GENGAR_EX_DECK:
@@ -51,11 +52,13 @@ const jsonFilePath: string = `${outputDirectory}/${JSON_FILE_NAME.MEGA_GENGAR_EX
 // });
 
 // Import prebuild decks from JSON
-const prebuildDeck: PrebuildDeck = importPrebuildDeckFromJson(jsonFilePath);
+// const prebuildDeck: PrebuildDeck = importPrebuildDeckFromJson(jsonFilePath);
 
 // Convert prebuild deck to Limitless deck
-const limitlessDeck: LimitlessDeck =
-	await convertPrebuildToLimitlessDeck(prebuildDeck);
+// const limitlessDeck: LimitlessDeck =
+// 	await convertPrebuildToLimitlessDeck(prebuildDeck);
 
 // Export limitless deck to TXT
-exportLimitlessDeckToTxt({ limitlessDeck, outputDirectory });
+// exportLimitlessDeckToTxt({ limitlessDeck, outputDirectory });
+
+await connectToDatabase();
