@@ -74,20 +74,20 @@ export async function convertPrebuildToCollectionCards({
 				};
 			}
 
-			if (variants.reverse) {
-				return {
-					_id: card.id,
-					variants: {
-						reverse: quantity,
-					},
-				};
-			}
-
 			if (variants.holo) {
 				return {
 					_id: card.id,
 					variants: {
 						holo: quantity,
+					},
+				};
+			}
+
+			if (variants.reverse) {
+				return {
+					_id: card.id,
+					variants: {
+						reverse: quantity,
 					},
 				};
 			}
@@ -115,7 +115,7 @@ export async function convertPrebuildToCollectionCards({
 	);
 
 	return {
-		cards,
 		name,
+		cards,
 	}
 }

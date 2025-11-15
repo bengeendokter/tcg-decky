@@ -8,10 +8,15 @@ import { importPrebuildDeckFromJson } from './prebuild/data-access/import-prebui
 import { connectToDatabase } from './collection/data-access/connect-to-database.ts';
 import type { Db } from 'mongodb';
 import { closeDatabaseConnection } from './collection/data-access/close-database-connection.ts';
-import type { CollectionCard } from './collection/model/collection-card.ts';
+import type {
+	CollectionCard,
+	CollectionCardDeck,
+} from './collection/model/collection-card.ts';
 import { addCollectionCard } from './collection/data-access/add-collection-card.ts';
 import { removeCollectionCard } from './collection/data-access/remove-collection-card.ts';
 import { getAllCollectionCards } from './collection/data-access/get-all-collection-cards.ts';
+import { convertPrebuildToCollectionCards } from './collection/feature/convert-prebuild-to-collection-cards.ts';
+import { exportCollectionCardDeckToJson } from "./collection/data-access/export-collection-card-deck-to-json.ts";
 
 const PREBUILD_DECKS_URL = {
 	MEGA_GENGAR_EX_DECK:
@@ -42,7 +47,7 @@ const CONFIG = {
 
 const deckUrl: string = CONFIG.PREBUILD_DECKS_URL.MARNIE_RIVAL_DECK;
 const outputDirectory: string = CONFIG.DEFAULT_OUTPUT_DIRECTORY;
-const jsonFilePath: string = `${outputDirectory}/${JSON_FILE_NAME.MEGA_GENGAR_EX_DECK}`;
+const jsonFilePath: string = `${outputDirectory}/${JSON_FILE_NAME.MARNIE_RIVAL_DECK}`;
 const databaseUrl: string = 'mongodb://localhost:27017';
 
 // Extract prebuild decks from webpage
@@ -59,7 +64,7 @@ const databaseUrl: string = 'mongodb://localhost:27017';
 // });
 
 // Import prebuild decks from JSON
-// const prebuildDeck: PrebuildDeck = importPrebuildDeckFromJson(jsonFilePath);
+const prebuildDeck: PrebuildDeck = importPrebuildDeckFromJson(jsonFilePath);
 
 // Convert prebuild deck to Limitless deck
 // const limitlessDeck: LimitlessDeck =
@@ -68,18 +73,24 @@ const databaseUrl: string = 'mongodb://localhost:27017';
 // Export limitless deck to TXT
 // exportLimitlessDeckToTxt({ limitlessDeck, outputDirectory });
 
-const db: Db = await connectToDatabase(databaseUrl);
+// Connect to database
+// const db: Db = await connectToDatabase(databaseUrl);
 
-const collectionCard: CollectionCard = {
-	_id: 'swsh3-137',
-	variants: {
-		normal: 2,
-		reverse: 9,
-	},
-};
+// const collectionCard: CollectionCard = {
+// 	_id: 'swsh3-137',
+// 	variants: {
+// 		normal: 2,
+// 		reverse: 9,
+// 	},
+// };
 
-const collectionCards: CollectionCard[] = await getAllCollectionCards(db);
+// Get all collection cards
+// const collectionCards: CollectionCard[] = await getAllCollectionCards(db);
 
-console.log('Collection Cards:', collectionCards);
+// Close database connection
+// await closeDatabaseConnection(db.client);
 
-await closeDatabaseConnection(db.client);
+const deck: CollectionCardDeck =
+	await convertPrebuildToCollectionCards(prebuildDeck);
+
+exportCollectionCardDeckToJson({deck, outputDirectory});
