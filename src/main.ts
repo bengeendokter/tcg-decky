@@ -6,6 +6,10 @@ import type { LimitlessDeck } from './limitless/model/limitless-deck.ts';
 import { exportLimitlessDeckToTxt } from './limitless/data-access/export-limitless-deck-to-txt.ts';
 import { importPrebuildDeckFromJson } from './prebuild/data-access/import-prebuild-deck-from-json.ts';
 import { connectToDatabase } from './collection/data-access/connect-to-database.ts';
+import type { Db } from 'mongodb';
+import { closeDatabaseConnection } from './collection/data-access/close-database-connection.ts';
+import type { CollectionCard } from './collection/model/collection-card.ts';
+import { addCollectionCard } from './collection/data-access/add-collection-card.ts';
 
 const PREBUILD_DECKS_URL = {
 	MEGA_GENGAR_EX_DECK:
@@ -34,12 +38,13 @@ const CONFIG = {
 	PREBUILD_DECKS_URL,
 } as const satisfies Record<Uppercase<string>, string | object>;
 
-const url: string = CONFIG.PREBUILD_DECKS_URL.MARNIE_RIVAL_DECK;
+const deckUrl: string = CONFIG.PREBUILD_DECKS_URL.MARNIE_RIVAL_DECK;
 const outputDirectory: string = CONFIG.DEFAULT_OUTPUT_DIRECTORY;
 const jsonFilePath: string = `${outputDirectory}/${JSON_FILE_NAME.MEGA_GENGAR_EX_DECK}`;
+const databaseUrl: string = 'mongodb://localhost:27017';
 
 // Extract prebuild decks from webpage
-// const decks: PrebuildDeck[] = await extractPrebuildDecks(url);
+// const decks: PrebuildDeck[] = await extractPrebuildDecks(deckUrl);
 
 // Export prebuild decks to JSON
 // exportPrebuildDecksToJson({ decks, outputDirectory });
@@ -61,4 +66,16 @@ const jsonFilePath: string = `${outputDirectory}/${JSON_FILE_NAME.MEGA_GENGAR_EX
 // Export limitless deck to TXT
 // exportLimitlessDeckToTxt({ limitlessDeck, outputDirectory });
 
-await connectToDatabase();
+const db: Db = await connectToDatabase(databaseUrl);
+
+const collectionCard: CollectionCard = {
+	_id: 'swsh3-137',
+	variants: {
+		normal: 2,
+		holo: 9,
+	},
+};
+
+await addCollectionCard({ db, collectionCard });
+
+await closeDatabaseConnection(db.client);
