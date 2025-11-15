@@ -8,3 +8,8 @@ export interface CollectionCard {
 		wPromo?: number;
 	};
 }
+
+export interface CollectionCardDeck {
+	cards: CollectionCard[];
+	name: string;
+}
