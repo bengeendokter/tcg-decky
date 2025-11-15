@@ -11,6 +11,7 @@ import { closeDatabaseConnection } from './collection/data-access/close-database
 import type { CollectionCard } from './collection/model/collection-card.ts';
 import { addCollectionCard } from './collection/data-access/add-collection-card.ts';
 import { removeCollectionCard } from './collection/data-access/remove-collection-card.ts';
+import { getAllCollectionCards } from './collection/data-access/get-all-collection-cards.ts';
 
 const PREBUILD_DECKS_URL = {
 	MEGA_GENGAR_EX_DECK:
@@ -77,6 +78,8 @@ const collectionCard: CollectionCard = {
 	},
 };
 
-await removeCollectionCard({ db, collectionCard });
+const collectionCards: CollectionCard[] = await getAllCollectionCards(db);
+
+console.log('Collection Cards:', collectionCards);
 
 await closeDatabaseConnection(db.client);

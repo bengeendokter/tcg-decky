@@ -11,7 +11,7 @@ export async function addCollectionCard({
 	collectionCard,
 }: AddCollectionCardParams): Promise<UpdateResult<CollectionCard>> {
 	const cards: Collection<CollectionCard> =
-		db.collection<CollectionCard>('cards');
+		db.collection('cards');
 
 	return await cards.updateOne(
 		{ _id: collectionCard._id },
