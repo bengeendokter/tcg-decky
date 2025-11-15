@@ -35,7 +35,7 @@ const CONFIG = {
 
 const url: string = CONFIG.PREBUILD_DECKS_URL.MARNIE_RIVAL_DECK;
 const outputDirectory: string = CONFIG.DEFAULT_OUTPUT_DIRECTORY;
-const jsonFilePath: string = `${outputDirectory}/${JSON_FILE_NAME.BATTLE_ACADEMY_2024_PIKACHU}`;
+const jsonFilePath: string = `${outputDirectory}/${JSON_FILE_NAME.MEGA_GENGAR_EX_DECK}`;
 
 // Extract prebuild decks from webpage
 // const decks: PrebuildDeck[] = await extractPrebuildDecks(url);
