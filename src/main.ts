@@ -10,6 +10,7 @@ import type { Db } from 'mongodb';
 import { closeDatabaseConnection } from './collection/data-access/close-database-connection.ts';
 import type { CollectionCard } from './collection/model/collection-card.ts';
 import { addCollectionCard } from './collection/data-access/add-collection-card.ts';
+import { removeCollectionCard } from './collection/data-access/remove-collection-card.ts';
 
 const PREBUILD_DECKS_URL = {
 	MEGA_GENGAR_EX_DECK:
@@ -72,10 +73,10 @@ const collectionCard: CollectionCard = {
 	_id: 'swsh3-137',
 	variants: {
 		normal: 2,
-		holo: 9,
+		reverse: 9,
 	},
 };
 
-await addCollectionCard({ db, collectionCard });
+await removeCollectionCard({ db, collectionCard });
 
 await closeDatabaseConnection(db.client);
