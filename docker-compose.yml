@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongodb/mongodb-community-server:7.0-ubi8
+    container_name: mongodb_server
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
+    driver: local
