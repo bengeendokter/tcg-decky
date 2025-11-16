@@ -18,6 +18,8 @@ import { getAllCollectionCards } from './collection/data-access/get-all-collecti
 import { convertPrebuildToCollectionCards } from './collection/feature/convert-prebuild-to-collection-cards.ts';
 import { exportCollectionCardDeckToJson } from './collection/data-access/export-collection-card-deck-to-json.ts';
 import { importCollectionCardDeckFromJson } from './collection/data-access/import-collection-card-deck-from-json.ts';
+import { importDittoDexCardsFromCsv } from './ditto-dex/data-access/import-ditto-dex-cards-from-csv.ts';
+import type { DittoDexCard } from './ditto-dex/model/ditto-dex-card.ts';
 
 const PREBUILD_DECKS_URL = {
 	MEGA_GENGAR_EX_DECK:
@@ -54,6 +56,7 @@ const deckUrl: string = CONFIG.PREBUILD_DECKS_URL.MARNIE_RIVAL_DECK;
 const outputDirectory: string = CONFIG.DEFAULT_OUTPUT_DIRECTORY;
 const prebuildDeckJsonFilePath: string = `${outputDirectory}/${PREBUILD_DECK_JSON_FILE_NAME.MARNIE_RIVAL_DECK}`;
 const collectionCardDeckJsonFilePath: string = `${outputDirectory}/${COLLECTION_CARD_DECK_JSON_FILE_NAME.MARNIE_RIVAL_DECK}`;
+const csvFilePath: string = 'data/dittodex_collection.csv';
 const databaseUrl: string = 'mongodb://localhost:27017';
 
 // Extract prebuild decks from webpage
@@ -104,6 +107,10 @@ const databaseUrl: string = 'mongodb://localhost:27017';
 // exportCollectionCardDeckToJson({deck, outputDirectory});
 
 // Import collection card deck from JSON
-const collectionCardDeck: CollectionCardDeck = importCollectionCardDeckFromJson(
-	collectionCardDeckJsonFilePath,
-);
+// const collectionCardDeck: CollectionCardDeck = importCollectionCardDeckFromJson(
+// 	collectionCardDeckJsonFilePath,
+// );
+
+const dittoDexCards: DittoDexCard[] = importDittoDexCardsFromCsv(csvFilePath);
+
+console.log('dittoDexCards', dittoDexCards);
