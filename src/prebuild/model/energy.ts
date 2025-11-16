@@ -9,12 +9,9 @@ export const ENERGY_TYPES = {
 	METAL: 'Metal',
 } as const satisfies Record<Uppercase<string>, string>;
 
-
 export type EnergyType = (typeof ENERGY_TYPES)[keyof typeof ENERGY_TYPES];
 
-export function isEnergyType(
-	text: string,
-): text is EnergyType {
+export function isEnergyType(text: string): text is EnergyType {
 	const energyTypes: string[] = Object.values(ENERGY_TYPES);
 	return energyTypes.includes(text);
 }
@@ -30,10 +27,12 @@ export const ENERGY_TYPES_LOCAL_ID_MAP = {
 	[ENERGY_TYPES.METAL]: 8,
 } as const satisfies Record<EnergyType, number>;
 
-export type EnergyTypeLocalId = typeof ENERGY_TYPES_LOCAL_ID_MAP[EnergyType];
+export type EnergyTypeLocalId = (typeof ENERGY_TYPES_LOCAL_ID_MAP)[EnergyType];
 
 export const energyTypeLocalIdMap: Map<EnergyType, EnergyTypeLocalId> = new Map(
-	Object.entries(ENERGY_TYPES_LOCAL_ID_MAP).filter((entry): entry is [EnergyType, EnergyTypeLocalId] => isEnergyType(entry[0])),
+	Object.entries(ENERGY_TYPES_LOCAL_ID_MAP).filter(
+		(entry): entry is [EnergyType, EnergyTypeLocalId] => isEnergyType(entry[0]),
+	),
 );
 // TODO update type to be an object with name, tcgOnline, and localId
 export type EnergyCard = `Basic ${EnergyType} Energy`;

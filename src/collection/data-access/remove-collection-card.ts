@@ -10,8 +10,7 @@ export async function removeCollectionCard({
 	db,
 	collectionCard,
 }: RemoveCollectionCardParams): Promise<UpdateResult<CollectionCard>> {
-	const cards: Collection<CollectionCard> =
-		db.collection('cards');
+	const cards: Collection<CollectionCard> = db.collection('cards');
 
 	const updateResult: UpdateResult<CollectionCard> = await cards.updateOne(
 		{ _id: collectionCard._id },

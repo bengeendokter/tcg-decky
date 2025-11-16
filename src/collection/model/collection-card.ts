@@ -14,29 +14,36 @@ export function isCollectionCard(object: object): object is CollectionCard {
 		return false;
 	}
 
-	if (!('variants' in object) || typeof object['variants'] !== 'object' || object['variants'] === null) {
+	if (
+		!('variants' in object) ||
+		typeof object['variants'] !== 'object' ||
+		object['variants'] === null
+	) {
 		return false;
 	}
 
 	const variants: object = object['variants'];
 
-	if('firstEdition' in variants && typeof variants['firstEdition'] !== 'number') {
+	if (
+		'firstEdition' in variants &&
+		typeof variants['firstEdition'] !== 'number'
+	) {
 		return false;
 	}
 
-	if('holo' in variants && typeof variants['holo'] !== 'number') {
+	if ('holo' in variants && typeof variants['holo'] !== 'number') {
 		return false;
 	}
 
-	if('normal' in variants && typeof variants['normal'] !== 'number') {
+	if ('normal' in variants && typeof variants['normal'] !== 'number') {
 		return false;
 	}
 
-	if('reverse' in variants && typeof variants['reverse'] !== 'number') {
+	if ('reverse' in variants && typeof variants['reverse'] !== 'number') {
 		return false;
 	}
 
-	if('wPromo' in variants && typeof variants['wPromo'] !== 'number') {
+	if ('wPromo' in variants && typeof variants['wPromo'] !== 'number') {
 		return false;
 	}
 

@@ -19,7 +19,9 @@ export function importDittoDexCardsFromCsv(
 		.filter((line) => line.length > 0);
 
 	return csvLines.map((line) => {
-		const lineValues: string[] = line.split(',').map((value) => value.trim().replaceAll('"', ''));
+		const lineValues: string[] = line
+			.split(',')
+			.map((value) => value.trim().replaceAll('"', ''));
 
 		if (lineValues.length !== 10) {
 			throw Error(

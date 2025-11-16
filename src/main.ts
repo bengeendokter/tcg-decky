@@ -20,6 +20,7 @@ import { exportCollectionCardDeckToJson } from './collection/data-access/export-
 import { importCollectionCardDeckFromJson } from './collection/data-access/import-collection-card-deck-from-json.ts';
 import { importDittoDexCardsFromCsv } from './ditto-dex/data-access/import-ditto-dex-cards-from-csv.ts';
 import type { DittoDexCard } from './ditto-dex/model/ditto-dex-card.ts';
+import { convetDittoDexCardsToCollectionCards } from './collection/feature/convert-ditto-dex-cards-to-collection-cards.ts';
 
 const PREBUILD_DECKS_URL = {
 	MEGA_GENGAR_EX_DECK:
@@ -113,4 +114,7 @@ const databaseUrl: string = 'mongodb://localhost:27017';
 
 const dittoDexCards: DittoDexCard[] = importDittoDexCardsFromCsv(csvFilePath);
 
-console.log('dittoDexCards', dittoDexCards);
+const collectionCards: CollectionCard[] =
+	await convetDittoDexCardsToCollectionCards(dittoDexCards);
+
+console.log('collectionCards', collectionCards);

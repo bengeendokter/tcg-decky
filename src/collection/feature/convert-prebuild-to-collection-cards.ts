@@ -4,29 +4,26 @@ import type {
 	PrebuildDeck,
 	PrebuildSetCardWithQuantity,
 } from '../../prebuild/model/prebuild-deck.ts';
-import type { CollectionCard, CollectionCardDeck } from '../model/collection-card.ts';
+import type {
+	CollectionCard,
+	CollectionCardDeck,
+} from '../model/collection-card.ts';
+import type { Variants } from '../model/variants.ts';
 
 const tcgdex = new TCGdex('en');
-
-interface Variants {
-	normal?: boolean;
-	reverse?: boolean;
-	holo?: boolean;
-	wPromo?: boolean;
-	firstEdition?: boolean;
-}
 
 export async function convertPrebuildToCollectionCards({
 	cards: prebuildCards,
 	name,
 }: PrebuildDeck): Promise<CollectionCardDeck> {
-	const setCardsWithQuantity: PrebuildSetCardWithQuantity[] = prebuildCards.filter(
-		(cardsWithQuantity): cardsWithQuantity is PrebuildSetCardWithQuantity => {
-			const card: PrebuildCard = cardsWithQuantity.card;
+	const setCardsWithQuantity: PrebuildSetCardWithQuantity[] =
+		prebuildCards.filter(
+			(cardsWithQuantity): cardsWithQuantity is PrebuildSetCardWithQuantity => {
+				const card: PrebuildCard = cardsWithQuantity.card;
 
-			return typeof card !== 'string';
-		},
-	);
+				return typeof card !== 'string';
+			},
+		);
 
 	const cards: CollectionCard[] = await Promise.all(
 		setCardsWithQuantity.map(async (setCardWithQuantity) => {
@@ -117,5 +114,5 @@ export async function convertPrebuildToCollectionCards({
 	return {
 		name,
 		cards,
-	}
+	};
 }

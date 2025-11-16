@@ -12,7 +12,7 @@ export function importPrebuildDeckFromJson(jsonFilePath: string): PrebuildDeck {
 		throw Error('JSON is not an object');
 	}
 
-	if(!isPrebuildDeck(json)) {
+	if (!isPrebuildDeck(json)) {
 		throw Error('JSON is not a PrebuildDeck');
 	}
 
