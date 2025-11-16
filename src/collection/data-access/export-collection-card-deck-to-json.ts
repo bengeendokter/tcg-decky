@@ -7,7 +7,7 @@ export interface ExportPrebuildDecksToJsonParams {
 }
 
 export function exportCollectionCardDeckToJson({deck, outputDirectory}: ExportPrebuildDecksToJsonParams): void {
-		const deckFileName = `${outputDirectory}/${deck.name}-collection.json`;
+		const deckFileName = `${outputDirectory}/${deck.name}_collection.json`;
 		fs.writeFileSync(deckFileName, JSON.stringify(deck, null, 2), {
 			encoding: 'utf-8',
 		});

@@ -16,7 +16,8 @@ import { addCollectionCard } from './collection/data-access/add-collection-card.
 import { removeCollectionCard } from './collection/data-access/remove-collection-card.ts';
 import { getAllCollectionCards } from './collection/data-access/get-all-collection-cards.ts';
 import { convertPrebuildToCollectionCards } from './collection/feature/convert-prebuild-to-collection-cards.ts';
-import { exportCollectionCardDeckToJson } from "./collection/data-access/export-collection-card-deck-to-json.ts";
+import { exportCollectionCardDeckToJson } from './collection/data-access/export-collection-card-deck-to-json.ts';
+import { importCollectionCardDeckFromJson } from './collection/data-access/import-collection-card-deck-from-json.ts';
 
 const PREBUILD_DECKS_URL = {
 	MEGA_GENGAR_EX_DECK:
@@ -29,13 +30,17 @@ const PREBUILD_DECKS_URL = {
 		'https://bulbapedia.bulbagarden.net/wiki/Battle_Academy_2024_(TCG)',
 } as const satisfies Record<Uppercase<string>, string>;
 
-const JSON_FILE_NAME = {
+const PREBUILD_DECK_JSON_FILE_NAME = {
 	MEGA_GENGAR_EX_DECK: 'mega_gengar_ex_mega_battle_deck.json',
 	DRAGAPULT_EX_DECK: 'dragapult_ex_league_battle_deck.json',
 	MARNIE_RIVAL_DECK: 'marnie_rival_battle_deck.json',
 	BATTLE_ACADEMY_2024_ARMAROUGE: 'battle_academy_2024_armarouge_deck.json',
 	BATTLE_ACADEMY_2024_DARKRAI: 'battle_academy_2024_darkrai_deck.json',
 	BATTLE_ACADEMY_2024_PIKACHU: 'battle_academy_2024_pikachu_deck.json',
+} as const satisfies Record<Uppercase<string>, string>;
+
+const COLLECTION_CARD_DECK_JSON_FILE_NAME = {
+	MARNIE_RIVAL_DECK: 'marnie_rival_battle_deck_collection.json',
 } as const satisfies Record<Uppercase<string>, string>;
 
 const DEFAULT_OUTPUT_DIRECTORY = './output';
@@ -47,7 +52,8 @@ const CONFIG = {
 
 const deckUrl: string = CONFIG.PREBUILD_DECKS_URL.MARNIE_RIVAL_DECK;
 const outputDirectory: string = CONFIG.DEFAULT_OUTPUT_DIRECTORY;
-const jsonFilePath: string = `${outputDirectory}/${JSON_FILE_NAME.MARNIE_RIVAL_DECK}`;
+const prebuildDeckJsonFilePath: string = `${outputDirectory}/${PREBUILD_DECK_JSON_FILE_NAME.MARNIE_RIVAL_DECK}`;
+const collectionCardDeckJsonFilePath: string = `${outputDirectory}/${COLLECTION_CARD_DECK_JSON_FILE_NAME.MARNIE_RIVAL_DECK}`;
 const databaseUrl: string = 'mongodb://localhost:27017';
 
 // Extract prebuild decks from webpage
@@ -64,7 +70,7 @@ const databaseUrl: string = 'mongodb://localhost:27017';
 // });
 
 // Import prebuild decks from JSON
-const prebuildDeck: PrebuildDeck = importPrebuildDeckFromJson(jsonFilePath);
+// const prebuildDeck: PrebuildDeck = importPrebuildDeckFromJson(prebuildDeckJsonFilePath);
 
 // Convert prebuild deck to Limitless deck
 // const limitlessDeck: LimitlessDeck =
@@ -90,7 +96,14 @@ const prebuildDeck: PrebuildDeck = importPrebuildDeckFromJson(jsonFilePath);
 // Close database connection
 // await closeDatabaseConnection(db.client);
 
-const deck: CollectionCardDeck =
-	await convertPrebuildToCollectionCards(prebuildDeck);
+// Convert prebuild deck to collection card deck
+// const deck: CollectionCardDeck =
+// 	await convertPrebuildToCollectionCards(prebuildDeck);
 
-exportCollectionCardDeckToJson({deck, outputDirectory});
+// Export collection card deck to JSON
+// exportCollectionCardDeckToJson({deck, outputDirectory});
+
+// Import collection card deck from JSON
+const collectionCardDeck: CollectionCardDeck = importCollectionCardDeckFromJson(
+	collectionCardDeckJsonFilePath,
+);
