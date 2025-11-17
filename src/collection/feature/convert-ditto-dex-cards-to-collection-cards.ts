@@ -11,7 +11,7 @@ const tcgdex = new TCGdex('en');
 export async function convetDittoDexCardsToCollectionCards(
 	dittoDexCards: DittoDexCard[],
 ): Promise<CollectionCard[]> {
-	return await Promise.all(
+	const collectionCards: CollectionCard[] = await Promise.all(
 		dittoDexCards.map(async (dittoDexCard) => {
 			const dittoDexCardId: string = dittoDexCard.id;
 			const setNumberStartIndex: number = dittoDexCardId.search(/\d/);
@@ -113,4 +113,51 @@ export async function convetDittoDexCardsToCollectionCards(
 			throw Error('Variant not found');
 		}),
 	);
+
+	const emptyCollectionCardMap: Map<string, CollectionCard> = new Map();
+
+	const collectionCardMap: Map<string, CollectionCard> = collectionCards.reduce(
+		(collectionCardMap, card) => {
+			const oldCollectionCard: CollectionCard | undefined =
+				collectionCardMap.get(card._id);
+
+			if (oldCollectionCard === undefined) {
+				collectionCardMap.set(card._id, card);
+				return collectionCardMap;
+			}
+
+			const oldVariants: CollectionCard['variants'] =
+				oldCollectionCard.variants;
+			const oldFirstEdition: number = oldVariants.firstEdition ?? 0;
+			const oldHolo: number = oldVariants.holo ?? 0;
+			const oldNormal: number = oldVariants.normal ?? 0;
+			const oldReverse: number = oldVariants.reverse ?? 0;
+			const oldWpromo: number = oldVariants.wPromo ?? 0;
+
+			const newVariants: CollectionCard['variants'] = card.variants;
+			const newFirstEdition: number = newVariants.firstEdition ?? 0;
+			const newHolo: number = newVariants.holo ?? 0;
+			const newNormal: number = newVariants.normal ?? 0;
+			const newReverse: number = newVariants.reverse ?? 0;
+			const newWpromo: number = newVariants.wPromo ?? 0;
+
+			const mergedCollectionCard: CollectionCard = {
+				_id: card._id,
+				variants: {
+					firstEdition: oldFirstEdition + newFirstEdition,
+					holo: oldHolo + newHolo,
+					normal: oldNormal + newNormal,
+					reverse: oldReverse + newReverse,
+					wPromo: oldWpromo + newWpromo,
+				},
+			};
+
+			collectionCardMap.set(card._id, mergedCollectionCard);
+
+			return collectionCardMap;
+		},
+		emptyCollectionCardMap,
+	);
+
+	return collectionCardMap.values().toArray();
 }

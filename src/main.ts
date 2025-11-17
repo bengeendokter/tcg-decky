@@ -88,7 +88,7 @@ const databaseUrl: string = 'mongodb://localhost:27017';
 // exportLimitlessDeckToTxt({ limitlessDeck, outputDirectory });
 
 // Connect to database
-const db: Db = await connectToDatabase(databaseUrl);
+// const db: Db = await connectToDatabase(databaseUrl);
 
 // const collectionCard: CollectionCard = {
 // 	_id: 'swsh3-137',
@@ -113,10 +113,12 @@ const db: Db = await connectToDatabase(databaseUrl);
 // 	collectionCardDeckJsonFilePath,
 // );
 
-// const dittoDexCards: DittoDexCard[] = importDittoDexCardsFromCsv(csvFilePath);
+const dittoDexCards: DittoDexCard[] = importDittoDexCardsFromCsv(csvFilePath);
 
-// const collectionCards: CollectionCard[] =
-// 	await convetDittoDexCardsToCollectionCards(dittoDexCards);
+const collectionCards: CollectionCard[] =
+	await convetDittoDexCardsToCollectionCards(dittoDexCards);
+
+console.log(collectionCards);
 
 // const collectionCardDeck: CollectionCardDeck = {
 // 	name: 'Deck 9',
@@ -130,19 +132,17 @@ const db: Db = await connectToDatabase(databaseUrl);
 // 		id: '691b670ffbbea7eccc5b67e0',
 // 	});
 
-const collectionCardDecks: CollectionCardDeck[] =
-	await getAllCollectionCardDecks(db);
+// const collectionCardDecks: CollectionCardDeck[] =
+// 	await getAllCollectionCardDecks(db);
 
-const collectionCardDeck: CollectionCardDeck | undefined =
-	collectionCardDecks[0];
+// const collectionCardDeck: CollectionCardDeck | undefined =
+// 	collectionCardDecks[0];
 
-if (collectionCardDeck === undefined) {
-	throw Error('collectionCardDeck not found');
-}
+// if (collectionCardDeck === undefined) {
+// 	throw Error('collectionCardDeck not found');
+// }
 
-const limitlessDeck: LimitlessDeck = await convertCollectionToLimitlessDeck(collectionCardDeck);
-
-console.log(limitlessDeck);
+// const limitlessDeck: LimitlessDeck = await convertCollectionToLimitlessDeck(collectionCardDeck);
 
 // Close database connection
-await closeDatabaseConnection(db.client);
+// await closeDatabaseConnection(db.client);
