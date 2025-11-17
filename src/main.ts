@@ -6,7 +6,7 @@ import type { LimitlessDeck } from './limitless/model/limitless-deck.ts';
 import { exportLimitlessDeckToTxt } from './limitless/data-access/export-limitless-deck-to-txt.ts';
 import { importPrebuildDeckFromJson } from './prebuild/data-access/import-prebuild-deck-from-json.ts';
 import { connectToDatabase } from './collection/data-access/connect-to-database.ts';
-import type { Db } from 'mongodb';
+import type { Db, FindCursor, UpdateResult, WithId } from 'mongodb';
 import { closeDatabaseConnection } from './collection/data-access/close-database-connection.ts';
 import type {
 	CollectionCard,
@@ -21,6 +21,9 @@ import { importCollectionCardDeckFromJson } from './collection/data-access/impor
 import { importDittoDexCardsFromCsv } from './ditto-dex/data-access/import-ditto-dex-cards-from-csv.ts';
 import type { DittoDexCard } from './ditto-dex/model/ditto-dex-card.ts';
 import { convetDittoDexCardsToCollectionCards } from './collection/feature/convert-ditto-dex-cards-to-collection-cards.ts';
+import { addCollectionCardDeck } from './collection/data-access/add-collection-card-deck.ts';
+import { updateCollectionCardDeck } from './collection/data-access/update-collection-card-deck.ts';
+import { getAllCollectionCardDecks } from './collection/data-access/get-all-collection-card-decks.ts';
 
 const PREBUILD_DECKS_URL = {
 	MEGA_GENGAR_EX_DECK:
@@ -84,7 +87,7 @@ const databaseUrl: string = 'mongodb://localhost:27017';
 // exportLimitlessDeckToTxt({ limitlessDeck, outputDirectory });
 
 // Connect to database
-// const db: Db = await connectToDatabase(databaseUrl);
+const db: Db = await connectToDatabase(databaseUrl);
 
 // const collectionCard: CollectionCard = {
 // 	_id: 'swsh3-137',
@@ -96,9 +99,6 @@ const databaseUrl: string = 'mongodb://localhost:27017';
 
 // Get all collection cards
 // const collectionCards: CollectionCard[] = await getAllCollectionCards(db);
-
-// Close database connection
-// await closeDatabaseConnection(db.client);
 
 // Convert prebuild deck to collection card deck
 // const deck: CollectionCardDeck =
@@ -112,9 +112,22 @@ const databaseUrl: string = 'mongodb://localhost:27017';
 // 	collectionCardDeckJsonFilePath,
 // );
 
-const dittoDexCards: DittoDexCard[] = importDittoDexCardsFromCsv(csvFilePath);
+// const dittoDexCards: DittoDexCard[] = importDittoDexCardsFromCsv(csvFilePath);
 
-const collectionCards: CollectionCard[] =
-	await convetDittoDexCardsToCollectionCards(dittoDexCards);
+// const collectionCards: CollectionCard[] =
+// 	await convetDittoDexCardsToCollectionCards(dittoDexCards);
 
-console.log('collectionCards', collectionCards);
+// const collectionCardDeck: CollectionCardDeck = {
+// 	name: 'Deck 3',
+// 	cards: collectionCards,
+// };
+
+// const collectionCardDeckUpdateResult: UpdateResult<CollectionCardDeck> =
+// 	await updateCollectionCardDeck({ collectionCardDeck, db });
+
+const collectionCardDecks: WithId<CollectionCardDeck>[] = await getAllCollectionCardDecks(db);
+
+console.log('collectionCardDecks', collectionCardDecks);
+
+// Close database connection
+await closeDatabaseConnection(db.client);
