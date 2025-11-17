@@ -24,6 +24,7 @@ import { convetDittoDexCardsToCollectionCards } from './collection/feature/conve
 import { addCollectionCardDeck } from './collection/data-access/add-collection-card-deck.ts';
 import { updateCollectionCardDeck } from './collection/data-access/update-collection-card-deck.ts';
 import { getAllCollectionCardDecks } from './collection/data-access/get-all-collection-card-decks.ts';
+import { convertCollectionToLimitlessDeck } from './limitless/feature/convert-collection-to-limitless-deck.ts';
 
 const PREBUILD_DECKS_URL = {
 	MEGA_GENGAR_EX_DECK:
@@ -112,22 +113,36 @@ const db: Db = await connectToDatabase(databaseUrl);
 // 	collectionCardDeckJsonFilePath,
 // );
 
-const dittoDexCards: DittoDexCard[] = importDittoDexCardsFromCsv(csvFilePath);
+// const dittoDexCards: DittoDexCard[] = importDittoDexCardsFromCsv(csvFilePath);
 
-const collectionCards: CollectionCard[] =
-	await convetDittoDexCardsToCollectionCards(dittoDexCards);
+// const collectionCards: CollectionCard[] =
+// 	await convetDittoDexCardsToCollectionCards(dittoDexCards);
 
-const collectionCardDeck: CollectionCardDeck = {
-	name: 'Deck 9',
-	cards: collectionCards,
-};
+// const collectionCardDeck: CollectionCardDeck = {
+// 	name: 'Deck 9',
+// 	cards: collectionCards,
+// };
 
-const collectionCardDeckUpdateResult: UpdateResult<CollectionCardDeck> =
-	await updateCollectionCardDeck({
-		collectionCardDeck,
-		db,
-		id: '691b670ffbbea7eccc5b67e0',
-	});
+// const collectionCardDeckUpdateResult: UpdateResult<CollectionCardDeck> =
+// 	await updateCollectionCardDeck({
+// 		collectionCardDeck,
+// 		db,
+// 		id: '691b670ffbbea7eccc5b67e0',
+// 	});
+
+const collectionCardDecks: CollectionCardDeck[] =
+	await getAllCollectionCardDecks(db);
+
+const collectionCardDeck: CollectionCardDeck | undefined =
+	collectionCardDecks[0];
+
+if (collectionCardDeck === undefined) {
+	throw Error('collectionCardDeck not found');
+}
+
+const limitlessDeck: LimitlessDeck = await convertCollectionToLimitlessDeck(collectionCardDeck);
+
+console.log(limitlessDeck);
 
 // Close database connection
 await closeDatabaseConnection(db.client);

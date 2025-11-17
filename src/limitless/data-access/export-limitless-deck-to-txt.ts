@@ -31,7 +31,7 @@ export function exportLimitlessDeckToTxt({
 	outputDirectory,
 }: ExportLimitlessDeckToTxtParams): void {
 	const { pokemon, trainer, energy } = limitlessDeck;
-	const deckFileName = `${outputDirectory}/${limitlessDeck.name}.txt`;
+	const deckFileName = `${outputDirectory}/${limitlessDeck.name.replaceAll(' ', '_')}.txt`;
 
 	const pokemonHeaderLine: string = limitlessCardsToCategoryHeaderLine({
 		limitlessCards: pokemon,

@@ -11,7 +11,7 @@ export function exportPrebuildDecksToJson({
 	outputDirectory,
 }: ExportPrebuildDecksToJsonParams): void {
 	decks.forEach((deck) => {
-		const deckFileName = `${outputDirectory}/${deck.name}.json`;
+		const deckFileName = `${outputDirectory}/${deck.name.replaceAll(' ', '_')}.json`;
 		fs.writeFileSync(deckFileName, JSON.stringify(deck, null, 2), {
 			encoding: 'utf-8',
 		});
