@@ -112,22 +112,22 @@ const db: Db = await connectToDatabase(databaseUrl);
 // 	collectionCardDeckJsonFilePath,
 // );
 
-// const dittoDexCards: DittoDexCard[] = importDittoDexCardsFromCsv(csvFilePath);
+const dittoDexCards: DittoDexCard[] = importDittoDexCardsFromCsv(csvFilePath);
 
-// const collectionCards: CollectionCard[] =
-// 	await convetDittoDexCardsToCollectionCards(dittoDexCards);
+const collectionCards: CollectionCard[] =
+	await convetDittoDexCardsToCollectionCards(dittoDexCards);
 
-// const collectionCardDeck: CollectionCardDeck = {
-// 	name: 'Deck 3',
-// 	cards: collectionCards,
-// };
+const collectionCardDeck: CollectionCardDeck = {
+	name: 'Deck 9',
+	cards: collectionCards,
+};
 
-// const collectionCardDeckUpdateResult: UpdateResult<CollectionCardDeck> =
-// 	await updateCollectionCardDeck({ collectionCardDeck, db });
-
-const collectionCardDecks: WithId<CollectionCardDeck>[] = await getAllCollectionCardDecks(db);
-
-console.log('collectionCardDecks', collectionCardDecks);
+const collectionCardDeckUpdateResult: UpdateResult<CollectionCardDeck> =
+	await updateCollectionCardDeck({
+		collectionCardDeck,
+		db,
+		id: '691b670ffbbea7eccc5b67e0',
+	});
 
 // Close database connection
 await closeDatabaseConnection(db.client);
