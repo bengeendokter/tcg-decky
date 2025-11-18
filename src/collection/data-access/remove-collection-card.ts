@@ -6,6 +6,7 @@ export interface RemoveCollectionCardParams {
 	collectionCard: CollectionCard;
 }
 
+// TODO can this function be cleaned up?
 export async function removeCollectionCard({
 	db,
 	collectionCard,
