@@ -141,15 +141,33 @@ export async function convetDittoDexCardsToCollectionCards(
 			const newReverse: number = newVariants.reverse ?? 0;
 			const newWpromo: number = newVariants.wPromo ?? 0;
 
+			const variants: CollectionCard['variants'] = {
+				firstEdition: oldFirstEdition + newFirstEdition,
+				holo: oldHolo + newHolo,
+				normal: oldNormal + newNormal,
+				reverse: oldReverse + newReverse,
+				wPromo: oldWpromo + newWpromo,
+			};
+
+			if (variants.firstEdition === 0) {
+				delete variants.firstEdition;
+			}
+			if (variants.holo === 0) {
+				delete variants.holo;
+			}
+			if (variants.normal === 0) {
+				delete variants.normal;
+			}
+			if (variants.reverse === 0) {
+				delete variants.reverse;
+			}
+			if (variants.wPromo === 0) {
+				delete variants.wPromo;
+			}
+
 			const mergedCollectionCard: CollectionCard = {
 				_id: card._id,
-				variants: {
-					firstEdition: oldFirstEdition + newFirstEdition,
-					holo: oldHolo + newHolo,
-					normal: oldNormal + newNormal,
-					reverse: oldReverse + newReverse,
-					wPromo: oldWpromo + newWpromo,
-				},
+				variants,
 			};
 
 			collectionCardMap.set(card._id, mergedCollectionCard);
