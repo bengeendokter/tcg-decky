@@ -1,4 +1,4 @@
-import TCGdex, { type Card, type Set } from '@tcgdex/sdk';
+import TCGdex, { type Card } from '@tcgdex/sdk';
 import type {
 	CollectionCard,
 	CollectionCardDeck,
@@ -10,19 +10,17 @@ import {
 	type LimitlessCardWithCategory,
 	type LimitlessDeck,
 } from '../model/limitless-deck.ts';
+import type { SetWithAbbreviation } from '../../tcg-dex/model/set-with-abbreviation.ts';
 
-interface SetWithAbbreviation extends Set {
-	abbreviation?: {
-		official?: string;
-	};
+interface ConvertCollectionToLimitlessDeckParams {
+	collectionCardDeck: CollectionCardDeck;
+	tcgdex: TCGdex;
 }
 
-const tcgdex = new TCGdex('en');
-
-export async function convertCollectionToLimitlessDeck({
+export async function convertCollectionToLimitlessDeck({collectionCardDeck: {
 	cards,
 	name,
-}: CollectionCardDeck): Promise<LimitlessDeck> {
+}, tcgdex}: ConvertCollectionToLimitlessDeckParams): Promise<LimitlessDeck> {
 	const limitlessCardsWithCategory: LimitlessCardWithCategory[] =
 		await Promise.all(
 			cards.map(async (collectionCard) => {

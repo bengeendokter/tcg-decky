@@ -9,6 +9,7 @@ import type {
 	PrebuildEnergyCardWithQuantity,
 	PrebuildSetCardWithQuantity,
 } from '../../prebuild/model/prebuild-deck.ts';
+import type { SetWithAbbreviation } from '../../tcg-dex/model/set-with-abbreviation.ts';
 import {
 	CATEGORY,
 	isCategory,
@@ -16,25 +17,17 @@ import {
 	type LimitlessCardWithCategory,
 	type LimitlessDeck,
 } from '../model/limitless-deck.ts';
-import TCGdex, {
-	Query,
-	type Card,
-	type CardResume,
-	type Set,
-} from '@tcgdex/sdk';
+import TCGdex, { Query, type Card, type CardResume } from '@tcgdex/sdk';
 
-interface SetWithAbbreviation extends Set {
-	abbreviation?: {
-		official?: string;
-	};
+interface ConvertPrebuildToLimitlessDeckParams {
+	prebuildDeck: PrebuildDeck;
+	tcgdex: TCGdex;
 }
 
-const tcgdex = new TCGdex('en');
-
 export async function convertPrebuildToLimitlessDeck({
-	name,
-	cards,
-}: PrebuildDeck): Promise<LimitlessDeck> {
+	prebuildDeck: { name, cards },
+	tcgdex,
+}: ConvertPrebuildToLimitlessDeckParams): Promise<LimitlessDeck> {
 	const setCardsWithQuantity: PrebuildSetCardWithQuantity[] = cards.filter(
 		(cardsWithQuantity): cardsWithQuantity is PrebuildSetCardWithQuantity => {
 			const card: PrebuildCard = cardsWithQuantity.card;

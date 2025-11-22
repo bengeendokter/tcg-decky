@@ -25,6 +25,8 @@ import { addCollectionCardDeck } from './collection/data-access/add-collection-c
 import { updateCollectionCardDeck } from './collection/data-access/update-collection-card-deck.ts';
 import { getAllCollectionCardDecks } from './collection/data-access/get-all-collection-card-decks.ts';
 import { convertCollectionToLimitlessDeck } from './limitless/feature/convert-collection-to-limitless-deck.ts';
+import TCGdex from '@tcgdex/sdk';
+import { getTcgDex } from './tcg-dex/data-access/get-tcg-dex.ts';
 
 const PREBUILD_DECKS_URL = {
 	MEGA_GENGAR_EX_DECK:
@@ -63,6 +65,9 @@ const prebuildDeckJsonFilePath: string = `${outputDirectory}/${PREBUILD_DECK_JSO
 const collectionCardDeckJsonFilePath: string = `${outputDirectory}/${COLLECTION_CARD_DECK_JSON_FILE_NAME.MARNIE_RIVAL_DECK}`;
 const csvFilePath: string = 'data/dittodex_collection.csv';
 const databaseUrl: string = 'mongodb://localhost:27017';
+
+const tcgServerUrl: string = 'http://localhost:3000/v2';
+const tcgdex: TCGdex = getTcgDex(tcgServerUrl);
 
 // Extract prebuild decks from webpage
 // const decks: PrebuildDeck[] = await extractPrebuildDecks(deckUrl);

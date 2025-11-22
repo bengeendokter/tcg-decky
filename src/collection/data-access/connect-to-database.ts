@@ -1,5 +1,4 @@
-import { Collection, Db, MongoClient } from 'mongodb';
-import type { CollectionCard } from '../model/collection-card.ts';
+import { Db, MongoClient } from 'mongodb';
 
 export async function connectToDatabase(url: string): Promise<Db> {
 	const client: MongoClient = new MongoClient(url);

@@ -10,12 +10,15 @@ import type {
 } from '../model/collection-card.ts';
 import type { Variants } from '../model/variants.ts';
 
-const tcgdex = new TCGdex('en');
+interface ConvertPrebuildToCollectionCardsParams {
+	prebuildDeck: PrebuildDeck;
+	tcgdex: TCGdex;
+}
 
 export async function convertPrebuildToCollectionCards({
-	cards: prebuildCards,
-	name,
-}: PrebuildDeck): Promise<CollectionCardDeck> {
+	prebuildDeck: { cards: prebuildCards, name },
+	tcgdex,
+}: ConvertPrebuildToCollectionCardsParams): Promise<CollectionCardDeck> {
 	const setCardsWithQuantity: PrebuildSetCardWithQuantity[] =
 		prebuildCards.filter(
 			(cardsWithQuantity): cardsWithQuantity is PrebuildSetCardWithQuantity => {

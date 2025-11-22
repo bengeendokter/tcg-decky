@@ -6,11 +6,15 @@ import {
 import type { CollectionCard } from '../model/collection-card.ts';
 import type { Variants } from '../model/variants.ts';
 
-const tcgdex = new TCGdex('en');
+interface ConvetDittoDexCardsToCollectionCardsParams {
+	dittoDexCards: DittoDexCard[];
+	tcgdex: TCGdex;
+}
 
-export async function convetDittoDexCardsToCollectionCards(
-	dittoDexCards: DittoDexCard[],
-): Promise<CollectionCard[]> {
+export async function convetDittoDexCardsToCollectionCards({
+	dittoDexCards,
+	tcgdex,
+}: ConvetDittoDexCardsToCollectionCardsParams): Promise<CollectionCard[]> {
 	const collectionCards: CollectionCard[] = await Promise.all(
 		dittoDexCards.map(async (dittoDexCard) => {
 			const dittoDexCardId: string = dittoDexCard.id;
