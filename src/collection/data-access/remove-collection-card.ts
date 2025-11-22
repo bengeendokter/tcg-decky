@@ -6,41 +6,90 @@ export interface RemoveCollectionCardParams {
 	collectionCard: CollectionCard;
 }
 
-// TODO can this function be cleaned up?
 export async function removeCollectionCard({
 	db,
 	collectionCard,
 }: RemoveCollectionCardParams): Promise<UpdateResult<CollectionCard>> {
 	const cards: Collection<CollectionCard> = db.collection('cards');
 
+	const {
+		normal,
+		reverse,
+		firstEdition,
+		holo,
+		wPromo,
+	}: CollectionCard['variants'] = collectionCard.variants;
+
+	const normalRemoveAmount: number = normal ?? 0;
+	const reverseRemoveAmount: number = reverse ?? 0;
+	const firstEditionRemoveAmount: number = firstEdition ?? 0;
+	const holoRemoveAmount: number = holo ?? 0;
+	const wPromoRemoveAmount: number = wPromo ?? 0;
+
 	const updateResult: UpdateResult<CollectionCard> = await cards.updateOne(
 		{ _id: collectionCard._id },
-		{
-			$inc: {
-				'variants.normal': (collectionCard.variants.normal ?? 0) * -1,
-				'variants.reverse': (collectionCard.variants.reverse ?? 0) * -1,
-				'variants.firstEdition':
-					(collectionCard.variants.firstEdition ?? 0) * -1,
-				'variants.holo': (collectionCard.variants.holo ?? 0) * -1,
-				'variants.wPromo': (collectionCard.variants.wPromo ?? 0) * -1,
+		[
+			{
+				$set: {
+					'variants.normal': {
+						$cond: {
+							if: {
+								$lt: [normalRemoveAmount, '$variants.normal'],
+							},
+							then: {
+								$add: ['$variants.normal', normalRemoveAmount * -1],
+							},
+							else: '$$REMOVE',
+						},
+					},
+					'variants.reverse': {
+						$cond: {
+							if: {
+								$lt: [reverseRemoveAmount, '$variants.reverse'],
+							},
+							then: {
+								$add: ['$variants.reverse', reverseRemoveAmount * -1],
+							},
+							else: '$$REMOVE',
+						},
+					},
+					'variants.firstEdition': {
+						$cond: {
+							if: {
+								$lt: [firstEditionRemoveAmount, '$variants.firstEdition'],
+							},
+							then: {
+								$add: ['$variants.firstEdition', firstEditionRemoveAmount * -1],
+							},
+							else: '$$REMOVE',
+						},
+					},
+					'variants.holo': {
+						$cond: {
+							if: {
+								$lt: [holoRemoveAmount, '$variants.holo'],
+							},
+							then: {
+								$add: ['$variants.holo', holoRemoveAmount * -1],
+							},
+							else: '$$REMOVE',
+						},
+					},
+					'variants.wPromo': {
+						$cond: {
+							if: {
+								$lt: [wPromoRemoveAmount, '$variants.wPromo'],
+							},
+							then: {
+								$add: ['$variants.wPromo', wPromoRemoveAmount * -1],
+							},
+							else: '$$REMOVE',
+						},
+					},
+				},
 			},
-		},
+		],
 	);
 
-	if (updateResult.modifiedCount === 0) {
-		return updateResult;
-	}
-
-	return await cards.updateOne(
-		{ _id: collectionCard._id },
-		{
-			$max: {
-				'variants.normal': 0,
-				'variants.reverse': 0,
-				'variants.firstEdition': 0,
-				'variants.holo': 0,
-				'variants.wPromo': 0,
-			},
-		},
-	);
+	return updateResult;
 }

@@ -93,15 +93,17 @@ const tcgdex: TCGdex = getTcgDex(tcgServerUrl);
 // exportLimitlessDeckToTxt({ limitlessDeck, outputDirectory });
 
 // Connect to database
-// const db: Db = await connectToDatabase(databaseUrl);
+const db: Db = await connectToDatabase(databaseUrl);
 
-// const collectionCard: CollectionCard = {
-// 	_id: 'swsh3-137',
-// 	variants: {
-// 		normal: 2,
-// 		reverse: 9,
-// 	},
-// };
+const collectionCard: CollectionCard = {
+	_id: 'swsh3-137',
+	variants: {
+		firstEdition: 4,
+		holo: 4,
+	},
+};
+
+await removeCollectionCard({ db, collectionCard });
 
 // Get all collection cards
 // const collectionCards: CollectionCard[] = await getAllCollectionCards(db);
@@ -118,12 +120,10 @@ const tcgdex: TCGdex = getTcgDex(tcgServerUrl);
 // 	collectionCardDeckJsonFilePath,
 // );
 
-const dittoDexCards: DittoDexCard[] = importDittoDexCardsFromCsv(csvFilePath);
+// const dittoDexCards: DittoDexCard[] = importDittoDexCardsFromCsv(csvFilePath);
 
-const collectionCards: CollectionCard[] =
-	await convetDittoDexCardsToCollectionCards(dittoDexCards);
-
-console.log(collectionCards);
+// const collectionCards: CollectionCard[] =
+// 	await convetDittoDexCardsToCollectionCards({dittoDexCards, tcgdex});
 
 // const collectionCardDeck: CollectionCardDeck = {
 // 	name: 'Deck 9',
@@ -150,4 +150,4 @@ console.log(collectionCards);
 // const limitlessDeck: LimitlessDeck = await convertCollectionToLimitlessDeck(collectionCardDeck);
 
 // Close database connection
-// await closeDatabaseConnection(db.client);
+await closeDatabaseConnection(db.client);
