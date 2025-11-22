@@ -9,9 +9,9 @@ export async function updateCollectionCard({
 	collectionCard,
 	db,
 }: UpdateCollectionCardParams): Promise<UpdateResult<CollectionCard>> {
-	const decks: Collection<CollectionCard> = db.collection('cards');
+	const cards: Collection<CollectionCard> = db.collection('cards');
 
-	return await decks.updateOne(
+	return await cards.updateOne(
 		{ _id: collectionCard._id },
 		{ $set: collectionCard },
 	);
