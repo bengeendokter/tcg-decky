@@ -18,13 +18,16 @@ import { convertPrebuildToCollectionCards } from './collection/feature/convert-p
 import { addCollectionCard } from './collection/data-access/add-collection-card.ts';
 
 export async function resetCollectionCardsDatabase(): Promise<void> {
+	console.log('Connect to database and tcgdex');
 	const db: Db = await connectToDatabase(CONFIG.MONGO_DB_DATABASE_URL);
 	const tcgDex: TCGdex = getTcgDex(CONFIG.TCG_DEX_SERVER_URL);
 
+	console.log('Import dittodex collection');
 	const dittoDexCards: DittoDexCard[] = importDittoDexCardsFromCsv(
 		CONFIG.DITTO_DEX_SCV_FILE_PATH,
 	);
 
+	console.log('Import prebuild decks');
 	const armarougeDeck: PrebuildDeck = importPrebuildDeckFromJson(
 		`${CONFIG.DEFAULT_OUTPUT_DIRECTORY}/${CONFIG.PREBUILD_DECK_JSON_FILE_NAME.BATTLE_ACADEMY_2024_ARMAROUGE}`,
 	);
@@ -49,9 +52,11 @@ export async function resetCollectionCardsDatabase(): Promise<void> {
 		`${CONFIG.DEFAULT_OUTPUT_DIRECTORY}/${CONFIG.PREBUILD_DECK_JSON_FILE_NAME.MEGA_GENGAR_EX_DECK}`,
 	);
 
+	console.log('Convert dittodex to collection');
 	const dittoDexCollectionCards: CollectionCard[] =
 		await convetDittoDexCardsToCollectionCards({ dittoDexCards, tcgDex });
 
+	console.log('Convert prebuild decks to collections');
 	const armarougeCollectionDeck: CollectionCardDeck =
 		await convertPrebuildToCollectionCards({
 			prebuildDeck: armarougeDeck,
@@ -98,13 +103,18 @@ export async function resetCollectionCardsDatabase(): Promise<void> {
 		...gengarCollectionDeck.cards,
 	];
 
+	console.log('Clear database');
 	await deleteAllCollectionCard(db);
 
+	console.log('Add collection cards to database');
 	await Promise.all(
 		collectionCards.map(async (collectionCard) => {
 			return await addCollectionCard({ db, collectionCard });
 		}),
 	);
 
+	console.log('Close database connection');
 	await closeDatabaseConnection(db.client);
 }
+
+await resetCollectionCardsDatabase();
