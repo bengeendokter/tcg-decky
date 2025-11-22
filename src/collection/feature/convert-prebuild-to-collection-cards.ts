@@ -12,12 +12,12 @@ import type { Variants } from '../model/variants.ts';
 
 interface ConvertPrebuildToCollectionCardsParams {
 	prebuildDeck: PrebuildDeck;
-	tcgdex: TCGdex;
+	tcgDex: TCGdex;
 }
 
 export async function convertPrebuildToCollectionCards({
 	prebuildDeck: { cards: prebuildCards, name },
-	tcgdex,
+	tcgDex,
 }: ConvertPrebuildToCollectionCardsParams): Promise<CollectionCardDeck> {
 	const setCardsWithQuantity: PrebuildSetCardWithQuantity[] =
 		prebuildCards.filter(
@@ -39,7 +39,7 @@ export async function convertPrebuildToCollectionCards({
 				? unvalidatedSetName.replace('Promo', 'Black Star Promos')
 				: unvalidatedSetName;
 
-			const cardResumes: CardResume[] = await tcgdex.card.list(
+			const cardResumes: CardResume[] = await tcgDex.card.list(
 				Query.create()
 					.like('localId', setCard.localId.toString())
 					.like('set.name', setName),
@@ -53,7 +53,7 @@ export async function convertPrebuildToCollectionCards({
 
 			const cardId: string = cardResume.id;
 
-			const card: Card | null = await tcgdex.card.get(cardId);
+			const card: Card | null = await tcgDex.card.get(cardId);
 
 			if (!card) {
 				throw Error('Card not found');

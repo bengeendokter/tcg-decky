@@ -8,12 +8,12 @@ import type { Variants } from '../model/variants.ts';
 
 interface ConvetDittoDexCardsToCollectionCardsParams {
 	dittoDexCards: DittoDexCard[];
-	tcgdex: TCGdex;
+	tcgDex: TCGdex;
 }
 
 export async function convetDittoDexCardsToCollectionCards({
 	dittoDexCards,
-	tcgdex,
+	tcgDex,
 }: ConvetDittoDexCardsToCollectionCardsParams): Promise<CollectionCard[]> {
 	const collectionCards: CollectionCard[] = await Promise.all(
 		dittoDexCards.map(async (dittoDexCard) => {
@@ -48,7 +48,7 @@ export async function convetDittoDexCardsToCollectionCards({
 			const _id: string = `${setAbriviation}${setNumber.padStart(2, '0')}-${cardNumber.padStart(3, '0')}`;
 			const quantity: number = dittoDexCard.qty;
 
-			const card: Card | null = await tcgdex.card.get(_id);
+			const card: Card | null = await tcgDex.card.get(_id);
 
 			if (!card) {
 				throw Error(`Card not found, id: ${_id}`);

@@ -6,6 +6,7 @@
 	"type": "module",
 	"scripts": {
 		"start": "node src/main.ts",
+		"reset-collection": "node src/reset-collection-cards-database.ts",
 		"start:hono": "node src/hono.ts",
 		"format": "prettier . --write"
 	},

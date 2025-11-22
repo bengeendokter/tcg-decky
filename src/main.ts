@@ -35,7 +35,7 @@ const prebuildDeckJsonFilePath: string = `${outputDirectory}/${CONFIG.PREBUILD_D
 const collectionCardDeckJsonFilePath: string = `${outputDirectory}/${CONFIG.COLLECTION_CARD_DECK_JSON_FILE_NAME.MARNIE_RIVAL_DECK}`;
 const databaseUrl: string = CONFIG.MONGO_DB_DATABASE_URL;
 
-const tcgdex: TCGdex = getTcgDex(CONFIG.TCG_DEX_SERVER_URL);
+const tcgDex: TCGdex = getTcgDex(CONFIG.TCG_DEX_SERVER_URL);
 
 // Extract prebuild decks from webpage
 // const decks: PrebuildDeck[] = await extractPrebuildDecks(deckUrl);

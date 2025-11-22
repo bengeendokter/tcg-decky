@@ -14,25 +14,25 @@ import type { SetWithAbbreviation } from '../../tcg-dex/model/set-with-abbreviat
 
 interface ConvertCollectionToLimitlessDeckParams {
 	collectionCardDeck: CollectionCardDeck;
-	tcgdex: TCGdex;
+	tcgDex: TCGdex;
 }
 
 export async function convertCollectionToLimitlessDeck({collectionCardDeck: {
 	cards,
 	name,
-}, tcgdex}: ConvertCollectionToLimitlessDeckParams): Promise<LimitlessDeck> {
+}, tcgDex}: ConvertCollectionToLimitlessDeckParams): Promise<LimitlessDeck> {
 	const limitlessCardsWithCategory: LimitlessCardWithCategory[] =
 		await Promise.all(
 			cards.map(async (collectionCard) => {
 				const cardId: string = collectionCard._id;
 
-				const card: Card | null = await tcgdex.card.get(cardId);
+				const card: Card | null = await tcgDex.card.get(cardId);
 
 				if (!card) {
 					throw Error('Card not found');
 				}
 
-				const set: SetWithAbbreviation | null = await tcgdex.set.get(
+				const set: SetWithAbbreviation | null = await tcgDex.set.get(
 					card.set.id,
 				);
 

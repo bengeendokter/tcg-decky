@@ -21,12 +21,12 @@ import TCGdex, { Query, type Card, type CardResume } from '@tcgdex/sdk';
 
 interface ConvertPrebuildToLimitlessDeckParams {
 	prebuildDeck: PrebuildDeck;
-	tcgdex: TCGdex;
+	tcgDex: TCGdex;
 }
 
 export async function convertPrebuildToLimitlessDeck({
 	prebuildDeck: { name, cards },
-	tcgdex,
+	tcgDex,
 }: ConvertPrebuildToLimitlessDeckParams): Promise<LimitlessDeck> {
 	const setCardsWithQuantity: PrebuildSetCardWithQuantity[] = cards.filter(
 		(cardsWithQuantity): cardsWithQuantity is PrebuildSetCardWithQuantity => {
@@ -59,7 +59,7 @@ export async function convertPrebuildToLimitlessDeck({
 					? unvalidatedSetName.replace('Promo', 'Black Star Promos')
 					: unvalidatedSetName;
 
-				const cardResumes: CardResume[] = await tcgdex.card.list(
+				const cardResumes: CardResume[] = await tcgDex.card.list(
 					Query.create()
 						.like('localId', setCard.localId.toString())
 						.like('set.name', setName),
@@ -73,7 +73,7 @@ export async function convertPrebuildToLimitlessDeck({
 
 				const cardId: string = cardResume.id;
 
-				const card: Card | null = await tcgdex.card.get(cardId);
+				const card: Card | null = await tcgDex.card.get(cardId);
 
 				if (!card) {
 					throw Error('Card not found');
@@ -87,7 +87,7 @@ export async function convertPrebuildToLimitlessDeck({
 					throw Error('Invalid category');
 				}
 
-				const set: SetWithAbbreviation | null = await tcgdex.set.get(
+				const set: SetWithAbbreviation | null = await tcgDex.set.get(
 					card.set.id,
 				);
 
