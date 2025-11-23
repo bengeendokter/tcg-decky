@@ -17,10 +17,11 @@
 	],
 	"author": "bengeendokter",
 	"license": "MIT",
-	"packageManager": "pnpm@10.22.0",
+	"packageManager": "pnpm@10.23.0",
 	"dependencies": {
 		"@hono/node-server": "^1.19.6",
 		"@tcgdex/sdk": "^2.7.1",
+		"arktype": "^2.1.27",
 		"hono": "^4.10.6",
 		"jsdom": "^27.1.0",
 		"mongodb": "^7.0.0"
