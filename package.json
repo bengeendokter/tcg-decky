@@ -8,6 +8,7 @@
 		"start": "node src/main.ts",
 		"reset-collection": "node src/reset-collection-cards-database.ts",
 		"extract-prebuild-decks": "node src/extract-prebuild-decks-to-json.ts",
+		"convert-prebuild-to-limitless": "node src/convert-prebuild-to-limitless-deck-txt.ts",
 		"start:hono": "node src/hono.ts",
 		"format": "prettier . --write"
 	},
