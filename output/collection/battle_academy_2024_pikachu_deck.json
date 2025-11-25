@@ -1,0 +1,161 @@
+{
+  "name": "battle_academy_2024_pikachu_deck",
+  "cards": [
+    {
+      "card": {
+        "name": "Pikachu ex",
+        "setName": "SVP Promo",
+        "localId": 106
+      },
+      "quantity": 1
+    },
+    {
+      "card": {
+        "name": "Voltorb",
+        "setName": "Paldea Evolved",
+        "localId": 66
+      },
+      "quantity": 4
+    },
+    {
+      "card": {
+        "name": "Electrode",
+        "setName": "Paldea Evolved",
+        "localId": 67
+      },
+      "quantity": 3
+    },
+    {
+      "card": {
+        "name": "Mareep",
+        "setName": "SVP Promo",
+        "localId": 107
+      },
+      "quantity": 4
+    },
+    {
+      "card": {
+        "name": "Flaaffy",
+        "setName": "SVP Promo",
+        "localId": 108
+      },
+      "quantity": 3
+    },
+    {
+      "card": {
+        "name": "Ampharos",
+        "setName": "SVP Promo",
+        "localId": 109
+      },
+      "quantity": 2
+    },
+    {
+      "card": {
+        "name": "Rotom",
+        "setName": "Scarlet & Violet",
+        "localId": 69
+      },
+      "quantity": 1
+    },
+    {
+      "card": {
+        "name": "Wattrel",
+        "setName": "Scarlet & Violet",
+        "localId": 77
+      },
+      "quantity": 2
+    },
+    {
+      "card": {
+        "name": "Kilowattrel",
+        "setName": "Paldea Evolved",
+        "localId": 82
+      },
+      "quantity": 1
+    },
+    {
+      "card": {
+        "name": "Miraidon",
+        "setName": "SVP Promo",
+        "localId": 148
+      },
+      "quantity": 1
+    },
+    {
+      "card": {
+        "name": "Electric Generator",
+        "setName": "Scarlet & Violet",
+        "localId": 170
+      },
+      "quantity": 1
+    },
+    {
+      "card": {
+        "name": "Great Ball",
+        "setName": "Paldea Evolved",
+        "localId": 183
+      },
+      "quantity": 4
+    },
+    {
+      "card": {
+        "name": "Jacq",
+        "setName": "Scarlet & Violet",
+        "localId": 175
+      },
+      "quantity": 1
+    },
+    {
+      "card": {
+        "name": "Nemona",
+        "setName": "Scarlet & Violet",
+        "localId": 180
+      },
+      "quantity": 4
+    },
+    {
+      "card": {
+        "name": "Nest Ball",
+        "setName": "Scarlet & Violet",
+        "localId": 181
+      },
+      "quantity": 1
+    },
+    {
+      "card": {
+        "name": "Picnicker",
+        "setName": "SVP Promo",
+        "localId": 114
+      },
+      "quantity": 2
+    },
+    {
+      "card": {
+        "name": "Potion",
+        "setName": "Scarlet & Violet",
+        "localId": 188
+      },
+      "quantity": 2
+    },
+    {
+      "card": {
+        "name": "Switch",
+        "setName": "Scarlet & Violet",
+        "localId": 194
+      },
+      "quantity": 2
+    },
+    {
+      "card": {
+        "name": "Youngster",
+        "setName": "Scarlet & Violet",
+        "localId": 198
+      },
+      "quantity": 3
+    },
+    {
+      "card": "Basic Lightning Energy",
+      "quantity": 18
+    }
+  ]
+}

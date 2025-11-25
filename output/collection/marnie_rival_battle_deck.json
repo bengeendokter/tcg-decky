@@ -1,0 +1,177 @@
+{
+  "name": "marnie_rival_battle_deck",
+  "cards": [
+    {
+      "card": {
+        "name": "Marnie's Purrloin",
+        "setName": "Destined Rivals",
+        "localId": 130
+      },
+      "quantity": 2
+    },
+    {
+      "card": {
+        "name": "Marnie's Liepard",
+        "setName": "Destined Rivals",
+        "localId": 131
+      },
+      "quantity": 2
+    },
+    {
+      "card": {
+        "name": "Marnie's Scraggy",
+        "setName": "Destined Rivals",
+        "localId": 132
+      },
+      "quantity": 2
+    },
+    {
+      "card": {
+        "name": "Marnie's Scrafty",
+        "setName": "Destined Rivals",
+        "localId": 133
+      },
+      "quantity": 1
+    },
+    {
+      "card": {
+        "name": "Marnie's Impidimp",
+        "setName": "Destined Rivals",
+        "localId": 134
+      },
+      "quantity": 4
+    },
+    {
+      "card": {
+        "name": "Marnie's Morgrem",
+        "setName": "Destined Rivals",
+        "localId": 135
+      },
+      "quantity": 3
+    },
+    {
+      "card": {
+        "name": "Marnie's Grimmsnarl ex",
+        "setName": "Destined Rivals",
+        "localId": 136
+      },
+      "quantity": 2
+    },
+    {
+      "card": {
+        "name": "Marnie's Morpeko",
+        "setName": "Destined Rivals",
+        "localId": 137
+      },
+      "quantity": 1
+    },
+    {
+      "card": {
+        "name": "Marnie's Morpeko",
+        "setName": "SVP Promo",
+        "localId": 206
+      },
+      "quantity": 1
+    },
+    {
+      "card": {
+        "name": "Buddy-Buddy Poffin",
+        "setName": "Temporal Forces",
+        "localId": 144
+      },
+      "quantity": 3
+    },
+    {
+      "card": {
+        "name": "Energy Recycler",
+        "setName": "Destined Rivals",
+        "localId": 164
+      },
+      "quantity": 1
+    },
+    {
+      "card": {
+        "name": "Exp. Share",
+        "setName": "Scarlet & Violet",
+        "localId": 174
+      },
+      "quantity": 1
+    },
+    {
+      "card": {
+        "name": "Rare Candy",
+        "setName": "Paldean Fates",
+        "localId": 89
+      },
+      "quantity": 3
+    },
+    {
+      "card": {
+        "name": "Super Rod",
+        "setName": "Paldea Evolved",
+        "localId": 188
+      },
+      "quantity": 1
+    },
+    {
+      "card": {
+        "name": "Switch",
+        "setName": "Scarlet & Violet",
+        "localId": 194
+      },
+      "quantity": 2
+    },
+    {
+      "card": {
+        "name": "Ultra Ball",
+        "setName": "Paldean Fates",
+        "localId": 91
+      },
+      "quantity": 4
+    },
+    {
+      "card": {
+        "name": "Boss's Orders",
+        "setName": "Paldea Evolved",
+        "localId": 172
+      },
+      "quantity": 2
+    },
+    {
+      "card": {
+        "name": "Drayton",
+        "setName": "Surging Sparks",
+        "localId": 174
+      },
+      "quantity": 3
+    },
+    {
+      "card": {
+        "name": "Iono",
+        "setName": "Paldea Evolved",
+        "localId": 185
+      },
+      "quantity": 2
+    },
+    {
+      "card": {
+        "name": "Professor's Research",
+        "setName": "Journey Together",
+        "localId": 155
+      },
+      "quantity": 4
+    },
+    {
+      "card": {
+        "name": "Spikemuth Gym",
+        "setName": "Destined Rivals",
+        "localId": 169
+      },
+      "quantity": 2
+    },
+    {
+      "card": "Basic Darkness Energy",
+      "quantity": 14
+    }
+  ]
+}

@@ -7,6 +7,7 @@
 	"scripts": {
 		"start": "node src/main.ts",
 		"reset-collection": "node src/reset-collection-cards-database.ts",
+		"extract-prebuild-decks": "node src/extract-prebuild-decks-to-json.ts",
 		"start:hono": "node src/hono.ts",
 		"format": "prettier . --write"
 	},
