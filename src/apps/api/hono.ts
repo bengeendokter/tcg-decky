@@ -1,23 +1,17 @@
 import { serve } from '@hono/node-server';
 import { Hono } from 'hono';
+import { cards } from './cards.ts';
+import { logger } from 'hono/logger';
 
-// - api/cards
-// - GET
-
-// - api/decks
-// - GET
-
-// 	- api/decks/:id
-// 	- GET
-// 	- POST
-// 	- UPDATE
-// 	- DELETE
-
-const app = new Hono();
+export const app = new Hono();
 
 app.get('/', (c) => {
 	return c.text('Hello Hono!');
 });
+
+app.use(logger());
+
+const routes = app.route('/cards', cards);
 
 serve(
 	{
@@ -28,3 +22,5 @@ serve(
 		console.log(`Server is running on http://localhost:${info.port}`);
 	},
 );
+
+export type AppType = typeof routes;

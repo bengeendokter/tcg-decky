@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import {
-	isCollectionCardDeck,
+	collectionCardDeckValidator,
 	type CollectionCardDeck,
 } from '../model/collection-card.ts';
 
@@ -17,7 +17,7 @@ export function importCollectionCardDeckFromJson(
 		throw Error('JSON is not an object');
 	}
 
-	if (!isCollectionCardDeck(json)) {
+	if (!collectionCardDeckValidator.allows(json)) {
 		throw Error('JSON is not a CollectionCardDeck');
 	}
 
