@@ -5,11 +5,11 @@
 	"main": "src/main.ts",
 	"type": "module",
 	"scripts": {
-		"start": "node src/main.ts",
-		"reset-collection": "node src/reset-collection-cards-database.ts",
-		"extract-prebuild-decks": "node src/extract-prebuild-decks-to-json.ts",
-		"convert-prebuild-to-limitless": "node src/convert-prebuild-to-limitless-deck-txt.ts",
-		"start:hono": "node src/hono.ts",
+		"start": "node src/apps/scripts/main.ts",
+		"reset-collection": "node src/apps/scripts/reset-collection-cards-database.ts",
+		"extract-prebuild-decks": "node src/apps/scripts/extract-prebuild-decks-to-json.ts",
+		"convert-prebuild-to-limitless": "node src/apps/scripts/convert-prebuild-to-limitless-deck-txt.ts",
+		"start:hono": "node src/apps/api/hono.ts",
 		"format": "prettier . --write"
 	},
 	"keywords": [
