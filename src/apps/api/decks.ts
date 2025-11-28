@@ -1,10 +1,15 @@
 import { Hono } from 'hono';
-import type { CollectionCardDeck } from '../../libs/collection/model/collection-card.ts';
+import {
+	collectionCardDeckValidator,
+	type CollectionCardDeck,
+} from '../../libs/collection/model/collection-card.ts';
 import { getAllCollectionCardDecks } from '../../libs/collection/data-access/get-all-collection-card-decks.ts';
 import { db } from './hono.ts';
 import { getCollectionCardDeck } from '../../libs/collection/data-access/get-collection-card-deck.ts';
 import { Type, type } from 'arktype';
 import { arktypeValidator } from '@hono/arktype-validator';
+import { addCollectionCardDeck } from '../../libs/collection/data-access/add-collection-card-deck.ts';
+import type { InsertOneResult } from 'mongodb';
 
 export interface DeckParams {
 	id: string;
@@ -45,6 +50,18 @@ export const decks = new Hono()
 			}
 
 			return context.json(deck);
+		},
+	)
+	.post(
+		'/',
+		arktypeValidator('json', collectionCardDeckValidator),
+		async (context) => {
+			const collectionCardDeck: CollectionCardDeck = context.req.valid('json');
+
+			const collectionCardDeckInsertResult: InsertOneResult<CollectionCardDeck> =
+				await addCollectionCardDeck({ collectionCardDeck, db });
+
+			return context.json(collectionCardDeckInsertResult);
 		},
 	);
 
