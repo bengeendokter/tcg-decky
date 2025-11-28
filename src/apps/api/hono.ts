@@ -5,6 +5,7 @@ import { logger } from 'hono/logger';
 import { connectToDatabase } from '../../libs/collection/data-access/connect-to-database.ts';
 import type { Db } from 'mongodb';
 import { CONFIG } from '../../config.ts';
+import { decks } from './decks.ts';
 
 export const app = new Hono();
 
@@ -16,7 +17,7 @@ app.get('/', (c) => {
 
 app.use(logger());
 
-const routes = app.route('/cards', cards);
+const routes = app.route('/cards', cards).route('/decks', decks);
 
 serve(
 	{
