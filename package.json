@@ -9,7 +9,7 @@
 		"reset-collection": "node src/apps/scripts/reset-collection-cards-database.ts",
 		"extract-prebuild-decks": "node src/apps/scripts/extract-prebuild-decks-to-json.ts",
 		"convert-prebuild-to-limitless": "node src/apps/scripts/convert-prebuild-to-limitless-deck-txt.ts",
-		"start:hono": "node src/apps/api/hono.ts",
+		"start:hono": "node src/apps/collection-api/hono.ts",
 		"format": "prettier . --write"
 	},
 	"keywords": [
