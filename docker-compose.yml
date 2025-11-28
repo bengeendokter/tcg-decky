@@ -1,7 +1,7 @@
 version: "3.8"
 
 services:
-  tcgdex-server:
+  tcgdex-api:
     image: tcgdex/server:pr-989
     restart: unless-stopped
     environment:
@@ -17,6 +17,12 @@ services:
       - "27017:27017"
     volumes:
       - mongo_data:/data/db
+  collection-api:
+    build:
+      context: .
+      dockerfile: CollectionApiDockerfile
+    ports:
+      - "4000:4000"
 
 volumes:
   mongo_data:
