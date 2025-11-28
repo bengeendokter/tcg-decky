@@ -22,3 +22,30 @@ content-type: application/json
 		}
 	]
 }
+
+###
+
+PUT http://localhost:4000/decks/692a00c149966bda273e1ce4
+content-type: application/json
+
+{
+	"name": "Deck 2",
+	"cards": [
+		{
+			"_id": "me01-096",
+			"variants": {
+				"normal": 1
+			}
+		},
+		{
+			"_id": "me01-112",
+			"variants": {
+				"normal": 1
+			}
+		}
+	]
+}
+
+###
+
+DELETE http://localhost:4000/decks/692a00c149966bda273e1ce4
