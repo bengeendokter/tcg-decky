@@ -9,7 +9,10 @@ import { decks } from './decks.ts';
 
 export const app = new Hono();
 
-export const db: Db = await connectToDatabase(CONFIG.MONGO_DB_DATABASE_URL);
+console.log('Connecting to database');
+const databaseUrl: string = process.env.MONGO_DB_DATABASE_URL ??  CONFIG.MONGO_DB_DATABASE_URL;
+export const db: Db = await connectToDatabase(databaseUrl);
+console.log('Database connection complete');
 
 app.get('/', (c) => {
 	return c.text('Hello Hono!');
