@@ -6,10 +6,12 @@
 	"type": "module",
 	"scripts": {
 		"start": "node src/apps/scripts/main.ts",
+		"start:collection-api": "node src/apps/collection-api/hono.ts",
+    	"start:deck-builder": "cd src/apps/deck-builder && ng serve",
+    	"build:deck-builder": "cd src/apps/deck-builder && ng build",
 		"reset-collection": "node src/apps/scripts/reset-collection-cards-database.ts",
 		"extract-prebuild-decks": "node src/apps/scripts/extract-prebuild-decks-to-json.ts",
 		"convert-prebuild-to-limitless": "node src/apps/scripts/convert-prebuild-to-limitless-deck-txt.ts",
-		"start:collection-api": "node src/apps/collection-api/hono.ts",
 		"format": "prettier . --write"
 	},
 	"keywords": [
