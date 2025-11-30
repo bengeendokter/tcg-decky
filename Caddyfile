@@ -1,0 +1,7 @@
+:80 {
+    # Set the root directory inside the container (where your site files are mounted)
+    root * /usr/share/caddy
+
+    # Enable the static file server
+    file_server
+}

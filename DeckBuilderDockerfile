@@ -1,0 +1,19 @@
+FROM node:24-alpine AS builder
+
+WORKDIR /app
+
+RUN corepack enable
+
+COPY package.json pnpm-lock.yaml tsconfig.json ./
+COPY src ./src
+
+RUN pnpm install --frozen-lockfile
+
+RUN pnpm build:deck-builder
+
+FROM caddy:2.10.2-alpine AS runner
+
+WORKDIR /usr/share/caddy
+
+COPY Caddyfile /etc/caddy/Caddyfile
+COPY --from=builder /app/output/deck-builder/browser .

@@ -2,6 +2,7 @@ version: "3.8"
 
 services:
   tcgdex-api:
+    container_name: tcgdex-api
     image: tcgdex/server:pr-989
     restart: unless-stopped
     environment:
@@ -18,6 +19,7 @@ services:
     volumes:
       - mongo_data:/data/db
   collection-api:
+    container_name: collection-api
     build:
       context: .
       dockerfile: CollectionApiDockerfile
@@ -25,6 +27,13 @@ services:
       - "4000:4000"
     environment:
       - MONGO_DB_DATABASE_URL=mongodb://mongodb:27017
+  deck-builder:
+    container_name: deck-builder
+    build:
+      context: .
+      dockerfile: DeckBuilderDockerfile
+    ports:
+      - "8080:80"
 
 volumes:
   mongo_data:
