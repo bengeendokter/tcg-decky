@@ -6,13 +6,26 @@ import { connectToDatabase } from '../../libs/collection/data-access/connect-to-
 import type { Db } from 'mongodb';
 import { CONFIG } from '../../config.ts';
 import { decks } from './decks.ts';
+import { cors } from 'hono/cors';
 
 export const app = new Hono();
 
 console.log('Connecting to database');
-const databaseUrl: string = process.env.MONGO_DB_DATABASE_URL ??  CONFIG.MONGO_DB_DATABASE_URL;
+const databaseUrl: string =
+	process.env.MONGO_DB_DATABASE_URL ?? CONFIG.MONGO_DB_DATABASE_URL;
 export const db: Db = await connectToDatabase(databaseUrl);
 console.log('Database connection complete');
+
+
+const deckBuilderUrl: string =
+	process.env.DECK_BUILDER_URL ?? 'http://localhost:4200';
+
+app.use(
+	'*',
+	cors({
+		origin: [deckBuilderUrl],
+	}),
+);
 
 app.get('/', (c) => {
 	return c.text('Hello Hono!');
