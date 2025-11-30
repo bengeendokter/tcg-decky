@@ -33,7 +33,7 @@ services:
       context: .
       dockerfile: DeckBuilderDockerfile
     ports:
-      - "8080:80"
+      - "4200:80"
 
 volumes:
   mongo_data:
