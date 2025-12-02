@@ -1,4 +1,5 @@
-const COLLECTION_API_URL = 'https://collection-api.home.bengeendokter.be/' as const satisfies string;;
+const COLLECTION_API_URL =
+	'https://collection-api.home.bengeendokter.be/' as const satisfies string;
 
 export const CONFIG = {
 	COLLECTION_API_URL,

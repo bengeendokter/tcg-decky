@@ -1,4 +1,4 @@
-import TCGdex from "@tcgdex/sdk";
+import TCGdex from '@tcgdex/sdk';
 
 export function getTcgDex(tcgServerUrl: string): TCGdex {
 	const tcgDex: TCGdex = new TCGdex('en');
