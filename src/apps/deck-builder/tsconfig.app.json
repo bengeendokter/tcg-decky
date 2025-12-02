@@ -7,11 +7,11 @@
     "types": [
       "node"
     ],
-		"composite": true,
-		"rootDir": "../../../src"
+		"composite": true
   },
   "include": [
-    "**/*.ts"
+    "**/*.ts",
+		"../../../src"
   ],
   "exclude": [
     "**/*.spec.ts"

@@ -22,7 +22,8 @@
 		"isolatedModules": true,
 		"noUncheckedSideEffectImports": true,
 		"moduleDetection": "force",
-		"skipLibCheck": true
+		"skipLibCheck": true,
+		"rootDir": "src"
 	},
 	"angularCompilerOptions": {
 		"enableI18nLegacyMessageIdFormat": false,
