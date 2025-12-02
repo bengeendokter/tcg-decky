@@ -2,10 +2,8 @@ import {
 	Component,
 	computed,
 	inject,
-	signal,
 	type ResourceRef,
-	type Signal,
-	type WritableSignal,
+	type Signal
 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Collection } from '../../../libs/deck-builder/data-access/collection.ts';
