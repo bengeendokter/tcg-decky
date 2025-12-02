@@ -1,4 +1,12 @@
-import { Component, inject, signal, type WritableSignal } from '@angular/core';
+import {
+	Component,
+	computed,
+	inject,
+	signal,
+	type ResourceRef,
+	type Signal,
+	type WritableSignal,
+} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Collection } from '../../../libs/deck-builder/data-access/collection.ts';
 import type { CollectionCard } from '../../../libs/collection/model/collection-card.ts';
@@ -11,11 +19,20 @@ import type { CollectionCard } from '../../../libs/collection/model/collection-c
 })
 export class App {
 	private readonly collection: Collection = inject(Collection);
-	protected cards: WritableSignal<CollectionCard[] | undefined> =
-		signal(undefined);
+	private readonly getAllCardsRecource: ResourceRef<CollectionCard[] | undefined> =
+		this.collection.getAllCardsRecource;
+
+	protected cards: Signal<CollectionCard[]> = computed(() => {
+		const getAllCardsRecource: ResourceRef<CollectionCard[] | undefined> =
+			this.getAllCardsRecource;
+		if (!getAllCardsRecource.hasValue()) {
+			return [];
+		}
+
+		return getAllCardsRecource.value();
+	});
 
 	protected async getAllCards() {
-		const cards: CollectionCard[] = await this.collection.getAllCards();
-		this.cards.set(cards);
+		this.getAllCardsRecource.reload();
 	}
 }
