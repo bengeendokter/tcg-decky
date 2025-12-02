@@ -5,13 +5,13 @@
 	"main": "src/apps/scripts/main.ts",
 	"type": "module",
 	"scripts": {
-		"start": "node src/apps/scripts/main.ts",
-		"start:collection-api": "node src/apps/collection-api/hono.ts",
+		"start": "tsx src/apps/scripts/main.ts",
+		"start:collection-api": "tsx src/apps/collection-api/hono.ts",
 		"start:deck-builder": "cd src/apps/deck-builder && ng serve",
 		"build:deck-builder": "cd src/apps/deck-builder && ng build",
-		"reset-collection": "node src/apps/scripts/reset-collection-cards-database.ts",
-		"extract-prebuild-decks": "node src/apps/scripts/extract-prebuild-decks-to-json.ts",
-		"convert-prebuild-to-limitless": "node src/apps/scripts/convert-prebuild-to-limitless-deck-txt.ts",
+		"reset-collection": "tsx src/apps/scripts/reset-collection-cards-database.ts",
+		"extract-prebuild-decks": "tsx src/apps/scripts/extract-prebuild-decks-to-json.ts",
+		"convert-prebuild-to-limitless": "tsx src/apps/scripts/convert-prebuild-to-limitless-deck-txt.ts",
 		"format": "prettier . --write"
 	},
 	"keywords": [
@@ -38,7 +38,8 @@
 		"jsdom": "^27.1.0",
 		"mongodb": "^7.0.0",
 		"rxjs": "~7.8.0",
-		"tslib": "^2.3.0"
+		"tslib": "^2.3.0",
+		"tsx": "^4.21.0"
 	},
 	"devDependencies": {
 		"@angular/build": "^21.0.1",

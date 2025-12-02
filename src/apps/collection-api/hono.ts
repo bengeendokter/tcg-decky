@@ -10,14 +10,16 @@ import { cors } from 'hono/cors';
 
 export const app = new Hono();
 
-console.log('Connecting to database');
 const databaseUrl: string =
 	process.env.MONGO_DB_DATABASE_URL ?? CONFIG.MONGO_DB_DATABASE_URL;
+console.log(`Connecting to database: ${databaseUrl}`);
 export const db: Db = await connectToDatabase(databaseUrl);
 console.log('Database connection complete');
 
 const deckBuilderUrl: string =
 	process.env.DECK_BUILDER_URL ?? 'http://localhost:4200';
+
+console.log(`Set CORS for ${deckBuilderUrl}`)
 
 app.use(
 	'*',
