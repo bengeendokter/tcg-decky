@@ -1,5 +1,5 @@
 import type { Collection, Db, WithId } from 'mongodb';
-import type { CollectionCardDeck } from '../model/collection-card.ts';
+import type { CollectionCardDeck } from '../model/collection-card';
 
 export async function getAllCollectionCardDecks(
 	db: Db,

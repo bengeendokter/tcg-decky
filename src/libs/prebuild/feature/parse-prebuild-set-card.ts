@@ -1,5 +1,5 @@
-import type { PrebuildSetCard } from '../model/prebuild-deck.ts';
-import type { CardTitle } from '../model/title.ts';
+import type { PrebuildSetCard } from '../model/prebuild-deck';
+import type { CardTitle } from '../model/title';
 
 export function parsePrebuildSetCard(title: CardTitle): PrebuildSetCard {
 	const [name, setAndId]: string[] = title.replace(')', '').split(' (');

@@ -3,12 +3,12 @@ import type {
 	PrebuildCard,
 	PrebuildDeck,
 	PrebuildSetCardWithQuantity,
-} from '../../prebuild/model/prebuild-deck.ts';
+} from '../../prebuild/model/prebuild-deck';
 import type {
 	CollectionCard,
 	CollectionCardDeck,
-} from '../model/collection-card.ts';
-import type { Variants } from '../model/variants.ts';
+} from '../model/collection-card';
+import type { Variants } from '../model/variants';
 
 interface ConvertPrebuildToCollectionCardsParams {
 	prebuildDeck: PrebuildDeck;

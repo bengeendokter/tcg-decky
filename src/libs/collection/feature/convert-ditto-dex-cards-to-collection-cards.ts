@@ -2,9 +2,9 @@ import TCGdex, { type Card } from '@tcgdex/sdk';
 import {
 	VARIANT,
 	type DittoDexCard,
-} from '../../ditto-dex/model/ditto-dex-card.ts';
-import type { CollectionCard } from '../model/collection-card.ts';
-import type { Variants } from '../model/variants.ts';
+} from '../../ditto-dex/model/ditto-dex-card';
+import type { CollectionCard } from '../model/collection-card';
+import type { Variants } from '../model/variants';
 
 interface ConvetDittoDexCardsToCollectionCardsParams {
 	dittoDexCards: DittoDexCard[];

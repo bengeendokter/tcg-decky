@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import type { PrebuildDeck } from '../model/prebuild-deck.ts';
+import type { PrebuildDeck } from '../model/prebuild-deck';
 
 export interface ExportPrebuildDecksToJsonParams {
 	decks: PrebuildDeck[];

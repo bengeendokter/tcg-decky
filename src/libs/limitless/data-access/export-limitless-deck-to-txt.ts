@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import type { LimitlessCard, LimitlessDeck } from '../model/limitless-deck.ts';
+import type { LimitlessCard, LimitlessDeck } from '../model/limitless-deck';
 
 export interface ExportLimitlessDeckToTxtParams {
 	limitlessDeck: LimitlessDeck;

@@ -2,16 +2,16 @@ import { Hono } from 'hono';
 import {
 	collectionCardDeckValidator,
 	type CollectionCardDeck,
-} from '../../libs/collection/model/collection-card.ts';
-import { getAllCollectionCardDecks } from '../../libs/collection/data-access/get-all-collection-card-decks.ts';
-import { db } from './hono.ts';
-import { getCollectionCardDeck } from '../../libs/collection/data-access/get-collection-card-deck.ts';
+} from '../../libs/collection/model/collection-card';
+import { getAllCollectionCardDecks } from '../../libs/collection/data-access/get-all-collection-card-decks';
+import { db } from './hono';
+import { getCollectionCardDeck } from '../../libs/collection/data-access/get-collection-card-deck';
 import { Type, type } from 'arktype';
 import { arktypeValidator } from '@hono/arktype-validator';
-import { addCollectionCardDeck } from '../../libs/collection/data-access/add-collection-card-deck.ts';
+import { addCollectionCardDeck } from '../../libs/collection/data-access/add-collection-card-deck';
 import type { DeleteResult, InsertOneResult, UpdateResult } from 'mongodb';
-import { updateCollectionCardDeck } from '../../libs/collection/data-access/update-collection-card-deck.ts';
-import { deleteCollectionCardDeck } from '../../libs/collection/data-access/delete-collection-card-deck.ts';
+import { updateCollectionCardDeck } from '../../libs/collection/data-access/update-collection-card-deck';
+import { deleteCollectionCardDeck } from '../../libs/collection/data-access/delete-collection-card-deck';
 
 export interface DeckParams {
 	id: string;

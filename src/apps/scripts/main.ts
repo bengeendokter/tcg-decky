@@ -1,33 +1,33 @@
-import { extractPrebuildDecks } from '../../libs/prebuild/feature/extract-prebuild-deck.ts';
-import type { PrebuildDeck } from '../../libs/prebuild/model/prebuild-deck.ts';
-import { exportPrebuildDecksToJson } from '../../libs/prebuild/data-access/export-prebuild-decks-to-json.ts';
-import { convertPrebuildToLimitlessDeck } from '../../libs/limitless/feature/convert-prebuild-to-limitless-deck.ts';
-import type { LimitlessDeck } from '../../libs/limitless/model/limitless-deck.ts';
-import { exportLimitlessDeckToTxt } from '../../libs/limitless/data-access/export-limitless-deck-to-txt.ts';
-import { importPrebuildDeckFromJson } from '../../libs/prebuild/data-access/import-prebuild-deck-from-json.ts';
-import { connectToDatabase } from '../../libs/collection/data-access/connect-to-database.ts';
+import { extractPrebuildDecks } from '../../libs/prebuild/feature/extract-prebuild-deck';
+import type { PrebuildDeck } from '../../libs/prebuild/model/prebuild-deck';
+import { exportPrebuildDecksToJson } from '../../libs/prebuild/data-access/export-prebuild-decks-to-json';
+import { convertPrebuildToLimitlessDeck } from '../../libs/limitless/feature/convert-prebuild-to-limitless-deck';
+import type { LimitlessDeck } from '../../libs/limitless/model/limitless-deck';
+import { exportLimitlessDeckToTxt } from '../../libs/limitless/data-access/export-limitless-deck-to-txt';
+import { importPrebuildDeckFromJson } from '../../libs/prebuild/data-access/import-prebuild-deck-from-json';
+import { connectToDatabase } from '../../libs/collection/data-access/connect-to-database';
 import type { Db, FindCursor, UpdateResult, WithId } from 'mongodb';
-import { closeDatabaseConnection } from '../../libs/collection/data-access/close-database-connection.ts';
+import { closeDatabaseConnection } from '../../libs/collection/data-access/close-database-connection';
 import type {
 	CollectionCard,
 	CollectionCardDeck,
-} from '../../libs/collection/model/collection-card.ts';
-import { addCollectionCard } from '../../libs/collection/data-access/add-collection-card.ts';
-import { removeCollectionCard } from '../../libs/collection/data-access/remove-collection-card.ts';
-import { getAllCollectionCards } from '../../libs/collection/data-access/get-all-collection-cards.ts';
-import { convertPrebuildToCollectionCards } from '../../libs/collection/feature/convert-prebuild-to-collection-cards.ts';
-import { exportCollectionCardDeckToJson } from '../../libs/collection/data-access/export-collection-card-deck-to-json.ts';
-import { importCollectionCardDeckFromJson } from '../../libs/collection/data-access/import-collection-card-deck-from-json.ts';
-import { importDittoDexCardsFromCsv } from '../../libs/ditto-dex/data-access/import-ditto-dex-cards-from-csv.ts';
-import type { DittoDexCard } from '../../libs/ditto-dex/model/ditto-dex-card.ts';
-import { convetDittoDexCardsToCollectionCards } from '../../libs/collection/feature/convert-ditto-dex-cards-to-collection-cards.ts';
-import { addCollectionCardDeck } from '../../libs/collection/data-access/add-collection-card-deck.ts';
-import { updateCollectionCardDeck } from '../../libs/collection/data-access/update-collection-card-deck.ts';
-import { getAllCollectionCardDecks } from '../../libs/collection/data-access/get-all-collection-card-decks.ts';
-import { convertCollectionToLimitlessDeck } from '../../libs/limitless/feature/convert-collection-to-limitless-deck.ts';
+} from '../../libs/collection/model/collection-card';
+import { addCollectionCard } from '../../libs/collection/data-access/add-collection-card';
+import { removeCollectionCard } from '../../libs/collection/data-access/remove-collection-card';
+import { getAllCollectionCards } from '../../libs/collection/data-access/get-all-collection-cards';
+import { convertPrebuildToCollectionCards } from '../../libs/collection/feature/convert-prebuild-to-collection-cards';
+import { exportCollectionCardDeckToJson } from '../../libs/collection/data-access/export-collection-card-deck-to-json';
+import { importCollectionCardDeckFromJson } from '../../libs/collection/data-access/import-collection-card-deck-from-json';
+import { importDittoDexCardsFromCsv } from '../../libs/ditto-dex/data-access/import-ditto-dex-cards-from-csv';
+import type { DittoDexCard } from '../../libs/ditto-dex/model/ditto-dex-card';
+import { convetDittoDexCardsToCollectionCards } from '../../libs/collection/feature/convert-ditto-dex-cards-to-collection-cards';
+import { addCollectionCardDeck } from '../../libs/collection/data-access/add-collection-card-deck';
+import { updateCollectionCardDeck } from '../../libs/collection/data-access/update-collection-card-deck';
+import { getAllCollectionCardDecks } from '../../libs/collection/data-access/get-all-collection-card-decks';
+import { convertCollectionToLimitlessDeck } from '../../libs/limitless/feature/convert-collection-to-limitless-deck';
 import TCGdex from '@tcgdex/sdk';
-import { getTcgDex } from '../../libs/tcg-dex/data-access/get-tcg-dex.ts';
-import { CONFIG } from '../../config.ts';
+import { getTcgDex } from '../../libs/tcg-dex/data-access/get-tcg-dex';
+import { CONFIG } from '../../config';
 
 const deckUrl: string = CONFIG.PREBUILD_DECKS_URL.MARNIE_RIVAL_DECK;
 const outputDirectory: string = CONFIG.DEFAULT_OUTPUT_DIRECTORY;

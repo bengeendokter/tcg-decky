@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import { isPrebuildDeck, type PrebuildDeck } from '../model/prebuild-deck.ts';
+import { isPrebuildDeck, type PrebuildDeck } from '../model/prebuild-deck';
 
 export function importPrebuildDeckFromJson(jsonFilePath: string): PrebuildDeck {
 	const jsonContent: string = fs.readFileSync(jsonFilePath, {

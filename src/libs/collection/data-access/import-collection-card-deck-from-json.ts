@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import {
 	collectionCardDeckValidator,
 	type CollectionCardDeck,
-} from '../model/collection-card.ts';
+} from '../model/collection-card';
 
 export function importCollectionCardDeckFromJson(
 	jsonFilePath: string,

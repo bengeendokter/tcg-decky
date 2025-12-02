@@ -1,5 +1,5 @@
 import type { Collection, Db, UpdateResult } from 'mongodb';
-import type { CollectionCard } from '../model/collection-card.ts';
+import type { CollectionCard } from '../model/collection-card';
 
 export interface AddCollectionCardParams {
 	db: Db;

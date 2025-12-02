@@ -1,5 +1,5 @@
 import { type Db, type Collection, type UpdateResult, ObjectId } from 'mongodb';
-import type { CollectionCardDeck } from '../model/collection-card.ts';
+import type { CollectionCardDeck } from '../model/collection-card';
 
 interface UpdateCollectionCardDeckParams {
 	id: string;

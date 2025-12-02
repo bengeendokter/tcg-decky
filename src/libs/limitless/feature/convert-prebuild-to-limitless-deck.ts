@@ -1,22 +1,22 @@
-import { parseEnergyType } from '../../prebuild/feature/parse-energy-type.ts';
+import { parseEnergyType } from '../../prebuild/feature/parse-energy-type';
 import {
 	energyTypeLocalIdMap,
 	type EnergyType,
-} from '../../prebuild/model/energy.ts';
+} from '../../prebuild/model/energy';
 import type {
 	PrebuildCard,
 	PrebuildDeck,
 	PrebuildEnergyCardWithQuantity,
 	PrebuildSetCardWithQuantity,
-} from '../../prebuild/model/prebuild-deck.ts';
-import type { SetWithAbbreviation } from '../../tcg-dex/model/set-with-abbreviation.ts';
+} from '../../prebuild/model/prebuild-deck';
+import type { SetWithAbbreviation } from '../../tcg-dex/model/set-with-abbreviation';
 import {
 	CATEGORY,
 	isCategory,
 	type LimitlessCard,
 	type LimitlessCardWithCategory,
 	type LimitlessDeck,
-} from '../model/limitless-deck.ts';
+} from '../model/limitless-deck';
 import TCGdex, { Query, type Card, type CardResume } from '@tcgdex/sdk';
 
 interface ConvertPrebuildToLimitlessDeckParams {

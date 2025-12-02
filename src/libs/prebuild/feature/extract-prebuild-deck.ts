@@ -1,8 +1,8 @@
 import { JSDOM } from 'jsdom';
-import { type PrebuildDeck } from '../model/prebuild-deck.ts';
-import { covertTableToDeck } from './convert-table-to-deck.ts';
-import { parseUrlDeckName } from './parse-url-deck-name.ts';
-import { getPage } from '../data-access/get-page.ts';
+import { type PrebuildDeck } from '../model/prebuild-deck';
+import { covertTableToDeck } from './convert-table-to-deck';
+import { parseUrlDeckName } from './parse-url-deck-name';
+import { getPage } from '../data-access/get-page';
 
 export async function extractPrebuildDecks(
 	url: string,

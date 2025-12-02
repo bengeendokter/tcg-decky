@@ -1,21 +1,21 @@
 import type { Db } from 'mongodb';
-import { connectToDatabase } from '../../libs/collection/data-access/connect-to-database.ts';
-import { CONFIG } from '../../config.ts';
-import { closeDatabaseConnection } from '../../libs/collection/data-access/close-database-connection.ts';
-import { deleteAllCollectionCard } from '../../libs/collection/data-access/delete-all-collection-cards.ts';
-import { importDittoDexCardsFromCsv } from '../../libs/ditto-dex/data-access/import-ditto-dex-cards-from-csv.ts';
-import type { DittoDexCard } from '../../libs/ditto-dex/model/ditto-dex-card.ts';
-import { convetDittoDexCardsToCollectionCards } from '../../libs/collection/feature/convert-ditto-dex-cards-to-collection-cards.ts';
-import { getTcgDex } from '../../libs/tcg-dex/data-access/get-tcg-dex.ts';
+import { connectToDatabase } from '../../libs/collection/data-access/connect-to-database';
+import { CONFIG } from '../../config';
+import { closeDatabaseConnection } from '../../libs/collection/data-access/close-database-connection';
+import { deleteAllCollectionCard } from '../../libs/collection/data-access/delete-all-collection-cards';
+import { importDittoDexCardsFromCsv } from '../../libs/ditto-dex/data-access/import-ditto-dex-cards-from-csv';
+import type { DittoDexCard } from '../../libs/ditto-dex/model/ditto-dex-card';
+import { convetDittoDexCardsToCollectionCards } from '../../libs/collection/feature/convert-ditto-dex-cards-to-collection-cards';
+import { getTcgDex } from '../../libs/tcg-dex/data-access/get-tcg-dex';
 import type TCGdex from '@tcgdex/sdk';
 import type {
 	CollectionCard,
 	CollectionCardDeck,
-} from '../../libs/collection/model/collection-card.ts';
-import { importPrebuildDeckFromJson } from '../../libs/prebuild/data-access/import-prebuild-deck-from-json.ts';
-import type { PrebuildDeck } from '../../libs/prebuild/model/prebuild-deck.ts';
-import { convertPrebuildToCollectionCards } from '../../libs/collection/feature/convert-prebuild-to-collection-cards.ts';
-import { addCollectionCard } from '../../libs/collection/data-access/add-collection-card.ts';
+} from '../../libs/collection/model/collection-card';
+import { importPrebuildDeckFromJson } from '../../libs/prebuild/data-access/import-prebuild-deck-from-json';
+import type { PrebuildDeck } from '../../libs/prebuild/model/prebuild-deck';
+import { convertPrebuildToCollectionCards } from '../../libs/collection/feature/convert-prebuild-to-collection-cards';
+import { addCollectionCard } from '../../libs/collection/data-access/add-collection-card';
 
 export async function resetCollectionCardsDatabase(): Promise<void> {
 	const db: Db = await connectToDatabase(CONFIG.MONGO_DB_DATABASE_URL);

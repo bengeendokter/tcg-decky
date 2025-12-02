@@ -1,4 +1,4 @@
-import { isEnergyCard, type EnergyCard } from './energy.ts';
+import { isEnergyCard, type EnergyCard } from './energy';
 
 export interface PrebuildSetCard {
 	name: string;

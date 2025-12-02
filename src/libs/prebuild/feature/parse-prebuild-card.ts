@@ -1,8 +1,8 @@
-import { parseEnergyType } from './parse-energy-type.ts';
-import type { EnergyType } from '../model/energy.ts';
-import type { PrebuildCard } from '../model/prebuild-deck.ts';
-import { type Title, isEnergyTitle } from '../model/title.ts';
-import { parsePrebuildSetCard } from './parse-prebuild-set-card.ts';
+import { parseEnergyType } from './parse-energy-type';
+import type { EnergyType } from '../model/energy';
+import type { PrebuildCard } from '../model/prebuild-deck';
+import { type Title, isEnergyTitle } from '../model/title';
+import { parsePrebuildSetCard } from './parse-prebuild-set-card';
 
 export function parsePrebuildCard(title: Title): PrebuildCard {
 	if (isEnergyTitle(title)) {

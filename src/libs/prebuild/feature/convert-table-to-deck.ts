@@ -2,10 +2,10 @@ import {
 	type PrebuildDeck,
 	type PrebuildCardWithQuantity,
 	type PrebuildCard,
-} from '../model/prebuild-deck.ts';
-import { parsePrebuildCard } from './parse-prebuild-card.ts';
-import { isQuantityText } from '../model/quantity.ts';
-import { isTitle } from '../model/title.ts';
+} from '../model/prebuild-deck';
+import { parsePrebuildCard } from './parse-prebuild-card';
+import { isQuantityText } from '../model/quantity';
+import { isTitle } from '../model/title';
 
 export interface CovertTableToDeckParams {
 	table: Element;
