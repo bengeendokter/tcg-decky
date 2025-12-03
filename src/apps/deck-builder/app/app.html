@@ -1,15 +1,18 @@
-<main>
-	<div class="one">App component works</div>
-	@let tcgCard = card();
-	@if(tcgCard) {
-	<div>{{tcgCard.name}}</div>
-	}
-	<button (click)="getAllCards()">Get all cards</button>
-	@for(card of cards(); track card._id) {
-	<div>
-		<div>{{card._id}}</div>
-		<button (click)="getCard(card._id)">Get card</button>
+<main class="builder-container">
+	<div class="deck-container">
+		@let tcgCard = card();
+		@if(tcgCard) {
+		<div>{{tcgCard.name}}</div>
+		<img [src]="tcgCard.image + '/low.webp'">
+		}
 	</div>
-	}
+	<div class="collection-container">
+		@for(card of cards(); track card._id) {
+		<div class="card">
+			<span class="card-quantity">{{getQuantitySum(card.variants)}}</span>
+			<button class="card-button" (click)="getCard(card._id)">+</button>
+		</div>
+		}
+	</div>
 </main>
 <router-outlet />
