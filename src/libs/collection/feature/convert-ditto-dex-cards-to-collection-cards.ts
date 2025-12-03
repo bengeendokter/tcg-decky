@@ -41,11 +41,13 @@ export async function convetDittoDexCardsToCollectionCards({
 			const setNumber: string =
 				setAbriviationWithSetNumber.substring(setNumberStartIndex);
 
-			if (setAbriviation === '' || setNumber === '') {
-				throw Error('Invalid dittoDexCardId');
+			if (setAbriviation === '') {
+				throw Error(`Invalid dittoDexCardId. dittoDexCardId: ${dittoDexCardId}, setAbriviation: ${setAbriviation}, setNumber: ${setNumber}`);
 			}
 
-			const _id: string = `${setAbriviation}${setNumber.padStart(2, '0')}-${cardNumber.padStart(3, '0')}`;
+			const setNumberPart: string = setNumber === '' ? setNumber : setNumber.padStart(2, '0');
+
+			const _id: string = `${setAbriviation}${setNumberPart}-${cardNumber.padStart(3, '0')}`;
 			const quantity: number = dittoDexCard.qty;
 
 			const card: Card | null = await tcgDex.card.get(_id);

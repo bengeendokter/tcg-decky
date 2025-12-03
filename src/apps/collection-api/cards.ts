@@ -4,7 +4,7 @@ import { getAllCollectionCards } from '../../libs/collection/data-access/get-all
 import { db, mongoDbDatabaseUrl, tcgDexServerUrl } from './hono';
 import type { BlankEnv } from 'hono/types';
 import type { ContentfulStatusCode, StatusCode } from 'hono/utils/http-status';
-import { resetCollectionCardsDatabase } from '../scripts/reset-collection-cards-database';
+import { resetCollectionCardsDatabase } from '../../libs/collection/feature/reset-collection-cards-database';
 
 const inferredCards = new Hono()
 	.get('/', async (context) => {

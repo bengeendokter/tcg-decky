@@ -25,7 +25,7 @@ export function importDittoDexCardsFromCsv(
 
 		if (lineValues.length !== 10) {
 			throw Error(
-				`Invalid CSV format: expected 10 values per line, got ${lineValues.length} values`,
+				`Invalid CSV format: expected 10 values per line, got ${lineValues.length} values. Line example: ${line}`,
 			);
 		}
 
