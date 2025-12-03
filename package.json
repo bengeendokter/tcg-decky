@@ -9,6 +9,7 @@
 		"start:collection-api": "tsx src/apps/collection-api/hono.ts",
 		"start:deck-builder": "cd src/apps/deck-builder && ng serve",
 		"build:deck-builder": "cd src/apps/deck-builder && ng build",
+		"build:deck-builder:dev": "cd src/apps/deck-builder && ng build --configuration development",
 		"reset-collection": "tsx src/apps/scripts/reset-collection-cards-database.ts",
 		"extract-prebuild-decks": "tsx src/apps/scripts/extract-prebuild-decks-to-json.ts",
 		"convert-prebuild-to-limitless": "tsx src/apps/scripts/convert-prebuild-to-limitless-deck-txt.ts",

@@ -9,7 +9,13 @@ COPY src ./src
 
 RUN pnpm install --frozen-lockfile
 
-RUN pnpm build:deck-builder
+ARG DEV_MODE=true
+
+RUN if [ "$DEV_MODE" = "true" ]; then \
+    pnpm build:deck-builder:dev; \
+    else \
+    pnpm build:deck-builder; \
+    fi
 
 FROM caddy:2.10.2-alpine AS runner
 

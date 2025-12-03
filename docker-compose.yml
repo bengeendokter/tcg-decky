@@ -6,6 +6,8 @@ services:
     build:
       context: .
       dockerfile: DeckBuilderDockerfile
+      args:
+        DEV_MODE: ${DEV_MODE:-true}
     ports:
       - "4200:4200"
   tcgdex-api:
