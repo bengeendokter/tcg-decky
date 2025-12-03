@@ -2,8 +2,7 @@
 	<div class="deck-container">
 		@let tcgCard = card();
 		@if(tcgCard) {
-		<div>{{tcgCard.name}}</div>
-		<img [src]="tcgCard.image + '/low.webp'">
+		<div class="card" [style.--background-image-url]="'url(' + tcgCard.image + '/low.webp' + ')'"></div>
 		}
 	</div>
 	<div class="collection-container">

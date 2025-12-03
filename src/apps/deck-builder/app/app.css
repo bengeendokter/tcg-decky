@@ -16,7 +16,8 @@
 	}
 }
 
-.collection-container, .deck-container {
+.collection-container,
+.deck-container {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
 	gap: 10px;
@@ -26,8 +27,9 @@
 .card {
 	height: auto;
 	aspect-ratio: 63 / 88;
+	--background-image-url: url(https://assets.tcgdex.net/en/me/me01/059/low.webp);
 
-	background-image: url(https://assets.tcgdex.net/en/me/me01/059/low.webp);
+	background-image: var(--background-image-url);
 	background-repeat: no-repeat;
 	background-size: contain;
 	display: grid;
