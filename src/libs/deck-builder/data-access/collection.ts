@@ -14,7 +14,7 @@ export class Collection {
 		return cards;
 	}
 
-	public readonly getAllCardsRecource: ResourceRef<
+	public readonly getAllCardsResource: ResourceRef<
 		CollectionCard[] | undefined
 	> = resource({
 		loader: () => this.getAllCards(),

@@ -1,6 +1,12 @@
 <main>
 	<div class="one">App component works</div>
-	<button (click)="getAllCards()">Get cards</button>
-	{{cards()}}
+	<button (click)="getCard()">Get card</button>
+	<div>{{card()?.name}}</div>
+	<button (click)="getAllCards()">Get all cards</button>
+	@for(card of cards(); track card._id) {
+	<div>
+		<div>{{card._id}}</div>
+	</div>
+	}
 </main>
 <router-outlet />
