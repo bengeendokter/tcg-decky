@@ -1,4 +1,4 @@
-:80 {
+:4200 {
     # Set the root directory inside the container (where your site files are mounted)
     root * /usr/share/caddy
 

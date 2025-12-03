@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: DeckBuilderDockerfile
     ports:
-      - "4200:80"
+      - "4200:4200"
   tcgdex-api:
     container_name: tcgdex-api
     image: tcgdex/server:pr-989
