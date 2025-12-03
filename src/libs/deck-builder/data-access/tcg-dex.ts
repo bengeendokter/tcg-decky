@@ -28,7 +28,11 @@ export class TcgDex {
 	public readonly getCardResource: ResourceRef<Card | undefined> = resource({
 		params: () => ({ id: this.cardId() }),
 		loader: ({ params }) => {
-			const id: string | undefined = params.id ?? '';
+			const id: string | undefined = params.id;
+
+			if (id === undefined) {
+				return Promise.resolve(undefined);
+			}
 
 			return this.getCard(id);
 		},
