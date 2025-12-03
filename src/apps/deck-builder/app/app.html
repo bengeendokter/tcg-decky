@@ -1,11 +1,14 @@
 <main>
 	<div class="one">App component works</div>
-	<button (click)="getCard()">Get card</button>
-	<div>{{card()?.name}}</div>
+	@let tcgCard = card();
+	@if(tcgCard) {
+	<div>{{tcgCard.name}}</div>
+	}
 	<button (click)="getAllCards()">Get all cards</button>
 	@for(card of cards(); track card._id) {
 	<div>
 		<div>{{card._id}}</div>
+		<button (click)="getCard(card._id)">Get card</button>
 	</div>
 	}
 </main>

@@ -4,6 +4,7 @@ import {
 	inject,
 	type ResourceRef,
 	type Signal,
+	type WritableSignal,
 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Collection } from '../../../libs/deck-builder/data-access/collection';
@@ -25,6 +26,8 @@ export class App {
 	> = this.collection.getAllCardsResource;
 	private readonly getCardResource: ResourceRef<Card | undefined> =
 		this.tcgDex.getCardResource;
+	private readonly cardId: WritableSignal<string | undefined> =
+		this.tcgDex.cardId;
 
 	protected cards: Signal<CollectionCard[]> = computed(() => {
 		if (!this.getAllCardsResource.hasValue()) {
@@ -42,7 +45,7 @@ export class App {
 		this.getAllCardsResource.reload();
 	}
 
-	protected async getCard() {
-		this.getCardResource.reload();
+	protected async getCard(id: string) {
+		this.cardId.set(id);
 	}
 }
