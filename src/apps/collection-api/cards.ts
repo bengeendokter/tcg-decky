@@ -12,8 +12,9 @@ const inferredCards = new Hono()
 
 		return context.json(cards);
 	})
-	.put('/reset', async () => {
+	.put('/reset', async (context) => {
 		await resetCollectionCardsDatabase({ mongoDbDatabaseUrl, tcgDexServerUrl });
+		return context.text('Card collection has been reset.');
 	});
 
 type InferredCardsRoute = typeof inferredCards;
@@ -33,9 +34,9 @@ type CorrectedCardsRoute = Hono<
 		'/reset': {
 			$put: {
 				input: {};
-				output: {};
-				outputFormat: string;
-				status: StatusCode;
+				output: 'Card collection has been reset.';
+				outputFormat: 'text';
+				status: ContentfulStatusCode;
 			};
 		};
 	},
