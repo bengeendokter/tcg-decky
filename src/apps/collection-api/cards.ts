@@ -1,17 +1,24 @@
 import { Hono } from 'hono';
 import { type CollectionCard } from '../../libs/collection/model/collection-card';
 import { getAllCollectionCards } from '../../libs/collection/data-access/get-all-collection-cards';
-import { db } from './hono';
+import { db, mongoDbDatabaseUrl, tcgDexServerUrl } from './hono';
 import type { BlankEnv } from 'hono/types';
-import type { ContentfulStatusCode } from 'hono/utils/http-status';
+import type { ContentfulStatusCode, StatusCode } from 'hono/utils/http-status';
+import { resetCollectionCardsDatabase } from '../scripts/reset-collection-cards-database';
 
-export const cards: CardsRoute = new Hono().get('/', async (context) => {
-	const cards: CollectionCard[] = await getAllCollectionCards(db);
+const inferredCards = new Hono()
+	.get('/', async (context) => {
+		const cards: CollectionCard[] = await getAllCollectionCards(db);
 
-	return context.json(cards);
-});
+		return context.json(cards);
+	})
+	.put('/reset', async () => {
+		await resetCollectionCardsDatabase({ mongoDbDatabaseUrl, tcgDexServerUrl });
+	});
 
-export type CardsRoute = Hono<
+type InferredCardsRoute = typeof inferredCards;
+
+type CorrectedCardsRoute = Hono<
 	BlankEnv,
 	{
 		'/': {
@@ -22,6 +29,17 @@ export type CardsRoute = Hono<
 				status: ContentfulStatusCode;
 			};
 		};
+	} & {
+		'/reset': {
+			$put: {
+				input: {};
+				output: {};
+				outputFormat: string;
+				status: StatusCode;
+			};
+		};
 	},
 	'/'
 >;
+
+export const cards: CorrectedCardsRoute = inferredCards;

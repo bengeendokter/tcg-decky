@@ -41,11 +41,11 @@ export class App {
 		return this.getCardResource.value();
 	});
 
-	protected async getAllCards() {
+	protected async getAllCards(): Promise<void> {
 		this.getAllCardsResource.reload();
 	}
 
-	protected async getCard(id: string) {
+	protected async getCard(id: string): Promise<void> {
 		this.cardId.set(id);
 	}
 }

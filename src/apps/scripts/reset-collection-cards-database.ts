@@ -17,9 +17,22 @@ import type { PrebuildDeck } from '../../libs/prebuild/model/prebuild-deck';
 import { convertPrebuildToCollectionCards } from '../../libs/collection/feature/convert-prebuild-to-collection-cards';
 import { addCollectionCard } from '../../libs/collection/data-access/add-collection-card';
 
-export async function resetCollectionCardsDatabase(): Promise<void> {
-	const db: Db = await connectToDatabase(CONFIG.MONGO_DB_DATABASE_URL);
-	const tcgDex: TCGdex = getTcgDex(CONFIG.TCG_DEX_SERVER_URL);
+export interface ResetCollectionCardsDatabaseParams {
+	mongoDbDatabaseUrl?: string;
+	tcgDexServerUrl?: string;
+}
+
+export async function resetCollectionCardsDatabase(
+	{
+		mongoDbDatabaseUrl = CONFIG.MONGO_DB_DATABASE_URL,
+		tcgDexServerUrl = CONFIG.TCG_DEX_SERVER_URL,
+	}: ResetCollectionCardsDatabaseParams = {
+		mongoDbDatabaseUrl: CONFIG.MONGO_DB_DATABASE_URL,
+		tcgDexServerUrl: CONFIG.TCG_DEX_SERVER_URL,
+	},
+): Promise<void> {
+	const db: Db = await connectToDatabase(mongoDbDatabaseUrl);
+	const tcgDex: TCGdex = getTcgDex(tcgDexServerUrl);
 
 	const dittoDexCards: DittoDexCard[] = importDittoDexCardsFromCsv(
 		CONFIG.DITTO_DEX_SCV_FILE_PATH,

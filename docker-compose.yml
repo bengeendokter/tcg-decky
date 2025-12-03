@@ -37,6 +37,7 @@ services:
     environment:
       - MONGO_DB_DATABASE_URL=mongodb://mongodb:27017
       - DECK_BUILDER_URL=${DECK_BUILDER_URL:-http://localhost:4200}
+      - TCG_DEX_SERVER_URL=${TCG_DEX_SERVER_URL:-http://localhost:3000/v2}
 
 volumes:
   mongo_data:
