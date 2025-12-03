@@ -42,12 +42,36 @@ export async function convetDittoDexCardsToCollectionCards({
 				setAbriviationWithSetNumber.substring(setNumberStartIndex);
 
 			if (setAbriviation === '') {
-				throw Error(`Invalid dittoDexCardId. dittoDexCardId: ${dittoDexCardId}, setAbriviation: ${setAbriviation}, setNumber: ${setNumber}`);
+				throw Error(
+					`Invalid dittoDexCardId. dittoDexCardId: ${dittoDexCardId}, setAbriviation: ${setAbriviation}, setNumber: ${setNumber}`,
+				);
 			}
 
-			const setNumberPart: string = setNumber === '' ? setNumber : setNumber.padStart(2, '0');
+			let setNumberPart: string =
+				setNumber === ''
+					? setNumber
+					: setNumber.padStart(2, '0').replace('pt5', '.5');
 
-			const _id: string = `${setAbriviation}${setNumberPart}-${cardNumber.padStart(3, '0')}`;
+			const setNumberDotIndex: number = setNumberPart.indexOf('.');
+			if (setNumberDotIndex !== -1) {
+				const setNumerBeforeDot: string = setNumberPart.substring(
+					0,
+					setNumberDotIndex,
+				);
+
+				const setNumberAfterDot: string =
+					setNumberPart.substring(setNumberDotIndex);
+
+				setNumberPart = `${setNumerBeforeDot.padStart(2, '0')}${setNumberAfterDot}`;
+			}
+
+			if (setAbriviation === 'zsv') {
+				setNumberPart = `${setNumberPart}b`;
+			}
+
+			const setAbriviationPart: string = setAbriviation.replace('zsv', 'sv');
+
+			let _id: string = `${setAbriviationPart}${setNumberPart}-${cardNumber.padStart(3, '0')}`;
 			const quantity: number = dittoDexCard.qty;
 
 			const card: Card | null = await tcgDex.card.get(_id);
