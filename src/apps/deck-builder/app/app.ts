@@ -53,6 +53,12 @@ export class App {
 
 	protected deckCards: WritableSignal<DeckCard[]> = signal([]);
 
+	protected totalCardQuantity: Signal<number> = computed(() => {
+		return this.deckCards().reduce((total, card) => {
+			return total + card.quantity;
+		}, 0)
+	})
+
 	constructor() {
 		effect(() => {
 			const collectionCards: CollectionCard[] = this.collectionCards();
@@ -64,7 +70,7 @@ export class App {
 		this.getAllCardsResource.reload();
 	}
 
-	protected addCard(card: TcgDexCollectionCard): void {
+	protected addCard(card: TcgDexCollectionCard | DeckCard): void {
 		const deckCards: DeckCard[] = this.deckCards();
 
 		if (deckCards.length === 0) {

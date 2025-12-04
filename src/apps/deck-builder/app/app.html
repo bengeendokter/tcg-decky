@@ -1,8 +1,15 @@
 <main class="builder-container">
 	<div class="deck-container">
+		<div class="card">
+			<span>Total: {{totalCardQuantity()}}</span>
+		</div>
 		@for(card of deckCards(); track card.id) {
 		<div class="card" [style.--background-image-url]="`url(${card.image}/low.webp)`">
 			<span class="card-quantity">{{card.quantity}}</span>
+			<div class="quantity-buttons">
+				<button class="card-button" (click)="addCard(card)">-</button>
+				<button class="card-button" (click)="addCard(card)">+</button>
+			</div>
 		</div>
 		}
 	</div>
@@ -10,7 +17,10 @@
 		@for(card of tcgDexCollectionCards(); track card.id) {
 		<div class="card" [style.--background-image-url]="`url(${card.image}/low.webp)`">
 			<span class="card-quantity">{{getQuantitySum(card.variants)}}</span>
-			<button class="card-button" (click)="addCard(card)">+</button>
+			<div class="quantity-buttons">
+				<button class="card-button" (click)="addCard(card)">-</button>
+				<button class="card-button" (click)="addCard(card)">+</button>
+			</div>
 		</div>
 		}
 	</div>

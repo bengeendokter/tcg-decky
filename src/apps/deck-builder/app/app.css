@@ -28,20 +28,33 @@
 .card {
 	height: auto;
 	aspect-ratio: 63 / 88;
-	--background-image-url: url(https://assets.tcgdex.net/en/me/me01/059/low.webp);
 
 	background-image: var(--background-image-url);
 	background-repeat: no-repeat;
 	background-size: contain;
 	display: grid;
-	justify-items: center;
 	align-content: space-evenly;
 }
 
 .card-quantity {
 	background-color: #a7a7a7;
 	border-radius: 50%;
-	padding: 10px;
 	aspect-ratio: 1;
-	text-align: center;
+	width: 50px;
+	display: grid;
+	justify-items: center;
+	align-items: center;
+	margin-inline: auto;
+}
+
+.quantity-buttons {
+    display: grid;
+    grid-auto-flow: column;
+    justify-items: center;
+}
+
+.card-button {
+	aspect-ratio: 1;
+	width: 40px;
+	height: auto;
 }
