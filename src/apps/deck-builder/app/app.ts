@@ -3,8 +3,10 @@ import {
 	computed,
 	effect,
 	inject,
+	signal,
 	type ResourceRef,
 	type Signal,
+	type WritableSignal,
 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Collection } from '../../../libs/deck-builder/data-access/collection';
@@ -12,6 +14,8 @@ import type { CollectionCard } from '../../../libs/collection/model/collection-c
 import { TcgDex } from '../../../libs/deck-builder/data-access/tcg-dex';
 import type { Card } from '@tcgdex/sdk';
 import type { TcgDexCollectionCard } from '../../../libs/deck-builder/model/tcg-dex-collection-card';
+
+type DeckCard = Omit<Card, 'variants'> & { quantity: number };
 
 @Component({
 	selector: 'app-root',
@@ -25,8 +29,6 @@ export class App {
 	private readonly getAllCardsResource: ResourceRef<
 		CollectionCard[] | undefined
 	> = this.collection.getAllCardsResource;
-	private readonly getCardResource: ResourceRef<Card | undefined> =
-		this.tcgDex.getCardResource;
 	private readonly tcgDexCollectionCardsResource: ResourceRef<
 		TcgDexCollectionCard[] | undefined
 	> = this.tcgDex.tcgDexCollectionCardsResource;
@@ -39,17 +41,17 @@ export class App {
 		return this.getAllCardsResource.value();
 	});
 
-	protected tcgDexCollectionCards: Signal<TcgDexCollectionCard[]> = computed(() => {
-		if (!this.tcgDexCollectionCardsResource.hasValue()) {
-			return [];
-		}
+	protected tcgDexCollectionCards: Signal<TcgDexCollectionCard[]> = computed(
+		() => {
+			if (!this.tcgDexCollectionCardsResource.hasValue()) {
+				return [];
+			}
 
-		return this.tcgDexCollectionCardsResource.value();
-	});
+			return this.tcgDexCollectionCardsResource.value();
+		},
+	);
 
-	protected card: Signal<Card | undefined> = computed(() => {
-		return this.getCardResource.value();
-	});
+	protected deckCards: WritableSignal<DeckCard[]> = signal([]);
 
 	constructor() {
 		effect(() => {
@@ -62,8 +64,32 @@ export class App {
 		this.getAllCardsResource.reload();
 	}
 
-	protected async getCard(id: string): Promise<void> {
-		this.tcgDex.cardId.set(id);
+	protected addCard(card: TcgDexCollectionCard): void {
+		const deckCards: DeckCard[] = this.deckCards();
+
+		if (deckCards.length === 0) {
+			this.deckCards.set([{ ...card, quantity: 1 }]);
+			return;
+		}
+
+		const existingDeckCard: DeckCard | undefined = deckCards.find(
+			(deckCard) => deckCard.id === card.id,
+		);
+
+		if (existingDeckCard === undefined) {
+			this.deckCards.set([...deckCards, { ...card, quantity: 1 }]);
+			return;
+		}
+
+		const deckCardsWithNewQuantities: DeckCard[] = deckCards.map((deckCard) => {
+			if (deckCard.id !== existingDeckCard.id) {
+				return deckCard;
+			}
+
+			return { ...deckCard, quantity: existingDeckCard.quantity + 1 };
+		});
+
+		this.deckCards.set(deckCardsWithNewQuantities);
 	}
 
 	protected getQuantitySum(variants: CollectionCard['variants']): number {
