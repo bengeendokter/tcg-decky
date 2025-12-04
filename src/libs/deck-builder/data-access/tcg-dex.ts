@@ -9,8 +9,13 @@ import { getTcgDex } from '../../tcg-dex/data-access/get-tcg-dex';
 import type TCGdex from '@tcgdex/sdk';
 import { CONFIG } from '../../../environment/environment';
 import type { Card } from '@tcgdex/sdk';
-import type { CollectionCard } from '../../collection/model/collection-card';
+import type {
+	CollectionCard,
+	CollectionCardDeck,
+} from '../../collection/model/collection-card';
 import type { TcgDexCollectionCard } from '../model/tcg-dex-collection-card';
+import type { LimitlessDeck } from '../../limitless/model/limitless-deck';
+import { convertCollectionToLimitlessDeck } from '../../limitless/feature/convert-collection-to-limitless-deck';
 
 @Injectable({ providedIn: 'root' })
 export class TcgDex {
@@ -63,4 +68,13 @@ export class TcgDex {
 			);
 		},
 	});
+
+	public async convertCollectionToLimitlessDeck(
+		collectionCardDeck: CollectionCardDeck,
+	): Promise<LimitlessDeck> {
+		return await convertCollectionToLimitlessDeck({
+			tcgDex: this.tcgDex,
+			collectionCardDeck,
+		});
+	}
 }

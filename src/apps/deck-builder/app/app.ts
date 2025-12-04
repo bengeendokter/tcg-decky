@@ -15,8 +15,13 @@ import { TcgDex } from '../../../libs/deck-builder/data-access/tcg-dex';
 import type { Card } from '@tcgdex/sdk';
 import type { TcgDexCollectionCard } from '../../../libs/deck-builder/model/tcg-dex-collection-card';
 import { form, Field, type FieldTree } from '@angular/forms/signals';
+import type { LimitlessDeck } from '../../../libs/limitless/model/limitless-deck';
+import { limitlessDeckToString } from '../../../libs/limitless/feature/limitless-deck-to-string';
 
-type DeckCard = Omit<Card, 'variants'> & { quantity: number, variants: CollectionCard['variants'] };
+type DeckCard = Omit<Card, 'variants'> &
+	CollectionCard & {
+		quantity: number;
+	};
 
 @Component({
 	selector: 'app-root',
@@ -174,5 +179,25 @@ export class App {
 		const wPromo: number = variants.wPromo ?? 0;
 
 		return firstEdition + holo + normal + reverse + wPromo;
+	}
+
+	protected async copyLimitlessDeck(): Promise<void> {
+		const clipboard: Clipboard | undefined = navigator.clipboard;
+
+		if (!clipboard) {
+			alert('Clipboard API not supported');
+			return;
+		}
+
+		const limitlessDeck: LimitlessDeck =
+			await this.tcgDex.convertCollectionToLimitlessDeck({
+				name: 'DefaultName',
+				cards: this.deckCards().map((deckCard) => {
+					return { ...deckCard, variants: { normal: deckCard.quantity } };
+				}),
+			});
+
+		await navigator.clipboard.writeText(limitlessDeckToString(limitlessDeck));
+		alert('Copied to clipboard!');
 	}
 }
