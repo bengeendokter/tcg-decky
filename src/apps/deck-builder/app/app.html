@@ -7,7 +7,7 @@
 		<div class="card" [style.--background-image-url]="`url(${card.image}/low.webp)`">
 			<span class="card-quantity">{{card.quantity}}</span>
 			<div class="quantity-buttons">
-				<button class="card-button" (click)="addCard(card)">-</button>
+				<button class="card-button" (click)="removeCard(card)">-</button>
 				<button class="card-button" (click)="addCard(card)">+</button>
 			</div>
 		</div>
@@ -18,7 +18,7 @@
 		<div class="card" [style.--background-image-url]="`url(${card.image}/low.webp)`">
 			<span class="card-quantity">{{getQuantitySum(card.variants)}}</span>
 			<div class="quantity-buttons">
-				<button class="card-button" (click)="addCard(card)">-</button>
+				<button class="card-button" (click)="removeCard(card)">-</button>
 				<button class="card-button" (click)="addCard(card)">+</button>
 			</div>
 		</div>

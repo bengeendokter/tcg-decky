@@ -56,8 +56,8 @@ export class App {
 	protected totalCardQuantity: Signal<number> = computed(() => {
 		return this.deckCards().reduce((total, card) => {
 			return total + card.quantity;
-		}, 0)
-	})
+		}, 0);
+	});
 
 	constructor() {
 		effect(() => {
@@ -96,6 +96,36 @@ export class App {
 		});
 
 		this.deckCards.set(deckCardsWithNewQuantities);
+	}
+
+	protected removeCard(card: TcgDexCollectionCard | DeckCard): void {
+		const deckCards: DeckCard[] = this.deckCards();
+
+		if (deckCards.length === 0) {
+			return;
+		}
+
+		const existingDeckCard: DeckCard | undefined = deckCards.find(
+			(deckCard) => deckCard.id === card.id,
+		);
+
+		if (existingDeckCard === undefined) {
+			return;
+		}
+
+		const deckCardsWithNewQuantities: DeckCard[] = deckCards.map((deckCard) => {
+			if (deckCard.id !== existingDeckCard.id) {
+				return deckCard;
+			}
+
+			return { ...deckCard, quantity: existingDeckCard.quantity - 1 };
+		});
+
+		this.deckCards.set(
+			deckCardsWithNewQuantities.filter((card) => {
+				return card.quantity > 0;
+			}),
+		);
 	}
 
 	protected getQuantitySum(variants: CollectionCard['variants']): number {
