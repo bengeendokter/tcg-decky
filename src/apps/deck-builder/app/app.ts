@@ -14,12 +14,13 @@ import type { CollectionCard } from '../../../libs/collection/model/collection-c
 import { TcgDex } from '../../../libs/deck-builder/data-access/tcg-dex';
 import type { Card } from '@tcgdex/sdk';
 import type { TcgDexCollectionCard } from '../../../libs/deck-builder/model/tcg-dex-collection-card';
+import { form, Field, type FieldTree } from '@angular/forms/signals';
 
 type DeckCard = Omit<Card, 'variants'> & { quantity: number };
 
 @Component({
 	selector: 'app-root',
-	imports: [RouterOutlet],
+	imports: [RouterOutlet, Field],
 	templateUrl: './app.html',
 	styleUrl: './app.css',
 })
@@ -47,7 +48,18 @@ export class App {
 				return [];
 			}
 
-			return this.tcgDexCollectionCardsResource.value();
+			const tcgDexCollectionCards: TcgDexCollectionCard[] =
+				this.tcgDexCollectionCardsResource.value();
+
+			const searchValue: string = this.searchForm().value().toLocaleLowerCase();
+
+			if (searchValue === '') {
+				return tcgDexCollectionCards;
+			}
+
+			return tcgDexCollectionCards.filter((card) => {
+				return card.name.toLocaleLowerCase().includes(searchValue);
+			});
 		},
 	);
 
@@ -58,6 +70,10 @@ export class App {
 			return total + card.quantity;
 		}, 0);
 	});
+
+	protected search: WritableSignal<string> = signal('');
+
+	protected searchForm: FieldTree<string> = form(this.search);
 
 	constructor() {
 		effect(() => {

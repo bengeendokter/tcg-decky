@@ -16,7 +16,13 @@
 	}
 }
 
-.collection-container,
+.collection-container {
+	display: grid;
+	grid-template-rows: auto 1fr;
+	overflow: auto;
+}
+
+.collection-cards,
 .deck-container {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
@@ -34,6 +40,7 @@
 	background-size: contain;
 	display: grid;
 	align-content: space-evenly;
+	justify-content: center;
 }
 
 .card-quantity {
@@ -48,9 +55,10 @@
 }
 
 .quantity-buttons {
-    display: grid;
-    grid-auto-flow: column;
-    justify-items: center;
+	display: grid;
+	grid-auto-flow: column;
+	justify-items: center;
+	gap: 25px;
 }
 
 .card-button {

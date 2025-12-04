@@ -14,15 +14,22 @@
 		}
 	</div>
 	<div class="collection-container">
-		@for(card of tcgDexCollectionCards(); track card.id) {
-		<div class="card" [style.--background-image-url]="`url(${card.image}/low.webp)`">
-			<span class="card-quantity">{{getQuantitySum(card.variants)}}</span>
-			<div class="quantity-buttons">
-				<button class="card-button" (click)="removeCard(card)">-</button>
-				<button class="card-button" (click)="addCard(card)">+</button>
+		<search>
+			<label for="search">Search name:</label>
+			<input id="search" type="search" [field]="searchForm">
+		</search>
+
+		<div class="collection-cards">
+			@for(card of tcgDexCollectionCards(); track card.id) {
+			<div class="card" [style.--background-image-url]="`url(${card.image}/low.webp)`">
+				<span class="card-quantity">{{getQuantitySum(card.variants)}}</span>
+				<div class="quantity-buttons">
+					<button class="card-button" (click)="removeCard(card)">-</button>
+					<button class="card-button" (click)="addCard(card)">+</button>
+				</div>
 			</div>
+			}
 		</div>
-		}
 	</div>
 </main>
 <router-outlet />
