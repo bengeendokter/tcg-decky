@@ -19,7 +19,7 @@
 .collection-container,
 .deck-container {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+	grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
 	gap: 10px;
 	overflow-y: auto;
 }
@@ -38,7 +38,7 @@
 }
 
 .card-quantity {
-	background-color: black;
+	background-color: pink;
 	border-radius: 50%;
 	padding: 10px;
 	aspect-ratio: 1;

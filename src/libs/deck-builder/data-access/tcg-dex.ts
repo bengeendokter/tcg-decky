@@ -9,11 +9,14 @@ import { getTcgDex } from '../../tcg-dex/data-access/get-tcg-dex';
 import type TCGdex from '@tcgdex/sdk';
 import { CONFIG } from '../../../environment/environment';
 import type { Card } from '@tcgdex/sdk';
+import type { CollectionCard } from '../../collection/model/collection-card';
+import type { TcgDexCollectionCard } from '../model/tcg-dex-collection-card';
 
 @Injectable({ providedIn: 'root' })
 export class TcgDex {
 	private readonly tcgDex: TCGdex = getTcgDex(CONFIG.TCG_DEX_SERVER_URL);
 	public cardId: WritableSignal<string | undefined> = signal(undefined);
+	public collectionCards: WritableSignal<CollectionCard[]> = signal([]);
 
 	private async getCard(id: string): Promise<Card | undefined> {
 		const card: Card | null = await this.tcgDex.card.get(id);
@@ -35,6 +38,29 @@ export class TcgDex {
 			}
 
 			return this.getCard(id);
+		},
+	});
+
+	public readonly tcgDexCollectionCardsResource: ResourceRef<
+		TcgDexCollectionCard[] | undefined
+	> = resource({
+		params: () => ({ collectionCards: this.collectionCards() }),
+		loader: ({ params }) => {
+			const collectionCards: CollectionCard[] = params.collectionCards;
+
+			return Promise.all(
+				collectionCards.map(async (collectionCard) => {
+					const tcgDexCard: Card | undefined = await this.getCard(
+						collectionCard._id,
+					);
+
+					if (tcgDexCard === undefined) {
+						throw Error(`tcgDexCard not found for id: ${collectionCard._id}`);
+					}
+
+					return { ...tcgDexCard, ...collectionCard };
+				}),
+			);
 		},
 	});
 }

@@ -1,16 +1,17 @@
 import {
 	Component,
 	computed,
+	effect,
 	inject,
 	type ResourceRef,
 	type Signal,
-	type WritableSignal,
 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Collection } from '../../../libs/deck-builder/data-access/collection';
 import type { CollectionCard } from '../../../libs/collection/model/collection-card';
 import { TcgDex } from '../../../libs/deck-builder/data-access/tcg-dex';
 import type { Card } from '@tcgdex/sdk';
+import type { TcgDexCollectionCard } from '../../../libs/deck-builder/model/tcg-dex-collection-card';
 
 @Component({
 	selector: 'app-root',
@@ -26,10 +27,11 @@ export class App {
 	> = this.collection.getAllCardsResource;
 	private readonly getCardResource: ResourceRef<Card | undefined> =
 		this.tcgDex.getCardResource;
-	private readonly cardId: WritableSignal<string | undefined> =
-		this.tcgDex.cardId;
+	private readonly tcgDexCollectionCardsResource: ResourceRef<
+		TcgDexCollectionCard[] | undefined
+	> = this.tcgDex.tcgDexCollectionCardsResource;
 
-	protected cards: Signal<CollectionCard[]> = computed(() => {
+	protected collectionCards: Signal<CollectionCard[]> = computed(() => {
 		if (!this.getAllCardsResource.hasValue()) {
 			return [];
 		}
@@ -37,16 +39,31 @@ export class App {
 		return this.getAllCardsResource.value();
 	});
 
+	protected tcgDexCollectionCards: Signal<TcgDexCollectionCard[]> = computed(() => {
+		if (!this.tcgDexCollectionCardsResource.hasValue()) {
+			return [];
+		}
+
+		return this.tcgDexCollectionCardsResource.value();
+	});
+
 	protected card: Signal<Card | undefined> = computed(() => {
 		return this.getCardResource.value();
 	});
+
+	constructor() {
+		effect(() => {
+			const collectionCards: CollectionCard[] = this.collectionCards();
+			this.tcgDex.collectionCards.set(collectionCards);
+		});
+	}
 
 	protected async getAllCards(): Promise<void> {
 		this.getAllCardsResource.reload();
 	}
 
 	protected async getCard(id: string): Promise<void> {
-		this.cardId.set(id);
+		this.tcgDex.cardId.set(id);
 	}
 
 	protected getQuantitySum(variants: CollectionCard['variants']): number {
