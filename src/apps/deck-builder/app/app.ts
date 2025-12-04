@@ -16,7 +16,7 @@ import type { Card } from '@tcgdex/sdk';
 import type { TcgDexCollectionCard } from '../../../libs/deck-builder/model/tcg-dex-collection-card';
 import { form, Field, type FieldTree } from '@angular/forms/signals';
 
-type DeckCard = Omit<Card, 'variants'> & { quantity: number };
+type DeckCard = Omit<Card, 'variants'> & { quantity: number, variants: CollectionCard['variants'] };
 
 @Component({
 	selector: 'app-root',
@@ -78,7 +78,24 @@ export class App {
 	constructor() {
 		effect(() => {
 			const collectionCards: CollectionCard[] = this.collectionCards();
-			this.tcgDex.collectionCards.set(collectionCards);
+
+			const energyIds: string[] = [
+				'sm1-164',
+				'sm1-165',
+				'sm1-166',
+				'sm1-167',
+				'sm1-168',
+				'sm1-169',
+				'sm1-170',
+				'sm1-171',
+			];
+
+			const energies: CollectionCard[] = energyIds.map((_id) => ({
+				_id,
+				variants: { normal: 99 },
+			}));
+
+			this.tcgDex.collectionCards.set(collectionCards.concat(energies));
 		});
 	}
 
@@ -108,7 +125,12 @@ export class App {
 				return deckCard;
 			}
 
-			return { ...deckCard, quantity: existingDeckCard.quantity + 1 };
+			const quantity: number = Math.min(
+				existingDeckCard.quantity + 1,
+				this.getQuantitySum(card.variants),
+			);
+
+			return { ...deckCard, quantity };
 		});
 
 		this.deckCards.set(deckCardsWithNewQuantities);
