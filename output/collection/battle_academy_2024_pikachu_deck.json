@@ -154,7 +154,11 @@
       "quantity": 3
     },
     {
-      "card": "Basic Lightning Energy",
+      "card": {
+        "name": "Basic Lightning Energy",
+        "localId": 167,
+        "setName": "SUM"
+      },
       "quantity": 18
     }
   ]

@@ -194,7 +194,11 @@
       "quantity": 2
     },
     {
-      "card": "Basic Darkness Energy",
+      "card": {
+        "name": "Basic Darkness Energy",
+        "localId": 170,
+        "setName": "SUM"
+      },
       "quantity": 13
     }
   ]

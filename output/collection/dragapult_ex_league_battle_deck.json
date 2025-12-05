@@ -186,11 +186,19 @@
       "quantity": 1
     },
     {
-      "card": "Basic Psychic Energy",
+      "card": {
+        "name": "Basic Psychic Energy",
+        "localId": 168,
+        "setName": "SUM"
+      },
       "quantity": 6
     },
     {
-      "card": "Basic Fire Energy",
+      "card": {
+        "name": "Basic Fire Energy",
+        "localId": 165,
+        "setName": "SUM"
+      },
       "quantity": 4
     }
   ]

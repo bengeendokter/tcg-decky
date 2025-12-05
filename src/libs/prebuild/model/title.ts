@@ -1,4 +1,6 @@
-import { ENERGY_TYPES, type EnergyCard } from './energy';
+import { ENERGY_TYPES, type EnergyType } from './energy';
+
+export type EnergyCard = `Basic ${EnergyType} Energy`;
 
 export type EnergyTitle = `${EnergyCard} (TCG)`;
 

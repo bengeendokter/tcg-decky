@@ -154,7 +154,11 @@
       "quantity": 3
     },
     {
-      "card": "Basic Fire Energy",
+      "card": {
+        "name": "Basic Fire Energy",
+        "localId": 165,
+        "setName": "SUM"
+      },
       "quantity": 18
     }
   ]

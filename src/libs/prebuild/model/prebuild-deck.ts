@@ -1,5 +1,3 @@
-import { isEnergyCard, type EnergyCard } from './energy';
-
 export interface PrebuildSetCard {
 	name: string;
 	localId: number;
@@ -22,13 +20,9 @@ export function isPrebuildSetCard(object: object): object is PrebuildSetCard {
 	return true;
 }
 
-export type PrebuildCard = PrebuildSetCard | EnergyCard;
+export type PrebuildCard = PrebuildSetCard;
 
-export function isPrebuildCard(card: object | string): card is PrebuildCard {
-	if (typeof card === 'string') {
-		return isEnergyCard(card);
-	}
-
+export function isPrebuildCard(card: object): card is PrebuildCard {
 	return isPrebuildSetCard(card);
 }
 
@@ -50,7 +44,7 @@ export function isPrebuildCardWithQuantity(
 
 	const card: unknown = object['card'];
 
-	if ((typeof card !== 'object' && typeof card !== 'string') || card === null) {
+	if ((typeof card !== 'object') || card === null) {
 		return false;
 	}
 
@@ -86,6 +80,6 @@ export interface PrebuildSetCardWithQuantity {
 }
 
 export interface PrebuildEnergyCardWithQuantity {
-	card: EnergyCard;
+	card: PrebuildSetCard;
 	quantity: number;
 }

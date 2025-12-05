@@ -36,17 +36,6 @@ export async function convertPrebuildToLimitlessDeck({
 		},
 	);
 
-	const energyCardsWithQuantity: PrebuildEnergyCardWithQuantity[] =
-		cards.filter(
-			(
-				cardsWithQuantity,
-			): cardsWithQuantity is PrebuildEnergyCardWithQuantity => {
-				const card: PrebuildCard = cardsWithQuantity.card;
-
-				return typeof card === 'string';
-			},
-		);
-
 	const limitlessCardsWithCategory: LimitlessCardWithCategory[] =
 		await Promise.all(
 			setCardsWithQuantity.map(async (setCardWithQuantity) => {
@@ -132,30 +121,9 @@ export async function convertPrebuildToLimitlessDeck({
 			return limitlessCardWithCategory.category === CATEGORY.TRAINER;
 		},
 	);
-	const energy: LimitlessCard[] = energyCardsWithQuantity.map(
-		(energyCardWithQuantity) => {
-			const { card: name, quantity } = energyCardWithQuantity;
-
-			const energyType: EnergyType | undefined = parseEnergyType(name);
-
-			if (!energyType) {
-				throw Error('Invalid energy type');
-			}
-
-			// TODO remove these hardcoded values when EnergyCard type is updated with these extra fields
-			const tcgOnline: string = 'SVE';
-			const localId: number | undefined = energyTypeLocalIdMap.get(energyType);
-
-			if (!localId) {
-				throw Error('Energy local ID not found');
-			}
-
-			return {
-				name,
-				quantity,
-				tcgOnline,
-				localId,
-			};
+	const energy: LimitlessCard[] = limitlessCardsWithCategory.filter(
+		(limitlessCardWithCategory) => {
+			return limitlessCardWithCategory.category === CATEGORY.ENERGY;
 		},
 	);
 

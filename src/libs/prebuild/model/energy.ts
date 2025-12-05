@@ -1,3 +1,5 @@
+import type { PrebuildSetCard } from './prebuild-deck';
+
 export const ENERGY_TYPES = {
 	GRASS: 'Grass',
 	FIRE: 'Fire',
@@ -34,12 +36,46 @@ export const energyTypeLocalIdMap: Map<EnergyType, EnergyTypeLocalId> = new Map(
 		(entry): entry is [EnergyType, EnergyTypeLocalId] => isEnergyType(entry[0]),
 	),
 );
-// TODO update type to be an object with name, tcgOnline, and localId
-export type EnergyCard = `Basic ${EnergyType} Energy`;
 
-export function isEnergyCard(text: string): text is EnergyCard {
-	const energyCards: string[] = Object.values(ENERGY_TYPES).map(
-		(energyType): EnergyCard => `Basic ${energyType} Energy`,
-	);
-	return energyCards.includes(text);
-}
+export const ENERGY_TYPES_PREBUILD_CARD_MAP = {
+	[ENERGY_TYPES.GRASS]: {
+		name: `Basic ${ENERGY_TYPES.GRASS} Energy`,
+		localId: 164,
+		setName: 'SUM',
+	},
+	[ENERGY_TYPES.FIRE]: {
+		name: `Basic ${ENERGY_TYPES.FIRE} Energy`,
+		localId: 165,
+		setName: 'SUM',
+	},
+	[ENERGY_TYPES.WATER]: {
+		name: `Basic ${ENERGY_TYPES.WATER} Energy`,
+		localId: 166,
+		setName: 'SUM',
+	},
+	[ENERGY_TYPES.LIGHTNING]: {
+		name: `Basic ${ENERGY_TYPES.LIGHTNING} Energy`,
+		localId: 167,
+		setName: 'SUM',
+	},
+	[ENERGY_TYPES.PSYCHIC]: {
+		name: `Basic ${ENERGY_TYPES.PSYCHIC} Energy`,
+		localId: 168,
+		setName: 'SUM',
+	},
+	[ENERGY_TYPES.FIGHTING]: {
+		name: `Basic ${ENERGY_TYPES.FIGHTING} Energy`,
+		localId: 169,
+		setName: 'SUM',
+	},
+	[ENERGY_TYPES.DARKNESS]: {
+		name: `Basic ${ENERGY_TYPES.DARKNESS} Energy`,
+		localId: 170,
+		setName: 'SUM',
+	},
+	[ENERGY_TYPES.METAL]: {
+		name: `Basic ${ENERGY_TYPES.METAL} Energy`,
+		localId: 171,
+		setName: 'SUM',
+	},
+} as const satisfies Record<EnergyType, PrebuildSetCard>;
