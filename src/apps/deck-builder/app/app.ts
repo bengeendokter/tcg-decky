@@ -19,7 +19,6 @@ import type { TcgDexCollectionCard } from '../../../libs/deck-builder/model/tcg-
 import { form, Field, type FieldTree } from '@angular/forms/signals';
 import {
 	CATEGORY,
-	type Category,
 	type LimitlessDeck,
 } from '../../../libs/limitless/model/limitless-deck';
 import { limitlessDeckToString } from '../../../libs/limitless/feature/limitless-deck-to-string';
@@ -44,9 +43,6 @@ export class App {
 	private readonly getAllDecksResource: ResourceRef<
 		WithId<CollectionCardDeck>[] | undefined
 	> = this.collection.getAllDecksResource;
-	private readonly tcgDexCollectionCardsResource: ResourceRef<
-		TcgDexCollectionCard[] | undefined
-	> = this.tcgDex.tcgDexCollectionCardsResource;
 	private readonly loadedDeckTcgDexCollectionCardsResource: ResourceRef<
 		TcgDexCollectionCard[] | undefined
 	> = this.tcgDex.loadedDeckTcgDexCollectionCardsResource;
@@ -78,14 +74,13 @@ export class App {
 		},
 	);
 
-	protected tcgDexCollectionCards: Signal<TcgDexCollectionCard[]> = computed(
-		() => {
-			if (!this.tcgDexCollectionCardsResource.hasValue()) {
-				return [];
-			}
+	protected tcgDexCollectionCards: Signal<TcgDexCollectionCard[]> =
+		this.tcgDex.tcgDexCollectionCards;
 
+	protected filteredTcgDexCollectionCards: Signal<TcgDexCollectionCard[]> =
+		computed(() => {
 			const tcgDexCollectionCards: TcgDexCollectionCard[] =
-				this.tcgDexCollectionCardsResource.value();
+				this.tcgDexCollectionCards();
 
 			const searchValue: string = this.searchForm().value().toLocaleLowerCase();
 
@@ -96,29 +91,50 @@ export class App {
 			return tcgDexCollectionCards.filter((card) => {
 				return card.name.toLocaleLowerCase().includes(searchValue);
 			});
-		},
-	);
+		});
 
 	protected sortedTcgDexCollectionCards: Signal<TcgDexCollectionCard[]> =
 		computed(() => {
 			const tcgDexCollectionCards: TcgDexCollectionCard[] =
-				this.tcgDexCollectionCards();
+				this.filteredTcgDexCollectionCards();
 
-			return tcgDexCollectionCards.sort((card1, card2) => {
-				const categorySortOrderMap: Map<string, number> = new Map(
-					Object.entries({
-						[CATEGORY.POKEMON]: 1,
-						[CATEGORY.TRAINER]: 2,
-						[CATEGORY.ENERGY]: 3,
-					}),
-				);
+			const categorySortOrderMap: Map<string, number> = new Map(
+				Object.entries({
+					[CATEGORY.POKEMON]: 1,
+					[CATEGORY.TRAINER]: 2,
+					[CATEGORY.ENERGY]: 3,
+				}),
+			);
 
-				const sortValue1: number =
+			const setReleaseDateMap: Map<string, Date> =
+				this.tcgDex.setReleaseDateMap();
+
+			return tcgDexCollectionCards.toSorted((card1, card2) => {
+				const cateorySortValue1: number =
 					categorySortOrderMap.get(card1.category) ?? 0;
-				const sortValue2: number =
+				const cateorySortValue2: number =
 					categorySortOrderMap.get(card2.category) ?? 0;
 
-				return sortValue1 - sortValue2;
+				const cateorySortDiff: number = cateorySortValue1 - cateorySortValue2;
+
+				if (cateorySortDiff !== 0) {
+					return cateorySortDiff;
+				}
+
+				const releaseDateSet1: Date =
+					setReleaseDateMap.get(card1.set.id) ?? new Date(0);
+
+				const releaseDateSet2: Date =
+					setReleaseDateMap.get(card2.set.id) ?? new Date(0);
+
+				const releaseDateDiff: number =
+					releaseDateSet1.getTime() - releaseDateSet2.getTime();
+
+				if (releaseDateDiff !== 0) {
+					return releaseDateDiff;
+				}
+
+				return parseInt(card1.localId) - parseInt(card2.localId);
 			});
 		});
 
