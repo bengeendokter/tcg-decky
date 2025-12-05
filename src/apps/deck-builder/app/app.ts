@@ -17,7 +17,11 @@ import type {
 import { TcgDex } from '../../../libs/deck-builder/data-access/tcg-dex';
 import type { TcgDexCollectionCard } from '../../../libs/deck-builder/model/tcg-dex-collection-card';
 import { form, Field, type FieldTree } from '@angular/forms/signals';
-import type { LimitlessDeck } from '../../../libs/limitless/model/limitless-deck';
+import {
+	CATEGORY,
+	type Category,
+	type LimitlessDeck,
+} from '../../../libs/limitless/model/limitless-deck';
 import { limitlessDeckToString } from '../../../libs/limitless/feature/limitless-deck-to-string';
 import type { WithId } from 'mongodb';
 
@@ -94,6 +98,29 @@ export class App {
 			});
 		},
 	);
+
+	protected sortedTcgDexCollectionCards: Signal<TcgDexCollectionCard[]> =
+		computed(() => {
+			const tcgDexCollectionCards: TcgDexCollectionCard[] =
+				this.tcgDexCollectionCards();
+
+			return tcgDexCollectionCards.sort((card1, card2) => {
+				const categorySortOrderMap: Map<string, number> = new Map(
+					Object.entries({
+						[CATEGORY.POKEMON]: 1,
+						[CATEGORY.TRAINER]: 2,
+						[CATEGORY.ENERGY]: 3,
+					}),
+				);
+
+				const sortValue1: number =
+					categorySortOrderMap.get(card1.category) ?? 0;
+				const sortValue2: number =
+					categorySortOrderMap.get(card2.category) ?? 0;
+
+				return sortValue1 - sortValue2;
+			});
+		});
 
 	protected deckCards: WritableSignal<DeckCard[]> = signal([]);
 
