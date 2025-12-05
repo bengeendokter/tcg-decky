@@ -5,7 +5,7 @@
 			<button (click)="copyLimitlessDeck()">Copy Limitless Deck</button>
 			<button (click)="addCollectionCardDeck()">Save New Deck</button>
 			@if(selectedDeckId()) {
-			<button>Update Deck</button>
+			<button (click)="updateCollectionCardDeck()">Update Deck</button>
 			}
 			<select [field]="LoadDeckForm">
 				@for (collectionDeck of collectionDecks(); track collectionDeck._id) {

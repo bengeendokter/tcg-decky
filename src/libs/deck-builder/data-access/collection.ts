@@ -10,6 +10,11 @@ import { CONFIG } from '../../../environment/environment';
 import { ArkErrors } from 'arktype';
 import type { WithId } from 'mongodb';
 
+export interface UpdateCollectionCardDeckParams {
+	id: string;
+	deck: CollectionCardDeck;
+}
+
 @Injectable({ providedIn: 'root' })
 export class Collection {
 	private readonly client = hc<AppType>(CONFIG.COLLECTION_API_URL);
@@ -41,6 +46,23 @@ export class Collection {
 		});
 
 		return (await response.json()).insertedId;
+	}
+
+	public async updateCollectionCardDeck({
+		id,
+		deck,
+	}: UpdateCollectionCardDeckParams): Promise<void> {
+		const validatedAndStrippedDeck: CollectionCardDeck | ArkErrors =
+			collectionCardDeckValidatorAndStripper(deck);
+
+		if (validatedAndStrippedDeck instanceof ArkErrors) {
+			throw validatedAndStrippedDeck;
+		}
+
+		await this.client.decks[':id'].$put({
+			param: { id },
+			json: validatedAndStrippedDeck,
+		});
 	}
 
 	private async getAllDecks(): Promise<WithId<CollectionCardDeck>[]> {

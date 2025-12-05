@@ -115,6 +115,20 @@ export class App {
 
 	protected selectedDeckId: WritableSignal<string> = signal('');
 
+	private selectedDeck: Signal<CollectionCardDeck | undefined> = computed(
+		() => {
+			const selectedDeckId: string = this.selectedDeckId();
+
+			if (selectedDeckId === '') {
+				return undefined;
+			}
+
+			return this.collectionDecks().find(
+				(deck) => deck._id.toString() === selectedDeckId,
+			);
+		},
+	);
+
 	protected LoadDeckForm: FieldTree<string> = form(this.selectedDeckId);
 
 	constructor() {
@@ -141,16 +155,7 @@ export class App {
 		});
 
 		effect(() => {
-			const selectedDeckId: string = this.LoadDeckForm().value();
-
-			if (selectedDeckId === '') {
-				return;
-			}
-
-			const selectedDeck: CollectionCardDeck | undefined =
-				this.collectionDecks().find(
-					(deck) => deck._id.toString() === selectedDeckId,
-				);
+			const selectedDeck: CollectionCardDeck | undefined = this.selectedDeck();
 
 			if (selectedDeck === undefined) {
 				return;
@@ -284,5 +289,34 @@ export class App {
 
 		this.getAllDecksResource.reload();
 		this.selectedDeckId.set(id);
+	}
+
+	protected async updateCollectionCardDeck(): Promise<void> {
+		const selectedDeck: CollectionCardDeck | undefined = this.selectedDeck();
+
+		if (selectedDeck === undefined) {
+			alert('Updating deck failed.');
+			return;
+		}
+
+		const name: string | null = prompt('Deck name:', selectedDeck.name);
+
+		if (name === null) {
+			alert('Deck has not been updated.');
+			return;
+		}
+
+		const deck: CollectionCardDeck = {
+			name,
+			cards: this.deckCollectionCards(),
+		};
+
+		await this.collection.updateCollectionCardDeck({
+			id: this.selectedDeckId(),
+			deck,
+		});
+		alert('Deck has been updated!');
+
+		this.getAllDecksResource.reload();
 	}
 }
