@@ -256,6 +256,11 @@ export class App {
 		);
 	}
 
+	protected reset(): void {
+		this.deckCards.set([]);
+		this.selectedDeckId.set('');
+	}
+
 	protected getQuantitySum(variants: CollectionCard['variants']): number {
 		const firstEdition: number = variants.firstEdition ?? 0;
 		const holo: number = variants.holo ?? 0;

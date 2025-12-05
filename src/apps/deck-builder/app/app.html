@@ -4,6 +4,7 @@
 			<span>Total: {{totalCardQuantity()}}</span>
 			<button (click)="copyLimitlessDeck()">Copy Limitless Deck</button>
 			<button (click)="addCollectionCardDeck()">Save New Deck</button>
+			<button (click)="reset()">Reset</button>
 			@if(selectedDeckId()) {
 			<button (click)="updateCollectionCardDeck()">Update Deck</button>
 			<button (click)="deleteCollectionCardDeck()">Delete Deck</button>
