@@ -10,7 +10,10 @@ import {
 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Collection } from '../../../libs/deck-builder/data-access/collection';
-import type { CollectionCard } from '../../../libs/collection/model/collection-card';
+import type {
+	CollectionCard,
+	CollectionCardDeck,
+} from '../../../libs/collection/model/collection-card';
 import { TcgDex } from '../../../libs/deck-builder/data-access/tcg-dex';
 import type { Card } from '@tcgdex/sdk';
 import type { TcgDexCollectionCard } from '../../../libs/deck-builder/model/tcg-dex-collection-card';
@@ -74,6 +77,12 @@ export class App {
 		return this.deckCards().reduce((total, card) => {
 			return total + card.quantity;
 		}, 0);
+	});
+
+	private deckCollectionCards: Signal<CollectionCard[]> = computed(() => {
+		return this.deckCards().map((deckCard) => {
+			return { ...deckCard, variants: { normal: deckCard.quantity } };
+		});
 	});
 
 	protected search: WritableSignal<string> = signal('');
@@ -192,12 +201,27 @@ export class App {
 		const limitlessDeck: LimitlessDeck =
 			await this.tcgDex.convertCollectionToLimitlessDeck({
 				name: 'DefaultName',
-				cards: this.deckCards().map((deckCard) => {
-					return { ...deckCard, variants: { normal: deckCard.quantity } };
-				}),
+				cards: this.deckCollectionCards(),
 			});
 
 		await navigator.clipboard.writeText(limitlessDeckToString(limitlessDeck));
 		alert('Copied to clipboard!');
+	}
+
+	protected async addCollectionCardDeck(): Promise<void> {
+		const name: string | null = prompt('Deck name:');
+
+		if (name === null) {
+			alert('Deck has not been saved.');
+			return;
+		}
+
+		const deck: CollectionCardDeck = {
+			name,
+			cards: this.deckCollectionCards(),
+		};
+
+		await this.collection.addCollectionCardDeck(deck);
+		alert('Deck has been saved!');
 	}
 }

@@ -3,6 +3,7 @@
 		<div class="card">
 			<span>Total: {{totalCardQuantity()}}</span>
 			<button (click)="copyLimitlessDeck()">Copy Limitless Deck</button>
+			<button (click)="addCollectionCardDeck()">Save Deck</button>
 		</div>
 		@for(card of deckCards(); track card.id) {
 		<div class="card" [style.--background-image-url]="`url(${card.image}/low.webp)`">
