@@ -1,29 +1,31 @@
 <main class="builder-container">
 	<div class="deck-container">
-		<div class="card">
-			<span>Total: {{totalCardQuantity()}}</span>
-			<button (click)="copyLimitlessDeck()">Copy Limitless Deck</button>
-			<button (click)="addCollectionCardDeck()">Save New Deck</button>
-			<button (click)="reset()">Reset</button>
-			@if(selectedDeckId()) {
-			<button (click)="updateCollectionCardDeck()">Update Deck</button>
-			<button (click)="deleteCollectionCardDeck()">Delete Deck</button>
+		<select [field]="LoadDeckForm">
+			@for (collectionDeck of collectionDecks(); track collectionDeck._id) {
+			<option [value]="collectionDeck._id">{{collectionDeck.name}}</option>
 			}
-			<select [field]="LoadDeckForm">
-				@for (collectionDeck of collectionDecks(); track collectionDeck._id) {
-				<option [value]="collectionDeck._id">{{collectionDeck.name}}</option>
+		</select>
+		<div class="deck-cards">
+			<div class="card">
+				<span>Total: {{totalCardQuantity()}}</span>
+				<button (click)="copyLimitlessDeck()">Copy Limitless Deck</button>
+				<button (click)="addCollectionCardDeck()">Save New Deck</button>
+				<button (click)="reset()">Reset</button>
+				@if(selectedDeckId()) {
+				<button (click)="updateCollectionCardDeck()">Update Deck</button>
+				<button (click)="deleteCollectionCardDeck()">Delete Deck</button>
 				}
-			</select>
-		</div>
-		@for(card of deckCards(); track card.id) {
-		<div class="card" [style.--background-image-url]="`url(${card.image}/low.webp)`">
-			<span class="card-quantity">{{card.quantity}}</span>
-			<div class="quantity-buttons">
-				<button class="card-button" (click)="removeCard(card)">-</button>
-				<button class="card-button" (click)="addCard(card)">+</button>
 			</div>
+			@for(card of deckCards(); track card.id) {
+			<div class="card" [style.--background-image-url]="`url(${card.image}/low.webp)`">
+				<button class="card-quantity" (click)="openDetail(card)">{{card.quantity}}</button>
+				<div class="quantity-buttons">
+					<button class="card-button" (click)="removeCard(card)">-</button>
+					<button class="card-button" (click)="addCard(card)">+</button>
+				</div>
+			</div>
+			}
 		</div>
-		}
 	</div>
 	<div class="collection-container">
 		<search>
@@ -34,7 +36,7 @@
 		<div class="collection-cards">
 			@for(card of sortedTcgDexCollectionCards(); track card.id) {
 			<div class="card" [style.--background-image-url]="`url(${card.image}/low.webp)`">
-				<span class="card-quantity">{{getQuantitySum(card.variants)}}</span>
+				<button class="card-quantity" (click)="openDetail(card)">{{getQuantitySum(card.variants)}}</button>
 				<div class="quantity-buttons">
 					<button class="card-button" (click)="removeCard(card)">-</button>
 					<button class="card-button" (click)="addCard(card)">+</button>
@@ -44,4 +46,12 @@
 		</div>
 	</div>
 </main>
+@let detailCard = selectedCard();
+<dialog #dialog class="detail-dialog" closedby="any">
+	@if(detailCard) {
+	<div (click)="closeDialog()" class="card detail-card"
+		[style.--background-image-url]="`url(${detailCard.image}/high.webp)`">
+	</div>
+	}
+</dialog>
 <router-outlet />

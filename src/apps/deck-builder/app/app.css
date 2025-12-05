@@ -16,14 +16,15 @@
 	}
 }
 
-.collection-container {
+.collection-container,
+.deck-container {
 	display: grid;
 	grid-template-rows: auto 1fr;
 	overflow: auto;
 }
 
 .collection-cards,
-.deck-container {
+.deck-cards {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
 	gap: 10px;
@@ -52,6 +53,10 @@
 	justify-items: center;
 	align-items: center;
 	margin-inline: auto;
+
+	&:hover {
+		background-color: pink;
+	}
 }
 
 .quantity-buttons {
@@ -65,4 +70,17 @@
 	aspect-ratio: 1;
 	width: 40px;
 	height: auto;
+}
+
+.detail-dialog {
+	display: grid;
+}
+
+.detail-card {
+	width: 300px;
+	max-width: 100%;
+}
+
+.close-dialog-button {
+	width: 100%;
 }

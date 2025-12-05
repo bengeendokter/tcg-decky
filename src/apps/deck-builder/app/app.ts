@@ -2,8 +2,10 @@ import {
 	Component,
 	computed,
 	effect,
+	ElementRef,
 	inject,
 	signal,
+	viewChild,
 	type ResourceRef,
 	type Signal,
 	type WritableSignal,
@@ -46,6 +48,12 @@ export class App {
 	private readonly loadedDeckTcgDexCollectionCardsResource: ResourceRef<
 		TcgDexCollectionCard[] | undefined
 	> = this.tcgDex.loadedDeckTcgDexCollectionCardsResource;
+
+	private readonly dialog: Signal<ElementRef<HTMLDialogElement>> =
+		viewChild.required('dialog');
+
+	protected selectedCard: WritableSignal<TcgDexCollectionCard | undefined> =
+		signal(undefined);
 
 	protected collectionCards: Signal<CollectionCard[]> = computed(() => {
 		if (!this.getAllCardsResource.hasValue()) {
@@ -217,6 +225,10 @@ export class App {
 
 			this.deckCards.set(loadedDeckCollectionCards);
 		});
+
+		effect(() => {
+			console.log(this.sortedTcgDexCollectionCards());
+		});
 	}
 
 	protected async getAllCards(): Promise<void> {
@@ -387,5 +399,14 @@ export class App {
 
 		this.getAllDecksResource.reload();
 		this.selectedDeckId.set('');
+	}
+
+	protected openDetail(card: TcgDexCollectionCard): void {
+		this.selectedCard.set(card);
+		this.dialog().nativeElement.showModal();
+	}	
+
+	protected closeDialog(): void {
+		this.dialog().nativeElement.close();
 	}
 }
