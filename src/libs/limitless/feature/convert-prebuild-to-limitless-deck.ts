@@ -1,12 +1,6 @@
-import { parseEnergyType } from '../../prebuild/feature/parse-energy-type';
-import {
-	energyTypeLocalIdMap,
-	type EnergyType,
-} from '../../prebuild/model/energy';
 import type {
 	PrebuildCard,
 	PrebuildDeck,
-	PrebuildEnergyCardWithQuantity,
 	PrebuildSetCardWithQuantity,
 } from '../../prebuild/model/prebuild-deck';
 import type { SetWithAbbreviation } from '../../tcg-dex/model/set-with-abbreviation';
