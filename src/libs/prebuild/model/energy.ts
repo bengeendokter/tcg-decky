@@ -41,41 +41,41 @@ export const ENERGY_TYPES_PREBUILD_CARD_MAP = {
 	[ENERGY_TYPES.GRASS]: {
 		name: `Basic ${ENERGY_TYPES.GRASS} Energy`,
 		localId: 164,
-		setName: 'SUM',
+		setName: 'Sun & Moon',
 	},
 	[ENERGY_TYPES.FIRE]: {
 		name: `Basic ${ENERGY_TYPES.FIRE} Energy`,
 		localId: 165,
-		setName: 'SUM',
+		setName: 'Sun & Moon',
 	},
 	[ENERGY_TYPES.WATER]: {
 		name: `Basic ${ENERGY_TYPES.WATER} Energy`,
 		localId: 166,
-		setName: 'SUM',
+		setName: 'Sun & Moon',
 	},
 	[ENERGY_TYPES.LIGHTNING]: {
 		name: `Basic ${ENERGY_TYPES.LIGHTNING} Energy`,
 		localId: 167,
-		setName: 'SUM',
+		setName: 'Sun & Moon',
 	},
 	[ENERGY_TYPES.PSYCHIC]: {
 		name: `Basic ${ENERGY_TYPES.PSYCHIC} Energy`,
 		localId: 168,
-		setName: 'SUM',
+		setName: 'Sun & Moon',
 	},
 	[ENERGY_TYPES.FIGHTING]: {
 		name: `Basic ${ENERGY_TYPES.FIGHTING} Energy`,
 		localId: 169,
-		setName: 'SUM',
+		setName: 'Sun & Moon',
 	},
 	[ENERGY_TYPES.DARKNESS]: {
 		name: `Basic ${ENERGY_TYPES.DARKNESS} Energy`,
 		localId: 170,
-		setName: 'SUM',
+		setName: 'Sun & Moon',
 	},
 	[ENERGY_TYPES.METAL]: {
 		name: `Basic ${ENERGY_TYPES.METAL} Energy`,
 		localId: 171,
-		setName: 'SUM',
+		setName: 'Sun & Moon',
 	},
 } as const satisfies Record<EnergyType, PrebuildSetCard>;

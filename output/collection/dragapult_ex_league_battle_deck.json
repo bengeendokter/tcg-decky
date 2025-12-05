@@ -189,7 +189,7 @@
       "card": {
         "name": "Basic Psychic Energy",
         "localId": 168,
-        "setName": "SUM"
+        "setName": "Sun & Moon"
       },
       "quantity": 6
     },
@@ -197,7 +197,7 @@
       "card": {
         "name": "Basic Fire Energy",
         "localId": 165,
-        "setName": "SUM"
+        "setName": "Sun & Moon"
       },
       "quantity": 4
     }
