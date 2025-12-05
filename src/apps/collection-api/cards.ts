@@ -6,20 +6,7 @@ import type { BlankEnv } from 'hono/types';
 import type { ContentfulStatusCode, StatusCode } from 'hono/utils/http-status';
 import { resetCollectionCardsDatabase } from '../../libs/collection/feature/reset-collection-cards-database';
 
-const inferredCards = new Hono()
-	.get('/', async (context) => {
-		const cards: CollectionCard[] = await getAllCollectionCards(db);
-
-		return context.json(cards);
-	})
-	.put('/reset', async (context) => {
-		await resetCollectionCardsDatabase({ mongoDbDatabaseUrl, tcgDexServerUrl });
-		return context.text('Card collection has been reset.');
-	});
-
-type InferredCardsRoute = typeof inferredCards;
-
-type CorrectedCardsRoute = Hono<
+type CorrectedGetAllCards = Hono<
 	BlankEnv,
 	{
 		'/': {
@@ -30,17 +17,20 @@ type CorrectedCardsRoute = Hono<
 				status: ContentfulStatusCode;
 			};
 		};
-	} & {
-		'/reset': {
-			$put: {
-				input: {};
-				output: 'Card collection has been reset.';
-				outputFormat: 'text';
-				status: ContentfulStatusCode;
-			};
-		};
 	},
 	'/'
 >;
 
-export const cards: CorrectedCardsRoute = inferredCards;
+const getAllCards: CorrectedGetAllCards = new Hono().get(
+	'/',
+	async (context) => {
+		const cards: CollectionCard[] = await getAllCollectionCards(db);
+
+		return context.json(cards);
+	},
+);
+
+export const cards = getAllCards.put('/reset', async (context) => {
+	await resetCollectionCardsDatabase({ mongoDbDatabaseUrl, tcgDexServerUrl });
+	return context.text('Card collection has been reset.');
+});

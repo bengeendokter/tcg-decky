@@ -20,8 +20,9 @@ import { convertCollectionToLimitlessDeck } from '../../limitless/feature/conver
 @Injectable({ providedIn: 'root' })
 export class TcgDex {
 	private readonly tcgDex: TCGdex = getTcgDex(CONFIG.TCG_DEX_SERVER_URL);
-	public cardId: WritableSignal<string | undefined> = signal(undefined);
-	public collectionCards: WritableSignal<CollectionCard[]> = signal([]);
+	public readonly cardId: WritableSignal<string | undefined> = signal(undefined);
+	public readonly collectionCards: WritableSignal<CollectionCard[]> = signal([]);
+	public readonly loadedDeckCollectionCards: WritableSignal<CollectionCard[]> = signal([]);
 
 	private async getCard(id: string): Promise<Card | undefined> {
 		const card: Card | null = await this.tcgDex.card.get(id);
@@ -50,6 +51,29 @@ export class TcgDex {
 		TcgDexCollectionCard[] | undefined
 	> = resource({
 		params: () => ({ collectionCards: this.collectionCards() }),
+		loader: ({ params }) => {
+			const collectionCards: CollectionCard[] = params.collectionCards;
+
+			return Promise.all(
+				collectionCards.map(async (collectionCard) => {
+					const tcgDexCard: Card | undefined = await this.getCard(
+						collectionCard._id,
+					);
+
+					if (tcgDexCard === undefined) {
+						throw Error(`tcgDexCard not found for id: ${collectionCard._id}`);
+					}
+
+					return { ...tcgDexCard, ...collectionCard };
+				}),
+			);
+		},
+	});
+
+	public readonly loadedDeckTcgDexCollectionCardsResource: ResourceRef<
+		TcgDexCollectionCard[] | undefined
+	> = resource({
+		params: () => ({ collectionCards: this.loadedDeckCollectionCards() }),
 		loader: ({ params }) => {
 			const collectionCards: CollectionCard[] = params.collectionCards;
 

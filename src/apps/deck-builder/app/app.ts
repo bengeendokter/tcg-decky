@@ -15,16 +15,15 @@ import type {
 	CollectionCardDeck,
 } from '../../../libs/collection/model/collection-card';
 import { TcgDex } from '../../../libs/deck-builder/data-access/tcg-dex';
-import type { Card } from '@tcgdex/sdk';
 import type { TcgDexCollectionCard } from '../../../libs/deck-builder/model/tcg-dex-collection-card';
 import { form, Field, type FieldTree } from '@angular/forms/signals';
 import type { LimitlessDeck } from '../../../libs/limitless/model/limitless-deck';
 import { limitlessDeckToString } from '../../../libs/limitless/feature/limitless-deck-to-string';
+import type { WithId } from 'mongodb';
 
-type DeckCard = Omit<Card, 'variants'> &
-	CollectionCard & {
-		quantity: number;
-	};
+type DeckCard = TcgDexCollectionCard & {
+	quantity: number;
+};
 
 @Component({
 	selector: 'app-root',
@@ -38,9 +37,15 @@ export class App {
 	private readonly getAllCardsResource: ResourceRef<
 		CollectionCard[] | undefined
 	> = this.collection.getAllCardsResource;
+	private readonly getAllDecksResource: ResourceRef<
+		WithId<CollectionCardDeck>[] | undefined
+	> = this.collection.getAllDecksResource;
 	private readonly tcgDexCollectionCardsResource: ResourceRef<
 		TcgDexCollectionCard[] | undefined
 	> = this.tcgDex.tcgDexCollectionCardsResource;
+	private readonly loadedDeckTcgDexCollectionCardsResource: ResourceRef<
+		TcgDexCollectionCard[] | undefined
+	> = this.tcgDex.loadedDeckTcgDexCollectionCardsResource;
 
 	protected collectionCards: Signal<CollectionCard[]> = computed(() => {
 		if (!this.getAllCardsResource.hasValue()) {
@@ -49,6 +54,25 @@ export class App {
 
 		return this.getAllCardsResource.value();
 	});
+
+	protected loadedDeckCollectionCards: Signal<TcgDexCollectionCard[]> =
+		computed(() => {
+			if (!this.loadedDeckTcgDexCollectionCardsResource.hasValue()) {
+				return [];
+			}
+
+			return this.loadedDeckTcgDexCollectionCardsResource.value();
+		});
+
+	protected collectionDecks: Signal<WithId<CollectionCardDeck>[]> = computed(
+		() => {
+			if (!this.getAllDecksResource.hasValue()) {
+				return [];
+			}
+
+			return this.getAllDecksResource.value();
+		},
+	);
 
 	protected tcgDexCollectionCards: Signal<TcgDexCollectionCard[]> = computed(
 		() => {
@@ -89,6 +113,10 @@ export class App {
 
 	protected searchForm: FieldTree<string> = form(this.search);
 
+	protected selectedDeckId: WritableSignal<string> = signal('');
+
+	protected LoadDeckForm: FieldTree<string> = form(this.selectedDeckId);
+
 	constructor() {
 		effect(() => {
 			const collectionCards: CollectionCard[] = this.collectionCards();
@@ -110,6 +138,36 @@ export class App {
 			}));
 
 			this.tcgDex.collectionCards.set(collectionCards.concat(energies));
+		});
+
+		effect(() => {
+			const selectedDeckId: string = this.LoadDeckForm().value();
+
+			if (selectedDeckId === '') {
+				return;
+			}
+
+			const selectedDeck: CollectionCardDeck | undefined =
+				this.collectionDecks().find(
+					(deck) => deck._id.toString() === selectedDeckId,
+				);
+
+			if (selectedDeck === undefined) {
+				return;
+			}
+			this.tcgDex.loadedDeckCollectionCards.set(selectedDeck.cards);
+		});
+
+		effect(() => {
+			const loadedDeckCollectionCards: DeckCard[] =
+				this.loadedDeckCollectionCards().map((tcgDexCollectionCard) => {
+					return {
+						...tcgDexCollectionCard,
+						quantity: this.getQuantitySum(tcgDexCollectionCard.variants),
+					};
+				});
+
+			this.deckCards.set(loadedDeckCollectionCards);
 		});
 	}
 
@@ -221,7 +279,10 @@ export class App {
 			cards: this.deckCollectionCards(),
 		};
 
-		await this.collection.addCollectionCardDeck(deck);
+		const id: string = await this.collection.addCollectionCardDeck(deck);
 		alert('Deck has been saved!');
+
+		this.getAllDecksResource.reload();
+		this.selectedDeckId.set(id);
 	}
 }

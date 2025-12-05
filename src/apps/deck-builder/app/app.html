@@ -3,7 +3,15 @@
 		<div class="card">
 			<span>Total: {{totalCardQuantity()}}</span>
 			<button (click)="copyLimitlessDeck()">Copy Limitless Deck</button>
-			<button (click)="addCollectionCardDeck()">Save Deck</button>
+			<button (click)="addCollectionCardDeck()">Save New Deck</button>
+			@if(selectedDeckId()) {
+			<button>Update Deck</button>
+			}
+			<select [field]="LoadDeckForm">
+				@for (collectionDeck of collectionDecks(); track collectionDeck._id) {
+				<option [value]="collectionDeck._id">{{collectionDeck.name}}</option>
+				}
+			</select>
 		</div>
 		@for(card of deckCards(); track card.id) {
 		<div class="card" [style.--background-image-url]="`url(${card.image}/low.webp)`">

@@ -8,6 +8,7 @@ import {
 } from '../../collection/model/collection-card';
 import { CONFIG } from '../../../environment/environment';
 import { ArkErrors } from 'arktype';
+import type { WithId } from 'mongodb';
 
 @Injectable({ providedIn: 'root' })
 export class Collection {
@@ -25,7 +26,9 @@ export class Collection {
 		loader: () => this.getAllCards(),
 	});
 
-	public async addCollectionCardDeck(deck: CollectionCardDeck): Promise<void> {
+	public async addCollectionCardDeck(
+		deck: CollectionCardDeck,
+	): Promise<string> {
 		const validatedAndStrippedDeck: CollectionCardDeck | ArkErrors =
 			collectionCardDeckValidatorAndStripper(deck);
 
@@ -33,6 +36,22 @@ export class Collection {
 			throw validatedAndStrippedDeck;
 		}
 
-		await this.client.decks.$post({ json: validatedAndStrippedDeck });
+		const response = await this.client.decks.$post({
+			json: validatedAndStrippedDeck,
+		});
+
+		return (await response.json()).insertedId;
 	}
+
+	private async getAllDecks(): Promise<WithId<CollectionCardDeck>[]> {
+		const response = await this.client.decks.$get();
+		const decks = await response.json();
+		return decks;
+	}
+
+	public readonly getAllDecksResource: ResourceRef<
+		WithId<CollectionCardDeck>[] | undefined
+	> = resource({
+		loader: () => this.getAllDecks(),
+	});
 }

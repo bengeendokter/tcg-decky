@@ -1,6 +1,7 @@
 import { Hono } from 'hono';
 import {
 	collectionCardDeckValidator,
+	type CollectionCard,
 	type CollectionCardDeck,
 } from '../../libs/collection/model/collection-card';
 import { getAllCollectionCardDecks } from '../../libs/collection/data-access/get-all-collection-card-decks';
@@ -9,9 +10,11 @@ import { getCollectionCardDeck } from '../../libs/collection/data-access/get-col
 import { Type, type } from 'arktype';
 import { arktypeValidator } from '@hono/arktype-validator';
 import { addCollectionCardDeck } from '../../libs/collection/data-access/add-collection-card-deck';
-import type { DeleteResult, InsertOneResult, UpdateResult } from 'mongodb';
+import type { DeleteResult, InsertOneResult, UpdateResult, WithId } from 'mongodb';
 import { updateCollectionCardDeck } from '../../libs/collection/data-access/update-collection-card-deck';
 import { deleteCollectionCardDeck } from '../../libs/collection/data-access/delete-collection-card-deck';
+import type { BlankEnv } from 'hono/types';
+import type { ContentfulStatusCode } from 'hono/utils/http-status';
 
 export interface DeckParams {
 	id: string;
@@ -21,12 +24,31 @@ const deckParamsValidator: Type<DeckParams> = type({
 	id: 'string == 24',
 });
 
-export const decks = new Hono()
-	.get('/', async (context) => {
+type CorrectedGetAllDecks = Hono<
+	BlankEnv,
+	{
+		'/': {
+			$get: {
+				input: {};
+				output: WithId<CollectionCardDeck>[];
+				outputFormat: 'json';
+				status: ContentfulStatusCode;
+			};
+		};
+	},
+	'/'
+>;
+
+const getAllDecks: CorrectedGetAllDecks = new Hono().get(
+	'/',
+	async (context) => {
 		const decks: CollectionCardDeck[] = await getAllCollectionCardDecks(db);
 
 		return context.json(decks);
-	})
+	},
+);
+
+export const decks = getAllDecks
 	.get(
 		'/:id',
 		arktypeValidator('param', deckParamsValidator),
