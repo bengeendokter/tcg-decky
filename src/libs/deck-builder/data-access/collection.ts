@@ -65,6 +65,10 @@ export class Collection {
 		});
 	}
 
+	public async deleteCollectionCardDeck(id: string): Promise<void> {
+		await this.client.decks[':id'].$delete({ param: { id } });
+	}
+
 	private async getAllDecks(): Promise<WithId<CollectionCardDeck>[]> {
 		const response = await this.client.decks.$get();
 		const decks = await response.json();

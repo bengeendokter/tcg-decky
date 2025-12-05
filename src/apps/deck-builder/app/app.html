@@ -6,6 +6,7 @@
 			<button (click)="addCollectionCardDeck()">Save New Deck</button>
 			@if(selectedDeckId()) {
 			<button (click)="updateCollectionCardDeck()">Update Deck</button>
+			<button (click)="deleteCollectionCardDeck()">Delete Deck</button>
 			}
 			<select [field]="LoadDeckForm">
 				@for (collectionDeck of collectionDecks(); track collectionDeck._id) {

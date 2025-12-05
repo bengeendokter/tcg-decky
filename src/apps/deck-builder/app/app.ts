@@ -202,9 +202,22 @@ export class App {
 				return deckCard;
 			}
 
+			const matchingCollectionCard: CollectionCard | undefined =
+				this.tcgDexCollectionCards().find(
+					(tcgDexCollectionCard) => tcgDexCollectionCard.id === deckCard.id,
+				);
+
+			if (matchingCollectionCard === undefined) {
+				return deckCard;
+			}
+
+			const collectionMaxQuantity: number = this.getQuantitySum(
+				matchingCollectionCard.variants,
+			);
+
 			const quantity: number = Math.min(
 				existingDeckCard.quantity + 1,
-				this.getQuantitySum(card.variants),
+				collectionMaxQuantity,
 			);
 
 			return { ...deckCard, quantity };
@@ -318,5 +331,13 @@ export class App {
 		alert('Deck has been updated!');
 
 		this.getAllDecksResource.reload();
+	}
+
+	protected async deleteCollectionCardDeck(): Promise<void> {
+		await this.collection.deleteCollectionCardDeck(this.selectedDeckId());
+		alert('Deck has been deleted!');
+
+		this.getAllDecksResource.reload();
+		this.selectedDeckId.set('');
 	}
 }
