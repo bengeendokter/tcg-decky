@@ -1,7 +1,7 @@
 <main class="builder-container">
 	<div class="deck-container">
 		<select [field]="LoadDeckForm">
-			@for (collectionDeck of collectionDecks(); track collectionDeck._id) {
+			@for (collectionDeck of sortedCollectionDecks(); track collectionDeck._id) {
 			<option [value]="collectionDeck._id">{{collectionDeck.name}}</option>
 			}
 		</select>
@@ -47,7 +47,7 @@
 	</div>
 </main>
 @let detailCard = selectedCard();
-<dialog #dialog class="detail-dialog" closedby="any">
+<dialog #dialog closedby="any">
 	@if(detailCard) {
 	<div (click)="closeDialog()" class="card detail-card"
 		[style.--background-image-url]="`url(${detailCard.image}/high.webp)`">

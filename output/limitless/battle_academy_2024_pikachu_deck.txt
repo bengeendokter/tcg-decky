@@ -1,14 +1,14 @@
 Pokémon: 22
-1 Pikachu ex PR-SV 106
+1 Pikachu ex SVP 106
 4 Voltorb PAL 66
 3 Electrode PAL 67
-4 Mareep PR-SV 107
-3 Flaaffy PR-SV 108
-2 Ampharos PR-SV 109
+4 Mareep SVP 107
+3 Flaaffy SVP 108
+2 Ampharos SVP 109
 1 Rotom SVI 69
 2 Wattrel SVI 77
 1 Kilowattrel PAL 82
-1 Miraidon PR-SV 148
+1 Miraidon SVP 148
 
 Trainer: 20
 1 Electric Generator SVI 170
@@ -16,7 +16,7 @@ Trainer: 20
 1 Jacq SVI 175
 4 Nemona SVI 180
 1 Nest Ball SVI 181
-2 Picnicker PR-SV 114
+2 Picnicker SVP 114
 2 Potion SVI 188
 2 Switch SVI 194
 3 Youngster SVI 198

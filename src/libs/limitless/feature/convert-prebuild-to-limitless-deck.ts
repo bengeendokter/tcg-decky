@@ -89,7 +89,7 @@ export async function convertPrebuildToLimitlessDeck({
 
 				// handle exceptions
 				const exeptionMap: Map<string, string> = new Map([
-					['SVP', 'PR-SV'],
+					// ['SVP', 'PR-SV'],
 					['SV', 'SVI'],
 				]);
 

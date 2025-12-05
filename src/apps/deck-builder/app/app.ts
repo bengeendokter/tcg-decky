@@ -72,7 +72,7 @@ export class App {
 			return this.loadedDeckTcgDexCollectionCardsResource.value();
 		});
 
-	protected collectionDecks: Signal<WithId<CollectionCardDeck>[]> = computed(
+	private collectionDecks: Signal<WithId<CollectionCardDeck>[]> = computed(
 		() => {
 			if (!this.getAllDecksResource.hasValue()) {
 				return [];
@@ -81,6 +81,16 @@ export class App {
 			return this.getAllDecksResource.value();
 		},
 	);
+
+	protected sortedCollectionDecks: Signal<WithId<CollectionCardDeck>[]> =
+		computed(() => {
+			const collectionDecks: WithId<CollectionCardDeck>[] =
+				this.collectionDecks();
+
+			return collectionDecks.toSorted((card1, card2) => {
+				return card1.name.localeCompare(card2.name);
+			});
+		});
 
 	protected tcgDexCollectionCards: Signal<TcgDexCollectionCard[]> =
 		this.tcgDex.tcgDexCollectionCards;
@@ -404,7 +414,7 @@ export class App {
 	protected openDetail(card: TcgDexCollectionCard): void {
 		this.selectedCard.set(card);
 		this.dialog().nativeElement.showModal();
-	}	
+	}
 
 	protected closeDialog(): void {
 		this.dialog().nativeElement.close();

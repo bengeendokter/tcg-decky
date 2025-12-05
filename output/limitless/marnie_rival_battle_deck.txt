@@ -7,7 +7,7 @@ Pokémon: 18
 3 Marnie's Morgrem DRI 135
 2 Marnie's Grimmsnarl ex DRI 136
 1 Marnie's Morpeko DRI 137
-1 Marnie's Morpeko PR-SV 206
+1 Marnie's Morpeko SVP 206
 
 Trainer: 28
 3 Buddy-Buddy Poffin TEF 144

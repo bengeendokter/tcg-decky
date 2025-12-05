@@ -72,10 +72,6 @@
 	height: auto;
 }
 
-.detail-dialog {
-	display: grid;
-}
-
 .detail-card {
 	width: 300px;
 	max-width: 100%;
