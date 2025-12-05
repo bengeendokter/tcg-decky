@@ -79,3 +79,14 @@ export const ENERGY_TYPES_PREBUILD_CARD_MAP = {
 		setName: 'Sun & Moon',
 	},
 } as const satisfies Record<EnergyType, PrebuildSetCard>;
+
+export const ENERGY_TYPES_LOCAL_ID_CODE_MAP = {
+	[ENERGY_TYPES.GRASS]: 'G',
+	[ENERGY_TYPES.FIRE]: 'R',
+	[ENERGY_TYPES.WATER]: 'W',
+	[ENERGY_TYPES.LIGHTNING]: 'L',
+	[ENERGY_TYPES.PSYCHIC]: 'P',
+	[ENERGY_TYPES.FIGHTING]: 'F',
+	[ENERGY_TYPES.DARKNESS]: 'D',
+	[ENERGY_TYPES.METAL]: 'M',
+} as const satisfies Record<EnergyType, string>;

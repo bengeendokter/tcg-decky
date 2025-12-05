@@ -1,10 +1,7 @@
 import type TCGdex from '@tcgdex/sdk';
 import { CONFIG } from '../../config';
-import { converLimitlessCardsToImportString } from '../../libs/limitless/feature/convert-limitless-cards-to-import-string';
-import type {
-	LimitlessCard,
-	LimitlessDeck,
-} from '../../libs/limitless/model/limitless-deck';
+import { converLimitlessDeckToImportString } from '../../libs/limitless/feature/convert-limitless-deck-to-import-string';
+import type { LimitlessDeck } from '../../libs/limitless/model/limitless-deck';
 import { getTcgDex } from '../../libs/tcg-dex/data-access/get-tcg-dex';
 import type { PrebuildDeck } from '../../libs/prebuild/model/prebuild-deck';
 import { convertPrebuildToLimitlessDeck } from '../../libs/limitless/feature/convert-prebuild-to-limitless-deck';
@@ -23,11 +20,6 @@ const limitlessDeck: LimitlessDeck = await convertPrebuildToLimitlessDeck({
 	tcgDex,
 });
 
-const LimitlessCards: LimitlessCard[] = limitlessDeck.pokemon.concat(
-	limitlessDeck.trainer,
-	limitlessDeck.energy,
-);
-
 const importString: string =
-	await converLimitlessCardsToImportString(LimitlessCards);
+	await converLimitlessDeckToImportString(limitlessDeck);
 console.log(importString);
