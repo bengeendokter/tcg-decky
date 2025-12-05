@@ -27,4 +27,4 @@ Trainer: 30
 2 Risky Ruins MEG 127
 
 Energy: 13
-13 Basic Darkness Energy SVE 7
+13 Darkness Energy SUM 170

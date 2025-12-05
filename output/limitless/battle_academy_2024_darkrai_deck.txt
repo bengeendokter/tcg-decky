@@ -21,4 +21,4 @@ Trainer: 20
 3 Youngster SVI 198
 
 Energy: 18
-18 Basic Darkness Energy SVE 7
+18 Darkness Energy SUM 170

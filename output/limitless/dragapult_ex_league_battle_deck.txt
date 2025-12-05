@@ -26,5 +26,5 @@ Trainer: 29
 1 Technical Machine: Evolution PAR 178
 
 Energy: 10
-6 Basic Psychic Energy SVE 5
-4 Basic Fire Energy SVE 2
+6 Psychic Energy SUM 168
+4 Fire Energy SUM 165

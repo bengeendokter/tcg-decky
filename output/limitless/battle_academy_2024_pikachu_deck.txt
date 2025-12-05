@@ -22,4 +22,4 @@ Trainer: 20
 3 Youngster SVI 198
 
 Energy: 18
-18 Basic Lightning Energy SVE 4
+18 Lightning Energy SUM 167

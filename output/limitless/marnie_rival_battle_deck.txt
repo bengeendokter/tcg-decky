@@ -24,4 +24,4 @@ Trainer: 28
 2 Spikemuth Gym DRI 169
 
 Energy: 14
-14 Basic Darkness Energy SVE 7
+14 Darkness Energy SUM 170

@@ -22,4 +22,4 @@ Trainer: 20
 3 Youngster SVI 198
 
 Energy: 18
-18 Basic Fire Energy SVE 2
+18 Fire Energy SUM 165
