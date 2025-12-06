@@ -140,17 +140,17 @@ export async function convertImportStringToLimitlessDecks({
 				const limitlessCardParts: LimitlessCardParts | ArkErrors =
 					limitlessCardPartsValidator(temporaryLimitlessCardParts);
 
-				if (limitlessCardParts) {
+				if (limitlessCardParts instanceof ArkErrors) {
 					throw Error('Can not parse import string');
 				}
 
 				limitlessCardPartsList.push(limitlessCardParts);
 
+				importStringIndex += localIdLength;
+
 				temporaryLimitlessCardParts = {};
 				setAbbriviationLenght = 0;
 				localIdLength = 0;
-
-				importStringIndex += localIdLength;
 				break;
 			default:
 				currentImportStringPart satisfies never;
@@ -218,7 +218,7 @@ export async function limitlessCardPartsToLimitlessCard({
 	}
 
 	const cardResumes: CardResume[] = await tcgDex.card.list(
-		Query.create().like('localId', localId.toString()).like('set.id', set.id),
+		Query.create().like('localId', localId.toString()).equal('set.id', set.id),
 	);
 
 	const cardResume: CardResume | undefined = cardResumes[0];
