@@ -23,7 +23,7 @@ const tcgDex: TCGdex = getTcgDex(CONFIG.TCG_DEX_SERVER_URL);
 // });
 
 // const importString: string =
-// 	await converLimitlessDeckToImportString(limitlessDeck);
+// 	converLimitlessDeckToImportString(limitlessDeck);
 // console.log(importString);
 
 // my.limitlesstcg.com/builder?i=10133SVP1050233SVP1140i31SUMR

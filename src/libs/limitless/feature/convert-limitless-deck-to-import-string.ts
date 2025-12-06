@@ -21,9 +21,9 @@ export function convertQuantityToCharacter(quantity: number): string {
 	return character;
 }
 
-export async function converLimitlessDeckToImportString(
+export function converLimitlessDeckToImportString(
 	limitlessDeck: LimitlessDeck,
-): Promise<string> {
+): string {
 	const cardCodes: string[] = limitlessDeck.pokemon
 		.concat(limitlessDeck.trainer)
 		.map((limitlessCard) => {

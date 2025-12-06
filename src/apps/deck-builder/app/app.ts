@@ -25,6 +25,7 @@ import {
 } from '../../../libs/limitless/model/limitless-deck';
 import { limitlessDeckToString } from '../../../libs/limitless/feature/limitless-deck-to-string';
 import type { WithId } from 'mongodb';
+import { converLimitlessDeckToImportString } from '../../../libs/limitless/feature/convert-limitless-deck-to-import-string';
 
 type DeckCard = TcgDexCollectionCard & {
 	quantity: number;
@@ -235,10 +236,6 @@ export class App {
 
 			this.deckCards.set(loadedDeckCollectionCards);
 		});
-
-		effect(() => {
-			console.log(this.sortedTcgDexCollectionCards());
-		});
 	}
 
 	protected async getAllCards(): Promise<void> {
@@ -352,6 +349,26 @@ export class App {
 
 		await navigator.clipboard.writeText(limitlessDeckToString(limitlessDeck));
 		alert('Copied to clipboard!');
+	}
+
+	protected async openLimitlessDeckBuilder(): Promise<void> {
+		const limitlessDeck: LimitlessDeck =
+			await this.tcgDex.convertCollectionToLimitlessDeck({
+				name: 'DefaultName',
+				cards: this.deckCollectionCards(),
+			});
+
+		const importString: string =
+			converLimitlessDeckToImportString(limitlessDeck);
+
+		const limitlessDeckBuilderUrl: URL = new URL(
+			'/builder',
+			'https://my.limitlesstcg.com',
+		);
+
+		limitlessDeckBuilderUrl.searchParams.set('i', importString);
+
+		window.open(limitlessDeckBuilderUrl.href, '_blank');
 	}
 
 	protected async addCollectionCardDeck(): Promise<void> {
