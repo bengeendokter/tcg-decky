@@ -1,6 +1,6 @@
 import { parseEnergyType } from './parse-energy-type';
 import {
-	ENERGY_TYPES_PREBUILD_CARD_MAP,
+	ENERGY_TYPE_PREBUILD_CARD_MAP,
 	type EnergyType,
 } from '../model/energy';
 import type { PrebuildCard } from '../model/prebuild-deck';
@@ -15,7 +15,7 @@ export function parsePrebuildCard(title: Title): PrebuildCard {
 			throw Error(`Unable to parse energy type from title: ${title}`);
 		}
 
-		return ENERGY_TYPES_PREBUILD_CARD_MAP[energyType];
+		return ENERGY_TYPE_PREBUILD_CARD_MAP[energyType];
 	}
 
 	return parsePrebuildSetCard(title);

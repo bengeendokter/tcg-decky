@@ -1,5 +1,15 @@
-import { ArkError, ArkErrors, Type, type } from 'arktype';
-import type { LimitlessCard, LimitlessDeck } from '../model/limitless-deck';
+import { ArkErrors, Type, type } from 'arktype';
+import {
+	CATEGORY,
+	type LimitlessCard,
+	type LimitlessCardWithCategory,
+	type LimitlessDeck,
+} from '../model/limitless-deck';
+import {
+	ENERGY_TYPE_PREBUILD_CARD_MAP,
+	isEnergyTypeLocalIdCode,
+	LOCAL_ID_CODE_ENERGY_TYPE_MAP,
+} from '../../prebuild/model/energy';
 
 const IMPORT_STRING_PART = {
 	REGION: 'region',
@@ -101,12 +111,16 @@ export async function convertImportStringToLimitlessDecks(
 				importStringIndex += setAbbriviationLenght;
 				break;
 			case IMPORT_STRING_PART.LOCALE_ID:
-				const localId: number = parseInt(
-					importString.substring(
-						importStringIndex,
-						importStringIndex + localIdLength,
-					),
+				const localIdString: string = importString.substring(
+					importStringIndex,
+					importStringIndex + localIdLength,
 				);
+
+				const localId: number = isEnergyTypeLocalIdCode(localIdString)
+					? ENERGY_TYPE_PREBUILD_CARD_MAP[
+							LOCAL_ID_CODE_ENERGY_TYPE_MAP[localIdString]
+						].localId
+					: parseInt(localIdString);
 
 				temporaryLimitlessCardParts = {
 					...temporaryLimitlessCardParts,
@@ -136,11 +150,26 @@ export async function convertImportStringToLimitlessDecks(
 			(importStringPartIndex + 1) % IMPORT_STRING_PARTS.length;
 	}
 
-	const limitlessCards: LimitlessCard[] = limitlessCardPartsList.map(
-		(limitlessCardParts) => {
-			return limitlessCardParts;
-		},
+	const limitlessCardsWithCategory: LimitlessCardWithCategory[] =
+		await Promise.all(
+			limitlessCardPartsList.map(limitlessCardPartsToLimitlessCard),
+		);
+
+	const pokemon: LimitlessCard[] = limitlessCardsWithCategory.filter(
+		(card) => card.category === CATEGORY.POKEMON,
+	);
+	const trainer: LimitlessCard[] = limitlessCardsWithCategory.filter(
+		(card) => card.category === CATEGORY.TRAINER,
+	);
+	const energy: LimitlessCard[] = limitlessCardsWithCategory.filter(
+		(card) => card.category === CATEGORY.ENERGY,
 	);
 
-	return { name: '', energy: [], pokemon: [], trainer: [] };
+	return { name: 'Imported Deck', energy, pokemon, trainer };
+}
+
+export async function limitlessCardPartsToLimitlessCard(
+	limitlessCardParts: LimitlessCardParts,
+): Promise<LimitlessCardWithCategory> {
+	return limitlessCardParts;
 }

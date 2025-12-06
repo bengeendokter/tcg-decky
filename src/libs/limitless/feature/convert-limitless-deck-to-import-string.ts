@@ -1,7 +1,7 @@
 import { parseEnergyType } from '../../prebuild/feature/parse-energy-type';
 import {
 	ENERGY_TYPES,
-	ENERGY_TYPES_LOCAL_ID_CODE_MAP,
+	ENERGY_TYPE_LOCAL_ID_CODE_MAP,
 	type EnergyType,
 } from '../../prebuild/model/energy';
 import type { LimitlessDeck } from '../model/limitless-deck';
@@ -59,7 +59,7 @@ export async function converLimitlessDeckToImportString(
 			const setAbbriviation: string = limitlessCard.tcgOnline;
 			const energyType: EnergyType =
 				parseEnergyType(limitlessCard.name) ?? ENERGY_TYPES.FIRE;
-			const localId: string = ENERGY_TYPES_LOCAL_ID_CODE_MAP[energyType];
+			const localId: string = ENERGY_TYPE_LOCAL_ID_CODE_MAP[energyType];
 
 			return [
 				region,
