@@ -1,6 +1,7 @@
 import { ArkErrors, Type, type } from 'arktype';
 import {
 	CATEGORY,
+	isCategory,
 	type LimitlessCard,
 	type LimitlessCardWithCategory,
 	type LimitlessDeck,
@@ -10,6 +11,9 @@ import {
 	isEnergyTypeLocalIdCode,
 	LOCAL_ID_CODE_ENERGY_TYPE_MAP,
 } from '../../prebuild/model/energy';
+import type TCGdex from '@tcgdex/sdk';
+import { Query, type Card, type CardResume, type SetResume } from '@tcgdex/sdk';
+import type { SetWithAbbreviation } from '../../tcg-dex/model/set-with-abbreviation';
 
 const IMPORT_STRING_PART = {
 	REGION: 'region',
@@ -53,9 +57,15 @@ export function convertCharacterToQuantity(character: string): number {
 	return QUANTITY_CONVERSION_STRING.indexOf(character);
 }
 
-export async function convertImportStringToLimitlessDecks(
-	importString: string,
-): Promise<LimitlessDeck> {
+export interface ConvertImportStringToLimitlessDecksParams {
+	importString: string;
+	tcgDex: TCGdex;
+}
+
+export async function convertImportStringToLimitlessDecks({
+	importString,
+	tcgDex,
+}: ConvertImportStringToLimitlessDecksParams): Promise<LimitlessDeck> {
 	let importStringIndex: number = 1;
 	let importStringPartIndex: number = 0;
 	let temporaryLimitlessCardParts: TemporaryLimitlessCardParts = {};
@@ -152,7 +162,12 @@ export async function convertImportStringToLimitlessDecks(
 
 	const limitlessCardsWithCategory: LimitlessCardWithCategory[] =
 		await Promise.all(
-			limitlessCardPartsList.map(limitlessCardPartsToLimitlessCard),
+			limitlessCardPartsList.map(async (limitlessCardParts) => {
+				return await limitlessCardPartsToLimitlessCard({
+					limitlessCardParts,
+					tcgDex,
+				});
+			}),
 		);
 
 	const pokemon: LimitlessCard[] = limitlessCardsWithCategory.filter(
@@ -168,8 +183,80 @@ export async function convertImportStringToLimitlessDecks(
 	return { name: 'Imported Deck', energy, pokemon, trainer };
 }
 
-export async function limitlessCardPartsToLimitlessCard(
-	limitlessCardParts: LimitlessCardParts,
-): Promise<LimitlessCardWithCategory> {
-	return limitlessCardParts;
+export interface LimitlessCardPartsToLimitlessCardParams {
+	limitlessCardParts: LimitlessCardParts;
+	tcgDex: TCGdex;
+}
+
+export async function limitlessCardPartsToLimitlessCard({
+	limitlessCardParts,
+	tcgDex,
+}: LimitlessCardPartsToLimitlessCardParams): Promise<LimitlessCardWithCategory> {
+	const { localId, setAbbriviation, quantity }: LimitlessCardParts =
+		limitlessCardParts;
+
+	// handle exceptions
+	const reverseExeptionMap: Map<string, string> = new Map([['SVI', 'SV']]);
+
+	const setResumes: SetResume[] = await tcgDex.set.list(
+		Query.create().like(
+			'abbreviation.official',
+			reverseExeptionMap.get(setAbbriviation) ?? setAbbriviation,
+		),
+	);
+
+	const setResume: SetResume | undefined = setResumes[0];
+
+	if (!setResume) {
+		throw Error('Set not found');
+	}
+
+	const set: SetWithAbbreviation | null = await tcgDex.set.get(setResume.id);
+
+	if (!set) {
+		throw Error('Set not found');
+	}
+
+	const cardResumes: CardResume[] = await tcgDex.card.list(
+		Query.create().like('localId', localId.toString()).like('set.id', set.id),
+	);
+
+	const cardResume: CardResume | undefined = cardResumes[0];
+
+	if (!cardResume) {
+		throw Error(`Card not found: ${setAbbriviation} #${localId}`);
+	}
+
+	const cardId: string = cardResume.id;
+
+	const card: Card | null = await tcgDex.card.get(cardId);
+
+	if (!card) {
+		throw Error('Card not found');
+	}
+
+	const name: string = card.name;
+	const category: string = card.category;
+
+	if (!isCategory(category)) {
+		throw Error('Invalid category');
+	}
+
+	const abbreviation: string | undefined = set?.abbreviation?.official;
+	let tcgOnline: string | undefined = set.tcgOnline ?? abbreviation;
+
+	if (!tcgOnline) {
+		throw Error(
+			`Set TCG Online code not found for ${set.name} with ID ${set.id} and abbreviation ${abbreviation}`,
+		);
+	}
+
+	const exeptionMap: Map<string, string> = new Map([
+		// ['SVP', 'PR-SV'],
+		['SV', 'SVI'],
+	]);
+
+	tcgOnline = exeptionMap.get(tcgOnline) ?? tcgOnline;
+
+	return { localId, quantity, name, category, tcgOnline };
 }
