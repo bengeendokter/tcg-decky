@@ -1,19 +1,25 @@
-@import 'normalize.css/normalize.css';
+@layer normalize, theme;
+@import 'normalize.css/normalize.css' layer(normalize);
+@import "m3-color-css/theme/palette" layer(theme);
+@import "m3-color-css/theme/light" layer(theme);
+@import "m3-color-css/theme/dark" layer(theme);
+@import "m3-color-css/theme/light-mc" layer(theme);
+@import "m3-color-css/theme/dark-mc" layer(theme);
+@import "m3-color-css/theme/light-hc" layer(theme);
+@import "m3-color-css/theme/dark-hc" layer(theme);
 
 html {
 	color-scheme: light dark;
+	box-sizing: border-box;
 }
 
-html {
-	height: 100%;
-	scrollbar-gutter: stable both-edges;
-}
-
+html,
 body {
 	height: 100%;
 }
 
-div,
-main {
-	box-sizing: border-box;
+*,
+:after,
+:before {
+	box-sizing: inherit
 }

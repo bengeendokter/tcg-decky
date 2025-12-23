@@ -50,6 +50,9 @@ importers:
       jsdom:
         specifier: ^27.1.0
         version: 27.1.0
+      m3-color-css:
+        specifier: github:bengeendokter/m3-color-css#v0.1.5
+        version: https://codeload.github.com/bengeendokter/m3-color-css/tar.gz/de0dc5463c6ae59fa4c39a38d6d9619efe41efbd
       mongodb:
         specifier: ^7.0.0
         version: 7.0.0(socks@2.8.7)
@@ -2312,6 +2315,10 @@ packages:
 
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
+
+  m3-color-css@https://codeload.github.com/bengeendokter/m3-color-css/tar.gz/de0dc5463c6ae59fa4c39a38d6d9619efe41efbd:
+    resolution: {tarball: https://codeload.github.com/bengeendokter/m3-color-css/tar.gz/de0dc5463c6ae59fa4c39a38d6d9619efe41efbd}
+    version: 0.1.5
 
   magic-string@0.30.19:
     resolution: {integrity: sha512-2N21sPY9Ws53PZvsEpVtNuSW+ScYbQdp4b9qUaL+9QkHUrGFKo56Lg9Emg5s9V/qrtNBmiR01sYhUOwu3H+VOw==}
@@ -5166,6 +5173,8 @@ snapshots:
   lru-cache@5.1.1:
     dependencies:
       yallist: 3.1.1
+
+  m3-color-css@https://codeload.github.com/bengeendokter/m3-color-css/tar.gz/de0dc5463c6ae59fa4c39a38d6d9619efe41efbd: {}
 
   magic-string@0.30.19:
     dependencies:

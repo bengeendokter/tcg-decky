@@ -4,8 +4,10 @@ import {
 	effect,
 	ElementRef,
 	inject,
+	PLATFORM_ID,
 	signal,
 	viewChild,
+	type OnInit,
 	type ResourceRef,
 	type Signal,
 	type WritableSignal,
@@ -26,6 +28,12 @@ import {
 import { limitlessDeckToString } from '../../../libs/limitless/feature/limitless-deck-to-string';
 import type { WithId } from 'mongodb';
 import { converLimitlessDeckToImportString } from '../../../libs/limitless/feature/convert-limitless-deck-to-import-string';
+import {
+	setTheme,
+	enableSystemContrastPreferenceListener,
+	enableSystemColorSchemePreferenceListener,
+} from 'm3-color-css';
+import { isPlatformBrowser } from '@angular/common';
 
 type DeckCard = TcgDexCollectionCard & {
 	quantity: number;
@@ -37,9 +45,10 @@ type DeckCard = TcgDexCollectionCard & {
 	templateUrl: './app.html',
 	styleUrl: './app.css',
 })
-export class App {
+export class App implements OnInit {
 	private readonly collection: Collection = inject(Collection);
 	private readonly tcgDex: TcgDex = inject(TcgDex);
+	private readonly platformId = inject(PLATFORM_ID);
 	private readonly getAllCardsResource: ResourceRef<
 		CollectionCard[] | undefined
 	> = this.collection.getAllCardsResource;
@@ -236,6 +245,15 @@ export class App {
 
 			this.deckCards.set(loadedDeckCollectionCards);
 		});
+	}
+
+	ngOnInit(): void {
+		if (isPlatformBrowser(this.platformId)) {
+			// set theming
+			setTheme();
+			enableSystemContrastPreferenceListener();
+			enableSystemColorSchemePreferenceListener();
+		}
 	}
 
 	protected async getAllCards(): Promise<void> {
