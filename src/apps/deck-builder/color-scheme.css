@@ -1,0 +1,11 @@
+html {
+	color-scheme: light dark;
+
+	&:where(.light,.light-medium-contrast,.light-high-contrast) {
+		color-scheme: light;
+	}
+
+	&:where(.dark,.dark-medium-contrast,.dark-high-contrast) {
+		color-scheme: dark;
+	}
+}

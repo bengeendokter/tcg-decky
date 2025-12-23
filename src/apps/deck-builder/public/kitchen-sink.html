@@ -207,8 +207,10 @@ pre {
 					<input type="password" id="example-input-password" placeholder="Password">
 				</p>
 				<p>
-					<label for="example-input-search">Search</label>
-					<input type="search" id="example-input-serach" placeholder="Search ..">
+					<search>
+						<label for="search">Search</label>
+						<input id="search" type="search" placeholder="Search ..">
+					</search>
 				</p>
 				<p>
 					<label for="example-input-tel">Telephone number</label>
@@ -315,6 +317,11 @@ pre {
 				</p>
 			</form>
 		</section>
+		<hr>
+		<label for="progress">File progress:</label>
+		<progress id="progress" max="100" value="70">70%</progress>
+		<label for="loading">Loading:</label>
+		<progress id="loading">Loading</progress>
 	</main>
 </body>
 
