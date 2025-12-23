@@ -322,6 +322,17 @@ pre {
 		<progress id="progress" max="100" value="70">70%</progress>
 		<label for="loading">Loading:</label>
 		<progress id="loading">Loading</progress>
+
+		<button commandfor="mydialog" command="show-modal">Show modal dialog</button>
+		<dialog id="mydialog">
+			<p>This is a dialog window</p>
+			<button commandfor="mydialog" command="close">Close</button>
+		</dialog>
+
+		<details>
+			<summary>What is HTML5?</summary>
+			<p>HTML5 is the latest version of the HyperText Markup Language.</p>
+		</details>
 	</main>
 </body>
 
