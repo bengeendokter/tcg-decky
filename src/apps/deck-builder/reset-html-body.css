@@ -1,0 +1,8 @@
+html {
+	color-scheme: light dark;
+}
+
+html,
+body {
+	height: 100%;
+}

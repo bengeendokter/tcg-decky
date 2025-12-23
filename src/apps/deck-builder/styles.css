@@ -1,5 +1,7 @@
-@layer normalize, theme;
+@layer normalize, reset, theme;
 @import 'normalize.css/normalize.css' layer(normalize);
+@import 'reset-box-sizing.css' layer(reset);
+@import 'reset-html-body.css' layer(reset);
 @import "m3-color-css/theme/palette" layer(theme);
 @import "m3-color-css/theme/light" layer(theme);
 @import "m3-color-css/theme/dark" layer(theme);
@@ -7,19 +9,4 @@
 @import "m3-color-css/theme/dark-mc" layer(theme);
 @import "m3-color-css/theme/light-hc" layer(theme);
 @import "m3-color-css/theme/dark-hc" layer(theme);
-
-html {
-	color-scheme: light dark;
-	box-sizing: border-box;
-}
-
-html,
-body {
-	height: 100%;
-}
-
-*,
-:after,
-:before {
-	box-sizing: inherit
-}
+@import 'm3-kitchen-sink.css' layer(theme);
