@@ -55,6 +55,17 @@
 							"optimization": false,
 							"extractLicenses": false,
 							"sourceMap": true
+						},
+						"lan": {
+							"optimization": false,
+							"extractLicenses": false,
+							"sourceMap": true,
+							"fileReplacements": [
+								{
+									"replace": "../../environment/environment.ts",
+									"with": "../../environment/environment.lan.ts"
+								}
+							]
 						}
 					},
 					"defaultConfiguration": "production"
@@ -67,6 +78,9 @@
 						},
 						"development": {
 							"buildTarget": "deck-builder:build:development"
+						},
+						"lan": {
+							"buildTarget": "deck-builder:build:lan"
 						}
 					},
 					"defaultConfiguration": "development"

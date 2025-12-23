@@ -8,6 +8,7 @@
 		"start": "tsx src/apps/scripts/main.ts",
 		"start:collection-api": "tsx src/apps/collection-api/hono.ts",
 		"start:deck-builder": "cd src/apps/deck-builder && ng serve",
+		"start:deck-builder:lan": "cd src/apps/deck-builder && ng serve --host 0.0.0.0 --configuration lan",
 		"build:deck-builder": "cd src/apps/deck-builder && ng build",
 		"build:deck-builder:dev": "cd src/apps/deck-builder && ng build --configuration development",
 		"reset-collection-cards": "tsx src/apps/scripts/reset-collection-cards-database.ts",
