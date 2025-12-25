@@ -1,3 +1,5 @@
+@import 'typography.css';
+
 :root {
 	--md-sys-shape-corner-value-none: 0;
 	--md-sys-shape-corner-value-extra-small: 4px;
@@ -15,6 +17,11 @@ html {
 	accent-color: var(--md-sys-color-primary);
 	color: var(--md-sys-color-on-surface);
 	background-color: var(--md-sys-color-surface);
+
+	font-family: var(--md-sys-typescale-body-large-font);
+	font-weight: var(--md-sys-typescale-body-large-weight);
+	font-size: var(--md-sys-typescale-body-large-size);
+	line-height: var(--md-sys-typescale-body-large-line-height);
 }
 
 * {
@@ -69,6 +76,10 @@ input::file-selector-button {
 	background-color: var(--md-sys-color-primary);
 	color: var(--md-sys-color-on-primary);
 	border-radius: var(--md-sys-shape-corner-value-full);
+	font-family: var(--md-sys-typescale-label-large-font);
+	font-weight: var(--md-sys-typescale-label-large-weight);
+	font-size: var(--md-sys-typescale-label-large-size);
+	line-height: var(--md-sys-typescale-label-large-line-height);
 
 	&:hover {
 		background-color: color-mix(in oklab, var(--md-sys-color-primary), var(--md-sys-color-on-primary) 8%);
