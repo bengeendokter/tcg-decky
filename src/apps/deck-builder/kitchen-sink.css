@@ -22,10 +22,29 @@ html {
 	font-weight: var(--md-sys-typescale-body-large-weight);
 	font-size: var(--md-sys-typescale-body-large-size);
 	line-height: var(--md-sys-typescale-body-large-line-height);
+
+	scrollbar-color: var(--md-sys-color-on-surface-variant) var(--md-sys-color-surface);
 }
 
 * {
 	border-color: var(--md-sys-color-outline);
+}
+
+::selection {
+	color: var(--md-sys-color-on-primary);
+	background-color: var(--md-sys-color-primary);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: var(--md-sys-typescale-headline-large-font);
+	font-weight: var(--md-sys-typescale-headline-large-weight);
+	font-size: var(--md-sys-typescale-headline-large-size);
+	line-height: var(--md-sys-typescale-headline-large-line-height);
 }
 
 hr {
@@ -59,6 +78,21 @@ textarea {
 
 	&::placeholder {
 		color: var(--md-sys-color-on-surface-variant);
+	}
+
+	label:has(+ &) {
+		--md-comp-outlined-text-field-label-text-background-color: var(--md-sys-color-surface);
+
+		color: var(--md-sys-color-on-surface-variant);
+		font-family: var(--md-sys-typescale-label-medium-font);
+		font-weight: var(--md-sys-typescale-label-medium-weight);
+		font-size: var(--md-sys-typescale-label-medium-size);
+		line-height: var(--md-sys-typescale-label-medium-line-height);
+
+		position: absolute;
+		padding-inline: 4px;
+		background-color: var(--md-comp-outlined-text-field-label-text-background-color);
+		transform: translateX(12px) translateY(-8px);
 	}
 }
 
