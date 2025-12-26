@@ -16,9 +16,13 @@
 <div class="collection-pane">
 	<div class="collection-actions">
 		<search>
-			<input type="search" placeholder="Search...">
+			<input type="search" [field]="searchForm" placeholder="Search name">
 		</search>
 		<button>Fullscreen</button>
 	</div>
-	<div class="collection-cards">Cards</div>
+	<div class="collection-cards">
+		@for(card of sortedTcgDexCollectionCards(); track card.id) {
+		<!-- <div class="card" [style.--background-image-url]="`url(${card.image}/low.webp)`"></div> -->
+		}
+	</div>
 </div>
