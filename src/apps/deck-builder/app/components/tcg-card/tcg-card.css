@@ -1,0 +1,27 @@
+:host {
+	min-width: 100px;
+	max-width: 100px;
+
+	height: auto;
+	aspect-ratio: 63 / 87;
+
+	background-image: var(--background-image-url);
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+
+	display: grid;
+	align-content: end;
+	justify-content: center;
+	padding: 4px;
+}
+
+.quantity {
+	background-color: var(--md-sys-color-secondary-container);
+	width: 24px;
+	height: 28px;
+	display: grid;
+	align-content: center;
+	justify-content: center;
+	border-radius: var(--md-sys-shape-corner-value-small);
+}

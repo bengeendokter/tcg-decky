@@ -45,4 +45,7 @@
 
 .collection-cards {
 	padding-inline: 24px;
+	display: flex;
+	gap: 8px;
+	overflow-x: auto;
 }

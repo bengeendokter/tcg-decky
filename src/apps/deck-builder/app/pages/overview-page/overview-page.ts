@@ -15,10 +15,11 @@ import { CATEGORY } from '../../../../../libs/limitless/model/limitless-deck';
 import type { CollectionCard } from '../../../../../libs/collection/model/collection-card';
 import { ENERGY_IDS } from '../../../../../libs/prebuild/model/energy';
 import { Collection } from '../../../../../libs/deck-builder/data-access/collection';
+import { TcgCard } from "../../components/tcg-card/tcg-card";
 
 @Component({
 	selector: 'overview-page',
-	imports: [Field],
+	imports: [Field, TcgCard],
 	templateUrl: './overview-page.html',
 	styleUrl: './overview-page.css',
 })

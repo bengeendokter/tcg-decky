@@ -22,7 +22,7 @@
 	</div>
 	<div class="collection-cards">
 		@for(card of sortedTcgDexCollectionCards(); track card.id) {
-		<!-- <div class="card" [style.--background-image-url]="`url(${card.image}/low.webp)`"></div> -->
+		<tcg-card [quantity]="99" [style.--background-image-url]="`url(${card.image}/low.webp)`"></tcg-card>
 		}
 	</div>
 </div>
