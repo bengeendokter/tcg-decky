@@ -16,6 +16,7 @@ import { importPrebuildDeckFromJson } from '../../prebuild/data-access/import-pr
 import type { PrebuildDeck } from '../../prebuild/model/prebuild-deck';
 import { convertPrebuildToCollectionCards } from '../feature/convert-prebuild-to-collection-cards';
 import { addCollectionCard } from '../data-access/add-collection-card';
+import { ENERGY_IDS } from '../../prebuild/model/energy';
 
 const ARMAROUGE_DECK_JSON_PATH =
 	`${CONFIG.COLLECTION_OUTPUT_DIRECTORY}/${CONFIG.PREBUILD_DECK_JSON_FILE_NAME.BATTLE_ACADEMY_2024_ARMAROUGE}` as const satisfies string;
@@ -85,9 +86,13 @@ export async function setCollectioncardsToDatabase({
 	await deleteAllCollectionCard(db);
 
 	await Promise.all(
-		collectionCards.map(async (collectionCard) => {
-			return await addCollectionCard({ db, collectionCard });
-		}),
+		collectionCards
+			.filter((collectionCard) => {
+				return !ENERGY_IDS.includes(collectionCard._id);
+			})
+			.map(async (collectionCard) => {
+				return await addCollectionCard({ db, collectionCard });
+			}),
 	);
 
 	await closeDatabaseConnection(db.client);

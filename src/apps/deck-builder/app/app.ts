@@ -34,6 +34,7 @@ import {
 	enableSystemColorSchemePreferenceListener,
 } from 'm3-color-css';
 import { isPlatformBrowser } from '@angular/common';
+import { ENERGY_IDS } from '../../../libs/prebuild/model/energy';
 
 type DeckCard = TcgDexCollectionCard & {
 	quantity: number;
@@ -206,18 +207,7 @@ export class App implements OnInit {
 		effect(() => {
 			const collectionCards: CollectionCard[] = this.collectionCards();
 
-			const energyIds: string[] = [
-				'sm1-164',
-				'sm1-165',
-				'sm1-166',
-				'sm1-167',
-				'sm1-168',
-				'sm1-169',
-				'sm1-170',
-				'sm1-171',
-			];
-
-			const energies: CollectionCard[] = energyIds.map((_id) => ({
+			const energies: CollectionCard[] = ENERGY_IDS.map((_id) => ({
 				_id,
 				variants: { normal: 99 },
 			}));

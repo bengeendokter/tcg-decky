@@ -80,6 +80,14 @@ export const ENERGY_TYPE_PREBUILD_CARD_MAP = {
 	},
 } as const satisfies Record<EnergyType, PrebuildSetCard>;
 
+export const ENERGY_LOCAL_IDS = Object.values(ENERGY_TYPE_PREBUILD_CARD_MAP).map((energyPrebuildCard) => {
+	return energyPrebuildCard.localId
+}) satisfies number[];
+
+export const ENERGY_IDS = ENERGY_LOCAL_IDS.map((localeId) => {
+	return `sm1-${localeId}`;
+}) satisfies string[];
+
 export const ENERGY_TYPE_LOCAL_ID_CODE = {
 	GRASS: 'G',
 	FIRE: 'R',
