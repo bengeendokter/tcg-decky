@@ -17,47 +17,93 @@ import type { PrebuildDeck } from '../../prebuild/model/prebuild-deck';
 import { convertPrebuildToCollectionCards } from '../feature/convert-prebuild-to-collection-cards';
 import { addCollectionCard } from '../data-access/add-collection-card';
 
+const ARMAROUGE_DECK_JSON_PATH =
+	`${CONFIG.COLLECTION_OUTPUT_DIRECTORY}/${CONFIG.PREBUILD_DECK_JSON_FILE_NAME.BATTLE_ACADEMY_2024_ARMAROUGE}` as const satisfies string;
+const PIKACHU_DECK_JSON_PATH =
+	`${CONFIG.COLLECTION_OUTPUT_DIRECTORY}/${CONFIG.PREBUILD_DECK_JSON_FILE_NAME.BATTLE_ACADEMY_2024_PIKACHU}` as const satisfies string;
+const DARKRAI_DECK_JSON_PATH =
+	`${CONFIG.COLLECTION_OUTPUT_DIRECTORY}/${CONFIG.PREBUILD_DECK_JSON_FILE_NAME.BATTLE_ACADEMY_2024_DARKRAI}` as const satisfies string;
+const DRAGAPULT_DECK_JSON_PATH =
+	`${CONFIG.COLLECTION_OUTPUT_DIRECTORY}/${CONFIG.PREBUILD_DECK_JSON_FILE_NAME.DRAGAPULT_EX_DECK}` as const satisfies string;
+const MARNIE_DECK_JSON_PATH =
+	`${CONFIG.COLLECTION_OUTPUT_DIRECTORY}/${CONFIG.PREBUILD_DECK_JSON_FILE_NAME.MARNIE_RIVAL_DECK}` as const satisfies string;
+const GENGAR_DECK_JSON_PATH =
+	`${CONFIG.COLLECTION_OUTPUT_DIRECTORY}/${CONFIG.PREBUILD_DECK_JSON_FILE_NAME.MEGA_GENGAR_EX_DECK}` as const satisfies string;
+
+const DECK_JSON_PATHS = [
+	ARMAROUGE_DECK_JSON_PATH,
+	PIKACHU_DECK_JSON_PATH,
+	DARKRAI_DECK_JSON_PATH,
+	DRAGAPULT_DECK_JSON_PATH,
+	MARNIE_DECK_JSON_PATH,
+	GENGAR_DECK_JSON_PATH,
+] as const satisfies string[];
+
 export interface ResetCollectionCardsDatabaseParams {
 	mongoDbDatabaseUrl?: string;
 	tcgDexServerUrl?: string;
+	dittoDexCards?: DittoDexCard[];
+	prebuildDecks?: PrebuildDeck[];
 }
 
-export async function resetCollectionCardsDatabase(
+const defaultResetCollectionCardsDatabaseParams: Required<ResetCollectionCardsDatabaseParams> =
 	{
-		mongoDbDatabaseUrl = CONFIG.MONGO_DB_DATABASE_URL,
-		tcgDexServerUrl = CONFIG.TCG_DEX_SERVER_URL,
-	}: ResetCollectionCardsDatabaseParams = {
 		mongoDbDatabaseUrl: CONFIG.MONGO_DB_DATABASE_URL,
 		tcgDexServerUrl: CONFIG.TCG_DEX_SERVER_URL,
-	},
-): Promise<void> {
-	const db: Db = await connectToDatabase(mongoDbDatabaseUrl);
+		dittoDexCards: importDittoDexCardsFromCsv(CONFIG.DITTO_DEX_SCV_FILE_PATH),
+		prebuildDecks: DECK_JSON_PATHS.map(importPrebuildDeckFromJson),
+	};
+
+export async function resetCollectionCardsDatabase({
+	mongoDbDatabaseUrl = defaultResetCollectionCardsDatabaseParams.mongoDbDatabaseUrl,
+	tcgDexServerUrl = defaultResetCollectionCardsDatabaseParams.tcgDexServerUrl,
+	dittoDexCards = defaultResetCollectionCardsDatabaseParams.dittoDexCards,
+	prebuildDecks = defaultResetCollectionCardsDatabaseParams.prebuildDecks,
+}: ResetCollectionCardsDatabaseParams = defaultResetCollectionCardsDatabaseParams): Promise<void> {
 	const tcgDex: TCGdex = getTcgDex(tcgDexServerUrl);
 
-	const dittoDexCards: DittoDexCard[] = importDittoDexCardsFromCsv(
-		CONFIG.DITTO_DEX_SCV_FILE_PATH,
+	const collectionCards: CollectionCard[] = await combineCardsToCollection({
+		dittoDexCards,
+		prebuildDecks,
+		tcgDex,
+	});
+
+	await setCollectioncardsToDatabase({ collectionCards, mongoDbDatabaseUrl });
+}
+
+interface SetCollectioncardsToDatabaseParams {
+	collectionCards: CollectionCard[];
+	mongoDbDatabaseUrl: string;
+}
+
+export async function setCollectioncardsToDatabase({
+	collectionCards,
+	mongoDbDatabaseUrl,
+}: SetCollectioncardsToDatabaseParams): Promise<void> {
+	const db: Db = await connectToDatabase(mongoDbDatabaseUrl);
+
+	await deleteAllCollectionCard(db);
+
+	await Promise.all(
+		collectionCards.map(async (collectionCard) => {
+			return await addCollectionCard({ db, collectionCard });
+		}),
 	);
 
-	const armarougeDeckJsonPath: string = `${CONFIG.COLLECTION_OUTPUT_DIRECTORY}/${CONFIG.PREBUILD_DECK_JSON_FILE_NAME.BATTLE_ACADEMY_2024_ARMAROUGE}`;
-	const pikachuDeckJsonPath: string = `${CONFIG.COLLECTION_OUTPUT_DIRECTORY}/${CONFIG.PREBUILD_DECK_JSON_FILE_NAME.BATTLE_ACADEMY_2024_PIKACHU}`;
-	const darkraiDeckJsonPath: string = `${CONFIG.COLLECTION_OUTPUT_DIRECTORY}/${CONFIG.PREBUILD_DECK_JSON_FILE_NAME.BATTLE_ACADEMY_2024_DARKRAI}`;
-	const dragapultDeckJsonPath: string = `${CONFIG.COLLECTION_OUTPUT_DIRECTORY}/${CONFIG.PREBUILD_DECK_JSON_FILE_NAME.DRAGAPULT_EX_DECK}`;
-	const marnieDeckJsonPath: string = `${CONFIG.COLLECTION_OUTPUT_DIRECTORY}/${CONFIG.PREBUILD_DECK_JSON_FILE_NAME.MARNIE_RIVAL_DECK}`;
-	const gengarDeckJsonPath: string = `${CONFIG.COLLECTION_OUTPUT_DIRECTORY}/${CONFIG.PREBUILD_DECK_JSON_FILE_NAME.MEGA_GENGAR_EX_DECK}`;
+	await closeDatabaseConnection(db.client);
+}
 
-	const deckJsonPaths = [
-		armarougeDeckJsonPath,
-		pikachuDeckJsonPath,
-		darkraiDeckJsonPath,
-		dragapultDeckJsonPath,
-		marnieDeckJsonPath,
-		gengarDeckJsonPath,
-	] as const satisfies string[];
+interface CombineCardsToCollectionParams {
+	dittoDexCards: DittoDexCard[];
+	prebuildDecks: PrebuildDeck[];
+	tcgDex: TCGdex;
+}
 
-	const prebuildDecks: PrebuildDeck[] = deckJsonPaths.map(
-		importPrebuildDeckFromJson,
-	);
-
+export async function combineCardsToCollection({
+	dittoDexCards,
+	prebuildDecks,
+	tcgDex,
+}: CombineCardsToCollectionParams): Promise<CollectionCard[]> {
 	const collectionCardDecks: CollectionCardDeck[] = await Promise.all(
 		prebuildDecks.map(async (prebuildDeck) => {
 			return await convertPrebuildToCollectionCards({ prebuildDeck, tcgDex });
@@ -77,18 +123,5 @@ export async function resetCollectionCardsDatabase(
 	const dittoDexCollectionCards: CollectionCard[] =
 		await convetDittoDexCardsToCollectionCards({ dittoDexCards, tcgDex });
 
-	const collectionCards: CollectionCard[] = [
-		...dittoDexCollectionCards,
-		...collectionCardDeckCards,
-	];
-
-	await deleteAllCollectionCard(db);
-
-	await Promise.all(
-		collectionCards.map(async (collectionCard) => {
-			return await addCollectionCard({ db, collectionCard });
-		}),
-	);
-
-	await closeDatabaseConnection(db.client);
+	return [...dittoDexCollectionCards, ...collectionCardDeckCards];
 }
