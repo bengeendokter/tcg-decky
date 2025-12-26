@@ -15,7 +15,7 @@ import { CATEGORY } from '../../../../../libs/limitless/model/limitless-deck';
 import type { CollectionCard } from '../../../../../libs/collection/model/collection-card';
 import { ENERGY_IDS } from '../../../../../libs/prebuild/model/energy';
 import { Collection } from '../../../../../libs/deck-builder/data-access/collection';
-import { TcgCard } from "../../components/tcg-card/tcg-card";
+import { TcgCard } from '../../components/tcg-card/tcg-card';
 
 @Component({
 	selector: 'overview-page',
@@ -117,5 +117,15 @@ export class OverviewPage {
 
 			this.tcgDex.collectionCards.set(collectionCards.concat(energies));
 		});
+	}
+
+	protected getQuantitySum(variants: CollectionCard['variants']): number {
+		const firstEdition: number = variants.firstEdition ?? 0;
+		const holo: number = variants.holo ?? 0;
+		const normal: number = variants.normal ?? 0;
+		const reverse: number = variants.reverse ?? 0;
+		const wPromo: number = variants.wPromo ?? 0;
+
+		return firstEdition + holo + normal + reverse + wPromo;
 	}
 }
