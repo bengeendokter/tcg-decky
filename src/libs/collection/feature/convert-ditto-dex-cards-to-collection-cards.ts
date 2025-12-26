@@ -1,4 +1,4 @@
-import TCGdex, { type Card } from '@tcgdex/sdk';
+import TCGdex, { Query, type Card, type CardResume } from '@tcgdex/sdk';
 import {
 	VARIANT,
 	type DittoDexCard,
@@ -17,67 +17,32 @@ export async function convetDittoDexCardsToCollectionCards({
 }: ConvetDittoDexCardsToCollectionCardsParams): Promise<CollectionCard[]> {
 	const collectionCards: CollectionCard[] = await Promise.all(
 		dittoDexCards.map(async (dittoDexCard) => {
-			const dittoDexCardId: string = dittoDexCard.id;
-			const setNumberStartIndex: number = dittoDexCardId.search(/\d/);
-
-			if (setNumberStartIndex === -1) {
-				throw Error('Invalid dittoDexCardId');
-			}
-
-			const [setAbriviationWithSetNumber, cardNumber]: string[] =
-				dittoDexCardId.split('-');
-
-			if (
-				setAbriviationWithSetNumber === undefined ||
-				cardNumber === undefined
-			) {
-				throw Error('Invalid dittoDexCardId');
-			}
-
-			const setAbriviation: string = setAbriviationWithSetNumber.substring(
-				0,
-				setNumberStartIndex,
-			);
-			const setNumber: string =
-				setAbriviationWithSetNumber.substring(setNumberStartIndex);
-
-			if (setAbriviation === '') {
-				throw Error(
-					`Invalid dittoDexCardId. dittoDexCardId: ${dittoDexCardId}, setAbriviation: ${setAbriviation}, setNumber: ${setNumber}`,
-				);
-			}
-
-			let setNumberPart: string =
-				setNumber === ''
-					? setNumber
-					: setNumber.padStart(2, '0').replace('pt5', '.5');
-
-			const setNumberDotIndex: number = setNumberPart.indexOf('.');
-			if (setNumberDotIndex !== -1) {
-				const setNumerBeforeDot: string = setNumberPart.substring(
-					0,
-					setNumberDotIndex,
-				);
-
-				const setNumberAfterDot: string =
-					setNumberPart.substring(setNumberDotIndex);
-
-				setNumberPart = `${setNumerBeforeDot.padStart(2, '0')}${setNumberAfterDot}`;
-			}
-
-			if (setAbriviation === 'zsv') {
-				setNumberPart = `${setNumberPart}b`;
-			}
-
-			const setAbriviationPart: string = setAbriviation.replace('zsv', 'sv');
-
-			let _id: string = `${setAbriviationPart}${setNumberPart}-${cardNumber.padStart(3, '0')}`;
 			const quantity: number = dittoDexCard.qty;
 
-			const card: Card | null = await tcgDex.card.get(_id);
+			const localId: string = dittoDexCard.number.toString();
+			let setName: string = dittoDexCard.setName;
+
+			switch (setName) {
+				case 'Scarlet & Violet Black Star Promos':
+					setName = 'SVP Black Star Promos';
+			}
+
+			const cardResumes: CardResume[] = await tcgDex.card.list(
+				Query.create().like('localId', localId).like('set.name', setName),
+			);
+
+			const cardResume: CardResume | undefined = cardResumes[0];
+
+			if (!cardResume) {
+				throw Error(`Card not found, localId: ${localId}, setName: ${setName}`);
+			}
+
+			const cardId: string = cardResume.id;
+
+			const card: Card | null = await tcgDex.card.get(cardId);
 
 			if (!card) {
-				throw Error(`Card not found, id: ${_id}`);
+				throw Error(`Card not found`);
 			}
 
 			const variants: Variants | undefined = card.variants;

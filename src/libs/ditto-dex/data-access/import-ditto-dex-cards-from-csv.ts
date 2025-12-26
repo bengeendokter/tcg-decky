@@ -20,12 +20,12 @@ export function importDittoDexCardsFromCsv(
 
 	return csvLines.map((line) => {
 		const lineValues: string[] = line
-			.split(',')
-			.map((value) => value.trim().replaceAll('"', ''));
+			.split('","')
+			.map((value) => value.trim().replaceAll('"', '').replaceAll(',', '.'));
 
-		if (lineValues.length !== 10) {
+		if (lineValues.length !== 15) {
 			throw Error(
-				`Invalid CSV format: expected 10 values per line, got ${lineValues.length} values. Line example: ${line}`,
+				`Invalid CSV format: expected 15 values per line, got ${lineValues.length} values. Line example: ${line}`,
 			);
 		}
 
@@ -57,13 +57,43 @@ export function importDittoDexCardsFromCsv(
 
 		number = parseInt(number);
 
-		const setName: string | undefined = lineValues[4];
+		const rarity: string | undefined = lineValues[4];
+
+		if (rarity === undefined) {
+			throw Error('rarity not found');
+		}
+
+		const types: string | undefined = lineValues[5];
+
+		if (types === undefined) {
+			throw Error('types not found');
+		}
+
+		const subtypes: string | undefined = lineValues[6];
+
+		if (subtypes === undefined) {
+			throw Error('subtypes not found');
+		}
+
+		const artist: string | undefined = lineValues[7];
+
+		if (artist === undefined) {
+			throw Error('artist not found');
+		}
+
+		const series: string | undefined = lineValues[8];
+
+		if (series === undefined) {
+			throw Error('series not found');
+		}
+
+		const setName: string | undefined = lineValues[9];
 
 		if (setName === undefined) {
 			throw Error('setName not found');
 		}
 
-		const variant: string | undefined = lineValues[5];
+		const variant: string | undefined = lineValues[10];
 
 		if (variant === undefined) {
 			throw Error('variant not found');
@@ -73,7 +103,7 @@ export function importDittoDexCardsFromCsv(
 			throw Error(`${variant} is not a valid variant`);
 		}
 
-		let qty: number | string | undefined = lineValues[6];
+		let qty: number | string | undefined = lineValues[11];
 
 		if (qty === undefined) {
 			throw Error('qty not found');
@@ -81,7 +111,7 @@ export function importDittoDexCardsFromCsv(
 
 		qty = parseInt(qty);
 
-		const currency: string | undefined = lineValues[7];
+		const currency: string | undefined = lineValues[12];
 
 		if (currency === undefined) {
 			throw Error('currency not found');
@@ -91,7 +121,7 @@ export function importDittoDexCardsFromCsv(
 			throw Error(`${currency} is not a valid currency`);
 		}
 
-		let value: number | string | undefined = lineValues[8];
+		let value: number | string | undefined = lineValues[13];
 
 		if (value === undefined) {
 			throw Error('value not found');
@@ -99,7 +129,7 @@ export function importDittoDexCardsFromCsv(
 
 		value = parseInt(value);
 
-		let totalValue: number | string | undefined = lineValues[9];
+		let totalValue: number | string | undefined = lineValues[14];
 
 		if (totalValue === undefined) {
 			throw Error('totalValue not found');
@@ -112,6 +142,11 @@ export function importDittoDexCardsFromCsv(
 			name,
 			pokedexNumber,
 			number,
+			rarity,
+			types,
+			subtypes,
+			artist,
+			series,
 			setName,
 			variant,
 			qty,

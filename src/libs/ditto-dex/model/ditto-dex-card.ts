@@ -26,6 +26,11 @@ export interface DittoDexCard {
 	name: string;
 	pokedexNumber: number;
 	number: number;
+	rarity: string;
+	types: string;
+	subtypes: string;
+	artist: string;
+	series: string;
 	setName: string;
 	variant: Variant;
 	qty: number;
