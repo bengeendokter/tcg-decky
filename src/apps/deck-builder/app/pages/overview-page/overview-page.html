@@ -5,15 +5,15 @@
 	</div>
 	<div class="deck-actions">
 		@if(existingDeck()) {
-		<button>Update</button>
+		<button (click)="updateCollectionCardDeck()">Update</button>
 		}
 		@else {
 		<button (click)="addCollectionCardDeck()">Save</button>
 		}
 		<button (click)="openLoadDeckDialog()">Load deck</button>
-		<button [disabled]="!existingDeck()">Create copy</button>
+		<button [disabled]="!existingDeck()" (click)="addCollectionCardDeck()">Create copy</button>
 		<button (click)="reset()">Reset</button>
-		<button [disabled]="!existingDeck()">Delete</button>
+		<button [disabled]="!existingDeck()" (click)="deleteCollectionCardDeck()">Delete</button>
 		<button (click)="openLimitlessDeckBuilder()">Share</button>
 	</div>
 	<div class="deck-cards">
@@ -67,7 +67,7 @@
 		</div>
 		<div class="load-deck-actions">
 			<button (click)="closeLoadDeckDialog()">Cancel</button>
-			<button (click)="loadDeck()">Load</button>
+			<button (click)="loadDeck()" [disabled]="loadDeckForm().invalid()">Load</button>
 		</div>
 	</div>
 </dialog>

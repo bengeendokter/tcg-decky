@@ -358,6 +358,7 @@ export class OverviewPage {
 
 	protected reset(): void {
 		this.deckCards.set([]);
+		this.tcgDex.loadedDeckCollectionCards.set([]);
 		this.selectedDeckId.set('');
 	}
 
@@ -402,6 +403,7 @@ export class OverviewPage {
 	}
 
 	protected openLoadDeckDialog(): void {
+		this.selectedLoadDeckId.set('');
 		this.loadDeckDialog().nativeElement.showModal();
 	}
 
@@ -412,5 +414,42 @@ export class OverviewPage {
 	protected loadDeck(): void {
 		this.selectedDeckId.set(this.selectedLoadDeckId());
 		this.closeLoadDeckDialog();
+	}
+
+	protected async deleteCollectionCardDeck(): Promise<void> {
+		await this.collection.deleteCollectionCardDeck(this.selectedDeckId());
+		alert('Deck has been deleted!');
+
+		this.getAllDecksResource.reload();
+		this.reset();
+	}
+
+	protected async updateCollectionCardDeck(): Promise<void> {
+		const selectedDeck: CollectionCardDeck | undefined = this.selectedDeck();
+
+		if (selectedDeck === undefined) {
+			alert('Updating deck failed.');
+			return;
+		}
+
+		const name: string | null = prompt('Deck name:', selectedDeck.name);
+
+		if (name === null) {
+			alert('Deck has not been updated.');
+			return;
+		}
+
+		const deck: CollectionCardDeck = {
+			name,
+			cards: this.deckCollectionCards(),
+		};
+
+		await this.collection.updateCollectionCardDeck({
+			id: this.selectedDeckId(),
+			deck,
+		});
+		alert('Deck has been updated!');
+
+		this.getAllDecksResource.reload();
 	}
 }
