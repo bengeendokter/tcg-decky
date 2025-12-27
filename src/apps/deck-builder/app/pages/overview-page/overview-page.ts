@@ -31,6 +31,21 @@ type DeckCard = TcgDexCollectionCard & {
 	quantity: number;
 };
 
+const REGULATION_MARKS_IN_ROTAION = ['G', 'H', 'I'] as const satisfies string[];
+
+const POKEMON_TYPES = [
+	'Grass',
+	'Fire',
+	'Water',
+	'Lightning',
+	'Fighting',
+	'Psychic',
+	'Colorless',
+	'Darkness',
+	'Metal',
+	'Dragon',
+] as const satisfies string[];
+
 @Component({
 	selector: 'overview-page',
 	imports: [Field, TcgCard],
@@ -66,20 +81,43 @@ export class OverviewPage {
 	protected tcgDexCollectionCards: Signal<TcgDexCollectionCard[]> =
 		this.tcgDex.tcgDexCollectionCards;
 
+	protected inRotationFilter: WritableSignal<boolean> = signal(false);
+
+	protected inRotationFilterForm: FieldTree<boolean> = form(
+		this.inRotationFilter,
+	);
+
 	protected filteredTcgDexCollectionCards: Signal<TcgDexCollectionCard[]> =
 		computed(() => {
-			const tcgDexCollectionCards: TcgDexCollectionCard[] =
+			let filteredTcgDexCollectionCards: TcgDexCollectionCard[] =
 				this.tcgDexCollectionCards();
 
 			const searchValue: string = this.searchForm().value().toLocaleLowerCase();
 
-			if (searchValue === '') {
-				return tcgDexCollectionCards;
+			if (searchValue) {
+				filteredTcgDexCollectionCards = filteredTcgDexCollectionCards.filter(
+					(card) => {
+						return card.name.toLocaleLowerCase().includes(searchValue);
+					},
+				);
 			}
 
-			return tcgDexCollectionCards.filter((card) => {
-				return card.name.toLocaleLowerCase().includes(searchValue);
-			});
+			if (this.inRotationFilter()) {
+				filteredTcgDexCollectionCards = filteredTcgDexCollectionCards.filter(
+					(card) => {
+						if (card.category === CATEGORY.ENERGY) {
+							return true;
+						}
+
+						const allowedRegulationMarks: string[] =
+							REGULATION_MARKS_IN_ROTAION;
+
+						return allowedRegulationMarks.includes(card.regulationMark ?? '');
+					},
+				);
+			}
+
+			return filteredTcgDexCollectionCards;
 		});
 
 	protected sortedTcgDexCollectionCards: Signal<TcgDexCollectionCard[]> =
