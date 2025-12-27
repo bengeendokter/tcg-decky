@@ -17,7 +17,10 @@ import {
 	CATEGORY,
 	type LimitlessDeck,
 } from '../../../../../libs/limitless/model/limitless-deck';
-import type { CollectionCard, CollectionCardDeck } from '../../../../../libs/collection/model/collection-card';
+import type {
+	CollectionCard,
+	CollectionCardDeck,
+} from '../../../../../libs/collection/model/collection-card';
 import { ENERGY_IDS } from '../../../../../libs/prebuild/model/energy';
 import { Collection } from '../../../../../libs/deck-builder/data-access/collection';
 import { TcgCard } from '../../components/tcg-card/tcg-card';
@@ -37,8 +40,10 @@ type DeckCard = TcgDexCollectionCard & {
 export class OverviewPage {
 	private readonly collection: Collection = inject(Collection);
 	private readonly tcgDex: TcgDex = inject(TcgDex);
-	private readonly dialog: Signal<ElementRef<HTMLDialogElement>> =
-		viewChild.required('dialog');
+	private readonly cardDetail: Signal<ElementRef<HTMLDialogElement>> =
+		viewChild.required('cardDetail');
+	private readonly loadDeckDialog: Signal<ElementRef<HTMLDialogElement>> =
+		viewChild.required('loadDeckDialog');
 
 	protected selectedCard: WritableSignal<TcgDexCollectionCard | undefined> =
 		signal(undefined);
@@ -180,9 +185,47 @@ export class OverviewPage {
 
 	protected selectedDeckId: WritableSignal<string> = signal('');
 
+	private selectedDeck: Signal<CollectionCardDeck | undefined> = computed(
+		() => {
+			const selectedDeckId: string = this.selectedDeckId();
+
+			if (selectedDeckId === '') {
+				return undefined;
+			}
+
+			return this.collectionDecks().find(
+				(deck) => deck._id.toString() === selectedDeckId,
+			);
+		},
+	);
+
 	protected existingDeck: Signal<boolean> = computed(() => {
 		return this.selectedDeckId() !== '';
 	});
+
+	private collectionDecks: Signal<WithId<CollectionCardDeck>[]> = computed(
+		() => {
+			if (!this.getAllDecksResource.hasValue()) {
+				return [];
+			}
+
+			return this.getAllDecksResource.value();
+		},
+	);
+
+	protected sortedCollectionDecks: Signal<WithId<CollectionCardDeck>[]> =
+		computed(() => {
+			const collectionDecks: WithId<CollectionCardDeck>[] =
+				this.collectionDecks();
+
+			return collectionDecks.toSorted((card1, card2) => {
+				return card1.name.localeCompare(card2.name);
+			});
+		});
+
+	protected selectedLoadDeckId: WritableSignal<string> = signal('');
+
+	protected loadDeckForm: FieldTree<string> = form(this.selectedLoadDeckId);
 
 	constructor() {
 		effect(() => {
@@ -194,6 +237,15 @@ export class OverviewPage {
 			}));
 
 			this.tcgDex.collectionCards.set(collectionCards.concat(energies));
+		});
+
+		effect(() => {
+			const selectedDeck: CollectionCardDeck | undefined = this.selectedDeck();
+
+			if (selectedDeck === undefined) {
+				return;
+			}
+			this.tcgDex.loadedDeckCollectionCards.set(selectedDeck.cards);
 		});
 
 		effect(() => {
@@ -219,13 +271,13 @@ export class OverviewPage {
 		return firstEdition + holo + normal + reverse + wPromo;
 	}
 
-	protected openDetail(card: TcgDexCollectionCard): void {
+	protected openCardDetail(card: TcgDexCollectionCard): void {
 		this.selectedCard.set(card);
-		this.dialog().nativeElement.showModal();
+		this.cardDetail().nativeElement.showModal();
 	}
 
-	protected closeDialog(): void {
-		this.dialog().nativeElement.close();
+	protected closeCardDetail(): void {
+		this.cardDetail().nativeElement.close();
 	}
 
 	protected addCard(card: TcgDexCollectionCard | DeckCard): void {
@@ -347,5 +399,18 @@ export class OverviewPage {
 
 		this.getAllDecksResource.reload();
 		this.selectedDeckId.set(id);
+	}
+
+	protected openLoadDeckDialog(): void {
+		this.loadDeckDialog().nativeElement.showModal();
+	}
+
+	protected closeLoadDeckDialog(): void {
+		this.loadDeckDialog().nativeElement.close();
+	}
+
+	protected loadDeck(): void {
+		this.selectedDeckId.set(this.selectedLoadDeckId());
+		this.closeLoadDeckDialog();
 	}
 }

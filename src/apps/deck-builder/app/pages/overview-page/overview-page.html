@@ -10,7 +10,7 @@
 		@else {
 		<button (click)="addCollectionCardDeck()">Save</button>
 		}
-		<button>Load deck</button>
+		<button (click)="openLoadDeckDialog()">Load deck</button>
 		<button [disabled]="!existingDeck()">Create copy</button>
 		<button (click)="reset()">Reset</button>
 		<button [disabled]="!existingDeck()">Delete</button>
@@ -18,7 +18,7 @@
 	</div>
 	<div class="deck-cards">
 		@for(card of deckCards(); track card.id) {
-		<tcg-card (click)="openDetail(card)" [quantity]="card.quantity" class="deck-card"
+		<tcg-card (click)="openCardDetail(card)" [quantity]="card.quantity" class="deck-card"
 			[style.--background-image-url]="`url(${card.image}/low.webp)`"></tcg-card>
 		}
 	</div>
@@ -32,18 +32,18 @@
 	</div>
 	<div class="collection-cards">
 		@for(card of sortedTcgDexCollectionCards(); track card.id) {
-		<tcg-card (click)="openDetail(card)" [quantity]="getQuantitySum(card.variants)"
+		<tcg-card (click)="openCardDetail(card)" [quantity]="getQuantitySum(card.variants)"
 			[style.--background-image-url]="`url(${card.image}/low.webp)`"></tcg-card>
 		}
 	</div>
 </div>
 @let detailCard = selectedDeckCard();
-<dialog #dialog closedby="any">
+<dialog #cardDetail closedby="any">
 	<div class="detail">
 		@if(detailCard) {
 		@let deckQuantity = detailCard.quantity;
 		@let collectionQuantity = getQuantitySum(detailCard.variants);
-		<tcg-card (click)="closeDialog()" class="detail-card"
+		<tcg-card (click)="closeCardDetail()" class="detail-card"
 			[style.--background-image-url]="`url(${detailCard.image}/high.webp)`"></tcg-card>
 		<div class="detail-actions">
 			<button (click)="removeCard(detailCard)" [disabled]="deckQuantity === 0">-</button>
@@ -52,5 +52,22 @@
 			<button (click)="addCard(detailCard)" [disabled]="deckQuantity === collectionQuantity">+</button>
 		</div>
 		}
+	</div>
+</dialog>
+<dialog #loadDeckDialog closedby="any">
+	<div class="load-deck">
+		<h2 class="md-typescale-headline-small">Load deck</h2>
+		<div>
+			<label for="load-deck">Deck</label>
+			<select class="load-deck-select" id="load-deck" [field]="loadDeckForm">
+				@for (collectionDeck of sortedCollectionDecks(); track collectionDeck._id) {
+				<option [value]="collectionDeck._id">{{collectionDeck.name}}</option>
+				}
+			</select>
+		</div>
+		<div class="load-deck-actions">
+			<button (click)="closeLoadDeckDialog()">Cancel</button>
+			<button (click)="loadDeck()">Load</button>
+		</div>
 	</div>
 </dialog>

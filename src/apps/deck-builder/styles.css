@@ -11,7 +11,3 @@
 @import "m3-color-css/theme/dark-hc" layer(theme);
 @import 'color-scheme.css' layer(theme);
 @import 'kitchen-sink.css' layer(theme);
-
-h1 {
-	margin: 0;
-}

@@ -45,6 +45,7 @@ h6 {
 	font-weight: var(--md-sys-typescale-headline-large-weight);
 	font-size: var(--md-sys-typescale-headline-large-size);
 	line-height: var(--md-sys-typescale-headline-large-line-height);
+	margin: 0;
 }
 
 hr {
@@ -93,6 +94,10 @@ textarea {
 		padding-inline: 4px;
 		background-color: var(--md-comp-outlined-text-field-label-text-background-color);
 		transform: translateX(12px) translateY(-8px);
+
+		dialog & {
+			--md-comp-outlined-text-field-label-text-background-color: var(--md-sys-color-surface-container-high);
+		}
 	}
 }
 
