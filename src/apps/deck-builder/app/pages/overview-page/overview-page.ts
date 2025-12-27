@@ -138,6 +138,31 @@ export class OverviewPage {
 		}, 0);
 	});
 
+	protected selectedDeckCard: Signal<DeckCard | undefined> = computed(() => {
+		const selectedCard: TcgDexCollectionCard | undefined = this.selectedCard();
+
+		if (selectedCard === undefined) {
+			return undefined;
+		}
+
+		const deckCards: DeckCard[] = this.deckCards();
+
+		const selectedDeckCard: DeckCard | undefined = deckCards.find(
+			(deckCard) => {
+				return deckCard._id === selectedCard._id;
+			},
+		);
+
+		if (selectedDeckCard === undefined) {
+			return {
+				...selectedCard,
+				quantity: 0,
+			};
+		}
+
+		return selectedDeckCard;
+	});
+
 	constructor() {
 		effect(() => {
 			const collectionCards: CollectionCard[] = this.collectionCards();

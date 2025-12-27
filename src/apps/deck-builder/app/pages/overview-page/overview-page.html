@@ -1,7 +1,7 @@
 <div class="deck-pane">
 	<div class="heading">
 		<h1>New deck</h1>
-		<span>60 cards in deck</span>
+		<span>{{totalCardQuantity()}} cards in deck</span>
 	</div>
 	<div class="deck-actions">
 		<button>Update</button>
@@ -32,15 +32,19 @@
 		}
 	</div>
 </div>
-@let detailCard = selectedCard();
+@let detailCard = selectedDeckCard();
 <dialog #dialog closedby="any">
 	<div class="detail">
 		@if(detailCard) {
-		<tcg-card class="detail-card" [style.--background-image-url]="`url(${detailCard.image}/high.webp)`"></tcg-card>
+		@let deckQuantity = detailCard.quantity;
+		@let collectionQuantity = getQuantitySum(detailCard.variants);
+		<tcg-card (click)="closeDialog()" class="detail-card"
+			[style.--background-image-url]="`url(${detailCard.image}/high.webp)`"></tcg-card>
 		<div class="detail-actions">
-			<button (click)="removeCard(detailCard)">-</button>
-			<span>??/0{{getQuantitySum(detailCard.variants)}}</span>
-			<button (click)="addCard(detailCard)">+</button>
+			<button (click)="removeCard(detailCard)" [disabled]="deckQuantity === 0">-</button>
+			<span>{{deckQuantity.toString().padStart(2,
+				"0")}}/{{collectionQuantity.toString().padStart(2, "0")}}</span>
+			<button (click)="addCard(detailCard)" [disabled]="deckQuantity === collectionQuantity">+</button>
 		</div>
 		}
 	</div>

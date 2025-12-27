@@ -136,6 +136,11 @@ input::file-selector-button {
 	&:active {
 		background-color: color-mix(in oklab, var(--md-sys-color-primary), var(--md-sys-color-on-primary) 10%);
 	}
+
+	&:disabled {
+		background-color: color-mix(in oklab, var(--md-sys-color-on-surface) 10%, transparent);
+		color: color-mix(in oklab, var(--md-sys-color-on-surface) 38%, transparent);
+	}
 }
 
 input[type=file] {
