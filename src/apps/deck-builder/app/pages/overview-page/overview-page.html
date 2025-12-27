@@ -4,12 +4,17 @@
 		<span>{{totalCardQuantity()}} cards in deck</span>
 	</div>
 	<div class="deck-actions">
+		@if(existingDeck()) {
 		<button>Update</button>
+		}
+		@else {
+		<button (click)="addCollectionCardDeck()">Save</button>
+		}
 		<button>Load deck</button>
-		<button>Create copy</button>
-		<button>Reset</button>
-		<button>Delete</button>
-		<button>Share</button>
+		<button [disabled]="!existingDeck()">Create copy</button>
+		<button (click)="reset()">Reset</button>
+		<button [disabled]="!existingDeck()">Delete</button>
+		<button (click)="openLimitlessDeckBuilder()">Share</button>
 	</div>
 	<div class="deck-cards">
 		@for(card of deckCards(); track card.id) {

@@ -127,6 +127,7 @@ input::file-selector-button {
 	font-weight: var(--md-sys-typescale-label-large-weight);
 	font-size: var(--md-sys-typescale-label-large-size);
 	line-height: var(--md-sys-typescale-label-large-line-height);
+	user-select: none;
 
 	&:hover {
 		background-color: color-mix(in oklab, var(--md-sys-color-primary), var(--md-sys-color-on-primary) 8%);

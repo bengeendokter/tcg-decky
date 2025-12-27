@@ -13,11 +13,16 @@ import {
 import { Field, type FieldTree, form } from '@angular/forms/signals';
 import { TcgDex } from '../../../../../libs/deck-builder/data-access/tcg-dex';
 import type { TcgDexCollectionCard } from '../../../../../libs/deck-builder/model/tcg-dex-collection-card';
-import { CATEGORY } from '../../../../../libs/limitless/model/limitless-deck';
-import type { CollectionCard } from '../../../../../libs/collection/model/collection-card';
+import {
+	CATEGORY,
+	type LimitlessDeck,
+} from '../../../../../libs/limitless/model/limitless-deck';
+import type { CollectionCard, CollectionCardDeck } from '../../../../../libs/collection/model/collection-card';
 import { ENERGY_IDS } from '../../../../../libs/prebuild/model/energy';
 import { Collection } from '../../../../../libs/deck-builder/data-access/collection';
 import { TcgCard } from '../../components/tcg-card/tcg-card';
+import { converLimitlessDeckToImportString } from '../../../../../libs/limitless/feature/convert-limitless-deck-to-import-string';
+import type { WithId } from 'mongodb';
 
 type DeckCard = TcgDexCollectionCard & {
 	quantity: number;
@@ -163,6 +168,22 @@ export class OverviewPage {
 		return selectedDeckCard;
 	});
 
+	private deckCollectionCards: Signal<CollectionCard[]> = computed(() => {
+		return this.deckCards().map((deckCard) => {
+			return { ...deckCard, variants: { normal: deckCard.quantity } };
+		});
+	});
+
+	private readonly getAllDecksResource: ResourceRef<
+		WithId<CollectionCardDeck>[] | undefined
+	> = this.collection.getAllDecksResource;
+
+	protected selectedDeckId: WritableSignal<string> = signal('');
+
+	protected existingDeck: Signal<boolean> = computed(() => {
+		return this.selectedDeckId() !== '';
+	});
+
 	constructor() {
 		effect(() => {
 			const collectionCards: CollectionCard[] = this.collectionCards();
@@ -281,5 +302,50 @@ export class OverviewPage {
 				return card.quantity > 0;
 			}),
 		);
+	}
+
+	protected reset(): void {
+		this.deckCards.set([]);
+		this.selectedDeckId.set('');
+	}
+
+	protected async openLimitlessDeckBuilder(): Promise<void> {
+		const limitlessDeck: LimitlessDeck =
+			await this.tcgDex.convertCollectionToLimitlessDeck({
+				name: 'DefaultName',
+				cards: this.deckCollectionCards(),
+			});
+
+		const importString: string =
+			converLimitlessDeckToImportString(limitlessDeck);
+
+		const limitlessDeckBuilderUrl: URL = new URL(
+			'/builder',
+			'https://my.limitlesstcg.com',
+		);
+
+		limitlessDeckBuilderUrl.searchParams.set('i', importString);
+
+		window.open(limitlessDeckBuilderUrl.href, '_blank');
+	}
+
+	protected async addCollectionCardDeck(): Promise<void> {
+		const name: string | null = prompt('Deck name:');
+
+		if (name === null) {
+			alert('Deck has not been saved.');
+			return;
+		}
+
+		const deck: CollectionCardDeck = {
+			name,
+			cards: this.deckCollectionCards(),
+		};
+
+		const id: string = await this.collection.addCollectionCardDeck(deck);
+		alert('Deck has been saved!');
+
+		this.getAllDecksResource.reload();
+		this.selectedDeckId.set(id);
 	}
 }
