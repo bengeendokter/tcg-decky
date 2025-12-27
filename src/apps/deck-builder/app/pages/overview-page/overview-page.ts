@@ -227,6 +227,16 @@ export class OverviewPage {
 
 	protected loadDeckForm: FieldTree<string> = form(this.selectedLoadDeckId);
 
+	protected deckName: Signal<string> = computed(() => {
+		const selectedDeck: CollectionCardDeck | undefined = this.selectedDeck();
+
+		if(selectedDeck === undefined) {
+			return '';
+		}
+
+		return selectedDeck.name;
+	});
+
 	constructor() {
 		effect(() => {
 			const collectionCards: CollectionCard[] = this.collectionCards();
@@ -365,7 +375,7 @@ export class OverviewPage {
 	protected async openLimitlessDeckBuilder(): Promise<void> {
 		const limitlessDeck: LimitlessDeck =
 			await this.tcgDex.convertCollectionToLimitlessDeck({
-				name: 'DefaultName',
+				name: this.deckName(),
 				cards: this.deckCollectionCards(),
 			});
 
@@ -383,7 +393,7 @@ export class OverviewPage {
 	}
 
 	protected async addCollectionCardDeck(): Promise<void> {
-		const name: string | null = prompt('Deck name:');
+		const name: string | null = prompt('Deck name:', this.deckName());
 
 		if (name === null) {
 			alert('Deck has not been saved.');
@@ -432,7 +442,7 @@ export class OverviewPage {
 			return;
 		}
 
-		const name: string | null = prompt('Deck name:', selectedDeck.name);
+		const name: string | null = prompt('Deck name:', this.deckName());
 
 		if (name === null) {
 			alert('Deck has not been updated.');
