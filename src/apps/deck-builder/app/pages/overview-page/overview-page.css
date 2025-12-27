@@ -67,6 +67,20 @@
 
 }
 
+.detail {
+	display: grid;
+	grid-template-rows: 1fr auto;
+	gap: 16px;
+}
+
 .detail-card {
 	width: 350px;
+}
+
+.detail-actions {
+	display: grid;
+	grid-auto-flow: column;
+	align-items: center;
+	justify-content: center;
+	gap: 12px;
 }

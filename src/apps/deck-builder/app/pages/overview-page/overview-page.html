@@ -12,8 +12,10 @@
 		<button>Share</button>
 	</div>
 	<div class="deck-cards">
-		<tcg-card [quantity]="99" class="deck-card"
-			[style.--background-image-url]="`url(https://assets.tcgdex.net/en/sv/sv01/033/low.webp)`"></tcg-card>
+		@for(card of deckCards(); track card.id) {
+		<tcg-card (click)="openDetail(card)" [quantity]="card.quantity" class="deck-card"
+			[style.--background-image-url]="`url(${card.image}/low.webp)`"></tcg-card>
+		}
 	</div>
 </div>
 <div class="collection-pane">
@@ -31,8 +33,15 @@
 	</div>
 </div>
 @let detailCard = selectedCard();
-<dialog #dialog closedby="any" (click)="closeDialog()">
-	@if(detailCard) {
-	<tcg-card class="detail-card" [style.--background-image-url]="`url(${detailCard.image}/high.webp)`"></tcg-card>
-	}
+<dialog #dialog closedby="any">
+	<div class="detail">
+		@if(detailCard) {
+		<tcg-card class="detail-card" [style.--background-image-url]="`url(${detailCard.image}/high.webp)`"></tcg-card>
+		<div class="detail-actions">
+			<button (click)="removeCard(detailCard)">-</button>
+			<span>??/0{{getQuantitySum(detailCard.variants)}}</span>
+			<button (click)="addCard(detailCard)">+</button>
+		</div>
+		}
+	</div>
 </dialog>

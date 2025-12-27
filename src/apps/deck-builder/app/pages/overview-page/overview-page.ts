@@ -19,6 +19,10 @@ import { ENERGY_IDS } from '../../../../../libs/prebuild/model/energy';
 import { Collection } from '../../../../../libs/deck-builder/data-access/collection';
 import { TcgCard } from '../../components/tcg-card/tcg-card';
 
+type DeckCard = TcgDexCollectionCard & {
+	quantity: number;
+};
+
 @Component({
 	selector: 'overview-page',
 	imports: [Field, TcgCard],
@@ -113,6 +117,27 @@ export class OverviewPage {
 			});
 		});
 
+	private readonly loadedDeckTcgDexCollectionCardsResource: ResourceRef<
+		TcgDexCollectionCard[] | undefined
+	> = this.tcgDex.loadedDeckTcgDexCollectionCardsResource;
+
+	protected loadedDeckCollectionCards: Signal<TcgDexCollectionCard[]> =
+		computed(() => {
+			if (!this.loadedDeckTcgDexCollectionCardsResource.hasValue()) {
+				return [];
+			}
+
+			return this.loadedDeckTcgDexCollectionCardsResource.value();
+		});
+
+	protected deckCards: WritableSignal<DeckCard[]> = signal([]);
+
+	protected totalCardQuantity: Signal<number> = computed(() => {
+		return this.deckCards().reduce((total, card) => {
+			return total + card.quantity;
+		}, 0);
+	});
+
 	constructor() {
 		effect(() => {
 			const collectionCards: CollectionCard[] = this.collectionCards();
@@ -123,6 +148,18 @@ export class OverviewPage {
 			}));
 
 			this.tcgDex.collectionCards.set(collectionCards.concat(energies));
+		});
+
+		effect(() => {
+			const loadedDeckCollectionCards: DeckCard[] =
+				this.loadedDeckCollectionCards().map((tcgDexCollectionCard) => {
+					return {
+						...tcgDexCollectionCard,
+						quantity: this.getQuantitySum(tcgDexCollectionCard.variants),
+					};
+				});
+
+			this.deckCards.set(loadedDeckCollectionCards);
 		});
 	}
 
@@ -143,5 +180,81 @@ export class OverviewPage {
 
 	protected closeDialog(): void {
 		this.dialog().nativeElement.close();
+	}
+
+	protected addCard(card: TcgDexCollectionCard | DeckCard): void {
+		const deckCards: DeckCard[] = this.deckCards();
+
+		if (deckCards.length === 0) {
+			this.deckCards.set([{ ...card, quantity: 1 }]);
+			return;
+		}
+
+		const existingDeckCard: DeckCard | undefined = deckCards.find(
+			(deckCard) => deckCard.id === card.id,
+		);
+
+		if (existingDeckCard === undefined) {
+			this.deckCards.set([...deckCards, { ...card, quantity: 1 }]);
+			return;
+		}
+
+		const deckCardsWithNewQuantities: DeckCard[] = deckCards.map((deckCard) => {
+			if (deckCard.id !== existingDeckCard.id) {
+				return deckCard;
+			}
+
+			const matchingCollectionCard: CollectionCard | undefined =
+				this.tcgDexCollectionCards().find(
+					(tcgDexCollectionCard) => tcgDexCollectionCard.id === deckCard.id,
+				);
+
+			if (matchingCollectionCard === undefined) {
+				return deckCard;
+			}
+
+			const collectionMaxQuantity: number = this.getQuantitySum(
+				matchingCollectionCard.variants,
+			);
+
+			const quantity: number = Math.min(
+				existingDeckCard.quantity + 1,
+				collectionMaxQuantity,
+			);
+
+			return { ...deckCard, quantity };
+		});
+
+		this.deckCards.set(deckCardsWithNewQuantities);
+	}
+
+	protected removeCard(card: TcgDexCollectionCard | DeckCard): void {
+		const deckCards: DeckCard[] = this.deckCards();
+
+		if (deckCards.length === 0) {
+			return;
+		}
+
+		const existingDeckCard: DeckCard | undefined = deckCards.find(
+			(deckCard) => deckCard.id === card.id,
+		);
+
+		if (existingDeckCard === undefined) {
+			return;
+		}
+
+		const deckCardsWithNewQuantities: DeckCard[] = deckCards.map((deckCard) => {
+			if (deckCard.id !== existingDeckCard.id) {
+				return deckCard;
+			}
+
+			return { ...deckCard, quantity: existingDeckCard.quantity - 1 };
+		});
+
+		this.deckCards.set(
+			deckCardsWithNewQuantities.filter((card) => {
+				return card.quantity > 0;
+			}),
+		);
 	}
 }
