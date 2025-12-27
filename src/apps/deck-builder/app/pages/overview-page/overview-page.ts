@@ -2,8 +2,10 @@ import {
 	Component,
 	computed,
 	effect,
+	ElementRef,
 	inject,
 	signal,
+	viewChild,
 	type ResourceRef,
 	type Signal,
 	type WritableSignal,
@@ -26,6 +28,11 @@ import { TcgCard } from '../../components/tcg-card/tcg-card';
 export class OverviewPage {
 	private readonly collection: Collection = inject(Collection);
 	private readonly tcgDex: TcgDex = inject(TcgDex);
+	private readonly dialog: Signal<ElementRef<HTMLDialogElement>> =
+		viewChild.required('dialog');
+
+	protected selectedCard: WritableSignal<TcgDexCollectionCard | undefined> =
+		signal(undefined);
 
 	private readonly getAllCardsResource: ResourceRef<
 		CollectionCard[] | undefined
@@ -127,5 +134,14 @@ export class OverviewPage {
 		const wPromo: number = variants.wPromo ?? 0;
 
 		return firstEdition + holo + normal + reverse + wPromo;
+	}
+
+	protected openDetail(card: TcgDexCollectionCard): void {
+		this.selectedCard.set(card);
+		this.dialog().nativeElement.showModal();
+	}
+
+	protected closeDialog(): void {
+		this.dialog().nativeElement.close();
 	}
 }

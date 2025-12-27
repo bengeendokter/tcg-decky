@@ -44,7 +44,6 @@
 }
 
 .deck-card {
-	max-width: unset;
 	width: 100%;
 }
 
@@ -65,4 +64,9 @@
 	display: flex;
 	gap: 8px;
 	overflow-x: auto;
+
+}
+
+.detail-card {
+	width: 350px;
 }

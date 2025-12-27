@@ -96,7 +96,7 @@ textarea {
 	}
 }
 
-search > input {
+search>input {
 	height: 56px;
 	background-color: var(--md-sys-color-surface-container-high);
 	border: none;
@@ -152,4 +152,9 @@ dialog {
 	border-width: 0;
 	background-color: var(--md-sys-color-surface-container-high);
 	border-radius: var(--md-sys-shape-corner-value-extra-large);
+	padding: 24px;
+
+	&:focus-visible {
+		outline: none;
+	}
 }

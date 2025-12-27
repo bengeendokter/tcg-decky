@@ -7,5 +7,5 @@ import { Component, input, type InputSignal } from "@angular/core";
 	styleUrl: './tcg-card.css',
 })
 export class TcgCard {
-	public readonly quantity: InputSignal<number> = input.required();
+	public readonly quantity: InputSignal<number | undefined> = input();
 }
