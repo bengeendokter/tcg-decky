@@ -163,14 +163,23 @@ export class OverviewPage {
 			},
 		);
 
+		const selectedCollectionCard: CollectionCard | undefined =
+			this.collectionCards().find((collectionCard) => {
+				return collectionCard._id === selectedCard._id;
+			});
+
+		const variants: CollectionCard['variants'] =
+			selectedCollectionCard?.variants ?? { normal: 99 };
+
 		if (selectedDeckCard === undefined) {
 			return {
 				...selectedCard,
+				variants,
 				quantity: 0,
 			};
 		}
 
-		return selectedDeckCard;
+		return { ...selectedDeckCard, variants };
 	});
 
 	private deckCollectionCards: Signal<CollectionCard[]> = computed(() => {
@@ -230,7 +239,7 @@ export class OverviewPage {
 	protected deckName: Signal<string> = computed(() => {
 		const selectedDeck: CollectionCardDeck | undefined = this.selectedDeck();
 
-		if(selectedDeck === undefined) {
+		if (selectedDeck === undefined) {
 			return '';
 		}
 
