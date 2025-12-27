@@ -17,6 +17,7 @@
 	display: grid;
 	grid-template-rows: auto auto 1fr;
 	gap: 16px;
+	overflow-y: hidden;
 }
 
 .heading {
@@ -33,10 +34,18 @@
 
 .deck-cards {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, 100px);
+	grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
 	justify-content: space-between;
 	gap: 8px;
 	padding-block-end: 8px;
+	align-content: start;
+	justify-items: center;
+	overflow-y: auto;
+}
+
+.deck-card {
+	max-width: unset;
+	width: 100%;
 }
 
 .collection-pane {
