@@ -33,6 +33,17 @@
 			<input id="in-rotation-filter" type="checkbox" [field]="inRotationFilterForm">
 			In rotation
 		</label>
+
+		<div>
+			<label for="pokemon-type-filter" [style.--md-comp-outlined-text-field-label-text-background-color]="'var(--md-sys-color-surface-container)'">Pokemon Type</label>
+			<select id="pokemon-type-filter" [field]="pokemonTypeFilterForm">
+				<option value="All">All</option>
+				@for (pokemonType of POKEMON_TYPES; track pokemonType) {
+				<option [value]="pokemonType">{{pokemonType}}</option>
+				}
+			</select>
+		</div>
+
 		<button>Fullscreen</button>
 	</div>
 	<div class="collection-cards">

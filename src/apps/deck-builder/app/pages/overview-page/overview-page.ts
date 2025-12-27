@@ -33,18 +33,33 @@ type DeckCard = TcgDexCollectionCard & {
 
 const REGULATION_MARKS_IN_ROTAION = ['G', 'H', 'I'] as const satisfies string[];
 
+const POKEMON_TYPE = {
+	GRASS: 'Grass',
+	FIRE: 'Fire',
+	WATER: 'Water',
+	LIGHTNING: 'Lightning',
+	FIGHTING: 'Fighting',
+	PSYCHIC: 'Psychic',
+	COLORLESS: 'Colorless',
+	DARKNESS: 'Darkness',
+	METAL: 'Metal',
+	DRAGON: 'Dragon',
+} as const satisfies Record<Uppercase<string>, string>;
+
+type PokemonType = (typeof POKEMON_TYPE)[keyof typeof POKEMON_TYPE];
+
 const POKEMON_TYPES = [
-	'Grass',
-	'Fire',
-	'Water',
-	'Lightning',
-	'Fighting',
-	'Psychic',
-	'Colorless',
-	'Darkness',
-	'Metal',
-	'Dragon',
-] as const satisfies string[];
+	POKEMON_TYPE.GRASS,
+	POKEMON_TYPE.FIRE,
+	POKEMON_TYPE.WATER,
+	POKEMON_TYPE.LIGHTNING,
+	POKEMON_TYPE.FIGHTING,
+	POKEMON_TYPE.PSYCHIC,
+	POKEMON_TYPE.COLORLESS,
+	POKEMON_TYPE.DARKNESS,
+	POKEMON_TYPE.METAL,
+	POKEMON_TYPE.DRAGON,
+] as const satisfies PokemonType[];
 
 @Component({
 	selector: 'overview-page',
@@ -87,6 +102,15 @@ export class OverviewPage {
 		this.inRotationFilter,
 	);
 
+	protected POKEMON_TYPES: typeof POKEMON_TYPES = POKEMON_TYPES;
+
+	protected pokemonTypeFilter: WritableSignal<PokemonType | 'All'> =
+		signal('All');
+
+	protected pokemonTypeFilterForm: FieldTree<PokemonType | 'All'> = form(
+		this.pokemonTypeFilter,
+	);
+
 	protected filteredTcgDexCollectionCards: Signal<TcgDexCollectionCard[]> =
 		computed(() => {
 			let filteredTcgDexCollectionCards: TcgDexCollectionCard[] =
@@ -113,6 +137,16 @@ export class OverviewPage {
 							REGULATION_MARKS_IN_ROTAION;
 
 						return allowedRegulationMarks.includes(card.regulationMark ?? '');
+					},
+				);
+			}
+
+			const pokemonTypeFilter: PokemonType | 'All' = this.pokemonTypeFilter();
+
+			if (pokemonTypeFilter !== 'All') {
+				filteredTcgDexCollectionCards = filteredTcgDexCollectionCards.filter(
+					(card) => {
+						return (card.types ?? []).includes(pokemonTypeFilter);
 					},
 				);
 			}
