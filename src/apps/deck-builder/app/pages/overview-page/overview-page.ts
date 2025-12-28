@@ -22,7 +22,6 @@ import type {
 } from '../../../../../libs/collection/model/collection-card';
 import { ENERGY_IDS } from '../../../../../libs/prebuild/model/energy';
 import { Collection } from '../../../../../libs/deck-builder/data-access/collection';
-import { TcgCard } from '../../components/tcg-card/tcg-card';
 import { converLimitlessDeckToImportString } from '../../../../../libs/limitless/feature/convert-limitless-deck-to-import-string';
 import type { WithId } from 'mongodb';
 import type { DeckCard } from '../../../../../libs/deck-builder/model/deck-card';
@@ -31,12 +30,13 @@ import { CardDetail } from "../../components/card-detail/card-detail";
 import { LoadDeckDialog } from "../../components/load-deck-dialog/load-deck-dialog";
 import { ALL, type All, type PokemonType } from '../../../../../libs/deck-builder/model/pokemon-type';
 import { CollectionPane } from "../../components/collection-pane/collection-pane";
+import { DeckPane } from "../../components/deck-pane/deck-pane";
 
 const REGULATION_MARKS_IN_ROTAION = ['G', 'H', 'I'] as const satisfies string[];
 
 @Component({
 	selector: 'overview-page',
-	imports: [TcgCard, CardDetail, LoadDeckDialog, CollectionPane],
+	imports: [CardDetail, LoadDeckDialog, CollectionPane, DeckPane],
 	templateUrl: './overview-page.html',
 	styleUrl: './overview-page.css',
 })

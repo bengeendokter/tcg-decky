@@ -1,0 +1,39 @@
+:host {
+	margin-inline: 24px;
+	background-color: var(--md-sys-color-surface);
+	border-radius: var(--md-sys-shape-corner-value-medium);
+	padding-inline: 8px;
+	padding-block-start: 8px;
+
+	display: grid;
+	grid-template-rows: auto auto 1fr;
+	gap: 16px;
+	overflow-y: hidden;
+}
+
+.heading {
+	display: grid;
+	grid-auto-flow: column;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.deck-actions {
+	display: flex;
+	gap: 12px;
+}
+
+.deck-cards {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+	justify-content: space-between;
+	gap: 8px;
+	padding-block-end: 8px;
+	align-content: start;
+	justify-items: center;
+	overflow-y: auto;
+}
+
+.deck-card {
+	width: 100%;
+}
