@@ -26,10 +26,9 @@ import { Collection } from '../../../../../libs/deck-builder/data-access/collect
 import { TcgCard } from '../../components/tcg-card/tcg-card';
 import { converLimitlessDeckToImportString } from '../../../../../libs/limitless/feature/convert-limitless-deck-to-import-string';
 import type { WithId } from 'mongodb';
-
-type DeckCard = TcgDexCollectionCard & {
-	quantity: number;
-};
+import type { DeckCard } from '../../../../../libs/deck-builder/model/deck-card';
+import { getQuantitySum } from '../../../../../libs/deck-builder/model/util/get-quantity-sum';
+import { CardDetail } from "../../components/card-detail/card-detail";
 
 const REGULATION_MARKS_IN_ROTAION = ['G', 'H', 'I'] as const satisfies string[];
 
@@ -61,28 +60,32 @@ const POKEMON_TYPES = [
 	POKEMON_TYPE.DRAGON,
 ] as const satisfies PokemonType[];
 
+const ALL = 'All' as const satisfies string;
+
+type All = typeof ALL;
+
 @Component({
 	selector: 'overview-page',
-	imports: [Field, TcgCard],
+	imports: [Field, TcgCard, CardDetail],
 	templateUrl: './overview-page.html',
 	styleUrl: './overview-page.css',
 })
 export class OverviewPage {
 	private readonly collection: Collection = inject(Collection);
 	private readonly tcgDex: TcgDex = inject(TcgDex);
-	private readonly cardDetail: Signal<ElementRef<HTMLDialogElement>> =
-		viewChild.required('cardDetail');
+	private readonly cardDetail: Signal<CardDetail> =
+		viewChild.required(CardDetail);
 	private readonly loadDeckDialog: Signal<ElementRef<HTMLDialogElement>> =
 		viewChild.required('loadDeckDialog');
 
-	protected selectedCard: WritableSignal<TcgDexCollectionCard | undefined> =
+	protected readonly selectedCard: WritableSignal<TcgDexCollectionCard | undefined> =
 		signal(undefined);
 
 	private readonly getAllCardsResource: ResourceRef<
 		CollectionCard[] | undefined
 	> = this.collection.getAllCardsResource;
 
-	protected collectionCards: Signal<CollectionCard[]> = computed(() => {
+	protected readonly collectionCards: Signal<CollectionCard[]> = computed(() => {
 		if (!this.getAllCardsResource.hasValue()) {
 			return [];
 		}
@@ -90,28 +93,29 @@ export class OverviewPage {
 		return this.getAllCardsResource.value();
 	});
 
-	protected search: WritableSignal<string> = signal('');
-	protected searchForm: FieldTree<string> = form(this.search);
+	protected readonly search: WritableSignal<string> = signal('');
+	protected readonly searchForm: FieldTree<string> = form(this.search);
 
-	protected tcgDexCollectionCards: Signal<TcgDexCollectionCard[]> =
+	protected readonly tcgDexCollectionCards: Signal<TcgDexCollectionCard[]> =
 		this.tcgDex.tcgDexCollectionCards;
 
-	protected inRotationFilter: WritableSignal<boolean> = signal(false);
+	protected readonly inRotationFilter: WritableSignal<boolean> = signal(false);
 
-	protected inRotationFilterForm: FieldTree<boolean> = form(
+	protected readonly inRotationFilterForm: FieldTree<boolean> = form(
 		this.inRotationFilter,
 	);
 
-	protected POKEMON_TYPES: typeof POKEMON_TYPES = POKEMON_TYPES;
+	protected readonly POKEMON_TYPES: typeof POKEMON_TYPES = POKEMON_TYPES;
 
-	protected pokemonTypeFilter: WritableSignal<PokemonType | 'All'> =
-		signal('All');
+	protected readonly ALL: All = ALL;
 
-	protected pokemonTypeFilterForm: FieldTree<PokemonType | 'All'> = form(
+	protected readonly pokemonTypeFilter: WritableSignal<PokemonType | All> = signal(ALL);
+
+	protected readonly pokemonTypeFilterForm: FieldTree<PokemonType | All> = form(
 		this.pokemonTypeFilter,
 	);
 
-	protected filteredTcgDexCollectionCards: Signal<TcgDexCollectionCard[]> =
+	protected readonly filteredTcgDexCollectionCards: Signal<TcgDexCollectionCard[]> =
 		computed(() => {
 			let filteredTcgDexCollectionCards: TcgDexCollectionCard[] =
 				this.tcgDexCollectionCards();
@@ -141,9 +145,9 @@ export class OverviewPage {
 				);
 			}
 
-			const pokemonTypeFilter: PokemonType | 'All' = this.pokemonTypeFilter();
+			const pokemonTypeFilter: PokemonType | All = this.pokemonTypeFilter();
 
-			if (pokemonTypeFilter !== 'All') {
+			if (pokemonTypeFilter !== ALL) {
 				filteredTcgDexCollectionCards = filteredTcgDexCollectionCards.filter(
 					(card) => {
 						return (card.types ?? []).includes(pokemonTypeFilter);
@@ -154,7 +158,7 @@ export class OverviewPage {
 			return filteredTcgDexCollectionCards;
 		});
 
-	protected sortedTcgDexCollectionCards: Signal<TcgDexCollectionCard[]> =
+	protected readonly sortedTcgDexCollectionCards: Signal<TcgDexCollectionCard[]> =
 		computed(() => {
 			const tcgDexCollectionCards: TcgDexCollectionCard[] =
 				this.filteredTcgDexCollectionCards();
@@ -203,7 +207,7 @@ export class OverviewPage {
 		TcgDexCollectionCard[] | undefined
 	> = this.tcgDex.loadedDeckTcgDexCollectionCardsResource;
 
-	protected loadedDeckCollectionCards: Signal<TcgDexCollectionCard[]> =
+	protected readonly loadedDeckCollectionCards: Signal<TcgDexCollectionCard[]> =
 		computed(() => {
 			if (!this.loadedDeckTcgDexCollectionCardsResource.hasValue()) {
 				return [];
@@ -212,15 +216,15 @@ export class OverviewPage {
 			return this.loadedDeckTcgDexCollectionCardsResource.value();
 		});
 
-	protected deckCards: WritableSignal<DeckCard[]> = signal([]);
+	protected readonly deckCards: WritableSignal<DeckCard[]> = signal([]);
 
-	protected totalCardQuantity: Signal<number> = computed(() => {
+	protected readonly totalCardQuantity: Signal<number> = computed(() => {
 		return this.deckCards().reduce((total, card) => {
 			return total + card.quantity;
 		}, 0);
 	});
 
-	protected selectedDeckCard: Signal<DeckCard | undefined> = computed(() => {
+	protected readonly selectedDeckCard: Signal<DeckCard | undefined> = computed(() => {
 		const selectedCard: TcgDexCollectionCard | undefined = this.selectedCard();
 
 		if (selectedCard === undefined) {
@@ -254,7 +258,7 @@ export class OverviewPage {
 		return { ...selectedDeckCard, variants };
 	});
 
-	private deckCollectionCards: Signal<CollectionCard[]> = computed(() => {
+	private readonly deckCollectionCards: Signal<CollectionCard[]> = computed(() => {
 		return this.deckCards().map((deckCard) => {
 			return { ...deckCard, variants: { normal: deckCard.quantity } };
 		});
@@ -264,9 +268,9 @@ export class OverviewPage {
 		WithId<CollectionCardDeck>[] | undefined
 	> = this.collection.getAllDecksResource;
 
-	protected selectedDeckId: WritableSignal<string> = signal('');
+	protected readonly selectedDeckId: WritableSignal<string> = signal('');
 
-	private selectedDeck: Signal<CollectionCardDeck | undefined> = computed(
+	private readonly selectedDeck: Signal<CollectionCardDeck | undefined> = computed(
 		() => {
 			const selectedDeckId: string = this.selectedDeckId();
 
@@ -280,11 +284,11 @@ export class OverviewPage {
 		},
 	);
 
-	protected existingDeck: Signal<boolean> = computed(() => {
+	protected readonly existingDeck: Signal<boolean> = computed(() => {
 		return this.selectedDeckId() !== '';
 	});
 
-	private collectionDecks: Signal<WithId<CollectionCardDeck>[]> = computed(
+	private readonly collectionDecks: Signal<WithId<CollectionCardDeck>[]> = computed(
 		() => {
 			if (!this.getAllDecksResource.hasValue()) {
 				return [];
@@ -294,7 +298,7 @@ export class OverviewPage {
 		},
 	);
 
-	protected sortedCollectionDecks: Signal<WithId<CollectionCardDeck>[]> =
+	protected readonly sortedCollectionDecks: Signal<WithId<CollectionCardDeck>[]> =
 		computed(() => {
 			const collectionDecks: WithId<CollectionCardDeck>[] =
 				this.collectionDecks();
@@ -304,11 +308,11 @@ export class OverviewPage {
 			});
 		});
 
-	protected selectedLoadDeckId: WritableSignal<string> = signal('');
+	protected readonly selectedLoadDeckId: WritableSignal<string> = signal('');
 
-	protected loadDeckForm: FieldTree<string> = form(this.selectedLoadDeckId);
+	protected readonly loadDeckForm: FieldTree<string> = form(this.selectedLoadDeckId);
 
-	protected deckName: Signal<string> = computed(() => {
+	protected readonly deckName: Signal<string> = computed(() => {
 		const selectedDeck: CollectionCardDeck | undefined = this.selectedDeck();
 
 		if (selectedDeck === undefined) {
@@ -317,6 +321,8 @@ export class OverviewPage {
 
 		return selectedDeck.name;
 	});
+
+	protected readonly getQuantitySum: typeof getQuantitySum = getQuantitySum;
 
 	constructor() {
 		effect(() => {
@@ -344,7 +350,7 @@ export class OverviewPage {
 				this.loadedDeckCollectionCards().map((tcgDexCollectionCard) => {
 					return {
 						...tcgDexCollectionCard,
-						quantity: this.getQuantitySum(tcgDexCollectionCard.variants),
+						quantity: getQuantitySum(tcgDexCollectionCard.variants),
 					};
 				});
 
@@ -352,26 +358,12 @@ export class OverviewPage {
 		});
 	}
 
-	protected getQuantitySum(variants: CollectionCard['variants']): number {
-		const firstEdition: number = variants.firstEdition ?? 0;
-		const holo: number = variants.holo ?? 0;
-		const normal: number = variants.normal ?? 0;
-		const reverse: number = variants.reverse ?? 0;
-		const wPromo: number = variants.wPromo ?? 0;
-
-		return firstEdition + holo + normal + reverse + wPromo;
-	}
-
 	protected openCardDetail(card: TcgDexCollectionCard): void {
 		this.selectedCard.set(card);
-		this.cardDetail().nativeElement.showModal();
+		this.cardDetail().openCardDetail();
 	}
 
-	protected closeCardDetail(): void {
-		this.cardDetail().nativeElement.close();
-	}
-
-	protected addCard(card: TcgDexCollectionCard | DeckCard): void {
+	protected addCard(card: DeckCard): void {
 		const deckCards: DeckCard[] = this.deckCards();
 
 		if (deckCards.length === 0) {
@@ -402,7 +394,7 @@ export class OverviewPage {
 				return deckCard;
 			}
 
-			const collectionMaxQuantity: number = this.getQuantitySum(
+			const collectionMaxQuantity: number = getQuantitySum(
 				matchingCollectionCard.variants,
 			);
 
@@ -417,7 +409,7 @@ export class OverviewPage {
 		this.deckCards.set(deckCardsWithNewQuantities);
 	}
 
-	protected removeCard(card: TcgDexCollectionCard | DeckCard): void {
+	protected removeCard(card: DeckCard): void {
 		const deckCards: DeckCard[] = this.deckCards();
 
 		if (deckCards.length === 0) {

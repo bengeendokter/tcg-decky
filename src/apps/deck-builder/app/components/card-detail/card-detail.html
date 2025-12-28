@@ -1,0 +1,17 @@
+@let detailCard = selectedDeckCard();
+<dialog #cardDetail closedby="any">
+	<div class="detail">
+		@if(detailCard) {
+		@let deckQuantity = detailCard.quantity;
+		@let collectionQuantity = getQuantitySum(detailCard.variants);
+		<tcg-card (click)="closeCardDetail()" class="detail-card"
+			[style.--background-image-url]="`url(${detailCard.image}/high.webp)`"></tcg-card>
+		<div class="detail-actions">
+			<button (click)="removeCard.emit(detailCard)" [disabled]="deckQuantity === 0">-</button>
+			<span>{{deckQuantity.toString().padStart(2,
+				"0")}}/{{collectionQuantity.toString().padStart(2, "0")}}</span>
+			<button (click)="addCard.emit(detailCard)" [disabled]="deckQuantity === collectionQuantity">+</button>
+		</div>
+		}
+	</div>
+</dialog>
