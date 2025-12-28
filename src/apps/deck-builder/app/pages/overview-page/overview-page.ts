@@ -2,7 +2,6 @@ import {
 	Component,
 	computed,
 	effect,
-	ElementRef,
 	inject,
 	signal,
 	viewChild,
@@ -10,7 +9,7 @@ import {
 	type Signal,
 	type WritableSignal,
 } from '@angular/core';
-import { Field, type FieldTree, form } from '@angular/forms/signals';
+import { type FieldTree, form } from '@angular/forms/signals';
 import { TcgDex } from '../../../../../libs/deck-builder/data-access/tcg-dex';
 import type { TcgDexCollectionCard } from '../../../../../libs/deck-builder/model/tcg-dex-collection-card';
 import {
@@ -30,44 +29,14 @@ import type { DeckCard } from '../../../../../libs/deck-builder/model/deck-card'
 import { getQuantitySum } from '../../../../../libs/deck-builder/util/get-quantity-sum';
 import { CardDetail } from "../../components/card-detail/card-detail";
 import { LoadDeckDialog } from "../../components/load-deck-dialog/load-deck-dialog";
+import { ALL, type All, type PokemonType } from '../../../../../libs/deck-builder/model/pokemon-type';
+import { CollectionPane } from "../../components/collection-pane/collection-pane";
 
 const REGULATION_MARKS_IN_ROTAION = ['G', 'H', 'I'] as const satisfies string[];
 
-const POKEMON_TYPE = {
-	GRASS: 'Grass',
-	FIRE: 'Fire',
-	WATER: 'Water',
-	LIGHTNING: 'Lightning',
-	FIGHTING: 'Fighting',
-	PSYCHIC: 'Psychic',
-	COLORLESS: 'Colorless',
-	DARKNESS: 'Darkness',
-	METAL: 'Metal',
-	DRAGON: 'Dragon',
-} as const satisfies Record<Uppercase<string>, string>;
-
-type PokemonType = (typeof POKEMON_TYPE)[keyof typeof POKEMON_TYPE];
-
-const POKEMON_TYPES = [
-	POKEMON_TYPE.GRASS,
-	POKEMON_TYPE.FIRE,
-	POKEMON_TYPE.WATER,
-	POKEMON_TYPE.LIGHTNING,
-	POKEMON_TYPE.FIGHTING,
-	POKEMON_TYPE.PSYCHIC,
-	POKEMON_TYPE.COLORLESS,
-	POKEMON_TYPE.DARKNESS,
-	POKEMON_TYPE.METAL,
-	POKEMON_TYPE.DRAGON,
-] as const satisfies PokemonType[];
-
-const ALL = 'All' as const satisfies string;
-
-type All = typeof ALL;
-
 @Component({
 	selector: 'overview-page',
-	imports: [Field, TcgCard, CardDetail, LoadDeckDialog],
+	imports: [TcgCard, CardDetail, LoadDeckDialog, CollectionPane],
 	templateUrl: './overview-page.html',
 	styleUrl: './overview-page.css',
 })
@@ -105,10 +74,6 @@ export class OverviewPage {
 	protected readonly inRotationFilterForm: FieldTree<boolean> = form(
 		this.inRotationFilter,
 	);
-
-	protected readonly POKEMON_TYPES: typeof POKEMON_TYPES = POKEMON_TYPES;
-
-	protected readonly ALL: All = ALL;
 
 	protected readonly pokemonTypeFilter: WritableSignal<PokemonType | All> = signal(ALL);
 

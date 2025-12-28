@@ -1,0 +1,30 @@
+<div class="collection-actions">
+	<search>
+		<input type="search" [field]="searchForm()" placeholder="Search name">
+	</search>
+
+	<label for="in-rotation-filter">
+		<input id="in-rotation-filter" type="checkbox" [field]="inRotationFilterForm()">
+		In rotation
+	</label>
+
+	<div>
+		<label for="pokemon-type-filter"
+			[style.--md-comp-outlined-text-field-label-text-background-color]="'var(--md-sys-color-surface-container)'">Pokemon
+			Type</label>
+		<select id="pokemon-type-filter" [field]="pokemonTypeFilterForm()">
+			<option [value]="ALL">{{ALL}}</option>
+			@for (pokemonType of POKEMON_TYPES; track pokemonType) {
+			<option [value]="pokemonType">{{pokemonType}}</option>
+			}
+		</select>
+	</div>
+
+	<button>Fullscreen</button>
+</div>
+<div class="collection-cards">
+	@for(card of sortedTcgDexCollectionCards(); track card.id) {
+	<tcg-card (click)="openCardDetail.emit(card)" [quantity]="getQuantitySum(card.variants)"
+		[style.--background-image-url]="`url(${card.image}/low.webp)`"></tcg-card>
+	}
+</div>

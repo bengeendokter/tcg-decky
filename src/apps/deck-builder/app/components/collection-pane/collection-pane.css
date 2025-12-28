@@ -1,0 +1,19 @@
+:host {
+	display: grid;
+	gap: 16px;
+}
+
+.collection-actions {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-inline: 24px;
+}
+
+.collection-cards {
+	padding-inline: 24px;
+	display: flex;
+	gap: 8px;
+	overflow-x: auto;
+	min-height: calc(100px * 87 / 63);
+}
