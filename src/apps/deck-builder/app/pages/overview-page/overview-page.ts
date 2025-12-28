@@ -9,7 +9,7 @@ import {
 	type Signal,
 	type WritableSignal,
 } from '@angular/core';
-import { type FieldTree, form } from '@angular/forms/signals';
+import { type FieldTree, form, required } from '@angular/forms/signals';
 import { TcgDex } from '../../../../../libs/deck-builder/data-access/tcg-dex';
 import type { TcgDexCollectionCard } from '../../../../../libs/deck-builder/model/tcg-dex-collection-card';
 import {
@@ -35,12 +35,19 @@ import {
 } from '../../../../../libs/deck-builder/model/pokemon-type';
 import { CollectionPane } from '../../components/collection-pane/collection-pane';
 import { DeckPane } from '../../components/deck-pane/deck-pane';
+import { CreateDeckDialog } from '../../components/create-deck-dialog/create-deck-dialog';
 
 const REGULATION_MARKS_IN_ROTAION = ['G', 'H', 'I'] as const satisfies string[];
 
 @Component({
 	selector: 'overview-page',
-	imports: [CardDetail, LoadDeckDialog, CollectionPane, DeckPane],
+	imports: [
+		CardDetail,
+		LoadDeckDialog,
+		CollectionPane,
+		DeckPane,
+		CreateDeckDialog,
+	],
 	templateUrl: './overview-page.html',
 	styleUrl: './overview-page.css',
 	host: {
@@ -54,6 +61,8 @@ export class OverviewPage {
 		viewChild.required(CardDetail);
 	private readonly loadDeckDialog: Signal<LoadDeckDialog> =
 		viewChild.required(LoadDeckDialog);
+	private readonly createDeckDialog: Signal<CreateDeckDialog> =
+		viewChild.required(CreateDeckDialog);
 
 	protected readonly collectionFullscreen: WritableSignal<boolean> =
 		signal(false);
@@ -311,6 +320,14 @@ export class OverviewPage {
 
 	protected readonly getQuantitySum: typeof getQuantitySum = getQuantitySum;
 
+	protected readonly inputDeckName: WritableSignal<string> = signal('');
+	protected readonly deckNameForm: FieldTree<string> = form(
+		this.inputDeckName,
+		(inputDeckName) => {
+			required(inputDeckName);
+		},
+	);
+
 	constructor() {
 		effect(() => {
 			const collectionCards: CollectionCard[] = this.collectionCards();
@@ -452,16 +469,14 @@ export class OverviewPage {
 		window.open(limitlessDeckBuilderUrl.href, '_blank');
 	}
 
+	protected openCreateDeckDialog(): void {
+		this.inputDeckName.set(this.deckName());
+		this.createDeckDialog().openCreateDeckDialog();
+	}
+
 	protected async addCollectionCardDeck(): Promise<void> {
-		const name: string | null = prompt('Deck name:', this.deckName());
-
-		if (name === null) {
-			alert('Deck has not been saved.');
-			return;
-		}
-
 		const deck: CollectionCardDeck = {
-			name,
+			name: this.inputDeckName(),
 			cards: this.deckCollectionCards(),
 		};
 

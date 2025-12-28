@@ -1,0 +1,13 @@
+<dialog #createDeckDialog closedby="any">
+	<div class="create-deck">
+		<h2 class="md-typescale-headline-small">Create new deck</h2>
+		<div>
+			<label for="deck-name">Name</label>
+			<input type="text" id="deck-name" class="create-deck-name" [field]="deckNameForm()">
+		</div>
+		<div class="create-deck-actions">
+			<button (click)="closeCreateDeckDialog()">Cancel</button>
+			<button (click)="createDeckAndCloseDialog()" [disabled]="deckNameForm()().invalid()">Create</button>
+		</div>
+	</div>
+</dialog>

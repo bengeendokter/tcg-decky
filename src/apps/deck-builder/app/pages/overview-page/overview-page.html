@@ -1,12 +1,14 @@
 <deck-pane [deckName]="deckName()" [totalCardQuantity]="totalCardQuantity()" [existingDeck]="existingDeck()"
 	[deckCards]="deckCards()" (updateCollectionCardDeck)="updateCollectionCardDeck()"
-	(addCollectionCardDeck)="addCollectionCardDeck()" (openLoadDeckDialog)="openLoadDeckDialog()" (reset)="reset()"
+	(addCollectionCardDeck)="openCreateDeckDialog()" (openLoadDeckDialog)="openLoadDeckDialog()" (reset)="reset()"
 	(deleteCollectionCardDeck)="deleteCollectionCardDeck()" (openLimitlessDeckBuilder)="openLimitlessDeckBuilder()"
 	(openCardDetail)="openCardDetail($event)" class="deck-pane"></deck-pane>
 <collection-pane [sortedTcgDexCollectionCards]="sortedTcgDexCollectionCards()" [searchForm]="searchForm"
 	[inRotationFilterForm]="inRotationFilterForm" [pokemonTypeFilterForm]="pokemonTypeFilterForm"
-	(openCardDetail)="openCardDetail($event)" (toggleFullscreen)="toggleFullscreen()" class="collection-pane"></collection-pane>
+	(openCardDetail)="openCardDetail($event)" (toggleFullscreen)="toggleFullscreen()"
+	class="collection-pane"></collection-pane>
 <card-detail [selectedDeckCard]="selectedDeckCard()" (removeCard)="removeCard($event)"
 	(addCard)="addCard($event)"></card-detail>
 <load-deck-dialog [loadDeckForm]="loadDeckForm" [sortedCollectionDecks]="sortedCollectionDecks()"
 	(loadDeck)="loadDeck()"></load-deck-dialog>
+<create-deck-dialog [deckNameForm]="deckNameForm" (createDeck)="addCollectionCardDeck()"></create-deck-dialog>
