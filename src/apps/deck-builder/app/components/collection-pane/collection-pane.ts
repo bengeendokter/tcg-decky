@@ -32,6 +32,7 @@ export class CollectionPane {
 		input.required();
 	public readonly pokemonTypeFilterForm: InputSignal<FieldTree<PokemonType | All>> =
 		input.required();
+	public readonly toggleFullscreen: OutputEmitterRef<void> = output();
 	public readonly openCardDetail: OutputEmitterRef<TcgDexCollectionCard> = output();
 
 	protected readonly POKEMON_TYPES: typeof POKEMON_TYPES = POKEMON_TYPES;

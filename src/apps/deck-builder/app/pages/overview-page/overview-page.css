@@ -1,8 +1,29 @@
 :host {
 	display: grid;
-	grid-template-rows: 1fr auto;
+	grid-template-rows: 1fr 225px;
 	height: 100%;
 	background-color: var(--md-sys-color-surface-container);
 	padding-block: 24px;
 	gap: 24px;
+	grid-template-areas:
+		"deck-pane"
+		"collection-pane";
+
+	&.collection-fullscreen {
+		grid-template-rows: 1fr;
+		grid-template-areas:
+			"collection-pane";
+
+		.deck-pane {
+			display: none;
+		}
+	}
+}
+
+.deck-pane {
+	grid-area: deck-pane;
+}
+
+.collection-pane {
+	grid-area: collection-pane;
 }

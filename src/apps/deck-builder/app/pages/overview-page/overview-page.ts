@@ -26,11 +26,15 @@ import { converLimitlessDeckToImportString } from '../../../../../libs/limitless
 import type { WithId } from 'mongodb';
 import type { DeckCard } from '../../../../../libs/deck-builder/model/deck-card';
 import { getQuantitySum } from '../../../../../libs/deck-builder/util/get-quantity-sum';
-import { CardDetail } from "../../components/card-detail/card-detail";
-import { LoadDeckDialog } from "../../components/load-deck-dialog/load-deck-dialog";
-import { ALL, type All, type PokemonType } from '../../../../../libs/deck-builder/model/pokemon-type';
-import { CollectionPane } from "../../components/collection-pane/collection-pane";
-import { DeckPane } from "../../components/deck-pane/deck-pane";
+import { CardDetail } from '../../components/card-detail/card-detail';
+import { LoadDeckDialog } from '../../components/load-deck-dialog/load-deck-dialog';
+import {
+	ALL,
+	type All,
+	type PokemonType,
+} from '../../../../../libs/deck-builder/model/pokemon-type';
+import { CollectionPane } from '../../components/collection-pane/collection-pane';
+import { DeckPane } from '../../components/deck-pane/deck-pane';
 
 const REGULATION_MARKS_IN_ROTAION = ['G', 'H', 'I'] as const satisfies string[];
 
@@ -39,6 +43,9 @@ const REGULATION_MARKS_IN_ROTAION = ['G', 'H', 'I'] as const satisfies string[];
 	imports: [CardDetail, LoadDeckDialog, CollectionPane, DeckPane],
 	templateUrl: './overview-page.html',
 	styleUrl: './overview-page.css',
+	host: {
+		'[class.collection-fullscreen]': 'collectionFullscreen()',
+	},
 })
 export class OverviewPage {
 	private readonly collection: Collection = inject(Collection);
@@ -48,20 +55,26 @@ export class OverviewPage {
 	private readonly loadDeckDialog: Signal<LoadDeckDialog> =
 		viewChild.required(LoadDeckDialog);
 
-	protected readonly selectedCard: WritableSignal<TcgDexCollectionCard | undefined> =
-		signal(undefined);
+	protected readonly collectionFullscreen: WritableSignal<boolean> =
+		signal(false);
+
+	protected readonly selectedCard: WritableSignal<
+		TcgDexCollectionCard | undefined
+	> = signal(undefined);
 
 	private readonly getAllCardsResource: ResourceRef<
 		CollectionCard[] | undefined
 	> = this.collection.getAllCardsResource;
 
-	protected readonly collectionCards: Signal<CollectionCard[]> = computed(() => {
-		if (!this.getAllCardsResource.hasValue()) {
-			return [];
-		}
+	protected readonly collectionCards: Signal<CollectionCard[]> = computed(
+		() => {
+			if (!this.getAllCardsResource.hasValue()) {
+				return [];
+			}
 
-		return this.getAllCardsResource.value();
-	});
+			return this.getAllCardsResource.value();
+		},
+	);
 
 	protected readonly search: WritableSignal<string> = signal('');
 	protected readonly searchForm: FieldTree<string> = form(this.search);
@@ -75,99 +88,101 @@ export class OverviewPage {
 		this.inRotationFilter,
 	);
 
-	protected readonly pokemonTypeFilter: WritableSignal<PokemonType | All> = signal(ALL);
+	protected readonly pokemonTypeFilter: WritableSignal<PokemonType | All> =
+		signal(ALL);
 
 	protected readonly pokemonTypeFilterForm: FieldTree<PokemonType | All> = form(
 		this.pokemonTypeFilter,
 	);
 
-	protected readonly filteredTcgDexCollectionCards: Signal<TcgDexCollectionCard[]> =
-		computed(() => {
-			let filteredTcgDexCollectionCards: TcgDexCollectionCard[] =
-				this.tcgDexCollectionCards();
+	protected readonly filteredTcgDexCollectionCards: Signal<
+		TcgDexCollectionCard[]
+	> = computed(() => {
+		let filteredTcgDexCollectionCards: TcgDexCollectionCard[] =
+			this.tcgDexCollectionCards();
 
-			const searchValue: string = this.searchForm().value().toLocaleLowerCase();
+		const searchValue: string = this.searchForm().value().toLocaleLowerCase();
 
-			if (searchValue) {
-				filteredTcgDexCollectionCards = filteredTcgDexCollectionCards.filter(
-					(card) => {
-						return card.name.toLocaleLowerCase().includes(searchValue);
-					},
-				);
-			}
-
-			if (this.inRotationFilter()) {
-				filteredTcgDexCollectionCards = filteredTcgDexCollectionCards.filter(
-					(card) => {
-						if (card.category === CATEGORY.ENERGY) {
-							return true;
-						}
-
-						const allowedRegulationMarks: string[] =
-							REGULATION_MARKS_IN_ROTAION;
-
-						return allowedRegulationMarks.includes(card.regulationMark ?? '');
-					},
-				);
-			}
-
-			const pokemonTypeFilter: PokemonType | All = this.pokemonTypeFilter();
-
-			if (pokemonTypeFilter !== ALL) {
-				filteredTcgDexCollectionCards = filteredTcgDexCollectionCards.filter(
-					(card) => {
-						return (card.types ?? []).includes(pokemonTypeFilter);
-					},
-				);
-			}
-
-			return filteredTcgDexCollectionCards;
-		});
-
-	protected readonly sortedTcgDexCollectionCards: Signal<TcgDexCollectionCard[]> =
-		computed(() => {
-			const tcgDexCollectionCards: TcgDexCollectionCard[] =
-				this.filteredTcgDexCollectionCards();
-
-			const categorySortOrderMap: Map<string, number> = new Map(
-				Object.entries({
-					[CATEGORY.POKEMON]: 1,
-					[CATEGORY.TRAINER]: 2,
-					[CATEGORY.ENERGY]: 3,
-				}),
+		if (searchValue) {
+			filteredTcgDexCollectionCards = filteredTcgDexCollectionCards.filter(
+				(card) => {
+					return card.name.toLocaleLowerCase().includes(searchValue);
+				},
 			);
+		}
 
-			const setReleaseDateMap: Map<string, Date> =
-				this.tcgDex.setReleaseDateMap();
+		if (this.inRotationFilter()) {
+			filteredTcgDexCollectionCards = filteredTcgDexCollectionCards.filter(
+				(card) => {
+					if (card.category === CATEGORY.ENERGY) {
+						return true;
+					}
 
-			return tcgDexCollectionCards.toSorted((card1, card2) => {
-				const cateorySortValue1: number =
-					categorySortOrderMap.get(card1.category) ?? 0;
-				const cateorySortValue2: number =
-					categorySortOrderMap.get(card2.category) ?? 0;
+					const allowedRegulationMarks: string[] = REGULATION_MARKS_IN_ROTAION;
 
-				const cateorySortDiff: number = cateorySortValue1 - cateorySortValue2;
+					return allowedRegulationMarks.includes(card.regulationMark ?? '');
+				},
+			);
+		}
 
-				if (cateorySortDiff !== 0) {
-					return cateorySortDiff;
-				}
+		const pokemonTypeFilter: PokemonType | All = this.pokemonTypeFilter();
 
-				const releaseDateSet1: Date =
-					setReleaseDateMap.get(card1.set.id) ?? new Date(0);
+		if (pokemonTypeFilter !== ALL) {
+			filteredTcgDexCollectionCards = filteredTcgDexCollectionCards.filter(
+				(card) => {
+					return (card.types ?? []).includes(pokemonTypeFilter);
+				},
+			);
+		}
 
-				const releaseDateSet2: Date =
-					setReleaseDateMap.get(card2.set.id) ?? new Date(0);
+		return filteredTcgDexCollectionCards;
+	});
 
-				const releaseDateDiff: number =
-					releaseDateSet1.getTime() - releaseDateSet2.getTime();
+	protected readonly sortedTcgDexCollectionCards: Signal<
+		TcgDexCollectionCard[]
+	> = computed(() => {
+		const tcgDexCollectionCards: TcgDexCollectionCard[] =
+			this.filteredTcgDexCollectionCards();
 
-				if (releaseDateDiff !== 0) {
-					return releaseDateDiff;
-				}
+		const categorySortOrderMap: Map<string, number> = new Map(
+			Object.entries({
+				[CATEGORY.POKEMON]: 1,
+				[CATEGORY.TRAINER]: 2,
+				[CATEGORY.ENERGY]: 3,
+			}),
+		);
 
-				return parseInt(card1.localId) - parseInt(card2.localId);
-			});
+		const setReleaseDateMap: Map<string, Date> =
+			this.tcgDex.setReleaseDateMap();
+
+		return tcgDexCollectionCards.toSorted((card1, card2) => {
+			const cateorySortValue1: number =
+				categorySortOrderMap.get(card1.category) ?? 0;
+			const cateorySortValue2: number =
+				categorySortOrderMap.get(card2.category) ?? 0;
+
+			const cateorySortDiff: number = cateorySortValue1 - cateorySortValue2;
+
+			if (cateorySortDiff !== 0) {
+				return cateorySortDiff;
+			}
+
+			const releaseDateSet1: Date =
+				setReleaseDateMap.get(card1.set.id) ?? new Date(0);
+
+			const releaseDateSet2: Date =
+				setReleaseDateMap.get(card2.set.id) ?? new Date(0);
+
+			const releaseDateDiff: number =
+				releaseDateSet1.getTime() - releaseDateSet2.getTime();
+
+			if (releaseDateDiff !== 0) {
+				return releaseDateDiff;
+			}
+
+			return parseInt(card1.localId) - parseInt(card2.localId);
 		});
+	});
 
 	private readonly loadedDeckTcgDexCollectionCardsResource: ResourceRef<
 		TcgDexCollectionCard[] | undefined
@@ -190,45 +205,50 @@ export class OverviewPage {
 		}, 0);
 	});
 
-	protected readonly selectedDeckCard: Signal<DeckCard | undefined> = computed(() => {
-		const selectedCard: TcgDexCollectionCard | undefined = this.selectedCard();
+	protected readonly selectedDeckCard: Signal<DeckCard | undefined> = computed(
+		() => {
+			const selectedCard: TcgDexCollectionCard | undefined =
+				this.selectedCard();
 
-		if (selectedCard === undefined) {
-			return undefined;
-		}
+			if (selectedCard === undefined) {
+				return undefined;
+			}
 
-		const deckCards: DeckCard[] = this.deckCards();
+			const deckCards: DeckCard[] = this.deckCards();
 
-		const selectedDeckCard: DeckCard | undefined = deckCards.find(
-			(deckCard) => {
-				return deckCard._id === selectedCard._id;
-			},
-		);
+			const selectedDeckCard: DeckCard | undefined = deckCards.find(
+				(deckCard) => {
+					return deckCard._id === selectedCard._id;
+				},
+			);
 
-		const selectedCollectionCard: CollectionCard | undefined =
-			this.collectionCards().find((collectionCard) => {
-				return collectionCard._id === selectedCard._id;
+			const selectedCollectionCard: CollectionCard | undefined =
+				this.collectionCards().find((collectionCard) => {
+					return collectionCard._id === selectedCard._id;
+				});
+
+			const variants: CollectionCard['variants'] =
+				selectedCollectionCard?.variants ?? { normal: 99 };
+
+			if (selectedDeckCard === undefined) {
+				return {
+					...selectedCard,
+					variants,
+					quantity: 0,
+				};
+			}
+
+			return { ...selectedDeckCard, variants };
+		},
+	);
+
+	private readonly deckCollectionCards: Signal<CollectionCard[]> = computed(
+		() => {
+			return this.deckCards().map((deckCard) => {
+				return { ...deckCard, variants: { normal: deckCard.quantity } };
 			});
-
-		const variants: CollectionCard['variants'] =
-			selectedCollectionCard?.variants ?? { normal: 99 };
-
-		if (selectedDeckCard === undefined) {
-			return {
-				...selectedCard,
-				variants,
-				quantity: 0,
-			};
-		}
-
-		return { ...selectedDeckCard, variants };
-	});
-
-	private readonly deckCollectionCards: Signal<CollectionCard[]> = computed(() => {
-		return this.deckCards().map((deckCard) => {
-			return { ...deckCard, variants: { normal: deckCard.quantity } };
-		});
-	});
+		},
+	);
 
 	private readonly getAllDecksResource: ResourceRef<
 		WithId<CollectionCardDeck>[] | undefined
@@ -236,8 +256,8 @@ export class OverviewPage {
 
 	protected readonly selectedDeckId: WritableSignal<string> = signal('');
 
-	private readonly selectedDeck: Signal<CollectionCardDeck | undefined> = computed(
-		() => {
+	private readonly selectedDeck: Signal<CollectionCardDeck | undefined> =
+		computed(() => {
 			const selectedDeckId: string = this.selectedDeckId();
 
 			if (selectedDeckId === '') {
@@ -247,36 +267,37 @@ export class OverviewPage {
 			return this.collectionDecks().find(
 				(deck) => deck._id.toString() === selectedDeckId,
 			);
-		},
-	);
+		});
 
 	protected readonly existingDeck: Signal<boolean> = computed(() => {
 		return this.selectedDeckId() !== '';
 	});
 
-	private readonly collectionDecks: Signal<WithId<CollectionCardDeck>[]> = computed(
-		() => {
+	private readonly collectionDecks: Signal<WithId<CollectionCardDeck>[]> =
+		computed(() => {
 			if (!this.getAllDecksResource.hasValue()) {
 				return [];
 			}
 
 			return this.getAllDecksResource.value();
-		},
-	);
-
-	protected readonly sortedCollectionDecks: Signal<WithId<CollectionCardDeck>[]> =
-		computed(() => {
-			const collectionDecks: WithId<CollectionCardDeck>[] =
-				this.collectionDecks();
-
-			return collectionDecks.toSorted((card1, card2) => {
-				return card1.name.localeCompare(card2.name);
-			});
 		});
+
+	protected readonly sortedCollectionDecks: Signal<
+		WithId<CollectionCardDeck>[]
+	> = computed(() => {
+		const collectionDecks: WithId<CollectionCardDeck>[] =
+			this.collectionDecks();
+
+		return collectionDecks.toSorted((card1, card2) => {
+			return card1.name.localeCompare(card2.name);
+		});
+	});
 
 	protected readonly selectedLoadDeckId: WritableSignal<string> = signal('');
 
-	protected readonly loadDeckForm: FieldTree<string> = form(this.selectedLoadDeckId);
+	protected readonly loadDeckForm: FieldTree<string> = form(
+		this.selectedLoadDeckId,
+	);
 
 	protected readonly deckName: Signal<string> = computed(() => {
 		const selectedDeck: CollectionCardDeck | undefined = this.selectedDeck();
@@ -495,5 +516,9 @@ export class OverviewPage {
 		alert('Deck has been updated!');
 
 		this.getAllDecksResource.reload();
+	}
+
+	protected toggleFullscreen(): void {
+		this.collectionFullscreen.update((isFullscreen) => !isFullscreen);
 	}
 }

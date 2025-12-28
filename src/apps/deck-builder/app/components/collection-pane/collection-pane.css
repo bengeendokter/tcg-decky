@@ -1,6 +1,10 @@
 :host {
 	display: grid;
+	grid-template-rows: auto 1fr;
 	gap: 16px;
+	align-items: center;
+	align-content: start;
+	container-type: size;
 }
 
 .collection-actions {
@@ -11,9 +15,25 @@
 }
 
 .collection-cards {
-	padding-inline: 24px;
 	display: flex;
+	padding-inline: 24px;
 	gap: 8px;
 	overflow-x: auto;
-	min-height: calc(100px * 87 / 63);
+	height: 100%;
+
+	@container (height > 300px) {
+		display: grid;
+		padding-inline: unset;
+		margin-inline: 24px;
+		overflow-x: unset;
+		overflow-y: auto;
+		grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+		justify-content: space-between;
+		align-content: start;
+		justify-items: center;
+
+		.collection-card {
+			width: 100%;
+		}
+	}
 }

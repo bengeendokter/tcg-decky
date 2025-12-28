@@ -20,11 +20,11 @@
 		</select>
 	</div>
 
-	<button>Fullscreen</button>
+	<button (click)="toggleFullscreen.emit()">Fullscreen</button>
 </div>
 <div class="collection-cards">
 	@for(card of sortedTcgDexCollectionCards(); track card.id) {
 	<tcg-card (click)="openCardDetail.emit(card)" [quantity]="getQuantitySum(card.variants)"
-		[style.--background-image-url]="`url(${card.image}/low.webp)`"></tcg-card>
+		[style.--background-image-url]="`url(${card.image}/low.webp)`" class="collection-card"></tcg-card>
 	}
 </div>
