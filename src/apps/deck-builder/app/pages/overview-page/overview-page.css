@@ -66,37 +66,3 @@
 	overflow-x: auto;
 
 }
-
-.detail {
-	display: grid;
-	grid-template-rows: 1fr auto;
-	gap: 16px;
-}
-
-.detail-card {
-	width: 350px;
-}
-
-.detail-actions {
-	display: grid;
-	grid-auto-flow: column;
-	align-items: center;
-	justify-content: center;
-	gap: 12px;
-}
-
-.load-deck {
-	display: grid;
-	gap: 16px;
-}
-
-.load-deck-select {
-	width: 100%;
-}
-
-.load-deck-actions {
-	display: grid;
-	grid-auto-flow: column;
-	justify-content: end;
-	gap: 12px;
-}

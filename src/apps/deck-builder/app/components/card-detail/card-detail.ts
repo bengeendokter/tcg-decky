@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { TcgCard } from '../tcg-card/tcg-card';
 import type { DeckCard } from '../../../../../libs/deck-builder/model/deck-card';
-import { getQuantitySum } from '../../../../../libs/deck-builder/model/util/get-quantity-sum';
+import { getQuantitySum } from '../../../../../libs/deck-builder/util/get-quantity-sum';
 
 @Component({
 	selector: 'card-detail',
@@ -21,7 +21,7 @@ import { getQuantitySum } from '../../../../../libs/deck-builder/model/util/get-
 export class CardDetail {
 	private readonly cardDetail: Signal<ElementRef<HTMLDialogElement>> =
 		viewChild.required('cardDetail');
-	public selectedDeckCard: InputSignal<DeckCard | undefined> = input();
+	public readonly selectedDeckCard: InputSignal<DeckCard | undefined> = input();
 	protected readonly getQuantitySum: typeof getQuantitySum = getQuantitySum;
 	public readonly removeCard: OutputEmitterRef<DeckCard> = output();
 	public readonly addCard: OutputEmitterRef<DeckCard> = output();

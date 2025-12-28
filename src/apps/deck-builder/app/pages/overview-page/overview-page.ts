@@ -27,8 +27,9 @@ import { TcgCard } from '../../components/tcg-card/tcg-card';
 import { converLimitlessDeckToImportString } from '../../../../../libs/limitless/feature/convert-limitless-deck-to-import-string';
 import type { WithId } from 'mongodb';
 import type { DeckCard } from '../../../../../libs/deck-builder/model/deck-card';
-import { getQuantitySum } from '../../../../../libs/deck-builder/model/util/get-quantity-sum';
+import { getQuantitySum } from '../../../../../libs/deck-builder/util/get-quantity-sum';
 import { CardDetail } from "../../components/card-detail/card-detail";
+import { LoadDeckDialog } from "../../components/load-deck-dialog/load-deck-dialog";
 
 const REGULATION_MARKS_IN_ROTAION = ['G', 'H', 'I'] as const satisfies string[];
 
@@ -66,7 +67,7 @@ type All = typeof ALL;
 
 @Component({
 	selector: 'overview-page',
-	imports: [Field, TcgCard, CardDetail],
+	imports: [Field, TcgCard, CardDetail, LoadDeckDialog],
 	templateUrl: './overview-page.html',
 	styleUrl: './overview-page.css',
 })
@@ -75,8 +76,8 @@ export class OverviewPage {
 	private readonly tcgDex: TcgDex = inject(TcgDex);
 	private readonly cardDetail: Signal<CardDetail> =
 		viewChild.required(CardDetail);
-	private readonly loadDeckDialog: Signal<ElementRef<HTMLDialogElement>> =
-		viewChild.required('loadDeckDialog');
+	private readonly loadDeckDialog: Signal<LoadDeckDialog> =
+		viewChild.required(LoadDeckDialog);
 
 	protected readonly selectedCard: WritableSignal<TcgDexCollectionCard | undefined> =
 		signal(undefined);
@@ -487,16 +488,11 @@ export class OverviewPage {
 
 	protected openLoadDeckDialog(): void {
 		this.selectedLoadDeckId.set('');
-		this.loadDeckDialog().nativeElement.showModal();
-	}
-
-	protected closeLoadDeckDialog(): void {
-		this.loadDeckDialog().nativeElement.close();
+		this.loadDeckDialog().openLoadDeckDialog();
 	}
 
 	protected loadDeck(): void {
 		this.selectedDeckId.set(this.selectedLoadDeckId());
-		this.closeLoadDeckDialog();
 	}
 
 	protected async deleteCollectionCardDeck(): Promise<void> {

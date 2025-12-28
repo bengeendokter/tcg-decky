@@ -1,0 +1,19 @@
+:host {
+	display: contents;
+}
+
+.load-deck {
+	display: grid;
+	gap: 16px;
+}
+
+.load-deck-select {
+	width: 100%;
+}
+
+.load-deck-actions {
+	display: grid;
+	grid-auto-flow: column;
+	justify-content: end;
+	gap: 12px;
+}
