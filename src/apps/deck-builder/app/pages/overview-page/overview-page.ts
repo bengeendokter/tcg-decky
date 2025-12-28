@@ -36,6 +36,7 @@ import {
 import { CollectionPane } from '../../components/collection-pane/collection-pane';
 import { DeckPane } from '../../components/deck-pane/deck-pane';
 import { CreateDeckDialog } from '../../components/create-deck-dialog/create-deck-dialog';
+import { DeleteDeckDialog } from '../../components/delete-deck-dialog/delete-deck-dialog';
 
 const REGULATION_MARKS_IN_ROTAION = ['G', 'H', 'I'] as const satisfies string[];
 
@@ -47,6 +48,7 @@ const REGULATION_MARKS_IN_ROTAION = ['G', 'H', 'I'] as const satisfies string[];
 		CollectionPane,
 		DeckPane,
 		CreateDeckDialog,
+		DeleteDeckDialog,
 	],
 	templateUrl: './overview-page.html',
 	styleUrl: './overview-page.css',
@@ -63,6 +65,8 @@ export class OverviewPage {
 		viewChild.required(LoadDeckDialog);
 	private readonly createDeckDialog: Signal<CreateDeckDialog> =
 		viewChild.required(CreateDeckDialog);
+	private readonly deleteDeckDialog: Signal<DeleteDeckDialog> =
+		viewChild.required(DeleteDeckDialog);
 
 	protected readonly collectionFullscreen: WritableSignal<boolean> =
 		signal(false);
@@ -494,6 +498,10 @@ export class OverviewPage {
 
 	protected loadDeck(): void {
 		this.selectedDeckId.set(this.selectedLoadDeckId());
+	}
+
+	protected openDeleteDeckDialog(): void {
+		this.deleteDeckDialog().openDeleteDeckDialog();
 	}
 
 	protected async deleteCollectionCardDeck(): Promise<void> {

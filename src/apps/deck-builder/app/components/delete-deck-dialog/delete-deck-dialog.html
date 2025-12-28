@@ -1,0 +1,12 @@
+<dialog #deleteDeckDialog closedby="any">
+	<div class="delete-deck">
+		<h2 class="md-typescale-headline-small">Delete deck</h2>
+		<div>
+			<span>Are you sure you want to delete this deck?</span>
+		</div>
+		<div class="delete-deck-actions">
+			<button (click)="closeDeleteDeckDialog()">Cancel</button>
+			<button (click)="deleteDeckAndCloseDialog()">Delete</button>
+		</div>
+	</div>
+</dialog>

@@ -1,0 +1,16 @@
+:host {
+	display: contents;
+}
+
+.delete-deck {
+	display: grid;
+	gap: 16px;
+}
+
+.delete-deck-actions {
+	display: grid;
+	grid-auto-flow: column;
+	justify-content: end;
+	gap: 12px;
+}
+
