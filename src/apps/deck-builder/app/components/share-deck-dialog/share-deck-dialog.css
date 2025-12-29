@@ -1,0 +1,16 @@
+:host {
+	display: contents;
+}
+
+.share-deck {
+	display: grid;
+	gap: 16px;
+}
+
+.share-deck-actions {
+	display: grid;
+	grid-auto-flow: column;
+	justify-content: end;
+	gap: 12px;
+}
+

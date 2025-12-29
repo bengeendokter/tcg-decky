@@ -38,6 +38,7 @@ import { DeckPane } from '../../components/deck-pane/deck-pane';
 import { CreateDeckDialog } from '../../components/create-deck-dialog/create-deck-dialog';
 import { DeleteDeckDialog } from '../../components/delete-deck-dialog/delete-deck-dialog';
 import { ResetDeckDialog } from "../../components/reset-deck-dialog/reset-deck-dialog";
+import { ShareDeckDialog } from "../../components/share-deck-dialog/share-deck-dialog";
 
 const REGULATION_MARKS_IN_ROTAION = ['G', 'H', 'I'] as const satisfies string[];
 
@@ -50,7 +51,8 @@ const REGULATION_MARKS_IN_ROTAION = ['G', 'H', 'I'] as const satisfies string[];
     DeckPane,
     CreateDeckDialog,
     DeleteDeckDialog,
-    ResetDeckDialog
+    ResetDeckDialog,
+    ShareDeckDialog
 ],
 	templateUrl: './overview-page.html',
 	styleUrl: './overview-page.css',
@@ -71,6 +73,8 @@ export class OverviewPage {
 		viewChild.required(DeleteDeckDialog);
 	private readonly resetDeckDialog: Signal<ResetDeckDialog> =
 		viewChild.required(ResetDeckDialog);
+	private readonly shareDeckDialog: Signal<ShareDeckDialog> =
+		viewChild.required(ShareDeckDialog);
 
 	protected readonly collectionFullscreen: WritableSignal<boolean> =
 		signal(false);
@@ -551,5 +555,9 @@ export class OverviewPage {
 
 	protected toggleFullscreen(): void {
 		this.collectionFullscreen.update((isFullscreen) => !isFullscreen);
+	}
+
+	protected openShareDeckDialog(): void {
+		this.shareDeckDialog().openShareDeckDialog();
 	}
 }

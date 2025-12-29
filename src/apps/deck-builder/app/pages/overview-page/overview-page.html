@@ -1,7 +1,7 @@
 <deck-pane [deckName]="deckName()" [totalCardQuantity]="totalCardQuantity()" [existingDeck]="existingDeck()"
 	[deckCards]="deckCards()" (updateCollectionCardDeck)="updateCollectionCardDeck()"
 	(addCollectionCardDeck)="openCreateDeckDialog()" (openLoadDeckDialog)="openLoadDeckDialog()" (reset)="openResetDeckDialog()"
-	(deleteCollectionCardDeck)="openDeleteDeckDialog()" (openLimitlessDeckBuilder)="openLimitlessDeckBuilder()"
+	(deleteCollectionCardDeck)="openDeleteDeckDialog()" (openLimitlessDeckBuilder)="openShareDeckDialog()"
 	(openCardDetail)="openCardDetail($event)" class="deck-pane"></deck-pane>
 <collection-pane [sortedTcgDexCollectionCards]="sortedTcgDexCollectionCards()" [searchForm]="searchForm"
 	[inRotationFilterForm]="inRotationFilterForm" [pokemonTypeFilterForm]="pokemonTypeFilterForm"
@@ -14,3 +14,4 @@
 <create-deck-dialog [deckNameForm]="deckNameForm" (createDeck)="addCollectionCardDeck()"></create-deck-dialog>
 <delete-deck-dialog (deleteDeck)="deleteCollectionCardDeck()"></delete-deck-dialog>
 <reset-deck-dialog (resetDeck)="reset()"></reset-deck-dialog>
+<share-deck-dialog (shareDeck)="openLimitlessDeckBuilder()"></share-deck-dialog>
