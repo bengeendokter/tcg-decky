@@ -1,0 +1,12 @@
+<dialog #resetDeckDialog closedby="any">
+	<div class="reset-deck">
+		<h2 class="md-typescale-headline-small">Reset deck</h2>
+		<div>
+			<span>Are you sure you want to reset your deck cards?</span>
+		</div>
+		<div class="reset-deck-actions">
+			<button (click)="closeResetDeckDialog()">Cancel</button>
+			<button (click)="resetDeckAndCloseDialog()">Reset</button>
+		</div>
+	</div>
+</dialog>

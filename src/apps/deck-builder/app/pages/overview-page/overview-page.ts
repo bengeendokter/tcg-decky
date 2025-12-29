@@ -37,19 +37,21 @@ import { CollectionPane } from '../../components/collection-pane/collection-pane
 import { DeckPane } from '../../components/deck-pane/deck-pane';
 import { CreateDeckDialog } from '../../components/create-deck-dialog/create-deck-dialog';
 import { DeleteDeckDialog } from '../../components/delete-deck-dialog/delete-deck-dialog';
+import { ResetDeckDialog } from "../../components/reset-deck-dialog/reset-deck-dialog";
 
 const REGULATION_MARKS_IN_ROTAION = ['G', 'H', 'I'] as const satisfies string[];
 
 @Component({
 	selector: 'overview-page',
 	imports: [
-		CardDetail,
-		LoadDeckDialog,
-		CollectionPane,
-		DeckPane,
-		CreateDeckDialog,
-		DeleteDeckDialog,
-	],
+    CardDetail,
+    LoadDeckDialog,
+    CollectionPane,
+    DeckPane,
+    CreateDeckDialog,
+    DeleteDeckDialog,
+    ResetDeckDialog
+],
 	templateUrl: './overview-page.html',
 	styleUrl: './overview-page.css',
 	host: {
@@ -67,6 +69,8 @@ export class OverviewPage {
 		viewChild.required(CreateDeckDialog);
 	private readonly deleteDeckDialog: Signal<DeleteDeckDialog> =
 		viewChild.required(DeleteDeckDialog);
+	private readonly resetDeckDialog: Signal<ResetDeckDialog> =
+		viewChild.required(ResetDeckDialog);
 
 	protected readonly collectionFullscreen: WritableSignal<boolean> =
 		signal(false);
@@ -445,6 +449,10 @@ export class OverviewPage {
 				return card.quantity > 0;
 			}),
 		);
+	}
+
+	protected openResetDeckDialog(): void {
+		this.resetDeckDialog().openResetDeckDialog();
 	}
 
 	protected reset(): void {

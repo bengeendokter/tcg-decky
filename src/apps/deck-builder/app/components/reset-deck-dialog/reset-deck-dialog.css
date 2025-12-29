@@ -1,0 +1,16 @@
+:host {
+	display: contents;
+}
+
+.reset-deck {
+	display: grid;
+	gap: 16px;
+}
+
+.reset-deck-actions {
+	display: grid;
+	grid-auto-flow: column;
+	justify-content: end;
+	gap: 12px;
+}
+
