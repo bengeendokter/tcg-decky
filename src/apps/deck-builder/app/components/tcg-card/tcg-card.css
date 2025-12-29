@@ -1,5 +1,5 @@
 :host {
-	height: auto;
+	height: 100%;
 	aspect-ratio: 63 / 87;
 
 	background-image: var(--background-image-url);
