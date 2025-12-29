@@ -39,6 +39,7 @@ import { CreateDeckDialog } from '../../components/create-deck-dialog/create-dec
 import { DeleteDeckDialog } from '../../components/delete-deck-dialog/delete-deck-dialog';
 import { ResetDeckDialog } from "../../components/reset-deck-dialog/reset-deck-dialog";
 import { ShareDeckDialog } from "../../components/share-deck-dialog/share-deck-dialog";
+import { RenameDeckDialog } from "../../components/rename-deck-dialog/rename-deck-dialog";
 
 const REGULATION_MARKS_IN_ROTAION = ['G', 'H', 'I'] as const satisfies string[];
 
@@ -52,7 +53,8 @@ const REGULATION_MARKS_IN_ROTAION = ['G', 'H', 'I'] as const satisfies string[];
     CreateDeckDialog,
     DeleteDeckDialog,
     ResetDeckDialog,
-    ShareDeckDialog
+    ShareDeckDialog,
+    RenameDeckDialog
 ],
 	templateUrl: './overview-page.html',
 	styleUrl: './overview-page.css',
@@ -75,6 +77,8 @@ export class OverviewPage {
 		viewChild.required(ResetDeckDialog);
 	private readonly shareDeckDialog: Signal<ShareDeckDialog> =
 		viewChild.required(ShareDeckDialog);
+	private readonly renameDeckDialog: Signal<RenameDeckDialog> =
+		viewChild.required(RenameDeckDialog);
 
 	protected readonly collectionFullscreen: WritableSignal<boolean> =
 		signal(false);
@@ -340,6 +344,14 @@ export class OverviewPage {
 		},
 	);
 
+	protected readonly renameDeckName: WritableSignal<string> = signal('');
+	protected readonly renameDeckNameFrom: FieldTree<string> = form(
+		this.renameDeckName,
+		(renameDeckName) => {
+			required(renameDeckName);
+		},
+	);
+
 	constructor() {
 		effect(() => {
 			const collectionCards: CollectionCard[] = this.collectionCards();
@@ -559,5 +571,9 @@ export class OverviewPage {
 
 	protected openShareDeckDialog(): void {
 		this.shareDeckDialog().openShareDeckDialog();
+	}
+
+	protected openRenameDeckDialog(): void {
+		this.renameDeckDialog().openRenameDeckDialog();
 	}
 }

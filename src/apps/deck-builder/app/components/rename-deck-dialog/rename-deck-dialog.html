@@ -1,0 +1,13 @@
+<dialog #renameDeckDialog closedby="any">
+	<div class="rename-deck">
+		<h2 class="md-typescale-headline-small">Rename deck</h2>
+		<div>
+			<label for="deck-name">Name</label>
+			<input type="text" id="deck-name" class="rename-deck-name" [field]="deckRenameForm()">
+		</div>
+		<div class="rename-deck-actions">
+			<button (click)="closeRenameDeckDialog()">Cancel</button>
+			<button (click)="renameDeckAndCloseDialog()" [disabled]="deckRenameForm()().invalid()">Rename</button>
+		</div>
+	</div>
+</dialog>
