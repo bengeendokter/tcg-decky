@@ -7,6 +7,10 @@
 	gap: 16px;
 }
 
+.rename-deck-title {
+	font: var(--md-sys-typescale-headline-small);
+}
+
 .rename-deck-name {
 	width: 100%;
 }

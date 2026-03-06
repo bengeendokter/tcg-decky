@@ -7,6 +7,10 @@
 	gap: 16px;
 }
 
+.create-deck-title {
+	font: var(--md-sys-typescale-headline-small);
+}
+
 .create-deck-name {
 	width: 100%;
 }

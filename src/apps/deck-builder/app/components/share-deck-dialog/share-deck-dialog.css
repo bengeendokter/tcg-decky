@@ -7,6 +7,10 @@
 	gap: 16px;
 }
 
+.share-deck-title {
+	font: var(--md-sys-typescale-headline-small);
+}
+
 .share-deck-actions {
 	display: grid;
 	grid-auto-flow: column;
