@@ -16,8 +16,8 @@
 .quantity {
 	font: var(--md-sys-typescale-label-large);
 	background-color: var(--md-sys-color-secondary-container);
-	width: 24px;
-	height: 28px;
+	min-width: 24px;
+	min-height: 28px;
 	display: grid;
 	align-content: center;
 	justify-content: center;

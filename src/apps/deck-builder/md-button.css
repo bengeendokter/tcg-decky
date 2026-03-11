@@ -1,9 +1,11 @@
 .md-icon-button {
 	padding: unset;
-	width: 40px;
+	min-width: 40px;
 
 	svg {
 		width: 24px;
+		height: auto;
+		aspect-ratio: 1;
 		fill: currentColor;
 	}
 }
