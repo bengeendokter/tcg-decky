@@ -9,11 +9,11 @@
 	@else {
 	<button (click)="addCollectionCardDeck.emit()">Save</button>
 	}
-	<button (click)="openLoadDeckDialog.emit()">Load deck</button>
-	<button [disabled]="!existingDeck()" (click)="addCollectionCardDeck.emit()">Create copy</button>
-	<button (click)="reset.emit()">Reset</button>
-	<button [disabled]="!existingDeck()" (click)="deleteCollectionCardDeck.emit()">Delete</button>
-	<button (click)="openLimitlessDeckBuilder.emit()">Share</button>
+	<button class="md-tonal-button" (click)="openLoadDeckDialog.emit()">Load deck</button>
+	<button class="md-tonal-button" [disabled]="!existingDeck()" (click)="addCollectionCardDeck.emit()">Create copy</button>
+	<button class="md-tonal-button md-icon-button" (click)="reset.emit()" aria-label="Reset"><icon [svg]="restartAltIcon"></icon></button>
+	<button class="md-tonal-button md-icon-button" [disabled]="!existingDeck()" (click)="deleteCollectionCardDeck.emit()" aria-label="Delete"><icon [svg]="deleteIcon"></icon></button>
+	<button class="md-tonal-button md-icon-button" (click)="openLimitlessDeckBuilder.emit()" aria-label="Share"><icon [svg]="shareIcon"></icon></button>
 </div>
 <div class="deck-cards">
 	@for(card of deckCards(); track card.id) {

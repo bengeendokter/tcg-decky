@@ -27,7 +27,10 @@
 						"styles": ["styles.css"],
 						"server": "main.server.ts",
 						"outputMode": "static",
-						"outputPath": "../../../output/deck-builder"
+						"outputPath": "../../../output/deck-builder",
+						"loader": {
+							".svg": "text"
+						}
 					},
 					"configurations": {
 						"production": {

@@ -1,12 +1,15 @@
 .md-icon-button {
 	padding: unset;
 	min-width: 40px;
+	display: flex;
+	justify-content: center;
 
 	svg {
 		width: 24px;
 		height: auto;
 		aspect-ratio: 1;
 		fill: currentColor;
+		color: var(--md-comp-button-label-text-color);
 	}
 }
 

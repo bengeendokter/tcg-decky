@@ -38,6 +38,9 @@ importers:
       '@hono/node-server':
         specifier: ^1.19.6
         version: 1.19.6(hono@4.10.6)
+      '@material-symbols/svg-400':
+        specifier: ^0.31.9
+        version: 0.31.9
       '@tcgdex/sdk':
         specifier: ^2.7.1
         version: 2.7.1
@@ -1149,6 +1152,9 @@ packages:
     resolution: {integrity: sha512-1JdBkcO0Vrua4LUgr4jAe4FUyluwCeq/pDkBrlaVjX3/BBWP1TzVjCL+TibWNQtPAL1BITXPAhlK5Ru4FBd/hg==}
     cpu: [x64]
     os: [win32]
+
+  '@material-symbols/svg-400@0.31.9':
+    resolution: {integrity: sha512-LeQrY/qYdRdIlV6ZR+hUQDXjtkDYgP1LGnMQh/Grm6FsXz+6GR2Q+DrotEJjzDnmao/oHygHFGLnkKAR/PM1hQ==}
 
   '@modelcontextprotocol/sdk@1.20.1':
     resolution: {integrity: sha512-j/P+yuxXfgxb+mW7OEoRCM3G47zCTDqUPivJo/VzpjbG8I9csTXtOprCf5FfOfHK4whOJny0aHuBEON+kS7CCA==}
@@ -3998,6 +4004,8 @@ snapshots:
 
   '@lmdb/lmdb-win32-x64@3.4.3':
     optional: true
+
+  '@material-symbols/svg-400@0.31.9': {}
 
   '@modelcontextprotocol/sdk@1.20.1':
     dependencies:
