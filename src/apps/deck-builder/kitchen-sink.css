@@ -1,6 +1,6 @@
 @import 'typography.css';
 
-:root {
+html {
 	--md-sys-shape-corner-value-none: 0;
 	--md-sys-shape-corner-value-extra-small: 4px;
 	--md-sys-shape-corner-value-small: 8px;
@@ -11,9 +11,7 @@
 	--md-sys-shape-corner-value-extra-large-increased: 32px;
 	--md-sys-shape-corner-value-extra-extra-large: 48px;
 	--md-sys-shape-corner-value-full: calc(infinity * 1px);
-}
 
-html {
 	accent-color: var(--md-sys-color-primary);
 	color: var(--md-sys-color-on-surface);
 	background-color: var(--md-sys-color-surface);
