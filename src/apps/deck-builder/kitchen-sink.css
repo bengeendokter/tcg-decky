@@ -119,12 +119,15 @@ option {
 button,
 input:is([type=button], [type=submit], [type=reset]),
 input::file-selector-button {
+	--md-comp-button-container-color: var(--md-sys-color-primary);
+	--md-comp-button-label-text-color: var(--md-sys-color-on-primary);
+
 	min-height: 40px;
 	padding-inline: 16px;
 	padding-block: 0;
 	border: none;
-	background-color: var(--md-sys-color-primary);
-	color: var(--md-sys-color-on-primary);
+	background-color: var(--md-comp-button-container-color);
+	color: var(--md-comp-button-label-text-color);
 	border-radius: var(--md-sys-shape-corner-value-full);
 	font-family: var(--md-sys-typescale-label-large-font);
 	font-weight: var(--md-sys-typescale-label-large-weight);
@@ -133,12 +136,12 @@ input::file-selector-button {
 	user-select: none;
 
 	&:hover {
-		background-color: color-mix(in oklab, var(--md-sys-color-primary), var(--md-sys-color-on-primary) 8%);
+		background-color: color-mix(in oklab, var(--md-comp-button-container-color), var(--md-comp-button-label-text-color) 8%);
 	}
 
 	&:focus-visible,
 	&:active {
-		background-color: color-mix(in oklab, var(--md-sys-color-primary), var(--md-sys-color-on-primary) 10%);
+		background-color: color-mix(in oklab, var(--md-comp-button-container-color), var(--md-comp-button-label-text-color) 10%);
 	}
 
 	&:disabled {
@@ -149,11 +152,11 @@ input::file-selector-button {
 
 input[type=file] {
 	&:hover::file-selector-button {
-		background-color: color-mix(in oklab, var(--md-sys-color-primary), var(--md-sys-color-on-primary) 8%);
+		background-color: color-mix(in oklab, var(--md-comp-button-container-color), var(--md-comp-button-label-text-color) 8%);
 	}
 
 	&:is(:focus-visible, :active)::file-selector-button {
-		background-color: color-mix(in oklab, var(--md-sys-color-primary), var(--md-sys-color-on-primary) 10%);
+		background-color: color-mix(in oklab, var(--md-comp-button-container-color), var(--md-comp-button-label-text-color) 10%);
 	}
 }
 
