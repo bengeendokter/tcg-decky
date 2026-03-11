@@ -20,7 +20,7 @@
 		</select>
 	</div>
 
-	<button (click)="toggleFullscreen.emit()">Fullscreen</button>
+	<button class="md-tonal-button md-icon-button" (click)="toggleFullscreen.emit()" [attr.aria-label]="collectionFullscreen() ? 'Close fullscreen' : 'Open fullscreen'"><icon [svg]="collectionFullscreen() ? closeFullscreenIcon : openInFullIcon"></icon></button>
 </div>
 <div class="collection-cards">
 	@for(card of sortedTcgDexCollectionCards(); track card.id) {

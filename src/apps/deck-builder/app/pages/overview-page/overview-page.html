@@ -6,8 +6,8 @@
 	class="deck-pane"></deck-pane>
 <collection-pane [sortedTcgDexCollectionCards]="sortedTcgDexCollectionCards()" [searchForm]="searchForm"
 	[inRotationFilterForm]="inRotationFilterForm" [pokemonTypeFilterForm]="pokemonTypeFilterForm"
-	(openCardDetail)="openCardDetail($event)" (toggleFullscreen)="toggleFullscreen()"
-	class="collection-pane"></collection-pane>
+	[collectionFullscreen]="collectionFullscreen()" (openCardDetail)="openCardDetail($event)"
+	(toggleFullscreen)="toggleFullscreen()" class="collection-pane"></collection-pane>
 <card-detail [selectedDeckCard]="selectedDeckCard()" (removeCard)="removeCard($event)"
 	(addCard)="addCard($event)"></card-detail>
 <load-deck-dialog [loadDeckForm]="loadDeckForm" [sortedCollectionDecks]="sortedCollectionDecks()"
