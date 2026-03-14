@@ -2,6 +2,8 @@
 @import 'normalize.css/normalize.css' layer(normalize);
 @import 'reset-box-sizing.css' layer(reset);
 @import 'reset-html-body.css' layer(reset);
+@import 'reset-text-wrap.css' layer(reset);
+@import 'reset-interpolate-size.css' layer(reset);
 @import "m3-color-css/theme/palette" layer(theme);
 @import "m3-color-css/theme/light" layer(theme);
 @import "m3-color-css/theme/dark" layer(theme);

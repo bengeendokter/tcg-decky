@@ -18,6 +18,10 @@
 	align-items: center;
 }
 
+.cards-quantity {
+	font: var(--md-sys-typescale-label-large);
+}
+
 .deck-actions {
 	display: flex;
 	gap: 12px;

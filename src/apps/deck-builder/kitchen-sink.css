@@ -13,13 +13,11 @@ html {
 	--md-sys-shape-corner-value-full: calc(infinity * 1px);
 
 	accent-color: var(--md-sys-color-primary);
+	caret-color: var(--md-sys-color-primary);
 	color: var(--md-sys-color-on-surface);
 	background-color: var(--md-sys-color-surface);
 
-	font-family: var(--md-sys-typescale-body-large-font);
-	font-weight: var(--md-sys-typescale-body-large-weight);
-	font-size: var(--md-sys-typescale-body-large-size);
-	line-height: var(--md-sys-typescale-body-large-line-height);
+	font: var(--md-sys-typescale-body-large);
 
 	scrollbar-color: var(--md-sys-color-on-surface-variant) var(--md-sys-color-surface);
 }
@@ -39,10 +37,7 @@ h3,
 h4,
 h5,
 h6 {
-	font-family: var(--md-sys-typescale-headline-large-font);
-	font-weight: var(--md-sys-typescale-headline-large-weight);
-	font-size: var(--md-sys-typescale-headline-large-size);
-	line-height: var(--md-sys-typescale-headline-large-line-height);
+	font: var(--md-sys-typescale-headline-large);
 	margin: 0;
 }
 
@@ -83,10 +78,7 @@ textarea {
 		--md-comp-outlined-text-field-label-text-background-color: var(--md-sys-color-surface);
 
 		color: var(--md-sys-color-on-surface-variant);
-		font-family: var(--md-sys-typescale-label-medium-font);
-		font-weight: var(--md-sys-typescale-label-medium-weight);
-		font-size: var(--md-sys-typescale-label-medium-size);
-		line-height: var(--md-sys-typescale-label-medium-line-height);
+		font: var(--md-sys-typescale-label-medium);
 
 		position: absolute;
 		padding-inline: 4px;
@@ -129,10 +121,7 @@ input::file-selector-button {
 	background-color: var(--md-comp-button-container-color);
 	color: var(--md-comp-button-label-text-color);
 	border-radius: var(--md-sys-shape-corner-value-full);
-	font-family: var(--md-sys-typescale-label-large-font);
-	font-weight: var(--md-sys-typescale-label-large-weight);
-	font-size: var(--md-sys-typescale-label-large-size);
-	line-height: var(--md-sys-typescale-label-large-line-height);
+	font: var(--md-sys-typescale-label-large);
 	user-select: none;
 
 	&:hover {

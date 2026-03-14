@@ -9,7 +9,6 @@
 		height: auto;
 		aspect-ratio: 1;
 		fill: currentColor;
-		color: var(--md-comp-button-label-text-color);
 	}
 }
 

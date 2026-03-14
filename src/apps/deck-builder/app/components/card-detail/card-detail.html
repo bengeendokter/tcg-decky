@@ -7,10 +7,10 @@
 		<tcg-card (click)="closeCardDetail()" class="detail-card"
 			[style.--background-image-url]="`url(${detailCard.image}/high.webp)`"></tcg-card>
 		<div class="detail-actions">
-			<button (click)="removeCard.emit(detailCard)" [disabled]="deckQuantity === 0">-</button>
+			<button class="md-icon-button" (click)="removeCard.emit(detailCard)" [disabled]="deckQuantity === 0"><icon [svg]="removeIcon"></icon></button>
 			<span>{{deckQuantity.toString().padStart(2,
 				"0")}}/{{collectionQuantity.toString().padStart(2, "0")}}</span>
-			<button (click)="addCard.emit(detailCard)" [disabled]="deckQuantity === collectionQuantity">+</button>
+			<button class="md-icon-button" (click)="addCard.emit(detailCard)" [disabled]="deckQuantity === collectionQuantity"><icon [svg]="addIcon"></icon></button>
 		</div>
 		}
 	</div>
