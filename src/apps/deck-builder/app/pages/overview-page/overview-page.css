@@ -26,4 +26,5 @@
 
 .collection-pane {
 	grid-area: collection-pane;
+	view-transition-name: collection-pane;
 }

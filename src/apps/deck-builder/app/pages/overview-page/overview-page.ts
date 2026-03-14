@@ -37,25 +37,25 @@ import { CollectionPane } from '../../components/collection-pane/collection-pane
 import { DeckPane } from '../../components/deck-pane/deck-pane';
 import { CreateDeckDialog } from '../../components/create-deck-dialog/create-deck-dialog';
 import { DeleteDeckDialog } from '../../components/delete-deck-dialog/delete-deck-dialog';
-import { ResetDeckDialog } from "../../components/reset-deck-dialog/reset-deck-dialog";
-import { ShareDeckDialog } from "../../components/share-deck-dialog/share-deck-dialog";
-import { RenameDeckDialog } from "../../components/rename-deck-dialog/rename-deck-dialog";
+import { ResetDeckDialog } from '../../components/reset-deck-dialog/reset-deck-dialog';
+import { ShareDeckDialog } from '../../components/share-deck-dialog/share-deck-dialog';
+import { RenameDeckDialog } from '../../components/rename-deck-dialog/rename-deck-dialog';
 
 const REGULATION_MARKS_IN_ROTAION = ['G', 'H', 'I'] as const satisfies string[];
 
 @Component({
 	selector: 'overview-page',
 	imports: [
-    CardDetail,
-    LoadDeckDialog,
-    CollectionPane,
-    DeckPane,
-    CreateDeckDialog,
-    DeleteDeckDialog,
-    ResetDeckDialog,
-    ShareDeckDialog,
-    RenameDeckDialog
-],
+		CardDetail,
+		LoadDeckDialog,
+		CollectionPane,
+		DeckPane,
+		CreateDeckDialog,
+		DeleteDeckDialog,
+		ResetDeckDialog,
+		ShareDeckDialog,
+		RenameDeckDialog,
+	],
 	templateUrl: './overview-page.html',
 	styleUrl: './overview-page.css',
 	host: {
@@ -566,7 +566,16 @@ export class OverviewPage {
 	}
 
 	protected toggleFullscreen(): void {
-		this.collectionFullscreen.update((isFullscreen) => !isFullscreen);
+		// Fallback for browsers that don't support this API:
+		if (!document.startViewTransition) {
+			this.collectionFullscreen.update((isFullscreen) => !isFullscreen);
+			return;
+		}
+
+		// With a View Transition:
+		document.startViewTransition(() =>
+			this.collectionFullscreen.update((isFullscreen) => !isFullscreen),
+		);
 	}
 
 	protected openShareDeckDialog(): void {
