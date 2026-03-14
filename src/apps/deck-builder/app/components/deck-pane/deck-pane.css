@@ -41,3 +41,25 @@
 .deck-card {
 	width: 100%;
 }
+
+@keyframes slide-in {
+	from {
+		opacity: 0;
+		transform: translateY(-50%);
+	}
+}
+
+.slide-in {
+	animation: 200ms ease-in-out slide-in;
+}
+
+@keyframes slide-out {
+	to {
+		opacity: 0;
+		transform: translateY(-50%);
+	}
+}
+
+.slide-out {
+	animation: 200ms ease-in-out slide-out;
+}

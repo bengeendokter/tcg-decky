@@ -17,7 +17,7 @@
 </div>
 <div class="deck-cards">
 	@for(card of deckCards(); track card.id) {
-	<tcg-card (click)="openCardDetail.emit(card)" [quantity]="card.quantity" class="deck-card"
-		[style.--background-image-url]="`url(${card.image}/low.webp)`"></tcg-card>
+	<tcg-card id="{{card.id}}" (click)="openCardDetail.emit(card)" [quantity]="card.quantity" class="deck-card"
+		[style.--background-image-url]="`url(${card.image}/low.webp)`" animate.enter="slide-in" animate.leave="slide-out"></tcg-card>
 	}
 </div>
