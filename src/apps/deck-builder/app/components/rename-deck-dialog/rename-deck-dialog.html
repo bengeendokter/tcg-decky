@@ -6,8 +6,8 @@
 			<input type="text" id="deck-name" class="rename-deck-name" [field]="deckRenameForm()">
 		</div>
 		<div class="rename-deck-actions">
-			<button (click)="closeRenameDeckDialog()">Cancel</button>
-			<button (click)="renameDeckAndCloseDialog()" [disabled]="deckRenameForm()().invalid()">Rename</button>
+			<button class="md-text-button" (click)="closeRenameDeckDialog()">Cancel</button>
+			<button class="md-text-button" (click)="renameDeckAndCloseDialog()" [disabled]="deckRenameForm()().invalid()">Rename</button>
 		</div>
 	</div>
 </dialog>

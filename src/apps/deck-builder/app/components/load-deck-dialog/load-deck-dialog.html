@@ -10,8 +10,8 @@
 			</select>
 		</div>
 		<div class="load-deck-actions">
-			<button (click)="closeLoadDeckDialog()">Cancel</button>
-			<button (click)="loadDeckAndCloseDialog()" [disabled]="loadDeckForm()().invalid()">Load</button>
+			<button class="md-text-button" (click)="closeLoadDeckDialog()">Cancel</button>
+			<button class="md-text-button" (click)="loadDeckAndCloseDialog()" [disabled]="loadDeckForm()().invalid()">Load</button>
 		</div>
 	</div>
 </dialog>

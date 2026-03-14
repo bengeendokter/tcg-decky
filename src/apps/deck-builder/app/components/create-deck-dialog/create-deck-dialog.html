@@ -6,8 +6,8 @@
 			<input type="text" id="deck-name" class="create-deck-name" [field]="deckNameForm()">
 		</div>
 		<div class="create-deck-actions">
-			<button (click)="closeCreateDeckDialog()">Cancel</button>
-			<button (click)="createDeckAndCloseDialog()" [disabled]="deckNameForm()().invalid()">Create</button>
+			<button class="md-text-button" (click)="closeCreateDeckDialog()">Cancel</button>
+			<button class="md-text-button" (click)="createDeckAndCloseDialog()" [disabled]="deckNameForm()().invalid()">Create</button>
 		</div>
 	</div>
 </dialog>

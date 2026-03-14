@@ -16,3 +16,8 @@
 	--md-comp-button-container-color: var(--md-sys-color-secondary-container);
 	--md-comp-button-label-text-color: var(--md-sys-color-on-secondary-container);
 }
+
+.md-text-button {
+	--md-comp-button-container-color: transparent;
+	--md-comp-button-label-text-color: var(--md-sys-color-primary);
+}
