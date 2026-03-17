@@ -13,7 +13,6 @@ services:
   tcgdex-api:
     container_name: tcgdex-api
     image: tcgdex/server:pr-989
-    restart: unless-stopped
     environment:
       # by default the server will start a worker for each threads available
       # You can downgrade the max number of workers by changing this value
