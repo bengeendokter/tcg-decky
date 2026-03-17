@@ -16,6 +16,13 @@
 	grid-auto-flow: column;
 	justify-content: space-between;
 	align-items: center;
+	grid-template-columns: 1fr max-content;
+	gap: 8px;
+}
+
+.deck-name {
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .cards-quantity {
