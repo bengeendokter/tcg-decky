@@ -1,0 +1,16 @@
+.md-snackbar {
+	display: grid;
+	align-items: center;
+	min-height: 48px;
+	padding-inline: 16px;
+	margin-inline: 16px;
+	background-color: var(--md-sys-color-inverse-surface);
+	color: var(--md-sys-color-inverse-on-surface);
+	border-radius: var(--md-sys-shape-corner-value-extra-small);
+	user-select: none;
+
+	position: absolute;
+	position-anchor: --root-anchor;
+	inset-block-end: calc(anchor(bottom) + 16px);
+	inset-inline: anchor(inside);
+}

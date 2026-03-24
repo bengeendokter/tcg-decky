@@ -20,6 +20,8 @@ html {
 	font: var(--md-sys-typescale-body-large);
 
 	scrollbar-color: var(--md-sys-color-on-surface-variant) var(--md-sys-color-surface);
+
+	anchor-name: --root-anchor;
 }
 
 * {

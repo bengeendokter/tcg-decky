@@ -14,3 +14,4 @@
 @import 'color-scheme.css' layer(theme);
 @import 'kitchen-sink.css' layer(theme);
 @import 'md-button.css' layer(component);
+@import 'md-snackbar.css' layer(component);
