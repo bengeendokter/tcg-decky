@@ -352,7 +352,33 @@ export class OverviewPage {
 		},
 	);
 
+	private readonly alertsQue: WritableSignal<string[]> = signal([]);
+	protected readonly aciveAlert: WritableSignal<string | undefined> =
+		signal(undefined);
+
 	constructor() {
+		effect((onCleanup) => {
+			const aciveAlert: string | undefined = this.aciveAlert();
+			const alertsQue: string[] = this.alertsQue();
+
+			const delay: number = aciveAlert === undefined ? 0 : 3000;
+
+			const timeout: NodeJS.Timeout = setTimeout(() => {
+				if (alertsQue.length === 0) {
+					this.aciveAlert.set(undefined);
+					return;
+				}
+
+				const [newActiveAlert, ...newAlertsQue] = alertsQue;
+				this.aciveAlert.set(newActiveAlert);
+				this.alertsQue.set(newAlertsQue);
+			}, delay);
+
+			onCleanup(() => {
+				clearTimeout(timeout);
+			});
+		});
+
 		effect(() => {
 			const collectionCards: CollectionCard[] = this.collectionCards();
 
@@ -509,7 +535,9 @@ export class OverviewPage {
 		};
 
 		const id: string = await this.collection.addCollectionCardDeck(deck);
-		alert('Deck has been saved!');
+		this.alertsQue.update((alertsQue) => {
+			return alertsQue.concat('Deck has been saved!');
+		});
 
 		this.getAllDecksResource.reload();
 		this.selectedDeckId.set(id);
@@ -530,7 +558,9 @@ export class OverviewPage {
 
 	protected async deleteCollectionCardDeck(): Promise<void> {
 		await this.collection.deleteCollectionCardDeck(this.selectedDeckId());
-		alert('Deck has been deleted!');
+		this.alertsQue.update((alertsQue) => {
+			return alertsQue.concat('Deck has been deleted!');
+		});
 
 		this.getAllDecksResource.reload();
 		this.reset();
@@ -540,14 +570,18 @@ export class OverviewPage {
 		const selectedDeck: CollectionCardDeck | undefined = this.selectedDeck();
 
 		if (selectedDeck === undefined) {
-			alert('Updating deck failed.');
+			this.alertsQue.update((alertsQue) => {
+				return alertsQue.concat('Updating deck failed.');
+			});
 			return;
 		}
 
 		const name: string | null = prompt('Deck name:', this.deckName());
 
 		if (name === null) {
-			alert('Deck has not been updated.');
+			this.alertsQue.update((alertsQue) => {
+				return alertsQue.concat('Deck has not been updated.');
+			});
 			return;
 		}
 
@@ -560,7 +594,9 @@ export class OverviewPage {
 			id: this.selectedDeckId(),
 			deck,
 		});
-		alert('Deck has been updated!');
+		this.alertsQue.update((alertsQue) => {
+			return alertsQue.concat('Deck has been updated!');
+		});
 
 		this.getAllDecksResource.reload();
 	}

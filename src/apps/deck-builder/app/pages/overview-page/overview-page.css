@@ -14,7 +14,7 @@
 		grid-template-areas:
 			"collection-pane";
 
-		.deck-pane {
+		.deck-pane, .snackbar {
 			display: none;
 		}
 	}
@@ -27,4 +27,29 @@
 .collection-pane {
 	grid-area: collection-pane;
 	view-transition-name: collection-pane;
+}
+
+@keyframes slide-fade-in {
+	from {
+		transform: translateY(10px);
+		opacity: 0;
+	}
+}
+
+.slide-fade-in {
+	animation: 200ms ease-in-out slide-fade-in;
+}
+
+@keyframes fade-out {
+	to {
+		opacity: 0;
+	}
+}
+
+.fade-out {
+	animation: 200ms ease-in-out fade-out;
+}
+
+.snackbar {
+	position-anchor: --deck-pane;
 }

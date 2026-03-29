@@ -9,6 +9,7 @@
 	grid-template-rows: auto auto 1fr;
 	gap: 16px;
 	overflow-y: hidden;
+	anchor-name: --deck-pane;
 }
 
 .heading {
