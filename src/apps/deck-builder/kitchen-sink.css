@@ -151,13 +151,30 @@ input[type=file] {
 	}
 }
 
+@keyframes fade-in {
+	from {
+		opacity: 0;
+	}
+}
+
 dialog {
 	border-width: 0;
 	background-color: var(--md-sys-color-surface-container-high);
 	border-radius: var(--md-sys-shape-corner-value-extra-large);
 	padding: 24px;
+	transition: opacity 200ms ease-in, display 200ms ease-in allow-discrete;
 
 	&:focus-visible {
 		outline: none;
+	}
+
+	@starting-style {
+		& {
+			opacity: 0;
+		}
+	}
+
+	&:not([open]) {
+			opacity: 0;
 	}
 }
