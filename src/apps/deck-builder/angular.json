@@ -24,7 +24,7 @@
 								"input": "public"
 							}
 						],
-						"styles": ["styles.css"],
+						"styles": ["styles/styles.css"],
 						"server": "main.server.ts",
 						"outputMode": "static",
 						"outputPath": "../../../output/deck-builder",

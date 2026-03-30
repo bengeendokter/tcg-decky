@@ -1,0 +1,5 @@
+@layer normalize, reset, theme, component;
+@import 'normalize.css/normalize.css' layer(normalize);
+@import 'reset/reset.css' layer(reset);
+@import 'theme/theme.css' layer(theme);
+@import 'component/component.css' layer(component);
