@@ -1,6 +1,6 @@
 html {
-	--md-ref-typeface-brand: system-ui, sans-serif;
-	--md-ref-typeface-plain: system-ui, sans-serif;
+	--md-ref-typeface-brand: var(--font-system-ui);
+	--md-ref-typeface-plain: var(--font-system-ui);
 
 	--md-ref-typeface-weight-regular: 400;
 	--md-ref-typeface-weight-medium: 500;
