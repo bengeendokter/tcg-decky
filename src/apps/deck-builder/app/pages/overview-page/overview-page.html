@@ -20,5 +20,5 @@
 <share-deck-dialog (shareDeck)="openLimitlessDeckBuilder()"></share-deck-dialog>
 @let alert = aciveAlert();
 @if(alert !== undefined) {
-<output class="md-snackbar snackbar" animate.enter="slide-fade-in" animate.leave="fade-out">{{alert}}</output>
+<output class="md-snackbar snackbar" animate.enter="snackbar-enter" animate.leave="snackbar-leave">{{alert}}</output>
 }

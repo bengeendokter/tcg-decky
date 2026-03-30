@@ -14,7 +14,8 @@
 		grid-template-areas:
 			"collection-pane";
 
-		.deck-pane, .snackbar {
+		.deck-pane,
+		.snackbar {
 			display: none;
 		}
 	}
@@ -29,25 +30,13 @@
 	view-transition-name: collection-pane;
 }
 
-@keyframes slide-fade-in {
-	from {
-		transform: translateY(10px);
-		opacity: 0;
-	}
+.snackbar-enter {
+	animation: var(--animation-fade-in),
+		var(--animation-slide-in-up);
 }
 
-.slide-fade-in {
-	animation: 200ms ease-in-out slide-fade-in;
-}
-
-@keyframes fade-out {
-	to {
-		opacity: 0;
-	}
-}
-
-.fade-out {
-	animation: 200ms ease-in-out fade-out;
+.snackbar-leave {
+	animation: var(--animation-fade-out);
 }
 
 .snackbar {
