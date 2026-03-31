@@ -167,6 +167,8 @@ dialog {
 	}
 
 	&:not([open]) {
-			opacity: 0;
+		opacity: 0;
+		inset-block-start: 0px;
+		inset-block-end: 0px;
 	}
 }
