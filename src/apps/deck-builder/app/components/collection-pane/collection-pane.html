@@ -13,14 +13,19 @@
 			[style.--md-comp-outlined-text-field-label-text-background-color]="'var(--md-sys-color-surface-container)'">Pokemon
 			Type</label>
 		<select id="pokemon-type-filter" [field]="pokemonTypeFilterForm()">
-			<option [value]="ALL">{{ALL}}</option>
-			@for (pokemonType of POKEMON_TYPES; track pokemonType) {
+			<option [value]="ALL"><span>A</span><span>{{ALL}}</span></option>
+			<!-- @for (pokemonType of POKEMON_TYPES; track pokemonType) {
 			<option [value]="pokemonType">{{pokemonType}}</option>
-			}
+			} -->
+			<option [value]="POKEMON_TYPES[0]"><span>G</span><span>{{POKEMON_TYPES[0]}}</span></option>
+			<option [value]="POKEMON_TYPES[1]"><span>F</span><span>{{POKEMON_TYPES[1]}}</span></option>
 		</select>
 	</div>
 
-	<button class="md-tonal-button md-icon-button" (click)="toggleFullscreen.emit()" [attr.aria-label]="collectionFullscreen() ? 'Close fullscreen' : 'Open fullscreen'"><icon [svg]="collectionFullscreen() ? closeFullscreenIcon : openInFullIcon"></icon></button>
+	<button class="md-tonal-button md-icon-button" (click)="toggleFullscreen.emit()"
+		[attr.aria-label]="collectionFullscreen() ? 'Close fullscreen' : 'Open fullscreen'">
+		<icon [svg]="collectionFullscreen() ? closeFullscreenIcon : openInFullIcon"></icon>
+	</button>
 </div>
 <div class="collection-cards">
 	@for(card of sortedTcgDexCollectionCards(); track card.id) {

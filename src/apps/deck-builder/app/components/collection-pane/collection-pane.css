@@ -61,3 +61,33 @@
 		transform-origin: right;
 	}
 }
+
+label[for=pokemon-type-filter] {
+	display: none;
+}
+
+select,
+::picker(select) {
+	appearance: base-select;
+}
+
+::picker(select) {
+	border: none;
+}
+
+select::picker-icon {
+	display: none;
+}
+
+option:hover,
+option:focus {
+	background-color: pink;
+}
+
+option:checked {
+	font-weight: bold;
+}
+
+option::checkmark {
+	display: none;
+}
