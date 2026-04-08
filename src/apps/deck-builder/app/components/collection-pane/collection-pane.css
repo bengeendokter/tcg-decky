@@ -71,12 +71,44 @@ select,
 	appearance: base-select;
 }
 
+select {
+	background-color: var(--md-sys-color-surface);
+    border: none;
+	min-height: unset;
+	padding-block: 10px;
+	border-radius: var(--md-sys-shape-corner-value-large);
+}
+
+select button {
+	color: var(--md-sys-color-on-surface);
+	min-height: unset;
+}
+
+select button svg {
+	width: 24px;
+    height: auto;
+    aspect-ratio: 1;
+    fill: currentColor;
+}
+
 ::picker(select) {
 	border: none;
+	background-color: pink;
 }
 
 select::picker-icon {
 	display: none;
+}
+
+selectedcontent, option {
+    display: flex;
+    align-items: center;
+}
+
+option {
+	padding-block: 10px;
+	padding-inline: 16px;
+	border-radius: var(--md-sys-shape-corner-value-large);
 }
 
 option:hover,
