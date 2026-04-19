@@ -17,7 +17,7 @@ import type { TcgDexCollectionCard } from '../../../../../libs/deck-builder/mode
 import { getQuantitySum } from '../../../../../libs/deck-builder/util/get-quantity-sum';
 import openInFullIcon from '@material-symbols/svg-400/rounded/open_in_full.svg';
 import closeFullscreenIcon from '@material-symbols/svg-400/rounded/close_fullscreen.svg';
-import { IconComponent } from "../icon/icon.component";
+import { IconComponent } from '../icon/icon.component';
 
 @Component({
 	selector: 'collection-pane',

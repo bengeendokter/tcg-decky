@@ -172,3 +172,58 @@ dialog {
 		inset-block-end: 0px;
 	}
 }
+
+select:has(button svg:last-child) {
+	padding-inline-end: 12px;
+}
+
+select,
+::picker(select) {
+	appearance: base-select;
+}
+
+select button {
+	color: var(--md-sys-color-on-surface);
+	min-height: unset;
+}
+
+select button svg {
+	width: 24px;
+	height: auto;
+	aspect-ratio: 1;
+	fill: currentColor;
+}
+
+::picker(select) {
+	border: none;
+	padding-block: 8px;
+	background-color: var(--md-sys-color-surface);
+}
+
+select::picker-icon {
+	display: none;
+}
+
+selectedcontent,
+option {
+	display: flex;
+	align-items: center;
+}
+
+option {
+	min-height: 48px;
+	padding-inline: 16px;
+}
+
+option:hover {
+	background-color: color-mix(in oklab, var(--md-sys-color-on-surface) 8%, transparent);
+}
+
+option:focus-visible,
+option:checked {
+	background-color: color-mix(in oklab, var(--md-sys-color-on-surface) 10%, transparent);
+}
+
+option::checkmark {
+	display: none;
+}
