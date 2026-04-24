@@ -24,7 +24,7 @@
 	],
 	"author": "bengeendokter",
 	"license": "MIT",
-	"packageManager": "pnpm@10.26.1",
+	"packageManager": "pnpm@10.33.2",
 	"dependencies": {
 		"@angular/common": "21.0.0",
 		"@angular/compiler": "21.0.0",
