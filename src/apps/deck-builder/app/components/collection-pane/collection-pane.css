@@ -40,16 +40,19 @@
 }
 
 .collection-card {
-	animation: ease-in-out slide-in,
+	animation:
+		ease-in-out slide-in,
 		ease-in-out slide-out;
 	animation-timeline: view(inline);
-	animation-range: entry 0% entry 50%, exit 50% 100%;
+	animation-range:
+		entry 0% entry 50%,
+		exit 50% 100%;
 }
 
 @keyframes slide-in {
 	from {
 		opacity: 0;
-		transform: scale(.5);
+		transform: scale(0.5);
 		transform-origin: left;
 	}
 }
@@ -57,7 +60,7 @@
 @keyframes slide-out {
 	to {
 		opacity: 0;
-		transform: scale(.5);
+		transform: scale(0.5);
 		transform-origin: right;
 	}
 }

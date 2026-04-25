@@ -44,7 +44,7 @@ export function isPrebuildCardWithQuantity(
 
 	const card: unknown = object['card'];
 
-	if ((typeof card !== 'object') || card === null) {
+	if (typeof card !== 'object' || card === null) {
 		return false;
 	}
 

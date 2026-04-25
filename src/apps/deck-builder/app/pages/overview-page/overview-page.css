@@ -11,8 +11,7 @@
 
 	&.collection-fullscreen {
 		grid-template-rows: 1fr;
-		grid-template-areas:
-			"collection-pane";
+		grid-template-areas: "collection-pane";
 
 		.deck-pane,
 		.snackbar {
@@ -31,8 +30,7 @@
 }
 
 .snackbar-enter {
-	animation: var(--animation-fade-in),
-		var(--animation-slide-in-up);
+	animation: var(--animation-fade-in), var(--animation-slide-in-up);
 }
 
 .snackbar-leave {

@@ -17,7 +17,7 @@
 					"builder": "@angular/build:application",
 					"options": {
 						"browser": "main.ts",
-						"tsConfig": "tsconfig.app.json",
+						"tsConfig": "../../../tsconfig.json",
 						"assets": [
 							{
 								"glob": "**/*",

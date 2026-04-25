@@ -3,11 +3,24 @@
 		<h2 class="create-deck-title">Create new deck</h2>
 		<div>
 			<label for="deck-name">Name</label>
-			<input type="text" id="deck-name" class="create-deck-name" [field]="deckNameForm()">
+			<input
+				type="text"
+				id="deck-name"
+				class="create-deck-name"
+				[field]="deckNameForm()"
+			/>
 		</div>
 		<div class="create-deck-actions">
-			<button class="md-text-button" (click)="closeCreateDeckDialog()">Cancel</button>
-			<button class="md-text-button" (click)="createDeckAndCloseDialog()" [disabled]="deckNameForm()().invalid()">Create</button>
+			<button class="md-text-button" (click)="closeCreateDeckDialog()">
+				Cancel
+			</button>
+			<button
+				class="md-text-button"
+				(click)="createDeckAndCloseDialog()"
+				[disabled]="deckNameForm()().invalid()"
+			>
+				Create
+			</button>
 		</div>
 	</div>
 </dialog>

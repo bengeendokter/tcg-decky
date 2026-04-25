@@ -5,19 +5,52 @@
 <div class="deck-actions">
 	@if(existingDeck()) {
 	<button (click)="updateCollectionCardDeck.emit()">Save</button>
-	}
-	@else {
+	} @else {
 	<button (click)="addCollectionCardDeck.emit()">Save</button>
 	}
-	<button class="md-tonal-button" (click)="openLoadDeckDialog.emit()">Load deck</button>
-	<button class="md-tonal-button" [disabled]="!existingDeck()" (click)="addCollectionCardDeck.emit()">Create copy</button>
-	<button class="md-tonal-button md-icon-button" (click)="reset.emit()" aria-label="Reset"><icon [svg]="restartAltIcon"></icon></button>
-	<button class="md-tonal-button md-icon-button" [disabled]="!existingDeck()" (click)="deleteCollectionCardDeck.emit()" aria-label="Delete"><icon [svg]="deleteIcon"></icon></button>
-	<button class="md-tonal-button md-icon-button" (click)="openLimitlessDeckBuilder.emit()" aria-label="Share"><icon [svg]="shareIcon"></icon></button>
+	<button class="md-tonal-button" (click)="openLoadDeckDialog.emit()">
+		Load deck
+	</button>
+	<button
+		class="md-tonal-button"
+		[disabled]="!existingDeck()"
+		(click)="addCollectionCardDeck.emit()"
+	>
+		Create copy
+	</button>
+	<button
+		class="md-tonal-button md-icon-button"
+		(click)="reset.emit()"
+		aria-label="Reset"
+	>
+		<icon [svg]="restartAltIcon"></icon>
+	</button>
+	<button
+		class="md-tonal-button md-icon-button"
+		[disabled]="!existingDeck()"
+		(click)="deleteCollectionCardDeck.emit()"
+		aria-label="Delete"
+	>
+		<icon [svg]="deleteIcon"></icon>
+	</button>
+	<button
+		class="md-tonal-button md-icon-button"
+		(click)="openLimitlessDeckBuilder.emit()"
+		aria-label="Share"
+	>
+		<icon [svg]="shareIcon"></icon>
+	</button>
 </div>
 <div class="deck-cards">
 	@for(card of deckCards(); track card.id) {
-	<tcg-card id="{{card.id}}" (click)="openCardDetail.emit(card)" [quantity]="card.quantity" class="deck-card"
-		[style.--background-image-url]="`url(${card.image}/low.webp)`" animate.enter="deck-card-enter" animate.leave="deck-card-leave"></tcg-card>
+	<tcg-card
+		id="{{card.id}}"
+		(click)="openCardDetail.emit(card)"
+		[quantity]="card.quantity"
+		class="deck-card"
+		[style.--background-image-url]="`url(${card.image}/low.webp)`"
+		animate.enter="deck-card-enter"
+		animate.leave="deck-card-leave"
+	></tcg-card>
 	}
 </div>

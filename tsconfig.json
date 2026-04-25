@@ -1,39 +1,35 @@
+/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
+/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
 {
-	// Visit https://aka.ms/tsconfig to read more about this file
+	"compileOnSave": false,
 	"compilerOptions": {
-		// Environment Settings
-		// See also https://aka.ms/tsconfig/module
-		"module": "preserve",
+		"strict": true,
+		"noImplicitOverride": true,
+		"noPropertyAccessFromIndexSignature": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+		"skipLibCheck": true,
+		"isolatedModules": true,
+		"experimentalDecorators": true,
+		"importHelpers": true,
 		"target": "esnext",
-		"types": [],
+		"module": "preserve",
 		"rewriteRelativeImportExtensions": true,
 		"erasableSyntaxOnly": true,
-		// Other Outputs
 		"sourceMap": true,
 		"declaration": true,
 		"declarationMap": true,
-		// Stricter Typechecking Options
 		"noUncheckedIndexedAccess": true,
 		"exactOptionalPropertyTypes": true,
-		// Recommended Options
-		"strict": true,
 		"jsx": "react-jsx",
 		"verbatimModuleSyntax": true,
-		"isolatedModules": true,
 		"noUncheckedSideEffectImports": true,
 		"moduleDetection": "force",
-		"skipLibCheck": true,
-		"rootDir": "src"
 	},
 	"angularCompilerOptions": {
 		"enableI18nLegacyMessageIdFormat": false,
 		"strictInjectionParameters": true,
 		"strictInputAccessModifiers": true,
 		"strictTemplates": true
-	},
-	"references": [
-		{
-			"path": "./src/apps/deck-builder/tsconfig.app.json"
-		}
-	]
+	}
 }

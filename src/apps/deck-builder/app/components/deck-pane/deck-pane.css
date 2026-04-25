@@ -51,11 +51,9 @@
 }
 
 .deck-card-enter {
-	animation: var(--animation-fade-in),
-		var(--animation-slide-in-down);
+	animation: var(--animation-fade-in), var(--animation-slide-in-down);
 }
 
 .deck-card-leave {
-	animation: var(--animation-fade-out),
-		var(--animation-slide-out-up);
+	animation: var(--animation-fade-out), var(--animation-slide-out-up);
 }

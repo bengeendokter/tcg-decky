@@ -26,6 +26,11 @@ export const POKEMON_TYPES = [
 	POKEMON_TYPE.DRAGON,
 ] as const satisfies PokemonType[];
 
+export function isPokemonType(value: string): value is PokemonType {
+	const pokemonTypes: string[] = POKEMON_TYPES;
+	return pokemonTypes.includes(value);
+}
+
 export const ALL = 'All' as const satisfies string;
 
 export type All = typeof ALL;

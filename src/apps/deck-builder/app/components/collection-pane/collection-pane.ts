@@ -9,6 +9,7 @@ import { Field, type FieldTree } from '@angular/forms/signals';
 import { TcgCard } from '../tcg-card/tcg-card';
 import {
 	ALL,
+	isPokemonType,
 	POKEMON_TYPES,
 	type All,
 	type PokemonType,
@@ -17,7 +18,7 @@ import type { TcgDexCollectionCard } from '../../../../../libs/deck-builder/mode
 import { getQuantitySum } from '../../../../../libs/deck-builder/util/get-quantity-sum';
 import openInFullIcon from '@material-symbols/svg-400/rounded/open_in_full.svg';
 import closeFullscreenIcon from '@material-symbols/svg-400/rounded/close_fullscreen.svg';
-import { IconComponent } from "../icon/icon.component";
+import { IconComponent } from '../icon/icon.component';
 
 @Component({
 	selector: 'collection-pane',
@@ -45,4 +46,28 @@ export class CollectionPane {
 	protected readonly POKEMON_TYPES: typeof POKEMON_TYPES = POKEMON_TYPES;
 	protected readonly ALL: All = ALL;
 	protected readonly getQuantitySum: typeof getQuantitySum = getQuantitySum;
+
+	protected handelSelectionChange(event: Event): void {
+		const target: EventTarget | null = event.target;
+
+		if (target === null) {
+			return;
+		}
+
+		if (!(target instanceof HTMLSelectElement)) {
+			return;
+		}
+
+		const value: string = target.value;
+
+		if (!(isPokemonType(value) || value === ALL)) {
+			return;
+		}
+
+		this.updatePokemonTypeFilterForm(value);
+	}
+
+	private updatePokemonTypeFilterForm(value: PokemonType | All): void {
+		this.pokemonTypeFilterForm()().setControlValue(value);
+	}
 }
