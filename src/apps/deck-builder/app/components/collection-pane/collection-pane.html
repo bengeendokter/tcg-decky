@@ -18,9 +18,9 @@
 			[style.--md-comp-outlined-text-field-label-text-background-color]="'var(--md-sys-color-surface-container)'"
 			>Pokemon Type</label
 		>
-		<select id="pokemon-type-filter" [field]="pokemonTypeFilterForm()">
+		<select id="pokemon-type-filter" (change)="handelSelectionChange($event)" [value]="pokemonTypeFilterForm()().value()">
 			<button>
-				<!-- <selectedcontent></selectedcontent> -->
+				<selectedcontent></selectedcontent>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					height="24px"
