@@ -40,4 +40,24 @@ export class LoadDeckDialog {
 		this.loadDeck.emit();
 		this.closeLoadDeckDialog();
 	}
+
+	protected handelSelectionChange(event: Event): void {
+		const target: EventTarget | null = event.target;
+
+		if (target === null) {
+			return;
+		}
+
+		if (!(target instanceof HTMLSelectElement)) {
+			return;
+		}
+
+		const value: string = target.value;
+
+		this.updateLoadDeckForm(value);
+	}
+
+	private updateLoadDeckForm(value: string): void {
+		this.loadDeckForm()().setControlValue(value);
+	}
 }
