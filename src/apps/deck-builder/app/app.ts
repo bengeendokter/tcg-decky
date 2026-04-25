@@ -1,9 +1,4 @@
-import {
-	Component,
-	inject,
-	PLATFORM_ID,
-	type OnInit,
-} from '@angular/core';
+import { Component, inject, PLATFORM_ID, type OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {
 	setTheme,

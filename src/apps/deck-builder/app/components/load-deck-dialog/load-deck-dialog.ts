@@ -37,7 +37,7 @@ export class LoadDeckDialog {
 	}
 
 	protected loadDeckAndCloseDialog(): void {
-		this.loadDeck.emit()
+		this.loadDeck.emit();
 		this.closeLoadDeckDialog();
 	}
 }

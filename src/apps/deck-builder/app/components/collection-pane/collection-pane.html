@@ -1,22 +1,33 @@
 <div class="collection-actions">
 	<search>
-		<input type="search" [field]="searchForm()" placeholder="Search name">
+		<input type="search" [field]="searchForm()" placeholder="Search name" />
 	</search>
 
 	<label for="in-rotation-filter">
-		<input id="in-rotation-filter" type="checkbox" [field]="inRotationFilterForm()">
+		<input
+			id="in-rotation-filter"
+			type="checkbox"
+			[field]="inRotationFilterForm()"
+		/>
 		In rotation
 	</label>
 
 	<div>
-		<label for="pokemon-type-filter"
-			[style.--md-comp-outlined-text-field-label-text-background-color]="'var(--md-sys-color-surface-container)'">Pokemon
-			Type</label>
+		<label
+			for="pokemon-type-filter"
+			[style.--md-comp-outlined-text-field-label-text-background-color]="'var(--md-sys-color-surface-container)'"
+			>Pokemon Type</label
+		>
 		<select id="pokemon-type-filter" [field]="pokemonTypeFilterForm()">
 			<button>
 				<!-- <selectedcontent></selectedcontent> -->
-				<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-					fill="#1f1f1f">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					height="24px"
+					viewBox="0 -960 960 960"
+					width="24px"
+					fill="#1f1f1f"
+				>
 					<path d="M480-360 280-560h400L480-360Z" />
 				</svg>
 			</button>
@@ -27,14 +38,23 @@
 		</select>
 	</div>
 
-	<button class="md-tonal-button md-icon-button" (click)="toggleFullscreen.emit()"
-		[attr.aria-label]="collectionFullscreen() ? 'Close fullscreen' : 'Open fullscreen'">
-		<icon [svg]="collectionFullscreen() ? closeFullscreenIcon : openInFullIcon"></icon>
+	<button
+		class="md-tonal-button md-icon-button"
+		(click)="toggleFullscreen.emit()"
+		[attr.aria-label]="collectionFullscreen() ? 'Close fullscreen' : 'Open fullscreen'"
+	>
+		<icon
+			[svg]="collectionFullscreen() ? closeFullscreenIcon : openInFullIcon"
+		></icon>
 	</button>
 </div>
 <div class="collection-cards">
 	@for(card of sortedTcgDexCollectionCards(); track card.id) {
-	<tcg-card (click)="openCardDetail.emit(card)" [quantity]="getQuantitySum(card.variants)"
-		[style.--background-image-url]="`url(${card.image}/low.webp)`" class="collection-card"></tcg-card>
+	<tcg-card
+		(click)="openCardDetail.emit(card)"
+		[quantity]="getQuantitySum(card.variants)"
+		[style.--background-image-url]="`url(${card.image}/low.webp)`"
+		class="collection-card"
+	></tcg-card>
 	}
 </div>

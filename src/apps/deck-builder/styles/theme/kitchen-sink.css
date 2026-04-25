@@ -17,7 +17,8 @@ html {
 
 	font: var(--md-sys-typescale-body-large);
 
-	scrollbar-color: var(--md-sys-color-on-surface-variant) var(--md-sys-color-surface);
+	scrollbar-color: var(--md-sys-color-on-surface-variant)
+		var(--md-sys-color-surface);
 
 	anchor-name: --root-anchor;
 }
@@ -50,7 +51,9 @@ a:visited {
 	color: var(--md-sys-color-primary);
 }
 
-input:where(:not(:is([type=file], [type=radio], [type=checkbox]), search > input)),
+input:where(
+	:not(:is([type="file"], [type="radio"], [type="checkbox"]), search > input)
+),
 select,
 textarea {
 	border-radius: var(--md-sys-shape-corner-value-extra-small);
@@ -75,23 +78,29 @@ textarea {
 	}
 
 	label:has(+ &) {
-		--md-comp-outlined-text-field-label-text-background-color: var(--md-sys-color-surface);
+		--md-comp-outlined-text-field-label-text-background-color: var(
+			--md-sys-color-surface
+		);
 
 		color: var(--md-sys-color-on-surface-variant);
 		font: var(--md-sys-typescale-label-medium);
 
 		position: absolute;
 		padding-inline: 4px;
-		background-color: var(--md-comp-outlined-text-field-label-text-background-color);
+		background-color: var(
+			--md-comp-outlined-text-field-label-text-background-color
+		);
 		transform: translateX(12px) translateY(-8px);
 
 		dialog & {
-			--md-comp-outlined-text-field-label-text-background-color: var(--md-sys-color-surface-container-high);
+			--md-comp-outlined-text-field-label-text-background-color: var(
+				--md-sys-color-surface-container-high
+			);
 		}
 	}
 }
 
-search>input {
+search > input {
 	min-height: 56px;
 	background-color: var(--md-sys-color-surface-container-high);
 	border: none;
@@ -109,7 +118,7 @@ option {
 }
 
 button,
-input:is([type=button], [type=submit], [type=reset]),
+input:is([type="button"], [type="submit"], [type="reset"]),
 input::file-selector-button {
 	--md-comp-button-container-color: var(--md-sys-color-primary);
 	--md-comp-button-label-text-color: var(--md-sys-color-on-primary);
@@ -125,27 +134,47 @@ input::file-selector-button {
 	user-select: none;
 
 	&:hover {
-		background-color: color-mix(in oklab, var(--md-comp-button-container-color), var(--md-comp-button-label-text-color) 8%);
+		background-color: color-mix(
+			in oklab,
+			var(--md-comp-button-container-color),
+			var(--md-comp-button-label-text-color) 8%
+		);
 	}
 
 	&:focus-visible,
 	&:active {
-		background-color: color-mix(in oklab, var(--md-comp-button-container-color), var(--md-comp-button-label-text-color) 10%);
+		background-color: color-mix(
+			in oklab,
+			var(--md-comp-button-container-color),
+			var(--md-comp-button-label-text-color) 10%
+		);
 	}
 
 	&:disabled {
-		background-color: color-mix(in oklab, var(--md-sys-color-on-surface) 10%, transparent);
+		background-color: color-mix(
+			in oklab,
+			var(--md-sys-color-on-surface) 10%,
+			transparent
+		);
 		color: color-mix(in oklab, var(--md-sys-color-on-surface) 38%, transparent);
 	}
 }
 
-input[type=file] {
+input[type="file"] {
 	&:hover::file-selector-button {
-		background-color: color-mix(in oklab, var(--md-comp-button-container-color), var(--md-comp-button-label-text-color) 8%);
+		background-color: color-mix(
+			in oklab,
+			var(--md-comp-button-container-color),
+			var(--md-comp-button-label-text-color) 8%
+		);
 	}
 
 	&:is(:focus-visible, :active)::file-selector-button {
-		background-color: color-mix(in oklab, var(--md-comp-button-container-color), var(--md-comp-button-label-text-color) 10%);
+		background-color: color-mix(
+			in oklab,
+			var(--md-comp-button-container-color),
+			var(--md-comp-button-label-text-color) 10%
+		);
 	}
 }
 
@@ -154,7 +183,9 @@ dialog {
 	background-color: var(--md-sys-color-surface-container-high);
 	border-radius: var(--md-sys-shape-corner-value-extra-large);
 	padding: 24px;
-	transition: opacity 200ms ease-in, display 200ms ease-in allow-discrete;
+	transition:
+		opacity 200ms ease-in,
+		display 200ms ease-in allow-discrete;
 
 	&:focus-visible {
 		outline: none;
@@ -216,12 +247,20 @@ option {
 }
 
 option:hover {
-	background-color: color-mix(in oklab, var(--md-sys-color-on-surface) 8%, transparent);
+	background-color: color-mix(
+		in oklab,
+		var(--md-sys-color-on-surface) 8%,
+		transparent
+	);
 }
 
 option:focus-visible,
 option:checked {
-	background-color: color-mix(in oklab, var(--md-sys-color-on-surface) 10%, transparent);
+	background-color: color-mix(
+		in oklab,
+		var(--md-sys-color-on-surface) 10%,
+		transparent
+	);
 }
 
 option::checkmark {

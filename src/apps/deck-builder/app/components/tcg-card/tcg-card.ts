@@ -1,4 +1,4 @@
-import { Component, input, type InputSignal } from "@angular/core";
+import { Component, input, type InputSignal } from '@angular/core';
 
 @Component({
 	selector: 'tcg-card',

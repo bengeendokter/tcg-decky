@@ -10,7 +10,12 @@ import { getCollectionCardDeck } from '../../libs/collection/data-access/get-col
 import { Type, type } from 'arktype';
 import { arktypeValidator } from '@hono/arktype-validator';
 import { addCollectionCardDeck } from '../../libs/collection/data-access/add-collection-card-deck';
-import type { DeleteResult, InsertOneResult, UpdateResult, WithId } from 'mongodb';
+import type {
+	DeleteResult,
+	InsertOneResult,
+	UpdateResult,
+	WithId,
+} from 'mongodb';
 import { updateCollectionCardDeck } from '../../libs/collection/data-access/update-collection-card-deck';
 import { deleteCollectionCardDeck } from '../../libs/collection/data-access/delete-collection-card-deck';
 import type { BlankEnv } from 'hono/types';

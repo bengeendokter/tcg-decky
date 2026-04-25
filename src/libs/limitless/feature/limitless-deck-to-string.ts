@@ -1,4 +1,4 @@
-import type { LimitlessCard, LimitlessDeck } from "../model/limitless-deck";
+import type { LimitlessCard, LimitlessDeck } from '../model/limitless-deck';
 
 interface LimitlessCardsToCategoryHeaderLineParams {
 	limitlessCards: LimitlessCard[];
@@ -20,9 +20,7 @@ function limitlessCardToTxtLine(limitlessCard: LimitlessCard): string {
 	return `${limitlessCard.quantity} ${limitlessCard.name} ${limitlessCard.tcgOnline} ${limitlessCard.localId}`;
 }
 
-export function limitlessDeckToString(
-	limitlessDeck: LimitlessDeck,
-): string {
+export function limitlessDeckToString(limitlessDeck: LimitlessDeck): string {
 	const { pokemon, trainer, energy } = limitlessDeck;
 
 	const pokemonHeaderLine: string = limitlessCardsToCategoryHeaderLine({

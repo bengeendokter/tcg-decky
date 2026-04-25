@@ -4,14 +4,23 @@
 		<div>
 			<label for="load-deck">Deck</label>
 			<select class="load-deck-select" id="load-deck" [field]="loadDeckForm()">
-				@for (collectionDeck of sortedCollectionDecks(); track collectionDeck._id) {
+				@for (collectionDeck of sortedCollectionDecks(); track
+				collectionDeck._id) {
 				<option [value]="collectionDeck._id">{{collectionDeck.name}}</option>
 				}
 			</select>
 		</div>
 		<div class="load-deck-actions">
-			<button class="md-text-button" (click)="closeLoadDeckDialog()">Cancel</button>
-			<button class="md-text-button" (click)="loadDeckAndCloseDialog()" [disabled]="loadDeckForm()().invalid()">Load</button>
+			<button class="md-text-button" (click)="closeLoadDeckDialog()">
+				Cancel
+			</button>
+			<button
+				class="md-text-button"
+				(click)="loadDeckAndCloseDialog()"
+				[disabled]="loadDeckForm()().invalid()"
+			>
+				Load
+			</button>
 		</div>
 	</div>
 </dialog>

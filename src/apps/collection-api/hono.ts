@@ -18,7 +18,10 @@ console.log('Database connection complete');
 
 const deckBuilderUrl: string | undefined = process.env.DECK_BUILDER_URL;
 
-const origin: string[] = deckBuilderUrl !== undefined ? [deckBuilderUrl] : ['http://localhost:4200', 'http://192.168.0.131:4200'];
+const origin: string[] =
+	deckBuilderUrl !== undefined
+		? [deckBuilderUrl]
+		: ['http://localhost:4200', 'http://192.168.0.131:4200'];
 
 export const tcgDexServerUrl: string =
 	process.env.TCG_DEX_SERVER_URL ?? CONFIG.TCG_DEX_SERVER_URL;
