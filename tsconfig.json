@@ -33,7 +33,8 @@
 			"@prebuild/*": ["./src/libs/prebuild/*"],
 			"@style/*": ["./src/libs/style/*"],
 			"@tcg-dex/*": ["./src/libs/tcg-dex/*"],
-			"@config": ["./src/config"]
+			"@config": ["./src/config"],
+			"@storybook/*": ["./.storybook/*"]
 		}
 	},
 	"angularCompilerOptions": {

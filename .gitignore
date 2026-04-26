@@ -1,3 +1,6 @@
 node_modules
 **/.angular
 output/deck-builder
+
+*storybook.log
+storybook-static
