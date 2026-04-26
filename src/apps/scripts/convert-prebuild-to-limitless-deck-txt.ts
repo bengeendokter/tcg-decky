@@ -1,5 +1,5 @@
 import type TCGdex from '@tcgdex/sdk';
-import { CONFIG } from '../../config';
+import { CONFIG } from '@config';
 import { convertPrebuildToLimitlessDeck } from '@limitless/feature/convert-prebuild-to-limitless-deck';
 import { importPrebuildDeckFromJson } from '@prebuild/data-access/import-prebuild-deck-from-json';
 import type { PrebuildDeck } from '@prebuild/model/prebuild-deck';

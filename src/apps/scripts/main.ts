@@ -1,5 +1,5 @@
 import type TCGdex from '@tcgdex/sdk';
-import { CONFIG } from '../../config';
+import { CONFIG } from '@config';
 // import { converLimitlessDeckToImportString } from '@limitless/feature/convert-limitless-deck-to-import-string';
 import type { LimitlessDeck } from '@limitless/model/limitless-deck';
 import { getTcgDex } from '@tcg-dex/data-access/get-tcg-dex';

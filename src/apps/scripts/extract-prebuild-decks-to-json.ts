@@ -1,4 +1,4 @@
-import { CONFIG } from '../../config';
+import { CONFIG } from '@config';
 import { exportPrebuildDecksToJson } from '@prebuild/data-access/export-prebuild-decks-to-json';
 import { extractPrebuildDecks } from '@prebuild/feature/extract-prebuild-deck';
 import type { PrebuildDeck } from '@prebuild/model/prebuild-deck';

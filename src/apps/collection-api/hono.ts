@@ -4,7 +4,7 @@ import { cards } from './cards';
 import { logger } from 'hono/logger';
 import { connectToDatabase } from '@collection/data-access/connect-to-database';
 import type { Db } from 'mongodb';
-import { CONFIG } from '../../config';
+import { CONFIG } from '@config';
 import { decks } from './decks';
 import { cors } from 'hono/cors';
 

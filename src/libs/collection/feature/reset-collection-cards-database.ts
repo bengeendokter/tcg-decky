@@ -1,6 +1,6 @@
 import type { Db } from 'mongodb';
 import { connectToDatabase } from '../data-access/connect-to-database';
-import { CONFIG } from '../../../config';
+import { CONFIG } from '@config';
 import { closeDatabaseConnection } from '../data-access/close-database-connection';
 import { deleteAllCollectionCard } from '../data-access/delete-all-collection-cards';
 import { importDittoDexCardsFromCsv } from '@ditto-dex/data-access/import-ditto-dex-cards-from-csv';
