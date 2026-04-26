@@ -24,7 +24,16 @@
 		"jsx": "react-jsx",
 		"verbatimModuleSyntax": true,
 		"noUncheckedSideEffectImports": true,
-		"moduleDetection": "force"
+		"moduleDetection": "force",
+		"paths": {
+			"@collection/*": ["./src/libs/collection/*"],
+			"@deck-builder/*": ["./src/libs/deck-builder/*"],
+			"@ditto-dex/*": ["./src/libs/ditto-dex/*"],
+			"@limitless/*": ["./src/libs/limitless/*"],
+			"@prebuild/*": ["./src/libs/prebuild/*"],
+			"@style/*": ["./src/libs/style/*"],
+			"@tcg-dex/*": ["./src/libs/tcg-dex/*"]
+		}
 	},
 	"angularCompilerOptions": {
 		"enableI18nLegacyMessageIdFormat": false,

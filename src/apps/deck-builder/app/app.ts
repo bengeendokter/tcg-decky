@@ -4,7 +4,7 @@ import {
 	setTheme,
 	enableSystemContrastPreferenceListener,
 	enableSystemColorSchemePreferenceListener,
-} from '../../../libs/style/util/theme';
+} from '@style/util/theme';
 import { isPlatformBrowser } from '@angular/common';
 import { OverviewPage } from './pages/overview-page/overview-page';
 
