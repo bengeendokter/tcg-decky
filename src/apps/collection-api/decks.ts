@@ -1,7 +1,6 @@
 import { Hono } from 'hono';
 import {
 	collectionCardDeckValidator,
-	type CollectionCard,
 	type CollectionCardDeck,
 } from '../../libs/collection/model/collection-card';
 import { getAllCollectionCardDecks } from '../../libs/collection/data-access/get-all-collection-card-decks';

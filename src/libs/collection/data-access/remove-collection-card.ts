@@ -1,3 +1,4 @@
+/* oxlint-disable no-thenable */
 import type { Collection, Db, UpdateResult } from 'mongodb';
 import type { CollectionCard } from '../model/collection-card';
 
