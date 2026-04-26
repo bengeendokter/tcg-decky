@@ -4,7 +4,7 @@
 		"strings": "on"
 	},
 	// prioritize ArkType's "type" for autoimports
-	"typescript.preferences.autoImportSpecifierExcludeRegexes": ["^(node:)?os$"],
+	"js/ts.preferences.autoImportSpecifierExcludeRegexes": ["^(node:)?os$"],
 	"todo-tree.tree.scanMode": "workspace only",
 
 	// oxfmt
