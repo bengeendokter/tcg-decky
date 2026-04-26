@@ -44,7 +44,6 @@
 		"arktype": "^2.1.27",
 		"hono": "^4.10.6",
 		"jsdom": "^27.1.0",
-		"m3-color-css": "github:bengeendokter/m3-color-css#v0.1.5",
 		"mongodb": "^7.0.0",
 		"normalize.css": "^8.0.1",
 		"open-props": "^1.7.23",

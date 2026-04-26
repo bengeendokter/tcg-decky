@@ -8,13 +8,13 @@ import {
 	type InputSignal,
 	type Signal,
 } from '@angular/core';
-import { Field, type FieldTree } from '@angular/forms/signals';
+import { type FieldTree } from '@angular/forms/signals';
 import type { WithId } from 'mongodb';
 import type { CollectionCardDeck } from '../../../../../libs/collection/model/collection-card';
 
 @Component({
 	selector: 'load-deck-dialog',
-	imports: [Field],
+	imports: [],
 	templateUrl: './load-deck-dialog.html',
 	styleUrl: './load-deck-dialog.css',
 })
