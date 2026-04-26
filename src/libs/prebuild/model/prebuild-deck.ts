@@ -31,9 +31,7 @@ export interface PrebuildCardWithQuantity {
 	quantity: number;
 }
 
-export function isPrebuildCardWithQuantity(
-	object: object,
-): object is PrebuildCardWithQuantity {
+export function isPrebuildCardWithQuantity(object: object): object is PrebuildCardWithQuantity {
 	if (!('card' in object)) {
 		return false;
 	}

@@ -30,80 +30,75 @@ export async function convertPrebuildToLimitlessDeck({
 		},
 	);
 
-	const limitlessCardsWithCategory: LimitlessCardWithCategory[] =
-		await Promise.all(
-			setCardsWithQuantity.map(async (setCardWithQuantity) => {
-				const { card: setCard, quantity } = setCardWithQuantity;
+	const limitlessCardsWithCategory: LimitlessCardWithCategory[] = await Promise.all(
+		setCardsWithQuantity.map(async (setCardWithQuantity) => {
+			const { card: setCard, quantity } = setCardWithQuantity;
 
-				// if setName end with Promo, replace it with Black Star Promos
-				const unvalidatedSetName: string = setCard.setName;
+			// if setName end with Promo, replace it with Black Star Promos
+			const unvalidatedSetName: string = setCard.setName;
 
-				const setName: string = unvalidatedSetName.endsWith('Promo')
-					? unvalidatedSetName.replace('Promo', 'Black Star Promos')
-					: unvalidatedSetName;
+			const setName: string = unvalidatedSetName.endsWith('Promo')
+				? unvalidatedSetName.replace('Promo', 'Black Star Promos')
+				: unvalidatedSetName;
 
-				const cardResumes: CardResume[] = await tcgDex.card.list(
-					Query.create()
-						.like('localId', setCard.localId.toString())
-						.like('set.name', setName),
+			const cardResumes: CardResume[] = await tcgDex.card.list(
+				Query.create().like('localId', setCard.localId.toString()).like('set.name', setName),
+			);
+
+			const cardResume: CardResume | undefined = cardResumes[0];
+
+			if (!cardResume) {
+				throw Error(`Card not found: ${setCard.setName} #${setCard.localId}`);
+			}
+
+			const cardId: string = cardResume.id;
+
+			const card: Card | null = await tcgDex.card.get(cardId);
+
+			if (!card) {
+				throw Error('Card not found');
+			}
+
+			const name: string = card.name;
+			const localId: number = parseInt(card.localId);
+			const category: string = card.category;
+
+			if (!isCategory(category)) {
+				throw Error('Invalid category');
+			}
+
+			const set: SetWithAbbreviation | null = await tcgDex.set.get(card.set.id);
+
+			if (!set) {
+				throw Error('Set not found');
+			}
+
+			const abbreviation: string | undefined = set?.abbreviation?.official;
+			let tcgOnline: string | undefined = set.tcgOnline ?? abbreviation;
+
+			if (!tcgOnline) {
+				throw Error(
+					`Set TCG Online code not found for ${set.name} with ID ${set.id} and abbreviation ${abbreviation}`,
 				);
+			}
 
-				const cardResume: CardResume | undefined = cardResumes[0];
+			// handle exceptions
+			const exeptionMap: Map<string, string> = new Map([
+				// ['SVP', 'PR-SV'],
+				['SV', 'SVI'],
+			]);
 
-				if (!cardResume) {
-					throw Error(`Card not found: ${setCard.setName} #${setCard.localId}`);
-				}
+			tcgOnline = exeptionMap.get(tcgOnline) ?? tcgOnline;
 
-				const cardId: string = cardResume.id;
-
-				const card: Card | null = await tcgDex.card.get(cardId);
-
-				if (!card) {
-					throw Error('Card not found');
-				}
-
-				const name: string = card.name;
-				const localId: number = parseInt(card.localId);
-				const category: string = card.category;
-
-				if (!isCategory(category)) {
-					throw Error('Invalid category');
-				}
-
-				const set: SetWithAbbreviation | null = await tcgDex.set.get(
-					card.set.id,
-				);
-
-				if (!set) {
-					throw Error('Set not found');
-				}
-
-				const abbreviation: string | undefined = set?.abbreviation?.official;
-				let tcgOnline: string | undefined = set.tcgOnline ?? abbreviation;
-
-				if (!tcgOnline) {
-					throw Error(
-						`Set TCG Online code not found for ${set.name} with ID ${set.id} and abbreviation ${abbreviation}`,
-					);
-				}
-
-				// handle exceptions
-				const exeptionMap: Map<string, string> = new Map([
-					// ['SVP', 'PR-SV'],
-					['SV', 'SVI'],
-				]);
-
-				tcgOnline = exeptionMap.get(tcgOnline) ?? tcgOnline;
-
-				return {
-					category,
-					quantity,
-					name,
-					tcgOnline,
-					localId,
-				};
-			}),
-		);
+			return {
+				category,
+				quantity,
+				name,
+				tcgOnline,
+				localId,
+			};
+		}),
+	);
 
 	const pokemon: LimitlessCard[] = limitlessCardsWithCategory.filter(
 		(limitlessCardWithCategory) => {
@@ -115,11 +110,9 @@ export async function convertPrebuildToLimitlessDeck({
 			return limitlessCardWithCategory.category === CATEGORY.TRAINER;
 		},
 	);
-	const energy: LimitlessCard[] = limitlessCardsWithCategory.filter(
-		(limitlessCardWithCategory) => {
-			return limitlessCardWithCategory.category === CATEGORY.ENERGY;
-		},
-	);
+	const energy: LimitlessCard[] = limitlessCardsWithCategory.filter((limitlessCardWithCategory) => {
+		return limitlessCardWithCategory.category === CATEGORY.ENERGY;
+	});
 
 	return {
 		name,

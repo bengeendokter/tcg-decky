@@ -1,11 +1,4 @@
-import {
-	Component,
-	computed,
-	inject,
-	input,
-	type InputSignal,
-	type Signal,
-} from '@angular/core';
+import { Component, computed, inject, input, type InputSignal, type Signal } from '@angular/core';
 import { DomSanitizer, type SafeHtml } from '@angular/platform-browser';
 
 @Component({

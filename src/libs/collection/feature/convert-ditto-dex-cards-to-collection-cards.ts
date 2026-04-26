@@ -1,8 +1,5 @@
 import TCGdex, { Query, type Card, type CardResume } from '@tcgdex/sdk';
-import {
-	VARIANT,
-	type DittoDexCard,
-} from '../../ditto-dex/model/ditto-dex-card';
+import { VARIANT, type DittoDexCard } from '../../ditto-dex/model/ditto-dex-card';
 import type { CollectionCard } from '../model/collection-card';
 import type { Variants } from '../model/variants';
 
@@ -113,16 +110,14 @@ export async function convetDittoDexCardsToCollectionCards({
 
 	const collectionCardMap: Map<string, CollectionCard> = collectionCards.reduce(
 		(collectionCardMap, card) => {
-			const oldCollectionCard: CollectionCard | undefined =
-				collectionCardMap.get(card._id);
+			const oldCollectionCard: CollectionCard | undefined = collectionCardMap.get(card._id);
 
 			if (oldCollectionCard === undefined) {
 				collectionCardMap.set(card._id, card);
 				return collectionCardMap;
 			}
 
-			const oldVariants: CollectionCard['variants'] =
-				oldCollectionCard.variants;
+			const oldVariants: CollectionCard['variants'] = oldCollectionCard.variants;
 			const oldFirstEdition: number = oldVariants.firstEdition ?? 0;
 			const oldHolo: number = oldVariants.holo ?? 0;
 			const oldNormal: number = oldVariants.normal ?? 0;

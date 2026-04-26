@@ -12,13 +12,8 @@ export async function removeCollectionCard({
 }: RemoveCollectionCardParams): Promise<UpdateResult<CollectionCard>> {
 	const cards: Collection<CollectionCard> = db.collection('cards');
 
-	const {
-		normal,
-		reverse,
-		firstEdition,
-		holo,
-		wPromo,
-	}: CollectionCard['variants'] = collectionCard.variants;
+	const { normal, reverse, firstEdition, holo, wPromo }: CollectionCard['variants'] =
+		collectionCard.variants;
 
 	const normalRemoveAmount: number = normal ?? 0;
 	const reverseRemoveAmount: number = reverse ?? 0;

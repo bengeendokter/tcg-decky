@@ -25,15 +25,11 @@ export class Collection {
 		return cards;
 	}
 
-	public readonly getAllCardsResource: ResourceRef<
-		CollectionCard[] | undefined
-	> = resource({
+	public readonly getAllCardsResource: ResourceRef<CollectionCard[] | undefined> = resource({
 		loader: () => this.getAllCards(),
 	});
 
-	public async addCollectionCardDeck(
-		deck: CollectionCardDeck,
-	): Promise<string> {
+	public async addCollectionCardDeck(deck: CollectionCardDeck): Promise<string> {
 		const validatedAndStrippedDeck: CollectionCardDeck | ArkErrors =
 			collectionCardDeckValidatorAndStripper(deck);
 
@@ -75,9 +71,8 @@ export class Collection {
 		return decks;
 	}
 
-	public readonly getAllDecksResource: ResourceRef<
-		WithId<CollectionCardDeck>[] | undefined
-	> = resource({
-		loader: () => this.getAllDecks(),
-	});
+	public readonly getAllDecksResource: ResourceRef<WithId<CollectionCardDeck>[] | undefined> =
+		resource({
+			loader: () => this.getAllDecks(),
+		});
 }

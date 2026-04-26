@@ -6,8 +6,7 @@ import type { PrebuildDeck } from '../../libs/prebuild/model/prebuild-deck';
 export async function extractPrebuildDecksToJson(): Promise<void> {
 	const outputDirectory: string = CONFIG.COLLECTION_OUTPUT_DIRECTORY;
 
-	const battleAcademyDecksUrl: string =
-		CONFIG.PREBUILD_DECKS_URL.BATTLE_ACADEMY_2024_DECKS;
+	const battleAcademyDecksUrl: string = CONFIG.PREBUILD_DECKS_URL.BATTLE_ACADEMY_2024_DECKS;
 	const dragapultDecksUrl: string = CONFIG.PREBUILD_DECKS_URL.DRAGAPULT_EX_DECK;
 	const marnieDecksUrl: string = CONFIG.PREBUILD_DECKS_URL.MARNIE_RIVAL_DECK;
 	const gengarDecksUrl: string = CONFIG.PREBUILD_DECKS_URL.MEGA_GENGAR_EX_DECK;
@@ -25,15 +24,9 @@ export async function extractPrebuildDecksToJson(): Promise<void> {
 				return await extractPrebuildDecks(deckUrl);
 			}),
 		)
-	).reduce(
-		(
-			resultPrebuildDeckList: PrebuildDeck[],
-			prebuildDeckList: PrebuildDeck[],
-		) => {
-			return resultPrebuildDeckList.concat(prebuildDeckList);
-		},
-		[],
-	);
+	).reduce((resultPrebuildDeckList: PrebuildDeck[], prebuildDeckList: PrebuildDeck[]) => {
+		return resultPrebuildDeckList.concat(prebuildDeckList);
+	}, []);
 
 	exportPrebuildDecksToJson({ decks, outputDirectory });
 }

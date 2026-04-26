@@ -4,10 +4,7 @@ import type {
 	PrebuildDeck,
 	PrebuildSetCardWithQuantity,
 } from '../../prebuild/model/prebuild-deck';
-import type {
-	CollectionCard,
-	CollectionCardDeck,
-} from '../model/collection-card';
+import type { CollectionCard, CollectionCardDeck } from '../model/collection-card';
 import type { Variants } from '../model/variants';
 
 interface ConvertPrebuildToCollectionCardsParams {
@@ -19,14 +16,13 @@ export async function convertPrebuildToCollectionCards({
 	prebuildDeck: { cards: prebuildCards, name },
 	tcgDex,
 }: ConvertPrebuildToCollectionCardsParams): Promise<CollectionCardDeck> {
-	const setCardsWithQuantity: PrebuildSetCardWithQuantity[] =
-		prebuildCards.filter(
-			(cardsWithQuantity): cardsWithQuantity is PrebuildSetCardWithQuantity => {
-				const card: PrebuildCard = cardsWithQuantity.card;
+	const setCardsWithQuantity: PrebuildSetCardWithQuantity[] = prebuildCards.filter(
+		(cardsWithQuantity): cardsWithQuantity is PrebuildSetCardWithQuantity => {
+			const card: PrebuildCard = cardsWithQuantity.card;
 
-				return typeof card !== 'string';
-			},
-		);
+			return typeof card !== 'string';
+		},
+	);
 
 	const cards: CollectionCard[] = await Promise.all(
 		setCardsWithQuantity.map(async (setCardWithQuantity) => {
@@ -40,9 +36,7 @@ export async function convertPrebuildToCollectionCards({
 				: unvalidatedSetName;
 
 			const cardResumes: CardResume[] = await tcgDex.card.list(
-				Query.create()
-					.like('localId', setCard.localId.toString())
-					.like('set.name', setName),
+				Query.create().like('localId', setCard.localId.toString()).like('set.name', setName),
 			);
 
 			const cardResume: CardResume | undefined = cardResumes[0];

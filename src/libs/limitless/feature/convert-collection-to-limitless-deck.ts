@@ -1,8 +1,5 @@
 import TCGdex, { type Card } from '@tcgdex/sdk';
-import type {
-	CollectionCard,
-	CollectionCardDeck,
-} from '../../collection/model/collection-card';
+import type { CollectionCard, CollectionCardDeck } from '../../collection/model/collection-card';
 import {
 	CATEGORY,
 	isCategory,
@@ -21,63 +18,59 @@ export async function convertCollectionToLimitlessDeck({
 	collectionCardDeck: { cards, name },
 	tcgDex,
 }: ConvertCollectionToLimitlessDeckParams): Promise<LimitlessDeck> {
-	const limitlessCardsWithCategory: LimitlessCardWithCategory[] =
-		await Promise.all(
-			cards.map(async (collectionCard) => {
-				const cardId: string = collectionCard._id;
+	const limitlessCardsWithCategory: LimitlessCardWithCategory[] = await Promise.all(
+		cards.map(async (collectionCard) => {
+			const cardId: string = collectionCard._id;
 
-				const card: Card | null = await tcgDex.card.get(cardId);
+			const card: Card | null = await tcgDex.card.get(cardId);
 
-				if (!card) {
-					throw Error('Card not found');
-				}
+			if (!card) {
+				throw Error('Card not found');
+			}
 
-				const set: SetWithAbbreviation | null = await tcgDex.set.get(
-					card.set.id,
+			const set: SetWithAbbreviation | null = await tcgDex.set.get(card.set.id);
+
+			if (!set) {
+				throw Error('Set not found');
+			}
+
+			const abbreviation: string | undefined = set?.abbreviation?.official;
+			let tcgOnline: string | undefined = set.tcgOnline ?? abbreviation;
+
+			if (!tcgOnline) {
+				throw Error(
+					`Set TCG Online code not found for ${set.name} with ID ${set.id} and abbreviation ${abbreviation}`,
 				);
+			}
 
-				if (!set) {
-					throw Error('Set not found');
-				}
+			// handle exceptions
+			const exeptionMap: Map<string, string> = new Map([
+				// ['SVP', 'PR-SV'],
+				['SV', 'SVI'],
+			]);
 
-				const abbreviation: string | undefined = set?.abbreviation?.official;
-				let tcgOnline: string | undefined = set.tcgOnline ?? abbreviation;
+			tcgOnline = exeptionMap.get(tcgOnline) ?? tcgOnline;
 
-				if (!tcgOnline) {
-					throw Error(
-						`Set TCG Online code not found for ${set.name} with ID ${set.id} and abbreviation ${abbreviation}`,
-					);
-				}
+			const variants: CollectionCard['variants'] = collectionCard.variants;
 
-				// handle exceptions
-				const exeptionMap: Map<string, string> = new Map([
-					// ['SVP', 'PR-SV'],
-					['SV', 'SVI'],
-				]);
+			const firstEdition: number = variants.firstEdition ?? 0;
+			const holo: number = variants.holo ?? 0;
+			const normal: number = variants.normal ?? 0;
+			const reverse: number = variants.reverse ?? 0;
+			const wPromo: number = variants.wPromo ?? 0;
 
-				tcgOnline = exeptionMap.get(tcgOnline) ?? tcgOnline;
+			const quantity: number = firstEdition + holo + normal + reverse + wPromo;
+			const name: string = card.name;
+			const localId: number = parseInt(card.localId);
+			const category: string = card.category;
 
-				const variants: CollectionCard['variants'] = collectionCard.variants;
+			if (!isCategory(category)) {
+				throw Error('Invalid category');
+			}
 
-				const firstEdition: number = variants.firstEdition ?? 0;
-				const holo: number = variants.holo ?? 0;
-				const normal: number = variants.normal ?? 0;
-				const reverse: number = variants.reverse ?? 0;
-				const wPromo: number = variants.wPromo ?? 0;
-
-				const quantity: number =
-					firstEdition + holo + normal + reverse + wPromo;
-				const name: string = card.name;
-				const localId: number = parseInt(card.localId);
-				const category: string = card.category;
-
-				if (!isCategory(category)) {
-					throw Error('Invalid category');
-				}
-
-				return { quantity, name, tcgOnline, localId, category };
-			}),
-		);
+			return { quantity, name, tcgOnline, localId, category };
+		}),
+	);
 
 	const pokemon: LimitlessCard[] = limitlessCardsWithCategory.filter(
 		(card) => card.category === CATEGORY.POKEMON,

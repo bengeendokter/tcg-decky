@@ -1,13 +1,7 @@
 import * as fs from 'fs';
-import {
-	isCurrency,
-	isVariant,
-	type DittoDexCard,
-} from '../model/ditto-dex-card';
+import { isCurrency, isVariant, type DittoDexCard } from '../model/ditto-dex-card';
 
-export function importDittoDexCardsFromCsv(
-	csvFilePath: string,
-): DittoDexCard[] {
+export function importDittoDexCardsFromCsv(csvFilePath: string): DittoDexCard[] {
 	const csvContent: string = fs.readFileSync(csvFilePath, {
 		encoding: 'utf-8',
 	});

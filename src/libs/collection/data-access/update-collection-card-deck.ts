@@ -13,8 +13,5 @@ export async function updateCollectionCardDeck({
 }: UpdateCollectionCardDeckParams): Promise<UpdateResult<CollectionCardDeck>> {
 	const decks: Collection<CollectionCardDeck> = db.collection('decks');
 
-	return await decks.updateOne(
-		{ _id: new ObjectId(id) },
-		{ $set: collectionCardDeck },
-	);
+	return await decks.updateOne({ _id: new ObjectId(id) }, { $set: collectionCardDeck });
 }

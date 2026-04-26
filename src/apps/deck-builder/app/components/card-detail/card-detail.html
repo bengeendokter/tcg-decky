@@ -1,8 +1,8 @@
 @let detailCard = selectedDeckCard();
 <dialog #cardDetail>
 	<div class="detail">
-		@if(detailCard) { @let deckQuantity = detailCard.quantity; @let
-		collectionQuantity = getQuantitySum(detailCard.variants);
+		@if(detailCard) { @let deckQuantity = detailCard.quantity; @let collectionQuantity =
+		getQuantitySum(detailCard.variants);
 		<tcg-card
 			(click)="closeCardDetail()"
 			class="detail-card"
@@ -17,8 +17,8 @@
 				<icon [svg]="removeIcon"></icon>
 			</button>
 			<span
-				>{{deckQuantity.toString().padStart(2,
-				"0")}}/{{collectionQuantity.toString().padStart(2, "0")}}</span
+				>{{deckQuantity.toString().padStart(2, "0")}}/{{collectionQuantity.toString().padStart(2,
+				"0")}}</span
 			>
 			<button
 				class="md-icon-button"

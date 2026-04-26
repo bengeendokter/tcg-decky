@@ -44,9 +44,7 @@ export async function resetCollectionCardDecksDatabase(
 		gengarDeckJsonPath,
 	] as const satisfies string[];
 
-	const prebuildDecks: PrebuildDeck[] = deckJsonPaths.map(
-		importPrebuildDeckFromJson,
-	);
+	const prebuildDecks: PrebuildDeck[] = deckJsonPaths.map(importPrebuildDeckFromJson);
 
 	const collectionCardDecks: CollectionCardDeck[] = await Promise.all(
 		prebuildDecks.map(async (prebuildDeck) => {

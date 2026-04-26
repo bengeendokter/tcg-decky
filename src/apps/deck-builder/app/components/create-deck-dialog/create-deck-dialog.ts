@@ -19,8 +19,7 @@ import { Field, type FieldTree } from '@angular/forms/signals';
 export class CreateDeckDialog {
 	private readonly createDeckDialog: Signal<ElementRef<HTMLDialogElement>> =
 		viewChild.required('createDeckDialog');
-	public readonly deckNameForm: InputSignal<FieldTree<string>> =
-		input.required();
+	public readonly deckNameForm: InputSignal<FieldTree<string>> = input.required();
 	public readonly createDeck: OutputEmitterRef<void> = output();
 
 	public openCreateDeckDialog(): void {

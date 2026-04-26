@@ -21,14 +21,11 @@ type CorrectedGetAllCards = Hono<
 	'/'
 >;
 
-const getAllCards: CorrectedGetAllCards = new Hono().get(
-	'/',
-	async (context) => {
-		const cards: CollectionCard[] = await getAllCollectionCards(db);
+const getAllCards: CorrectedGetAllCards = new Hono().get('/', async (context) => {
+	const cards: CollectionCard[] = await getAllCollectionCards(db);
 
-		return context.json(cards);
-	},
-);
+	return context.json(cards);
+});
 
 export const cards = getAllCards.put('/reset', async (context) => {
 	await resetCollectionCardsDatabase({ mongoDbDatabaseUrl, tcgDexServerUrl });

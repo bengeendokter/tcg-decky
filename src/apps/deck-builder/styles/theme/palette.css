@@ -5,9 +5,7 @@ html {
 	--chroma-factor: 1.2;
 	--palette-primary-base-color: var(--theme-base-color);
 
-	--md-ref-palette-primary0: oklch(
-		from var(--palette-primary-base-color) 0 0 h
-	);
+	--md-ref-palette-primary0: oklch(from var(--palette-primary-base-color) 0 0 h);
 	--md-ref-palette-primary2: oklch(
 		from var(--palette-primary-base-color) 14%
 			calc((sin(0.009 * 02 * pi) * c / var(--chroma-factor))) h
@@ -184,18 +182,12 @@ html {
 		from var(--palette-primary-base-color) 98%
 			calc((sin(0.009 * 98 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary100: oklch(
-		from var(--palette-primary-base-color) 1 0 h
-	);
+	--md-ref-palette-primary100: oklch(from var(--palette-primary-base-color) 1 0 h);
 
 	/* secondary */
-	--palette-secondary-base-color: oklch(
-		from var(--theme-base-color) l calc(c / 3) h
-	);
+	--palette-secondary-base-color: oklch(from var(--theme-base-color) l calc(c / 3) h);
 
-	--md-ref-palette-secondary0: oklch(
-		from var(--palette-secondary-base-color) 0 0 h
-	);
+	--md-ref-palette-secondary0: oklch(from var(--palette-secondary-base-color) 0 0 h);
 	--md-ref-palette-secondary2: oklch(
 		from var(--palette-secondary-base-color) 14%
 			calc((sin(0.009 * 02 * pi) * c / var(--chroma-factor))) h
@@ -372,18 +364,12 @@ html {
 		from var(--palette-secondary-base-color) 98%
 			calc((sin(0.009 * 98 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary100: oklch(
-		from var(--palette-secondary-base-color) 1 0 h
-	);
+	--md-ref-palette-secondary100: oklch(from var(--palette-secondary-base-color) 1 0 h);
 
 	/* tertiary */
-	--palette-tertiary-base-color: oklch(
-		from var(--theme-base-color) l calc(c / 2) calc(h + 60)
-	);
+	--palette-tertiary-base-color: oklch(from var(--theme-base-color) l calc(c / 2) calc(h + 60));
 
-	--md-ref-palette-tertiary0: oklch(
-		from var(--palette-tertiary-base-color) 0 0 h
-	);
+	--md-ref-palette-tertiary0: oklch(from var(--palette-tertiary-base-color) 0 0 h);
 	--md-ref-palette-tertiary2: oklch(
 		from var(--palette-tertiary-base-color) 14%
 			calc((sin(0.009 * 02 * pi) * c / var(--chroma-factor))) h
@@ -560,19 +546,13 @@ html {
 		from var(--palette-tertiary-base-color) 98%
 			calc((sin(0.009 * 98 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary100: oklch(
-		from var(--palette-tertiary-base-color) 1 0 h
-	);
+	--md-ref-palette-tertiary100: oklch(from var(--palette-tertiary-base-color) 1 0 h);
 
 	/* neutral */
 	--chroma-factor-neutral: 0.5;
-	--palette-neutral-base-color: oklch(
-		from var(--theme-base-color) l min(calc(c / 12), 0.01) h
-	);
+	--palette-neutral-base-color: oklch(from var(--theme-base-color) l min(calc(c / 12), 0.01) h);
 
-	--md-ref-palette-neutral0: oklch(
-		from var(--palette-neutral-base-color) 0 0 h
-	);
+	--md-ref-palette-neutral0: oklch(from var(--palette-neutral-base-color) 0 0 h);
 	--md-ref-palette-neutral2: oklch(
 		from var(--palette-neutral-base-color) 14%
 			calc((sin(0.009 * 02 * pi) * c / var(--chroma-factor-neutral))) h
@@ -749,18 +729,14 @@ html {
 		from var(--palette-neutral-base-color) 98%
 			calc((sin(0.009 * 98 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral100: oklch(
-		from var(--palette-neutral-base-color) 1 0 h
-	);
+	--md-ref-palette-neutral100: oklch(from var(--palette-neutral-base-color) 1 0 h);
 
 	/* neutral-variant */
 	--palette-neutral-variant-base-color: oklch(
 		from var(--theme-base-color) l min(calc(c / 6), 0.02) h
 	);
 
-	--md-ref-palette-neutral-variant0: oklch(
-		from var(--palette-neutral-variant-base-color) 0 0 h
-	);
+	--md-ref-palette-neutral-variant0: oklch(from var(--palette-neutral-variant-base-color) 0 0 h);
 	--md-ref-palette-neutral-variant2: oklch(
 		from var(--palette-neutral-variant-base-color) 14%
 			calc((sin(0.009 * 02 * pi) * c / var(--chroma-factor-neutral))) h
@@ -937,9 +913,7 @@ html {
 		from var(--palette-neutral-variant-base-color) 98%
 			calc((sin(0.009 * 98 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant100: oklch(
-		from var(--palette-neutral-variant-base-color) 1 0 h
-	);
+	--md-ref-palette-neutral-variant100: oklch(from var(--palette-neutral-variant-base-color) 1 0 h);
 
 	/* error */
 	--chroma-factor-error: 1;

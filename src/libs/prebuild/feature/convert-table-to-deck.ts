@@ -12,22 +12,14 @@ export interface CovertTableToDeckParams {
 	name: string;
 }
 
-export function covertTableToDeck({
-	table,
-	name,
-}: CovertTableToDeckParams): PrebuildDeck {
+export function covertTableToDeck({ table, name }: CovertTableToDeckParams): PrebuildDeck {
 	const cards: PrebuildCardWithQuantity[] = [];
 
-	const rows: NodeListOf<Element> = table.querySelectorAll(
-		'tr:has(td:nth-of-type(3))',
-	);
+	const rows: NodeListOf<Element> = table.querySelectorAll('tr:has(td:nth-of-type(3))');
 
 	rows.forEach((row) => {
-		const cardTableData: Element | null = row.querySelector(
-			'td:nth-of-type(3) > a',
-		);
-		const quantityTableData: Element | null =
-			row.querySelector('td:nth-of-type(4)');
+		const cardTableData: Element | null = row.querySelector('td:nth-of-type(3) > a');
+		const quantityTableData: Element | null = row.querySelector('td:nth-of-type(4)');
 
 		if (!cardTableData || !quantityTableData) {
 			return;

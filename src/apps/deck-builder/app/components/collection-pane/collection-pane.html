@@ -4,11 +4,7 @@
 	</search>
 
 	<label for="in-rotation-filter">
-		<input
-			id="in-rotation-filter"
-			type="checkbox"
-			[field]="inRotationFilterForm()"
-		/>
+		<input id="in-rotation-filter" type="checkbox" [field]="inRotationFilterForm()" />
 		In rotation
 	</label>
 
@@ -18,7 +14,11 @@
 			[style.--md-comp-outlined-text-field-label-text-background-color]="'var(--md-sys-color-surface-container)'"
 			>Pokemon Type</label
 		>
-		<select id="pokemon-type-filter" (change)="handelSelectionChange($event)" [value]="pokemonTypeFilterForm()().value()">
+		<select
+			id="pokemon-type-filter"
+			(change)="handelSelectionChange($event)"
+			[value]="pokemonTypeFilterForm()().value()"
+		>
 			<button>
 				<selectedcontent></selectedcontent>
 				<svg
@@ -43,9 +43,7 @@
 		(click)="toggleFullscreen.emit()"
 		[attr.aria-label]="collectionFullscreen() ? 'Close fullscreen' : 'Open fullscreen'"
 	>
-		<icon
-			[svg]="collectionFullscreen() ? closeFullscreenIcon : openInFullIcon"
-		></icon>
+		<icon [svg]="collectionFullscreen() ? closeFullscreenIcon : openInFullIcon"></icon>
 	</button>
 </div>
 <div class="collection-cards">

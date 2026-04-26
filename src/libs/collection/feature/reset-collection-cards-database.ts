@@ -8,10 +8,7 @@ import type { DittoDexCard } from '../../ditto-dex/model/ditto-dex-card';
 import { convetDittoDexCardsToCollectionCards } from '../feature/convert-ditto-dex-cards-to-collection-cards';
 import { getTcgDex } from '../../tcg-dex/data-access/get-tcg-dex';
 import type TCGdex from '@tcgdex/sdk';
-import type {
-	CollectionCard,
-	CollectionCardDeck,
-} from '../model/collection-card';
+import type { CollectionCard, CollectionCardDeck } from '../model/collection-card';
 import { importPrebuildDeckFromJson } from '../../prebuild/data-access/import-prebuild-deck-from-json';
 import type { PrebuildDeck } from '../../prebuild/model/prebuild-deck';
 import { convertPrebuildToCollectionCards } from '../feature/convert-prebuild-to-collection-cards';
@@ -47,13 +44,12 @@ export interface ResetCollectionCardsDatabaseParams {
 	prebuildDecks?: PrebuildDeck[];
 }
 
-const defaultResetCollectionCardsDatabaseParams: Required<ResetCollectionCardsDatabaseParams> =
-	{
-		mongoDbDatabaseUrl: CONFIG.MONGO_DB_DATABASE_URL,
-		tcgDexServerUrl: CONFIG.TCG_DEX_SERVER_URL,
-		dittoDexCards: importDittoDexCardsFromCsv(CONFIG.DITTO_DEX_SCV_FILE_PATH),
-		prebuildDecks: DECK_JSON_PATHS.map(importPrebuildDeckFromJson),
-	};
+const defaultResetCollectionCardsDatabaseParams: Required<ResetCollectionCardsDatabaseParams> = {
+	mongoDbDatabaseUrl: CONFIG.MONGO_DB_DATABASE_URL,
+	tcgDexServerUrl: CONFIG.TCG_DEX_SERVER_URL,
+	dittoDexCards: importDittoDexCardsFromCsv(CONFIG.DITTO_DEX_SCV_FILE_PATH),
+	prebuildDecks: DECK_JSON_PATHS.map(importPrebuildDeckFromJson),
+};
 
 export async function resetCollectionCardsDatabase({
 	mongoDbDatabaseUrl = defaultResetCollectionCardsDatabaseParams.mongoDbDatabaseUrl,
@@ -116,17 +112,16 @@ export async function combineCardsToCollection({
 	);
 
 	const collectionCardDeckCards: CollectionCard[] = collectionCardDecks.reduce(
-		(
-			collectionCardDeckCards: CollectionCard[],
-			collectionCardDeck: CollectionCardDeck,
-		) => {
+		(collectionCardDeckCards: CollectionCard[], collectionCardDeck: CollectionCardDeck) => {
 			return collectionCardDeckCards.concat(collectionCardDeck.cards);
 		},
 		[],
 	);
 
-	const dittoDexCollectionCards: CollectionCard[] =
-		await convetDittoDexCardsToCollectionCards({ dittoDexCards, tcgDex });
+	const dittoDexCollectionCards: CollectionCard[] = await convetDittoDexCardsToCollectionCards({
+		dittoDexCards,
+		tcgDex,
+	});
 
 	return [...dittoDexCollectionCards, ...collectionCardDeckCards];
 }

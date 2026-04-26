@@ -80,11 +80,11 @@ export const ENERGY_TYPE_PREBUILD_CARD_MAP = {
 	},
 } as const satisfies Record<EnergyType, PrebuildSetCard>;
 
-export const ENERGY_LOCAL_IDS = Object.values(
-	ENERGY_TYPE_PREBUILD_CARD_MAP,
-).map((energyPrebuildCard) => {
-	return energyPrebuildCard.localId;
-}) satisfies number[];
+export const ENERGY_LOCAL_IDS = Object.values(ENERGY_TYPE_PREBUILD_CARD_MAP).map(
+	(energyPrebuildCard) => {
+		return energyPrebuildCard.localId;
+	},
+) satisfies number[];
 
 export const ENERGY_IDS = ENERGY_LOCAL_IDS.map((localeId) => {
 	return `sm1-${localeId}`;
@@ -104,9 +104,7 @@ export const ENERGY_TYPE_LOCAL_ID_CODE = {
 type EnergyTypeLocalIdCode =
 	(typeof ENERGY_TYPE_LOCAL_ID_CODE)[keyof typeof ENERGY_TYPE_LOCAL_ID_CODE];
 
-export function isEnergyTypeLocalIdCode(
-	localId: string,
-): localId is EnergyTypeLocalIdCode {
+export function isEnergyTypeLocalIdCode(localId: string): localId is EnergyTypeLocalIdCode {
 	const localIdCodes: string[] = Object.values(ENERGY_TYPE_LOCAL_ID_CODE);
 	return localIdCodes.includes(localId);
 }

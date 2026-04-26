@@ -12,10 +12,7 @@ import {
 import { type FieldTree, form, required } from '@angular/forms/signals';
 import { TcgDex } from '../../../../../libs/deck-builder/data-access/tcg-dex';
 import type { TcgDexCollectionCard } from '../../../../../libs/deck-builder/model/tcg-dex-collection-card';
-import {
-	CATEGORY,
-	type LimitlessDeck,
-} from '../../../../../libs/limitless/model/limitless-deck';
+import { CATEGORY, type LimitlessDeck } from '../../../../../libs/limitless/model/limitless-deck';
 import type {
 	CollectionCard,
 	CollectionCardDeck,
@@ -65,41 +62,32 @@ const REGULATION_MARKS_IN_ROTAION = ['G', 'H', 'I'] as const satisfies string[];
 export class OverviewPage {
 	private readonly collection: Collection = inject(Collection);
 	private readonly tcgDex: TcgDex = inject(TcgDex);
-	private readonly cardDetail: Signal<CardDetail> =
-		viewChild.required(CardDetail);
-	private readonly loadDeckDialog: Signal<LoadDeckDialog> =
-		viewChild.required(LoadDeckDialog);
+	private readonly cardDetail: Signal<CardDetail> = viewChild.required(CardDetail);
+	private readonly loadDeckDialog: Signal<LoadDeckDialog> = viewChild.required(LoadDeckDialog);
 	private readonly createDeckDialog: Signal<CreateDeckDialog> =
 		viewChild.required(CreateDeckDialog);
 	private readonly deleteDeckDialog: Signal<DeleteDeckDialog> =
 		viewChild.required(DeleteDeckDialog);
-	private readonly resetDeckDialog: Signal<ResetDeckDialog> =
-		viewChild.required(ResetDeckDialog);
-	private readonly shareDeckDialog: Signal<ShareDeckDialog> =
-		viewChild.required(ShareDeckDialog);
+	private readonly resetDeckDialog: Signal<ResetDeckDialog> = viewChild.required(ResetDeckDialog);
+	private readonly shareDeckDialog: Signal<ShareDeckDialog> = viewChild.required(ShareDeckDialog);
 	private readonly renameDeckDialog: Signal<RenameDeckDialog> =
 		viewChild.required(RenameDeckDialog);
 
-	protected readonly collectionFullscreen: WritableSignal<boolean> =
-		signal(false);
+	protected readonly collectionFullscreen: WritableSignal<boolean> = signal(false);
 
-	protected readonly selectedCard: WritableSignal<
-		TcgDexCollectionCard | undefined
-	> = signal(undefined);
+	protected readonly selectedCard: WritableSignal<TcgDexCollectionCard | undefined> =
+		signal(undefined);
 
-	private readonly getAllCardsResource: ResourceRef<
-		CollectionCard[] | undefined
-	> = this.collection.getAllCardsResource;
+	private readonly getAllCardsResource: ResourceRef<CollectionCard[] | undefined> =
+		this.collection.getAllCardsResource;
 
-	protected readonly collectionCards: Signal<CollectionCard[]> = computed(
-		() => {
-			if (!this.getAllCardsResource.hasValue()) {
-				return [];
-			}
+	protected readonly collectionCards: Signal<CollectionCard[]> = computed(() => {
+		if (!this.getAllCardsResource.hasValue()) {
+			return [];
+		}
 
-			return this.getAllCardsResource.value();
-		},
-	);
+		return this.getAllCardsResource.value();
+	});
 
 	protected readonly search: WritableSignal<string> = signal('');
 	protected readonly searchForm: FieldTree<string> = form(this.search);
@@ -109,36 +97,28 @@ export class OverviewPage {
 
 	protected readonly inRotationFilter: WritableSignal<boolean> = signal(false);
 
-	protected readonly inRotationFilterForm: FieldTree<boolean> = form(
-		this.inRotationFilter,
-	);
+	protected readonly inRotationFilterForm: FieldTree<boolean> = form(this.inRotationFilter);
 
-	protected readonly pokemonTypeFilter: WritableSignal<PokemonType | All> =
-		signal(ALL);
+	protected readonly pokemonTypeFilter: WritableSignal<PokemonType | All> = signal(ALL);
 
 	protected readonly pokemonTypeFilterForm: FieldTree<PokemonType | All> = form(
 		this.pokemonTypeFilter,
 	);
 
-	protected readonly filteredTcgDexCollectionCards: Signal<
-		TcgDexCollectionCard[]
-	> = computed(() => {
-		let filteredTcgDexCollectionCards: TcgDexCollectionCard[] =
-			this.tcgDexCollectionCards();
+	protected readonly filteredTcgDexCollectionCards: Signal<TcgDexCollectionCard[]> = computed(
+		() => {
+			let filteredTcgDexCollectionCards: TcgDexCollectionCard[] = this.tcgDexCollectionCards();
 
-		const searchValue: string = this.searchForm().value().toLocaleLowerCase();
+			const searchValue: string = this.searchForm().value().toLocaleLowerCase();
 
-		if (searchValue) {
-			filteredTcgDexCollectionCards = filteredTcgDexCollectionCards.filter(
-				(card) => {
+			if (searchValue) {
+				filteredTcgDexCollectionCards = filteredTcgDexCollectionCards.filter((card) => {
 					return card.name.toLocaleLowerCase().includes(searchValue);
-				},
-			);
-		}
+				});
+			}
 
-		if (this.inRotationFilter()) {
-			filteredTcgDexCollectionCards = filteredTcgDexCollectionCards.filter(
-				(card) => {
+			if (this.inRotationFilter()) {
+				filteredTcgDexCollectionCards = filteredTcgDexCollectionCards.filter((card) => {
 					if (card.category === CATEGORY.ENERGY) {
 						return true;
 					}
@@ -146,28 +126,23 @@ export class OverviewPage {
 					const allowedRegulationMarks: string[] = REGULATION_MARKS_IN_ROTAION;
 
 					return allowedRegulationMarks.includes(card.regulationMark ?? '');
-				},
-			);
-		}
+				});
+			}
 
-		const pokemonTypeFilter: PokemonType | All = this.pokemonTypeFilter();
+			const pokemonTypeFilter: PokemonType | All = this.pokemonTypeFilter();
 
-		if (pokemonTypeFilter !== ALL) {
-			filteredTcgDexCollectionCards = filteredTcgDexCollectionCards.filter(
-				(card) => {
+			if (pokemonTypeFilter !== ALL) {
+				filteredTcgDexCollectionCards = filteredTcgDexCollectionCards.filter((card) => {
 					return (card.types ?? []).includes(pokemonTypeFilter);
-				},
-			);
-		}
+				});
+			}
 
-		return filteredTcgDexCollectionCards;
-	});
+			return filteredTcgDexCollectionCards;
+		},
+	);
 
-	protected readonly sortedTcgDexCollectionCards: Signal<
-		TcgDexCollectionCard[]
-	> = computed(() => {
-		const tcgDexCollectionCards: TcgDexCollectionCard[] =
-			this.filteredTcgDexCollectionCards();
+	protected readonly sortedTcgDexCollectionCards: Signal<TcgDexCollectionCard[]> = computed(() => {
+		const tcgDexCollectionCards: TcgDexCollectionCard[] = this.filteredTcgDexCollectionCards();
 
 		const categorySortOrderMap: Map<string, number> = new Map(
 			Object.entries({
@@ -177,14 +152,11 @@ export class OverviewPage {
 			}),
 		);
 
-		const setReleaseDateMap: Map<string, Date> =
-			this.tcgDex.setReleaseDateMap();
+		const setReleaseDateMap: Map<string, Date> = this.tcgDex.setReleaseDateMap();
 
 		return tcgDexCollectionCards.toSorted((card1, card2) => {
-			const cateorySortValue1: number =
-				categorySortOrderMap.get(card1.category) ?? 0;
-			const cateorySortValue2: number =
-				categorySortOrderMap.get(card2.category) ?? 0;
+			const cateorySortValue1: number = categorySortOrderMap.get(card1.category) ?? 0;
+			const cateorySortValue2: number = categorySortOrderMap.get(card2.category) ?? 0;
 
 			const cateorySortDiff: number = cateorySortValue1 - cateorySortValue2;
 
@@ -192,14 +164,11 @@ export class OverviewPage {
 				return cateorySortDiff;
 			}
 
-			const releaseDateSet1: Date =
-				setReleaseDateMap.get(card1.set.id) ?? new Date(0);
+			const releaseDateSet1: Date = setReleaseDateMap.get(card1.set.id) ?? new Date(0);
 
-			const releaseDateSet2: Date =
-				setReleaseDateMap.get(card2.set.id) ?? new Date(0);
+			const releaseDateSet2: Date = setReleaseDateMap.get(card2.set.id) ?? new Date(0);
 
-			const releaseDateDiff: number =
-				releaseDateSet1.getTime() - releaseDateSet2.getTime();
+			const releaseDateDiff: number = releaseDateSet1.getTime() - releaseDateSet2.getTime();
 
 			if (releaseDateDiff !== 0) {
 				return releaseDateDiff;
@@ -213,14 +182,13 @@ export class OverviewPage {
 		TcgDexCollectionCard[] | undefined
 	> = this.tcgDex.loadedDeckTcgDexCollectionCardsResource;
 
-	protected readonly loadedDeckCollectionCards: Signal<TcgDexCollectionCard[]> =
-		computed(() => {
-			if (!this.loadedDeckTcgDexCollectionCardsResource.hasValue()) {
-				return [];
-			}
+	protected readonly loadedDeckCollectionCards: Signal<TcgDexCollectionCard[]> = computed(() => {
+		if (!this.loadedDeckTcgDexCollectionCardsResource.hasValue()) {
+			return [];
+		}
 
-			return this.loadedDeckTcgDexCollectionCardsResource.value();
-		});
+		return this.loadedDeckTcgDexCollectionCardsResource.value();
+	});
 
 	protected readonly deckCards: WritableSignal<DeckCard[]> = signal([]);
 
@@ -230,88 +198,73 @@ export class OverviewPage {
 		}, 0);
 	});
 
-	protected readonly selectedDeckCard: Signal<DeckCard | undefined> = computed(
-		() => {
-			const selectedCard: TcgDexCollectionCard | undefined =
-				this.selectedCard();
+	protected readonly selectedDeckCard: Signal<DeckCard | undefined> = computed(() => {
+		const selectedCard: TcgDexCollectionCard | undefined = this.selectedCard();
 
-			if (selectedCard === undefined) {
-				return undefined;
-			}
+		if (selectedCard === undefined) {
+			return undefined;
+		}
 
-			const deckCards: DeckCard[] = this.deckCards();
+		const deckCards: DeckCard[] = this.deckCards();
 
-			const selectedDeckCard: DeckCard | undefined = deckCards.find(
-				(deckCard) => {
-					return deckCard._id === selectedCard._id;
-				},
-			);
+		const selectedDeckCard: DeckCard | undefined = deckCards.find((deckCard) => {
+			return deckCard._id === selectedCard._id;
+		});
 
-			const selectedCollectionCard: CollectionCard | undefined =
-				this.collectionCards().find((collectionCard) => {
-					return collectionCard._id === selectedCard._id;
-				});
+		const selectedCollectionCard: CollectionCard | undefined = this.collectionCards().find(
+			(collectionCard) => {
+				return collectionCard._id === selectedCard._id;
+			},
+		);
 
-			const variants: CollectionCard['variants'] =
-				selectedCollectionCard?.variants ?? { normal: 99 };
+		const variants: CollectionCard['variants'] = selectedCollectionCard?.variants ?? { normal: 99 };
 
-			if (selectedDeckCard === undefined) {
-				return {
-					...selectedCard,
-					variants,
-					quantity: 0,
-				};
-			}
+		if (selectedDeckCard === undefined) {
+			return {
+				...selectedCard,
+				variants,
+				quantity: 0,
+			};
+		}
 
-			return { ...selectedDeckCard, variants };
-		},
-	);
+		return { ...selectedDeckCard, variants };
+	});
 
-	private readonly deckCollectionCards: Signal<CollectionCard[]> = computed(
-		() => {
-			return this.deckCards().map((deckCard) => {
-				return { ...deckCard, variants: { normal: deckCard.quantity } };
-			});
-		},
-	);
+	private readonly deckCollectionCards: Signal<CollectionCard[]> = computed(() => {
+		return this.deckCards().map((deckCard) => {
+			return { ...deckCard, variants: { normal: deckCard.quantity } };
+		});
+	});
 
-	private readonly getAllDecksResource: ResourceRef<
-		WithId<CollectionCardDeck>[] | undefined
-	> = this.collection.getAllDecksResource;
+	private readonly getAllDecksResource: ResourceRef<WithId<CollectionCardDeck>[] | undefined> =
+		this.collection.getAllDecksResource;
 
 	protected readonly selectedDeckId: WritableSignal<string> = signal('');
 
-	private readonly selectedDeck: Signal<CollectionCardDeck | undefined> =
-		computed(() => {
-			const selectedDeckId: string = this.selectedDeckId();
+	private readonly selectedDeck: Signal<CollectionCardDeck | undefined> = computed(() => {
+		const selectedDeckId: string = this.selectedDeckId();
 
-			if (selectedDeckId === '') {
-				return undefined;
-			}
+		if (selectedDeckId === '') {
+			return undefined;
+		}
 
-			return this.collectionDecks().find(
-				(deck) => deck._id.toString() === selectedDeckId,
-			);
-		});
+		return this.collectionDecks().find((deck) => deck._id.toString() === selectedDeckId);
+	});
 
 	protected readonly existingDeck: Signal<boolean> = computed(() => {
 		return this.selectedDeckId() !== '';
 	});
 
-	private readonly collectionDecks: Signal<WithId<CollectionCardDeck>[]> =
-		computed(() => {
-			if (!this.getAllDecksResource.hasValue()) {
-				return [];
-			}
+	private readonly collectionDecks: Signal<WithId<CollectionCardDeck>[]> = computed(() => {
+		if (!this.getAllDecksResource.hasValue()) {
+			return [];
+		}
 
-			return this.getAllDecksResource.value();
-		});
+		return this.getAllDecksResource.value();
+	});
 
-	protected readonly sortedCollectionDecks: Signal<
-		WithId<CollectionCardDeck>[]
-	> = computed(() => {
-		const collectionDecks: WithId<CollectionCardDeck>[] =
-			this.collectionDecks();
+	protected readonly sortedCollectionDecks: Signal<WithId<CollectionCardDeck>[]> = computed(() => {
+		const collectionDecks: WithId<CollectionCardDeck>[] = this.collectionDecks();
 
 		return collectionDecks.toSorted((card1, card2) => {
 			return card1.name.localeCompare(card2.name);
@@ -320,9 +273,7 @@ export class OverviewPage {
 
 	protected readonly selectedLoadDeckId: WritableSignal<string> = signal('');
 
-	protected readonly loadDeckForm: FieldTree<string> = form(
-		this.selectedLoadDeckId,
-	);
+	protected readonly loadDeckForm: FieldTree<string> = form(this.selectedLoadDeckId);
 
 	protected readonly deckName: Signal<string> = computed(() => {
 		const selectedDeck: CollectionCardDeck | undefined = this.selectedDeck();
@@ -337,12 +288,9 @@ export class OverviewPage {
 	protected readonly getQuantitySum: typeof getQuantitySum = getQuantitySum;
 
 	protected readonly inputDeckName: WritableSignal<string> = signal('');
-	protected readonly deckNameForm: FieldTree<string> = form(
-		this.inputDeckName,
-		(inputDeckName) => {
-			required(inputDeckName);
-		},
-	);
+	protected readonly deckNameForm: FieldTree<string> = form(this.inputDeckName, (inputDeckName) => {
+		required(inputDeckName);
+	});
 
 	protected readonly renameDeckName: WritableSignal<string> = signal('');
 	protected readonly renameDeckNameFrom: FieldTree<string> = form(
@@ -353,8 +301,7 @@ export class OverviewPage {
 	);
 
 	private readonly alertsQue: WritableSignal<string[]> = signal([]);
-	protected readonly aciveAlert: WritableSignal<string | undefined> =
-		signal(undefined);
+	protected readonly aciveAlert: WritableSignal<string | undefined> = signal(undefined);
 
 	constructor() {
 		effect((onCleanup) => {
@@ -400,13 +347,14 @@ export class OverviewPage {
 		});
 
 		effect(() => {
-			const loadedDeckCollectionCards: DeckCard[] =
-				this.loadedDeckCollectionCards().map((tcgDexCollectionCard) => {
+			const loadedDeckCollectionCards: DeckCard[] = this.loadedDeckCollectionCards().map(
+				(tcgDexCollectionCard) => {
 					return {
 						...tcgDexCollectionCard,
 						quantity: getQuantitySum(tcgDexCollectionCard.variants),
 					};
-				});
+				},
+			);
 
 			this.deckCards.set(loadedDeckCollectionCards);
 		});
@@ -439,23 +387,17 @@ export class OverviewPage {
 				return deckCard;
 			}
 
-			const matchingCollectionCard: CollectionCard | undefined =
-				this.tcgDexCollectionCards().find(
-					(tcgDexCollectionCard) => tcgDexCollectionCard.id === deckCard.id,
-				);
+			const matchingCollectionCard: CollectionCard | undefined = this.tcgDexCollectionCards().find(
+				(tcgDexCollectionCard) => tcgDexCollectionCard.id === deckCard.id,
+			);
 
 			if (matchingCollectionCard === undefined) {
 				return deckCard;
 			}
 
-			const collectionMaxQuantity: number = getQuantitySum(
-				matchingCollectionCard.variants,
-			);
+			const collectionMaxQuantity: number = getQuantitySum(matchingCollectionCard.variants);
 
-			const quantity: number = Math.min(
-				existingDeckCard.quantity + 1,
-				collectionMaxQuantity,
-			);
+			const quantity: number = Math.min(existingDeckCard.quantity + 1, collectionMaxQuantity);
 
 			return { ...deckCard, quantity };
 		});
@@ -504,19 +446,14 @@ export class OverviewPage {
 	}
 
 	protected async openLimitlessDeckBuilder(): Promise<void> {
-		const limitlessDeck: LimitlessDeck =
-			await this.tcgDex.convertCollectionToLimitlessDeck({
-				name: this.deckName(),
-				cards: this.deckCollectionCards(),
-			});
+		const limitlessDeck: LimitlessDeck = await this.tcgDex.convertCollectionToLimitlessDeck({
+			name: this.deckName(),
+			cards: this.deckCollectionCards(),
+		});
 
-		const importString: string =
-			converLimitlessDeckToImportString(limitlessDeck);
+		const importString: string = converLimitlessDeckToImportString(limitlessDeck);
 
-		const limitlessDeckBuilderUrl: URL = new URL(
-			'/builder',
-			'https://my.limitlesstcg.com',
-		);
+		const limitlessDeckBuilderUrl: URL = new URL('/builder', 'https://my.limitlesstcg.com');
 
 		limitlessDeckBuilderUrl.searchParams.set('i', importString);
 

@@ -27,9 +27,7 @@ export async function convertPrebuildToLimitlessDeckTxt(): Promise<void> {
 		gengarDeckJsonPath,
 	] as const satisfies string[];
 
-	const prebuildDecks: PrebuildDeck[] = deckJsonPaths.map(
-		importPrebuildDeckFromJson,
-	);
+	const prebuildDecks: PrebuildDeck[] = deckJsonPaths.map(importPrebuildDeckFromJson);
 
 	const limitlessDecks: LimitlessDeck[] = await Promise.all(
 		prebuildDecks.map(async (prebuildDeck) => {

@@ -19,8 +19,7 @@ import { Field, type FieldTree } from '@angular/forms/signals';
 export class RenameDeckDialog {
 	private readonly renameDeckDialog: Signal<ElementRef<HTMLDialogElement>> =
 		viewChild.required('renameDeckDialog');
-	public readonly deckRenameForm: InputSignal<FieldTree<string>> =
-		input.required();
+	public readonly deckRenameForm: InputSignal<FieldTree<string>> = input.required();
 	public readonly renameDeck: OutputEmitterRef<void> = output();
 
 	public openRenameDeckDialog(): void {

@@ -9,10 +9,7 @@ function limitlessCardsToCategoryHeaderLine({
 	limitlessCards,
 	category,
 }: LimitlessCardsToCategoryHeaderLineParams): string {
-	const quantityTotal: number = limitlessCards.reduce(
-		(acc, card) => acc + card.quantity,
-		0,
-	);
+	const quantityTotal: number = limitlessCards.reduce((acc, card) => acc + card.quantity, 0);
 	return `${category}: ${quantityTotal}`;
 }
 

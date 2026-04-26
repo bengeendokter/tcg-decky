@@ -3,17 +3,10 @@
 		<h2 class="rename-deck-title">Rename deck</h2>
 		<div>
 			<label for="deck-name">Name</label>
-			<input
-				type="text"
-				id="deck-name"
-				class="rename-deck-name"
-				[field]="deckRenameForm()"
-			/>
+			<input type="text" id="deck-name" class="rename-deck-name" [field]="deckRenameForm()" />
 		</div>
 		<div class="rename-deck-actions">
-			<button class="md-text-button" (click)="closeRenameDeckDialog()">
-				Cancel
-			</button>
+			<button class="md-text-button" (click)="closeRenameDeckDialog()">Cancel</button>
 			<button
 				class="md-text-button"
 				(click)="renameDeckAndCloseDialog()"

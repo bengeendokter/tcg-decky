@@ -3,10 +3,8 @@ const PREBUILD_DECKS_URL = {
 		'https://bulbapedia.bulbagarden.net/wiki/Mega_Gengar_ex_Mega_Battle_Deck_(TCG)',
 	DRAGAPULT_EX_DECK:
 		'https://bulbapedia.bulbagarden.net/wiki/Dragapult_ex_League_Battle_Deck_(TCG)',
-	MARNIE_RIVAL_DECK:
-		'https://bulbapedia.bulbagarden.net/wiki/Marnie_Rival_Battle_Deck_(TCG)',
-	BATTLE_ACADEMY_2024_DECKS:
-		'https://bulbapedia.bulbagarden.net/wiki/Battle_Academy_2024_(TCG)',
+	MARNIE_RIVAL_DECK: 'https://bulbapedia.bulbagarden.net/wiki/Marnie_Rival_Battle_Deck_(TCG)',
+	BATTLE_ACADEMY_2024_DECKS: 'https://bulbapedia.bulbagarden.net/wiki/Battle_Academy_2024_(TCG)',
 } as const satisfies Record<Uppercase<string>, string>;
 
 const PREBUILD_DECK_JSON_FILE_NAME = {
@@ -27,10 +25,8 @@ const COLLECTION_OUTPUT_DIRECTORY =
 	`${DEFAULT_OUTPUT_DIRECTORY}/collection` as const satisfies string;
 const LIMITLESS_OUTPUT_DIRECTORY =
 	`${DEFAULT_OUTPUT_DIRECTORY}/limitless` as const satisfies string;
-const DITTO_DEX_SCV_FILE_PATH =
-	'data/dittodex_collection.csv' as const satisfies string;
-const MONGO_DB_DATABASE_URL =
-	'mongodb://localhost:27017' as const satisfies string;
+const DITTO_DEX_SCV_FILE_PATH = 'data/dittodex_collection.csv' as const satisfies string;
+const MONGO_DB_DATABASE_URL = 'mongodb://localhost:27017' as const satisfies string;
 const TCG_DEX_SERVER_URL = 'http://localhost:3000/v2' as const satisfies string;
 
 export const CONFIG = {

@@ -40,16 +40,11 @@
 	[deckRenameForm]="renameDeckNameFrom"
 	(renameDeck)="updateCollectionCardDeck()"
 ></rename-deck-dialog>
-<delete-deck-dialog
-	(deleteDeck)="deleteCollectionCardDeck()"
-></delete-deck-dialog>
+<delete-deck-dialog (deleteDeck)="deleteCollectionCardDeck()"></delete-deck-dialog>
 <reset-deck-dialog (resetDeck)="reset()"></reset-deck-dialog>
 <share-deck-dialog (shareDeck)="openLimitlessDeckBuilder()"></share-deck-dialog>
 @let alert = aciveAlert(); @if(alert !== undefined) {
-<output
-	class="md-snackbar snackbar"
-	animate.enter="snackbar-enter"
-	animate.leave="snackbar-leave"
+<output class="md-snackbar snackbar" animate.enter="snackbar-enter" animate.leave="snackbar-leave"
 	>{{alert}}</output
 >
 }

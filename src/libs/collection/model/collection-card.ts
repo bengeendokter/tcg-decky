@@ -44,9 +44,8 @@ export const collectionCardDeckValidator: Type<CollectionCardDeck> = type({
 	name: 'string',
 });
 
-export const collectionCardDeckValidatorAndStripper: Type<CollectionCardDeck> =
-	type({
-		'+': 'delete',
-		cards: collectionCardValidatorAndStripper.array(),
-		name: 'string',
-	});
+export const collectionCardDeckValidatorAndStripper: Type<CollectionCardDeck> = type({
+	'+': 'delete',
+	cards: collectionCardValidatorAndStripper.array(),
+	name: 'string',
+});

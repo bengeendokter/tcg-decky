@@ -2,8 +2,15 @@
 	"name": "tcg-decky",
 	"version": "0.0.1",
 	"description": "TCG deck building tool",
-	"main": "src/apps/scripts/main.ts",
+	"keywords": [
+		"builder",
+		"deck",
+		"tcg"
+	],
+	"license": "MIT",
+	"author": "bengeendokter",
 	"type": "module",
+	"main": "src/apps/scripts/main.ts",
 	"scripts": {
 		"start:deck-builder": "cd src/apps/deck-builder && ng serve",
 		"start:deck-builder:lan": "cd src/apps/deck-builder && ng serve --host 0.0.0.0 --configuration lan",
@@ -16,16 +23,9 @@
 		"reset-collection-decks": "tsx src/apps/scripts/reset-collection-card-decks-database.ts",
 		"extract-prebuild-decks": "tsx src/apps/scripts/extract-prebuild-decks-to-json.ts",
 		"convert-prebuild-to-limitless": "tsx src/apps/scripts/convert-prebuild-to-limitless-deck-txt.ts",
-		"format": "prettier . --write"
+		"fmt": "oxfmt",
+		"fmt:check": "oxfmt --check"
 	},
-	"keywords": [
-		"tcg",
-		"deck",
-		"builder"
-	],
-	"author": "bengeendokter",
-	"license": "MIT",
-	"packageManager": "pnpm@10.33.2",
 	"dependencies": {
 		"@angular/common": "21.0.0",
 		"@angular/compiler": "21.0.0",
@@ -57,7 +57,8 @@
 		"@types/jsdom": "^27.0.0",
 		"@types/node": "^20.17.19",
 		"baseline-browser-mapping": "^2.10.21",
-		"prettier": "3.6.2",
+		"oxfmt": "^0.46.0",
 		"typescript": "~5.9.2"
-	}
+	},
+	"packageManager": "pnpm@10.33.2"
 }

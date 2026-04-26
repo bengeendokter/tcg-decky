@@ -21,11 +21,9 @@ import type { CollectionCardDeck } from '../../../../../libs/collection/model/co
 export class LoadDeckDialog {
 	private readonly loadDeckDialog: Signal<ElementRef<HTMLDialogElement>> =
 		viewChild.required('loadDeckDialog');
-	public readonly sortedCollectionDecks: InputSignal<
-		WithId<CollectionCardDeck>[]
-	> = input.required();
-	public readonly loadDeckForm: InputSignal<FieldTree<string>> =
+	public readonly sortedCollectionDecks: InputSignal<WithId<CollectionCardDeck>[]> =
 		input.required();
+	public readonly loadDeckForm: InputSignal<FieldTree<string>> = input.required();
 	public readonly loadDeck: OutputEmitterRef<void> = output();
 
 	public openLoadDeckDialog(): void {

@@ -10,12 +10,7 @@ import { getCollectionCardDeck } from '../../libs/collection/data-access/get-col
 import { Type, type } from 'arktype';
 import { arktypeValidator } from '@hono/arktype-validator';
 import { addCollectionCardDeck } from '../../libs/collection/data-access/add-collection-card-deck';
-import type {
-	DeleteResult,
-	InsertOneResult,
-	UpdateResult,
-	WithId,
-} from 'mongodb';
+import type { DeleteResult, InsertOneResult, UpdateResult, WithId } from 'mongodb';
 import { updateCollectionCardDeck } from '../../libs/collection/data-access/update-collection-card-deck';
 import { deleteCollectionCardDeck } from '../../libs/collection/data-access/delete-collection-card-deck';
 import type { BlankEnv } from 'hono/types';
@@ -44,55 +39,44 @@ type CorrectedGetAllDecks = Hono<
 	'/'
 >;
 
-const getAllDecks: CorrectedGetAllDecks = new Hono().get(
-	'/',
-	async (context) => {
-		const decks: CollectionCardDeck[] = await getAllCollectionCardDecks(db);
+const getAllDecks: CorrectedGetAllDecks = new Hono().get('/', async (context) => {
+	const decks: CollectionCardDeck[] = await getAllCollectionCardDecks(db);
 
-		return context.json(decks);
-	},
-);
+	return context.json(decks);
+});
 
 export const decks = getAllDecks
-	.get(
-		'/:id',
-		arktypeValidator('param', deckParamsValidator),
-		async (context) => {
-			const deckParams: DeckParams = context.req.valid('param');
-			const id: string = deckParams.id;
+	.get('/:id', arktypeValidator('param', deckParamsValidator), async (context) => {
+		const deckParams: DeckParams = context.req.valid('param');
+		const id: string = deckParams.id;
 
-			const deck: CollectionCardDeck | null = await getCollectionCardDeck({
-				db,
-				id,
+		const deck: CollectionCardDeck | null = await getCollectionCardDeck({
+			db,
+			id,
+		});
+
+		if (deck === null) {
+			context.status(404);
+			return context.json({
+				success: false,
+				errors: [
+					{
+						code: 'idNotFound',
+					},
+				],
 			});
+		}
 
-			if (deck === null) {
-				context.status(404);
-				return context.json({
-					success: false,
-					errors: [
-						{
-							code: 'idNotFound',
-						},
-					],
-				});
-			}
+		return context.json(deck);
+	})
+	.post('/', arktypeValidator('json', collectionCardDeckValidator), async (context) => {
+		const collectionCardDeck: CollectionCardDeck = context.req.valid('json');
 
-			return context.json(deck);
-		},
-	)
-	.post(
-		'/',
-		arktypeValidator('json', collectionCardDeckValidator),
-		async (context) => {
-			const collectionCardDeck: CollectionCardDeck = context.req.valid('json');
+		const collectionCardDeckInsertResult: InsertOneResult<CollectionCardDeck> =
+			await addCollectionCardDeck({ collectionCardDeck, db });
 
-			const collectionCardDeckInsertResult: InsertOneResult<CollectionCardDeck> =
-				await addCollectionCardDeck({ collectionCardDeck, db });
-
-			return context.json(collectionCardDeckInsertResult);
-		},
-	)
+		return context.json(collectionCardDeckInsertResult);
+	})
 	.put(
 		'/:id',
 		arktypeValidator('param', deckParamsValidator),
@@ -109,16 +93,11 @@ export const decks = getAllDecks
 			return context.json(collectionCardDeckUpdateResult);
 		},
 	)
-	.delete(
-		'/:id',
-		arktypeValidator('param', deckParamsValidator),
-		async (context) => {
-			const deckParams: DeckParams = context.req.valid('param');
-			const id: string = deckParams.id;
+	.delete('/:id', arktypeValidator('param', deckParamsValidator), async (context) => {
+		const deckParams: DeckParams = context.req.valid('param');
+		const id: string = deckParams.id;
 
-			const collectionCardDeckDeleteResult: DeleteResult =
-				await deleteCollectionCardDeck({ id, db });
+		const collectionCardDeckDeleteResult: DeleteResult = await deleteCollectionCardDeck({ id, db });
 
-			return context.json(collectionCardDeckDeleteResult);
-		},
-	);
+		return context.json(collectionCardDeckDeleteResult);
+	});

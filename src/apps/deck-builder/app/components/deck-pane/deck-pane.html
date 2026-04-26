@@ -8,9 +8,7 @@
 	} @else {
 	<button (click)="addCollectionCardDeck.emit()">Save</button>
 	}
-	<button class="md-tonal-button" (click)="openLoadDeckDialog.emit()">
-		Load deck
-	</button>
+	<button class="md-tonal-button" (click)="openLoadDeckDialog.emit()">Load deck</button>
 	<button
 		class="md-tonal-button"
 		[disabled]="!existingDeck()"
@@ -18,11 +16,7 @@
 	>
 		Create copy
 	</button>
-	<button
-		class="md-tonal-button md-icon-button"
-		(click)="reset.emit()"
-		aria-label="Reset"
-	>
+	<button class="md-tonal-button md-icon-button" (click)="reset.emit()" aria-label="Reset">
 		<icon [svg]="restartAltIcon"></icon>
 	</button>
 	<button

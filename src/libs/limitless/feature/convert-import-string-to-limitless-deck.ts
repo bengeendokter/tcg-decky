@@ -24,8 +24,7 @@ const IMPORT_STRING_PART = {
 	LOCALE_ID: 'local_id',
 } as const satisfies Record<Uppercase<string>, string>;
 
-type ImportStringPart =
-	(typeof IMPORT_STRING_PART)[keyof typeof IMPORT_STRING_PART];
+type ImportStringPart = (typeof IMPORT_STRING_PART)[keyof typeof IMPORT_STRING_PART];
 
 const IMPORT_STRING_PARTS = [
 	IMPORT_STRING_PART.REGION,
@@ -82,8 +81,7 @@ export async function convertImportStringToLimitlessDecks({
 				importStringIndex += 1;
 				break;
 			case IMPORT_STRING_PART.COUNT:
-				const quantityCharacter: string =
-					importString.charAt(importStringIndex);
+				const quantityCharacter: string = importString.charAt(importStringIndex);
 
 				const quantity: number = convertCharacterToQuantity(quantityCharacter);
 
@@ -93,17 +91,13 @@ export async function convertImportStringToLimitlessDecks({
 				importStringIndex += 1;
 				break;
 			case IMPORT_STRING_PART.SET_ABBRIVIATION_LENGHT:
-				const setAbbriviationLenghtCharacter: string =
-					importString.charAt(importStringIndex);
+				const setAbbriviationLenghtCharacter: string = importString.charAt(importStringIndex);
 
-				setAbbriviationLenght = convertCharacterToQuantity(
-					setAbbriviationLenghtCharacter,
-				);
+				setAbbriviationLenght = convertCharacterToQuantity(setAbbriviationLenghtCharacter);
 				importStringIndex += 1;
 				break;
 			case IMPORT_STRING_PART.LOCAL_ID_LENGHT:
-				const localIdLengthCharacter: string =
-					importString.charAt(importStringIndex);
+				const localIdLengthCharacter: string = importString.charAt(importStringIndex);
 
 				localIdLength = convertCharacterToQuantity(localIdLengthCharacter);
 				importStringIndex += 1;
@@ -127,9 +121,7 @@ export async function convertImportStringToLimitlessDecks({
 				);
 
 				const localId: number = isEnergyTypeLocalIdCode(localIdString)
-					? ENERGY_TYPE_PREBUILD_CARD_MAP[
-							LOCAL_ID_CODE_ENERGY_TYPE_MAP[localIdString]
-						].localId
+					? ENERGY_TYPE_PREBUILD_CARD_MAP[LOCAL_ID_CODE_ENERGY_TYPE_MAP[localIdString]].localId
 					: parseInt(localIdString);
 
 				temporaryLimitlessCardParts = {
@@ -137,8 +129,9 @@ export async function convertImportStringToLimitlessDecks({
 					localId,
 				};
 
-				const limitlessCardParts: LimitlessCardParts | ArkErrors =
-					limitlessCardPartsValidator(temporaryLimitlessCardParts);
+				const limitlessCardParts: LimitlessCardParts | ArkErrors = limitlessCardPartsValidator(
+					temporaryLimitlessCardParts,
+				);
 
 				if (limitlessCardParts instanceof ArkErrors) {
 					throw Error('Can not parse import string');
@@ -156,19 +149,17 @@ export async function convertImportStringToLimitlessDecks({
 				currentImportStringPart satisfies never;
 		}
 
-		importStringPartIndex =
-			(importStringPartIndex + 1) % IMPORT_STRING_PARTS.length;
+		importStringPartIndex = (importStringPartIndex + 1) % IMPORT_STRING_PARTS.length;
 	}
 
-	const limitlessCardsWithCategory: LimitlessCardWithCategory[] =
-		await Promise.all(
-			limitlessCardPartsList.map(async (limitlessCardParts) => {
-				return await limitlessCardPartsToLimitlessCard({
-					limitlessCardParts,
-					tcgDex,
-				});
-			}),
-		);
+	const limitlessCardsWithCategory: LimitlessCardWithCategory[] = await Promise.all(
+		limitlessCardPartsList.map(async (limitlessCardParts) => {
+			return await limitlessCardPartsToLimitlessCard({
+				limitlessCardParts,
+				tcgDex,
+			});
+		}),
+	);
 
 	const pokemon: LimitlessCard[] = limitlessCardsWithCategory.filter(
 		(card) => card.category === CATEGORY.POKEMON,
@@ -192,8 +183,7 @@ export async function limitlessCardPartsToLimitlessCard({
 	limitlessCardParts,
 	tcgDex,
 }: LimitlessCardPartsToLimitlessCardParams): Promise<LimitlessCardWithCategory> {
-	const { localId, setAbbriviation, quantity }: LimitlessCardParts =
-		limitlessCardParts;
+	const { localId, setAbbriviation, quantity }: LimitlessCardParts = limitlessCardParts;
 
 	// handle exceptions
 	const reverseExeptionMap: Map<string, string> = new Map([['SVI', 'SV']]);

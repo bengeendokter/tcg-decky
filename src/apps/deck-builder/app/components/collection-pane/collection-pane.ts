@@ -1,10 +1,4 @@
-import {
-	Component,
-	input,
-	output,
-	OutputEmitterRef,
-	type InputSignal,
-} from '@angular/core';
+import { Component, input, output, OutputEmitterRef, type InputSignal } from '@angular/core';
 import { Field, type FieldTree } from '@angular/forms/signals';
 import { TcgCard } from '../tcg-card/tcg-card';
 import {
@@ -27,21 +21,17 @@ import { IconComponent } from '../icon/icon.component';
 	styleUrl: './collection-pane.css',
 })
 export class CollectionPane {
-	public readonly sortedTcgDexCollectionCards: InputSignal<
-		TcgDexCollectionCard[]
-	> = input.required();
-	public readonly searchForm: InputSignal<FieldTree<string>> = input.required();
-	public readonly inRotationFilterForm: InputSignal<FieldTree<boolean>> =
+	public readonly sortedTcgDexCollectionCards: InputSignal<TcgDexCollectionCard[]> =
 		input.required();
-	public readonly pokemonTypeFilterForm: InputSignal<
-		FieldTree<PokemonType | All>
-	> = input.required();
+	public readonly searchForm: InputSignal<FieldTree<string>> = input.required();
+	public readonly inRotationFilterForm: InputSignal<FieldTree<boolean>> = input.required();
+	public readonly pokemonTypeFilterForm: InputSignal<FieldTree<PokemonType | All>> =
+		input.required();
 	public readonly collectionFullscreen: InputSignal<boolean> = input.required();
 	protected readonly openInFullIcon: string = openInFullIcon;
 	protected readonly closeFullscreenIcon: string = closeFullscreenIcon;
 	public readonly toggleFullscreen: OutputEmitterRef<void> = output();
-	public readonly openCardDetail: OutputEmitterRef<TcgDexCollectionCard> =
-		output();
+	public readonly openCardDetail: OutputEmitterRef<TcgDexCollectionCard> = output();
 
 	protected readonly POKEMON_TYPES: typeof POKEMON_TYPES = POKEMON_TYPES;
 	protected readonly ALL: All = ALL;
