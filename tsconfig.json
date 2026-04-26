@@ -32,7 +32,8 @@
 			"@limitless/*": ["./src/libs/limitless/*"],
 			"@prebuild/*": ["./src/libs/prebuild/*"],
 			"@style/*": ["./src/libs/style/*"],
-			"@tcg-dex/*": ["./src/libs/tcg-dex/*"]
+			"@tcg-dex/*": ["./src/libs/tcg-dex/*"],
+			"@config": ["./src/libs/config"]
 		}
 	},
 	"angularCompilerOptions": {

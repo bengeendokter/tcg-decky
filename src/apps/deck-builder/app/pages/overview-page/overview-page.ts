@@ -12,14 +12,14 @@ import {
 import { type FieldTree, form, required } from '@angular/forms/signals';
 import { TcgDex } from '../../../../../libs/deck-builder/data-access/tcg-dex';
 import type { TcgDexCollectionCard } from '../../../../../libs/deck-builder/model/tcg-dex-collection-card';
-import { CATEGORY, type LimitlessDeck } from '../../../../../libs/limitless/model/limitless-deck';
+import { CATEGORY, type LimitlessDeck } from '@limitless/model/limitless-deck';
 import type {
 	CollectionCard,
 	CollectionCardDeck,
-} from '../../../../../libs/collection/model/collection-card';
-import { ENERGY_IDS } from '../../../../../libs/prebuild/model/energy';
+} from '@collection/model/collection-card';
+import { ENERGY_IDS } from '@prebuild/model/energy';
 import { Collection } from '../../../../../libs/deck-builder/data-access/collection';
-import { converLimitlessDeckToImportString } from '../../../../../libs/limitless/feature/convert-limitless-deck-to-import-string';
+import { converLimitlessDeckToImportString } from '@limitless/feature/convert-limitless-deck-to-import-string';
 import type { WithId } from 'mongodb';
 import type { DeckCard } from '../../../../../libs/deck-builder/model/deck-card';
 import { getQuantitySum } from '../../../../../libs/deck-builder/util/get-quantity-sum';

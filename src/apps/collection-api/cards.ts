@@ -1,10 +1,10 @@
 import { Hono } from 'hono';
-import { type CollectionCard } from '../../libs/collection/model/collection-card';
-import { getAllCollectionCards } from '../../libs/collection/data-access/get-all-collection-cards';
+import { type CollectionCard } from '@collection/model/collection-card';
+import { getAllCollectionCards } from '@collection/data-access/get-all-collection-cards';
 import { db, mongoDbDatabaseUrl, tcgDexServerUrl } from './hono';
 import type { BlankEnv } from 'hono/types';
 import type { ContentfulStatusCode } from 'hono/utils/http-status';
-import { resetCollectionCardsDatabase } from '../../libs/collection/feature/reset-collection-cards-database';
+import { resetCollectionCardsDatabase } from '@collection/feature/reset-collection-cards-database';
 
 type CorrectedGetAllCards = Hono<
 	BlankEnv,

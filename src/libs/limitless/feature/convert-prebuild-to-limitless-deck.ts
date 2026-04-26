@@ -2,8 +2,8 @@ import type {
 	PrebuildCard,
 	PrebuildDeck,
 	PrebuildSetCardWithQuantity,
-} from '../../prebuild/model/prebuild-deck';
-import type { SetWithAbbreviation } from '../../tcg-dex/model/set-with-abbreviation';
+} from '@prebuild/model/prebuild-deck';
+import type { SetWithAbbreviation } from '@tcg-dex/model/set-with-abbreviation';
 import {
 	CATEGORY,
 	isCategory,

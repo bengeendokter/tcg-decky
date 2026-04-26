@@ -3,7 +3,7 @@ import type {
 	PrebuildCard,
 	PrebuildDeck,
 	PrebuildSetCardWithQuantity,
-} from '../../prebuild/model/prebuild-deck';
+} from '@prebuild/model/prebuild-deck';
 import type { CollectionCard, CollectionCardDeck } from '../model/collection-card';
 import type { Variants } from '../model/variants';
 

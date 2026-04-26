@@ -1,3 +1,3 @@
-import { resetCollectionCardDecksDatabase } from '../../libs/collection/feature/reset-collection-card-decks-database';
+import { resetCollectionCardDecksDatabase } from '@collection/feature/reset-collection-card-decks-database';
 
 await resetCollectionCardDecksDatabase();

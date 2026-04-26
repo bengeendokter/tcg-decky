@@ -10,10 +10,10 @@ import {
 	ENERGY_TYPE_PREBUILD_CARD_MAP,
 	isEnergyTypeLocalIdCode,
 	LOCAL_ID_CODE_ENERGY_TYPE_MAP,
-} from '../../prebuild/model/energy';
+} from '@prebuild/model/energy';
 import type TCGdex from '@tcgdex/sdk';
 import { Query, type Card, type CardResume, type SetResume } from '@tcgdex/sdk';
-import type { SetWithAbbreviation } from '../../tcg-dex/model/set-with-abbreviation';
+import type { SetWithAbbreviation } from '@tcg-dex/model/set-with-abbreviation';
 
 const IMPORT_STRING_PART = {
 	REGION: 'region',

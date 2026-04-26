@@ -3,17 +3,17 @@ import { connectToDatabase } from '../data-access/connect-to-database';
 import { CONFIG } from '../../../config';
 import { closeDatabaseConnection } from '../data-access/close-database-connection';
 import { deleteAllCollectionCard } from '../data-access/delete-all-collection-cards';
-import { importDittoDexCardsFromCsv } from '../../ditto-dex/data-access/import-ditto-dex-cards-from-csv';
-import type { DittoDexCard } from '../../ditto-dex/model/ditto-dex-card';
+import { importDittoDexCardsFromCsv } from '@ditto-dex/data-access/import-ditto-dex-cards-from-csv';
+import type { DittoDexCard } from '@ditto-dex/model/ditto-dex-card';
 import { convetDittoDexCardsToCollectionCards } from '../feature/convert-ditto-dex-cards-to-collection-cards';
-import { getTcgDex } from '../../tcg-dex/data-access/get-tcg-dex';
+import { getTcgDex } from '@tcg-dex/data-access/get-tcg-dex';
 import type TCGdex from '@tcgdex/sdk';
 import type { CollectionCard, CollectionCardDeck } from '../model/collection-card';
-import { importPrebuildDeckFromJson } from '../../prebuild/data-access/import-prebuild-deck-from-json';
-import type { PrebuildDeck } from '../../prebuild/model/prebuild-deck';
+import { importPrebuildDeckFromJson } from '@prebuild/data-access/import-prebuild-deck-from-json';
+import type { PrebuildDeck } from '@prebuild/model/prebuild-deck';
 import { convertPrebuildToCollectionCards } from '../feature/convert-prebuild-to-collection-cards';
 import { addCollectionCard } from '../data-access/add-collection-card';
-import { ENERGY_IDS } from '../../prebuild/model/energy';
+import { ENERGY_IDS } from '@prebuild/model/energy';
 
 const ARMAROUGE_DECK_JSON_PATH =
 	`${CONFIG.COLLECTION_OUTPUT_DIRECTORY}/${CONFIG.PREBUILD_DECK_JSON_FILE_NAME.BATTLE_ACADEMY_2024_ARMAROUGE}` as const satisfies string;

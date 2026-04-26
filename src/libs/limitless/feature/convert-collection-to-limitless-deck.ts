@@ -1,5 +1,5 @@
 import TCGdex, { type Card } from '@tcgdex/sdk';
-import type { CollectionCard, CollectionCardDeck } from '../../collection/model/collection-card';
+import type { CollectionCard, CollectionCardDeck } from '@collection/model/collection-card';
 import {
 	CATEGORY,
 	isCategory,
@@ -7,7 +7,7 @@ import {
 	type LimitlessCardWithCategory,
 	type LimitlessDeck,
 } from '../model/limitless-deck';
-import type { SetWithAbbreviation } from '../../tcg-dex/model/set-with-abbreviation';
+import type { SetWithAbbreviation } from '@tcg-dex/model/set-with-abbreviation';
 
 interface ConvertCollectionToLimitlessDeckParams {
 	collectionCardDeck: CollectionCardDeck;

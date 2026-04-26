@@ -2,7 +2,7 @@ import { serve } from '@hono/node-server';
 import { Hono } from 'hono';
 import { cards } from './cards';
 import { logger } from 'hono/logger';
-import { connectToDatabase } from '../../libs/collection/data-access/connect-to-database';
+import { connectToDatabase } from '@collection/data-access/connect-to-database';
 import type { Db } from 'mongodb';
 import { CONFIG } from '../../config';
 import { decks } from './decks';

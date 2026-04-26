@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { type FieldTree } from '@angular/forms/signals';
 import type { WithId } from 'mongodb';
-import type { CollectionCardDeck } from '../../../../../libs/collection/model/collection-card';
+import type { CollectionCardDeck } from '@collection/model/collection-card';
 
 @Component({
 	selector: 'load-deck-dialog',

@@ -1,5 +1,5 @@
 import TCGdex, { Query, type Card, type CardResume } from '@tcgdex/sdk';
-import { VARIANT, type DittoDexCard } from '../../ditto-dex/model/ditto-dex-card';
+import { VARIANT, type DittoDexCard } from '@ditto-dex/model/ditto-dex-card';
 import type { CollectionCard } from '../model/collection-card';
 import type { Variants } from '../model/variants';
 

@@ -7,14 +7,14 @@ import {
 	type Signal,
 	type WritableSignal,
 } from '@angular/core';
-import { getTcgDex } from '../../tcg-dex/data-access/get-tcg-dex';
+import { getTcgDex } from '@tcg-dex/data-access/get-tcg-dex';
 import type TCGdex from '@tcgdex/sdk';
 import { CONFIG } from '../../../environment/environment';
 import type { Card, Set as TcgSet } from '@tcgdex/sdk';
-import type { CollectionCard, CollectionCardDeck } from '../../collection/model/collection-card';
+import type { CollectionCard, CollectionCardDeck } from '@collection/model/collection-card';
 import type { TcgDexCollectionCard } from '../model/tcg-dex-collection-card';
-import type { LimitlessDeck } from '../../limitless/model/limitless-deck';
-import { convertCollectionToLimitlessDeck } from '../../limitless/feature/convert-collection-to-limitless-deck';
+import type { LimitlessDeck } from '@limitless/model/limitless-deck';
+import { convertCollectionToLimitlessDeck } from '@limitless/feature/convert-collection-to-limitless-deck';
 
 @Injectable({ providedIn: 'root' })
 export class TcgDex {

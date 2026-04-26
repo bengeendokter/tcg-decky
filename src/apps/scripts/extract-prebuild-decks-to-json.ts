@@ -1,7 +1,7 @@
 import { CONFIG } from '../../config';
-import { exportPrebuildDecksToJson } from '../../libs/prebuild/data-access/export-prebuild-decks-to-json';
-import { extractPrebuildDecks } from '../../libs/prebuild/feature/extract-prebuild-deck';
-import type { PrebuildDeck } from '../../libs/prebuild/model/prebuild-deck';
+import { exportPrebuildDecksToJson } from '@prebuild/data-access/export-prebuild-decks-to-json';
+import { extractPrebuildDecks } from '@prebuild/feature/extract-prebuild-deck';
+import type { PrebuildDeck } from '@prebuild/model/prebuild-deck';
 
 export async function extractPrebuildDecksToJson(): Promise<void> {
 	const outputDirectory: string = CONFIG.COLLECTION_OUTPUT_DIRECTORY;

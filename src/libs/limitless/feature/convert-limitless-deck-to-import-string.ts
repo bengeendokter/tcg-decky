@@ -1,9 +1,9 @@
-import { parseEnergyType } from '../../prebuild/feature/parse-energy-type';
+import { parseEnergyType } from '@prebuild/feature/parse-energy-type';
 import {
 	ENERGY_TYPES,
 	ENERGY_TYPE_LOCAL_ID_CODE_MAP,
 	type EnergyType,
-} from '../../prebuild/model/energy';
+} from '@prebuild/model/energy';
 import type { LimitlessDeck } from '../model/limitless-deck';
 
 const QUANTITY_CONVERSION_STRING =

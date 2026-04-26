@@ -1,4 +1,4 @@
-import type { CollectionCard } from '../../collection/model/collection-card';
+import type { CollectionCard } from '@collection/model/collection-card';
 
 export function getQuantitySum(variants: CollectionCard['variants']): number {
 	const firstEdition: number = variants.firstEdition ?? 0;

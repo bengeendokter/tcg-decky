@@ -5,7 +5,7 @@ import {
 	collectionCardDeckValidatorAndStripper,
 	type CollectionCard,
 	type CollectionCardDeck,
-} from '../../collection/model/collection-card';
+} from '@collection/model/collection-card';
 import { CONFIG } from '../../../environment/environment';
 import { ArkErrors } from 'arktype';
 import type { WithId } from 'mongodb';
