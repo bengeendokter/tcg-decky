@@ -1,0 +1,16 @@
+@layer normalize, reset, theme, component;
+@import "normalize.css/normalize.css" layer(normalize);
+@import "../src/libs/style/ui/reset/reset.css" layer(reset);
+@import "open-props/easings.min.css" layer(theme);
+@import "open-props/animations.min.css" layer(theme);
+@import "open-props/fonts.min.css" layer(theme);
+@import "../src/libs/style/ui/theme/theme.css" layer(theme);
+@import "../src/libs/style/ui/component/component.css" layer(component);
+
+@layer theme {
+	@keyframes fade-in {
+		from {
+			opacity: 0;
+		}
+	}
+}

@@ -1,9 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/web-components-vite";
-
 import { html } from "lit";
 
 const meta: Meta = {
-  component: "md-button",
+	title: "Button"
 };
 
 export default meta;
