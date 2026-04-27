@@ -2,7 +2,7 @@ import { html } from "lit";
 import preview from "#.storybook/preview";
 
 const meta = preview.meta({
-  title: "Button",
+  title: "Components/Button",
 });
 
 export const Filled = meta.story({

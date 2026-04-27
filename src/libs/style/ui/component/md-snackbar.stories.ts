@@ -2,7 +2,7 @@ import { html } from "lit";
 import preview from "#.storybook/preview";
 
 const meta = preview.meta({
-  title: "Snackbar",
+  title: "Components/Snackbar",
 });
 
 export const Primary = meta.story({
