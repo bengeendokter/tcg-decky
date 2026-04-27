@@ -17,8 +17,6 @@
 		"rewriteRelativeImportExtensions": true,
 		"erasableSyntaxOnly": true,
 		"sourceMap": true,
-		"declaration": true,
-		"declarationMap": true,
 		"noUncheckedIndexedAccess": true,
 		"exactOptionalPropertyTypes": true,
 		"jsx": "react-jsx",
