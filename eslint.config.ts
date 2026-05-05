@@ -31,18 +31,22 @@ export default defineConfig([
           rules: [
             {
               from: { type: "feature" },
-              allow: { to: { type: ["data-access", "ui", "util", "model"] } },
+              allow: { to: { type: ["feature", "data-access", "ui", "util", "model"] } },
             },
             {
               from: { type: "data-access" },
-              allow: { to: { type: ["util", "model"] } },
+              allow: { to: { type: ["data-access", "util", "model"] } },
             },
             {
               from: { type: "ui" },
-              allow: { to: { type: ["util", "model"] } },
+              allow: { to: { type: ["ui", "util", "model"] } },
             },
             {
               from: { type: "util" },
+              allow: { to: { type: ["util", "model"] } },
+            },
+            {
+              from: { type: "model" },
               allow: { to: { type: ["model"] } },
             },
           ],
