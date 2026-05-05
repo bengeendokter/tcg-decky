@@ -11,17 +11,16 @@ export default defineConfig([
     files: ["**/*.{js,mjs,cjs,ts,mts,cts}"],
     plugins: { "@typescript-eslint": typescriptEslintPlugin as any, js, boundaries },
     settings: {
-      "import/resolver": {
-        typescript: {
-          alwaysTryTypes: true,
-        },
-      },
+    "import/resolver": {
+      typescript: true,
+      node: true,
+    },
       "boundaries/elements": [
-        { type: "feature", pattern: "feature/*" },
-        { type: "data-access", pattern: "data-access/*" },
-        { type: "ui", pattern: "ui/*" },
-        { type: "util", pattern: "util/*" },
-        { type: "model", pattern: "model/*" },
+        { type: "feature", pattern: "feature/*", mode: "file" },
+        { type: "data-access", pattern: "data-access/*", mode: "file" },
+        { type: "ui", pattern: "ui/*", mode: "file" },
+        { type: "util", pattern: "util/*", mode: "file" },
+        { type: "model", pattern: "model/*", mode: "file" },
       ],
     },
     rules: {
