@@ -17,35 +17,39 @@ export default defineConfig({
       node: true,
     },
     "boundaries/elements": [
-      { type: "feature", pattern: "src/libs/*/feature/*" },
-      { type: "data-access", pattern: "src/libs/*/data-access/*" },
-      { type: "ui", pattern: "src/libs/*/ui/*" },
-      { type: "util", pattern: "src/libs/*/util/*" },
-      { type: "model", pattern: "src/libs/*/model/*" },
+      { type: "feature", pattern: "feature/*", mode: "file" },
+      { type: "data-access", pattern: "data-access/*", mode: "file" },
+      { type: "ui", pattern: "ui/*", mode: "file" },
+      { type: "util", pattern: "util/*", mode: "file" },
+      { type: "model", pattern: "model/*", mode: "file" },
     ],
   },
   rules: {
     "boundaries/dependencies": [
       2,
       {
-        default: "allow",
+        default: "disallow",
         rules: [
-          // {
-          //   from: { type: "feature" },
-          //   allow: { to: { type: ["data-access", "ui", "util", "model"] } },
-          // },
-          // {
-          //   from: { type: "data-access" },
-          //   allow: { to: { type: ["util", "model"] } },
-          // },
-          // {
-          //   from: { type: "ui" },
-          //   allow: { to: { type: ["util", "model"] } },
-          // },
-          // {
-          //   from: { type: "util" },
-          //   allow: { to: { type: ["model"] } },
-          // },
+          {
+            from: { type: "feature" },
+            allow: { to: { type: ["feature", "data-access", "ui", "util", "model"] } },
+          },
+          {
+            from: { type: "data-access" },
+            allow: { to: { type: ["data-access", "util", "model"] } },
+          },
+          {
+            from: { type: "ui" },
+            allow: { to: { type: ["ui", "util", "model"] } },
+          },
+          {
+            from: { type: "util" },
+            allow: { to: { type: ["util", "model"] } },
+          },
+          {
+            from: { type: "model" },
+            allow: { to: { type: ["model"] } },
+          },
         ],
       },
     ],

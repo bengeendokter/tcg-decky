@@ -17,7 +17,7 @@
       "./*.ts"
     ]
   },
-  "packageManager": "pnpm@10.33.2",
+  "packageManager": "pnpm@10.33.3",
   "scripts": {
     "start:deck-builder": "cd src/apps/deck-builder && ng serve",
     "start:deck-builder:lan": "cd src/apps/deck-builder && ng serve --host 0.0.0.0 --configuration lan",
