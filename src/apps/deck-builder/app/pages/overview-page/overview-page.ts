@@ -20,20 +20,20 @@ import { converLimitlessDeckToImportString } from "@limitless/feature/convert-li
 import type { WithId } from "mongodb";
 import type { DeckCard } from "../../../../../libs/deck-builder/model/deck-card";
 import { getQuantitySum } from "../../../../../libs/deck-builder/util/get-quantity-sum";
-import { CardDetail } from "../../components/card-detail/card-detail";
-import { LoadDeckDialog } from "../../components/load-deck-dialog/load-deck-dialog";
+import { CardDetail } from "../../../../../libs/deck-builder/ui/card-detail/card-detail";
+import { LoadDeckDialog } from "../../../../../libs/deck-builder/ui/load-deck-dialog/load-deck-dialog";
 import {
   ALL,
   type All,
   type PokemonType,
 } from "../../../../../libs/deck-builder/model/pokemon-type";
-import { CollectionPane } from "../../components/collection-pane/collection-pane";
-import { DeckPane } from "../../components/deck-pane/deck-pane";
-import { CreateDeckDialog } from "../../components/create-deck-dialog/create-deck-dialog";
-import { DeleteDeckDialog } from "../../components/delete-deck-dialog/delete-deck-dialog";
-import { ResetDeckDialog } from "../../components/reset-deck-dialog/reset-deck-dialog";
-import { ShareDeckDialog } from "../../components/share-deck-dialog/share-deck-dialog";
-import { RenameDeckDialog } from "../../components/rename-deck-dialog/rename-deck-dialog";
+import { CollectionPane } from "../../../../../libs/deck-builder/ui/collection-pane/collection-pane";
+import { DeckPane } from "../../../../../libs/deck-builder/ui/deck-pane/deck-pane";
+import { CreateDeckDialog } from "../../../../../libs/deck-builder/ui/create-deck-dialog/create-deck-dialog";
+import { DeleteDeckDialog } from "../../../../../libs/deck-builder/ui/delete-deck-dialog/delete-deck-dialog";
+import { ResetDeckDialog } from "../../../../../libs/deck-builder/ui/reset-deck-dialog/reset-deck-dialog";
+import { ShareDeckDialog } from "../../../../../libs/deck-builder/ui/share-deck-dialog/share-deck-dialog";
+import { RenameDeckDialog } from "../../../../../libs/deck-builder/ui/rename-deck-dialog/rename-deck-dialog";
 import { convertCollectionToLimitlessDeck } from "@limitless/feature/convert-collection-to-limitless-deck";
 
 const REGULATION_MARKS_IN_ROTAION = ["G", "H", "I"] as const satisfies string[];
