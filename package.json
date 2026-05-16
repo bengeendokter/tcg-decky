@@ -17,7 +17,7 @@
       "./*.ts"
     ]
   },
-  "packageManager": "pnpm@10.33.2",
+  "packageManager": "pnpm@10.33.3",
   "scripts": {
     "start:deck-builder": "cd src/apps/deck-builder && ng serve",
     "start:deck-builder:lan": "cd src/apps/deck-builder && ng serve --host 0.0.0.0 --configuration lan",
@@ -73,6 +73,8 @@
     "@vitest/browser-playwright": "^4.1.5",
     "@vitest/coverage-v8": "^4.1.5",
     "baseline-browser-mapping": "^2.10.21",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-boundaries": "^6.0.2",
     "lit": "^3.3.2",
     "oxfmt": "^0.46.0",
     "oxlint": "^1.61.0",
