@@ -49,8 +49,8 @@
 							"outputHashing": "all",
 							"fileReplacements": [
 								{
-									"replace": "../../environment/environment.ts",
-									"with": "../../environment/environment.production.ts"
+									"replace": "../../config/environment/environment.ts",
+									"with": "../../config/environment/environment.production.ts"
 								}
 							]
 						},
@@ -65,8 +65,8 @@
 							"sourceMap": true,
 							"fileReplacements": [
 								{
-									"replace": "../../environment/environment.ts",
-									"with": "../../environment/environment.lan.ts"
+									"replace": "../../config/environment/environment.ts",
+									"with": "../../config/environment/environment.lan.ts"
 								}
 							]
 						}

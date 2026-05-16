@@ -3,7 +3,7 @@ const COLLECTION_API_URL =
 
 const TCG_DEX_SERVER_URL = 'https://tcgdex-api.home.bengeendokter.be/v2' as const satisfies string;
 
-export const CONFIG = {
+export const ENVIRONMENT_CONFIG = {
 	COLLECTION_API_URL,
 	TCG_DEX_SERVER_URL,
 } as const satisfies Record<Uppercase<string>, string | object>;
