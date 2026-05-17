@@ -9,7 +9,7 @@ import type { Variants } from "../model/variants.ts";
 
 interface ConvertPrebuildToCollectionCardsParams {
   prebuildDeck: PrebuildDeck;
-  tcgDex: TCGdex;
+  tcgDex: any;
 }
 
 export async function convertPrebuildToCollectionCards({

@@ -26,7 +26,7 @@ export async function resetCollectionCardDecksDatabase(
   },
 ): Promise<void> {
   const db: Db = await connectToDatabase(mongoDbDatabaseUrl);
-  const tcgDex: TCGdex = getTcgDex(tcgDexServerUrl);
+  const tcgDex = getTcgDex(tcgDexServerUrl);
 
   const armarougeDeckJsonPath: string = `${CONFIG.COLLECTION_OUTPUT_DIRECTORY}/${CONFIG.PREBUILD_DECK_JSON_FILE_NAME.BATTLE_ACADEMY_2024_ARMAROUGE}`;
   const pikachuDeckJsonPath: string = `${CONFIG.COLLECTION_OUTPUT_DIRECTORY}/${CONFIG.PREBUILD_DECK_JSON_FILE_NAME.BATTLE_ACADEMY_2024_PIKACHU}`;

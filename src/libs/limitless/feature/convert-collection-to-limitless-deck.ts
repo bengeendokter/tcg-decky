@@ -11,7 +11,7 @@ import type { SetWithAbbreviation } from "#tcg-dex/model/set-with-abbreviation.t
 
 interface ConvertCollectionToLimitlessDeckParams {
   collectionCardDeck: CollectionCardDeck;
-  tcgDex: TCGdex;
+  tcgDex: any;
 }
 
 export async function convertCollectionToLimitlessDeck({

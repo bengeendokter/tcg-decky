@@ -5,7 +5,7 @@ import type { Variants } from "../model/variants.ts";
 
 interface ConvetDittoDexCardsToCollectionCardsParams {
   dittoDexCards: DittoDexCard[];
-  tcgDex: TCGdex;
+  tcgDex: any;
 }
 
 export async function convetDittoDexCardsToCollectionCards({

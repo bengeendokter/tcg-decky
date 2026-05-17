@@ -15,7 +15,7 @@ import TCGdex, { Query, type Card, type CardResume } from "@tcgdex/sdk";
 
 interface ConvertPrebuildToLimitlessDeckParams {
   prebuildDeck: PrebuildDeck;
-  tcgDex: TCGdex;
+  tcgDex: any;
 }
 
 export async function convertPrebuildToLimitlessDeck({

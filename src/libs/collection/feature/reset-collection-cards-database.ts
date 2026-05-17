@@ -57,7 +57,7 @@ export async function resetCollectionCardsDatabase({
   dittoDexCards = defaultResetCollectionCardsDatabaseParams.dittoDexCards,
   prebuildDecks = defaultResetCollectionCardsDatabaseParams.prebuildDecks,
 }: ResetCollectionCardsDatabaseParams = defaultResetCollectionCardsDatabaseParams): Promise<void> {
-  const tcgDex: TCGdex = getTcgDex(tcgDexServerUrl);
+  const tcgDex = getTcgDex(tcgDexServerUrl);
 
   const collectionCards: CollectionCard[] = await combineCardsToCollection({
     dittoDexCards,
@@ -97,7 +97,7 @@ export async function setCollectioncardsToDatabase({
 interface CombineCardsToCollectionParams {
   dittoDexCards: DittoDexCard[];
   prebuildDecks: PrebuildDeck[];
-  tcgDex: TCGdex;
+  tcgDex: any;
 }
 
 export async function combineCardsToCollection({

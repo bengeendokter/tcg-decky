@@ -16,7 +16,7 @@ import type { TcgDexCollectionCard } from "../model/tcg-dex-collection-card.ts";
 
 @Injectable({ providedIn: "root" })
 export class TcgDex {
-  public readonly tcgDex: TCGdex = getTcgDex(CONFIG.TCG_DEX_SERVER_URL);
+  public readonly tcgDex = getTcgDex(CONFIG.TCG_DEX_SERVER_URL);
   public readonly cardId: WritableSignal<string | undefined> = signal(undefined);
   public readonly collectionCards: WritableSignal<CollectionCard[]> = signal([]);
   public readonly loadedDeckCollectionCards: WritableSignal<CollectionCard[]> = signal([]);

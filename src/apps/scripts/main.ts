@@ -9,7 +9,7 @@ import { getTcgDex } from "#tcg-dex/data-access/get-tcg-dex.ts";
 import { convertImportStringToLimitlessDecks } from "#limitless/feature/convert-import-string-to-limitless-deck.ts";
 import { limitlessDeckToString } from "#limitless/util/limitless-deck-to-string.ts";
 
-const tcgDex: TCGdex = getTcgDex(CONFIG.TCG_DEX_SERVER_URL);
+const tcgDex = getTcgDex(CONFIG.TCG_DEX_SERVER_URL);
 
 // const armarougeDeckJsonPath: string = `${CONFIG.COLLECTION_OUTPUT_DIRECTORY}/${CONFIG.PREBUILD_DECK_JSON_FILE_NAME.BATTLE_ACADEMY_2024_ARMAROUGE}`;
 

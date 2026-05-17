@@ -8,7 +8,7 @@ import type { LimitlessDeck } from "#limitless/model/limitless-deck.ts";
 import { exportLimitlessDeckToTxt } from "#limitless/data-access/export-limitless-deck-to-txt.ts";
 
 export async function convertPrebuildToLimitlessDeckTxt(): Promise<void> {
-  const tcgDex: TCGdex = getTcgDex(CONFIG.TCG_DEX_SERVER_URL);
+  const tcgDex = getTcgDex(CONFIG.TCG_DEX_SERVER_URL);
   const outputDirectory = CONFIG.LIMITLESS_OUTPUT_DIRECTORY;
 
   const armarougeDeckJsonPath: string = `${CONFIG.COLLECTION_OUTPUT_DIRECTORY}/${CONFIG.PREBUILD_DECK_JSON_FILE_NAME.BATTLE_ACADEMY_2024_ARMAROUGE}`;
