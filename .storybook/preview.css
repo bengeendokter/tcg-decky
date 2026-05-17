@@ -19,6 +19,11 @@
 	background-color: var(--md-sys-color-surface);
 }
 
-.sb-story #root-inner {
-	anchor-name: --root-anchor;
+.sb-story {
+	display: grid;
+
+	#root-inner {
+		height: 100%;
+		anchor-name: --root-anchor;
+	}
 }
