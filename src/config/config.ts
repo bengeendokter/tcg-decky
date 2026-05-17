@@ -1,4 +1,4 @@
-import { ENVIRONMENT_CONFIG } from "./environment/environment";
+import { ENVIRONMENT_CONFIG } from './environment/environment';
 
 const PREBUILD_DECKS_URL = {
 	MEGA_GENGAR_EX_DECK:
@@ -39,5 +39,5 @@ export const CONFIG = {
 	COLLECTION_CARD_DECK_JSON_FILE_NAME,
 	DITTO_DEX_SCV_FILE_PATH,
 	MONGO_DB_DATABASE_URL,
-	...ENVIRONMENT_CONFIG
+	...ENVIRONMENT_CONFIG,
 } as const satisfies Record<Uppercase<string>, string | object>;

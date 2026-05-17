@@ -1,19 +1,19 @@
-import * as fs from "fs";
-import type { LimitlessDeck } from "../model/limitless-deck";
-import { limitlessDeckToString } from "../util/limitless-deck-to-string";
+import * as fs from 'fs';
+import type { LimitlessDeck } from '../model/limitless-deck';
+import { limitlessDeckToString } from '../util/limitless-deck-to-string';
 
 export interface ExportLimitlessDeckToTxtParams {
-  limitlessDeck: LimitlessDeck;
-  outputDirectory: string;
+	limitlessDeck: LimitlessDeck;
+	outputDirectory: string;
 }
 
 export function exportLimitlessDeckToTxt({
-  limitlessDeck,
-  outputDirectory,
+	limitlessDeck,
+	outputDirectory,
 }: ExportLimitlessDeckToTxtParams): void {
-  const deckFileName = `${outputDirectory}/${limitlessDeck.name.replaceAll(" ", "_")}.txt`;
+	const deckFileName = `${outputDirectory}/${limitlessDeck.name.replaceAll(' ', '_')}.txt`;
 
-  const txtContent: string = limitlessDeckToString(limitlessDeck);
+	const txtContent: string = limitlessDeckToString(limitlessDeck);
 
-  fs.writeFileSync(deckFileName, txtContent, { encoding: "utf-8" });
+	fs.writeFileSync(deckFileName, txtContent, { encoding: 'utf-8' });
 }

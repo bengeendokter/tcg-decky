@@ -1,13 +1,13 @@
-import type TCGdex from "@tcgdex/sdk";
-import { CONFIG } from "@config";
+import type TCGdex from '@tcgdex/sdk';
+import { CONFIG } from '@config';
 // import { converLimitlessDeckToImportString } from '@limitless/feature/convert-limitless-deck-to-import-string';
-import type { LimitlessDeck } from "@limitless/model/limitless-deck";
-import { getTcgDex } from "@tcg-dex/data-access/get-tcg-dex";
+import type { LimitlessDeck } from '@limitless/model/limitless-deck';
+import { getTcgDex } from '@tcg-dex/data-access/get-tcg-dex';
 // import type { PrebuildDeck } from '@prebuild/model/prebuild-deck';
 // import { convertPrebuildToLimitlessDeck } from '@limitless/feature/convert-prebuild-to-limitless-deck';
 // import { importPrebuildDeckFromJson } from '@prebuild/data-access/import-prebuild-deck-from-json';
-import { convertImportStringToLimitlessDecks } from "@limitless/feature/convert-import-string-to-limitless-deck";
-import { limitlessDeckToString } from "@limitless/util/limitless-deck-to-string";
+import { convertImportStringToLimitlessDecks } from '@limitless/feature/convert-import-string-to-limitless-deck';
+import { limitlessDeckToString } from '@limitless/util/limitless-deck-to-string';
 
 const tcgDex: TCGdex = getTcgDex(CONFIG.TCG_DEX_SERVER_URL);
 
@@ -27,11 +27,11 @@ const tcgDex: TCGdex = getTcgDex(CONFIG.TCG_DEX_SERVER_URL);
 // console.log(importString);
 
 // my.limitlesstcg.com/builder?i=10133SVP1050233SVP1140i31SUMR
-const importString: string = "10133SVP1050233SVP1140i31SUMR";
+const importString: string = '10133SVP1050233SVP1140i31SUMR';
 
 const limitlessDeck: LimitlessDeck = await convertImportStringToLimitlessDecks({
-  tcgDex,
-  importString,
+	tcgDex,
+	importString,
 });
 
 console.log(limitlessDeckToString(limitlessDeck));
