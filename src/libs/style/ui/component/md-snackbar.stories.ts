@@ -6,5 +6,7 @@ const meta = preview.meta({
 });
 
 export const Primary = meta.story({
-	render: () => html`<output class="md-snackbar">Snackbar without action</output>`,
+	render: () => html`<div style="min-height: 150px">
+		<output class="md-snackbar">Snackbar without action</output>
+	</div>`,
 });
