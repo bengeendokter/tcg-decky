@@ -8,10 +8,10 @@ import {
   type InputSignal,
   type Signal,
 } from "@angular/core";
-import { TcgCard } from "../tcg-card/tcg-card";
-import type { DeckCard } from "../../model/deck-card";
-import { getQuantitySum } from "../../util/get-quantity-sum";
-import { IconComponent } from "../icon/icon.component";
+import { TcgCard } from "../tcg-card/tcg-card.ts";
+import type { DeckCard } from "../../model/deck-card.ts";
+import { getQuantitySum } from "../../util/get-quantity-sum.ts";
+import { IconComponent } from "../icon/icon.component.ts";
 import addIcon from "@material-symbols/svg-400/rounded/add.svg";
 import removeIcon from "@material-symbols/svg-400/rounded/remove.svg";
 

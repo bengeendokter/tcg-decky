@@ -1,11 +1,11 @@
 import { Component, input, output, OutputEmitterRef, type InputSignal } from "@angular/core";
-import { TcgCard } from "../tcg-card/tcg-card";
-import type { TcgDexCollectionCard } from "../../model/tcg-dex-collection-card";
-import type { DeckCard } from "../../model/deck-card";
+import { TcgCard } from "../tcg-card/tcg-card.ts";
+import type { TcgDexCollectionCard } from "../../model/tcg-dex-collection-card.ts";
+import type { DeckCard } from "../../model/deck-card.ts";
 import deleteIcon from "@material-symbols/svg-400/rounded/delete.svg";
 import restartAltIcon from "@material-symbols/svg-400/rounded/restart_alt.svg";
 import shareIcon from "@material-symbols/svg-400/rounded/share.svg";
-import { IconComponent } from "../icon/icon.component";
+import { IconComponent } from "../icon/icon.component.ts";
 
 @Component({
   selector: "deck-pane",

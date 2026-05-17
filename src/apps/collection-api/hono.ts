@@ -1,11 +1,11 @@
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
-import { cards } from "./cards";
+import { cards } from "./cards.ts";
 import { logger } from "hono/logger";
-import { connectToDatabase } from "@collection/data-access/connect-to-database";
+import { connectToDatabase } from "#collection/data-access/connect-to-database.ts";
 import type { Db } from "mongodb";
-import { CONFIG } from "@config";
-import { decks } from "./decks";
+import { CONFIG } from "#config/config.ts";
+import { decks } from "./decks.ts";
 import { cors } from "hono/cors";
 
 export const app = new Hono();

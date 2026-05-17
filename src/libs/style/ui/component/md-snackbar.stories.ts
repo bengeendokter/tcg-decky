@@ -1,5 +1,5 @@
 import { html } from "lit";
-import preview from "#.storybook/preview";
+import preview from "#storybook/preview.ts";
 
 const meta = preview.meta({
   title: "Components/Snackbar",

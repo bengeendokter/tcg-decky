@@ -1,19 +1,19 @@
 import type { Db } from "mongodb";
-import { connectToDatabase } from "../data-access/connect-to-database";
-import { CONFIG } from "@config";
-import { closeDatabaseConnection } from "../data-access/close-database-connection";
-import { deleteAllCollectionCard } from "../data-access/delete-all-collection-cards";
-import { importDittoDexCardsFromCsv } from "@ditto-dex/data-access/import-ditto-dex-cards-from-csv";
-import type { DittoDexCard } from "@ditto-dex/model/ditto-dex-card";
-import { convetDittoDexCardsToCollectionCards } from "../feature/convert-ditto-dex-cards-to-collection-cards";
-import { getTcgDex } from "@tcg-dex/data-access/get-tcg-dex";
+import { connectToDatabase } from "../data-access/connect-to-database.ts";
+import { CONFIG } from "#config/config.ts";
+import { closeDatabaseConnection } from "../data-access/close-database-connection.ts";
+import { deleteAllCollectionCard } from "../data-access/delete-all-collection-cards.ts";
+import { importDittoDexCardsFromCsv } from "#ditto-dex/data-access/import-ditto-dex-cards-from-csv.ts";
+import type { DittoDexCard } from "#ditto-dex/model/ditto-dex-card.ts";
+import { convetDittoDexCardsToCollectionCards } from "../feature/convert-ditto-dex-cards-to-collection-cards.ts";
+import { getTcgDex } from "#tcg-dex/data-access/get-tcg-dex.ts";
 import type TCGdex from "@tcgdex/sdk";
-import type { CollectionCard, CollectionCardDeck } from "../model/collection-card";
-import { importPrebuildDeckFromJson } from "@prebuild/data-access/import-prebuild-deck-from-json";
-import type { PrebuildDeck } from "@prebuild/model/prebuild-deck";
-import { convertPrebuildToCollectionCards } from "../feature/convert-prebuild-to-collection-cards";
-import { addCollectionCard } from "../data-access/add-collection-card";
-import { ENERGY_IDS } from "@prebuild/model/energy";
+import type { CollectionCard, CollectionCardDeck } from "../model/collection-card.ts";
+import { importPrebuildDeckFromJson } from "#prebuild/data-access/import-prebuild-deck-from-json.ts";
+import type { PrebuildDeck } from "#prebuild/model/prebuild-deck.ts";
+import { convertPrebuildToCollectionCards } from "../feature/convert-prebuild-to-collection-cards.ts";
+import { addCollectionCard } from "../data-access/add-collection-card.ts";
+import { ENERGY_IDS } from "#prebuild/model/energy.ts";
 
 const ARMAROUGE_DECK_JSON_PATH =
   `${CONFIG.COLLECTION_OUTPUT_DIRECTORY}/${CONFIG.PREBUILD_DECK_JSON_FILE_NAME.BATTLE_ACADEMY_2024_ARMAROUGE}` as const satisfies string;

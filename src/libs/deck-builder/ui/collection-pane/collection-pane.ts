@@ -1,18 +1,18 @@
 import { Component, input, output, OutputEmitterRef, type InputSignal } from "@angular/core";
 import { Field, type FieldTree } from "@angular/forms/signals";
-import { TcgCard } from "../tcg-card/tcg-card";
+import { TcgCard } from "../tcg-card/tcg-card.ts";
 import {
   ALL,
   isPokemonType,
   POKEMON_TYPES,
   type All,
   type PokemonType,
-} from "../../model/pokemon-type";
-import type { TcgDexCollectionCard } from "../../model/tcg-dex-collection-card";
-import { getQuantitySum } from "../../util/get-quantity-sum";
+} from "../../model/pokemon-type.ts";
+import type { TcgDexCollectionCard } from "../../model/tcg-dex-collection-card.ts";
+import { getQuantitySum } from "../../util/get-quantity-sum.ts";
 import openInFullIcon from "@material-symbols/svg-400/rounded/open_in_full.svg";
 import closeFullscreenIcon from "@material-symbols/svg-400/rounded/close_fullscreen.svg";
-import { IconComponent } from "../icon/icon.component";
+import { IconComponent } from "../icon/icon.component.ts";
 
 @Component({
   selector: "collection-pane",

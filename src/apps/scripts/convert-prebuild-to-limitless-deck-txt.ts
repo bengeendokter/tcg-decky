@@ -1,11 +1,11 @@
 import type TCGdex from "@tcgdex/sdk";
-import { CONFIG } from "@config";
-import { convertPrebuildToLimitlessDeck } from "@limitless/feature/convert-prebuild-to-limitless-deck";
-import { importPrebuildDeckFromJson } from "@prebuild/data-access/import-prebuild-deck-from-json";
-import type { PrebuildDeck } from "@prebuild/model/prebuild-deck";
-import { getTcgDex } from "@tcg-dex/data-access/get-tcg-dex";
-import type { LimitlessDeck } from "@limitless/model/limitless-deck";
-import { exportLimitlessDeckToTxt } from "@limitless/data-access/export-limitless-deck-to-txt";
+import { CONFIG } from "#config/config.ts";
+import { convertPrebuildToLimitlessDeck } from "#limitless/feature/convert-prebuild-to-limitless-deck.ts";
+import { importPrebuildDeckFromJson } from "#prebuild/data-access/import-prebuild-deck-from-json.ts";
+import type { PrebuildDeck } from "#prebuild/model/prebuild-deck.ts";
+import { getTcgDex } from "#tcg-dex/data-access/get-tcg-dex.ts";
+import type { LimitlessDeck } from "#limitless/model/limitless-deck.ts";
+import { exportLimitlessDeckToTxt } from "#limitless/data-access/export-limitless-deck-to-txt.ts";
 
 export async function convertPrebuildToLimitlessDeckTxt(): Promise<void> {
   const tcgDex: TCGdex = getTcgDex(CONFIG.TCG_DEX_SERVER_URL);

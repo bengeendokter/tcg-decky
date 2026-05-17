@@ -7,12 +7,12 @@ import {
   type Signal,
   type WritableSignal,
 } from "@angular/core";
-import { getTcgDex } from "@tcg-dex/data-access/get-tcg-dex";
+import { getTcgDex } from "#tcg-dex/data-access/get-tcg-dex.ts";
 import type TCGdex from "@tcgdex/sdk";
-import { CONFIG } from "@config";
+import { CONFIG } from "#config/config.ts";
 import type { Card, Set as TcgSet } from "@tcgdex/sdk";
-import type { CollectionCard } from "@collection/model/collection-card";
-import type { TcgDexCollectionCard } from "../model/tcg-dex-collection-card";
+import type { CollectionCard } from "#collection/model/collection-card.ts";
+import type { TcgDexCollectionCard } from "../model/tcg-dex-collection-card.ts";
 
 @Injectable({ providedIn: "root" })
 export class TcgDex {

@@ -4,9 +4,9 @@ import {
   setTheme,
   enableSystemContrastPreferenceListener,
   enableSystemColorSchemePreferenceListener,
-} from "@style/util/theme";
+} from "#style/util/theme.ts";
 import { isPlatformBrowser } from "@angular/common";
-import { OverviewPage } from "@deck-builder/feature/overview-page/overview-page";
+import { OverviewPage } from "#deck-builder/feature/overview-page/overview-page.ts";
 
 @Component({
   selector: "app-root",

@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import type { CollectionCardDeck } from '../model/collection-card';
+import type { CollectionCardDeck } from '../model/collection-card.ts';
 
 export interface ExportPrebuildDecksToJsonParams {
 	deck: CollectionCardDeck;

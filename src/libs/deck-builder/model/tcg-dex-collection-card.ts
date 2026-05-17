@@ -1,4 +1,4 @@
-import type { Card } from '@tcgdex/sdk';
-import type { CollectionCard } from '@collection/model/collection-card';
+import type { Card } from "@tcgdex/sdk";
+import type { CollectionCard } from "#collection/model/collection-card.ts";
 
-export type TcgDexCollectionCard = Omit<Card, 'variants'> & CollectionCard;
+export type TcgDexCollectionCard = Omit<Card, "variants"> & CollectionCard;

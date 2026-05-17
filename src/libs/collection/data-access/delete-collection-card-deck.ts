@@ -1,5 +1,5 @@
 import { ObjectId, type Collection, type Db, type DeleteResult } from 'mongodb';
-import type { CollectionCardDeck } from '../model/collection-card';
+import type { CollectionCardDeck } from '../model/collection-card.ts';
 
 export interface DeleteCollectionCardDeckParams {
 	id: string;

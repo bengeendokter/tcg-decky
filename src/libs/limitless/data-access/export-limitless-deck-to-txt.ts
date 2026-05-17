@@ -1,6 +1,6 @@
 import * as fs from "fs";
-import type { LimitlessDeck } from "../model/limitless-deck";
-import { limitlessDeckToString } from "../util/limitless-deck-to-string";
+import type { LimitlessDeck } from "../model/limitless-deck.ts";
+import { limitlessDeckToString } from "../util/limitless-deck-to-string.ts";
 
 export interface ExportLimitlessDeckToTxtParams {
   limitlessDeck: LimitlessDeck;

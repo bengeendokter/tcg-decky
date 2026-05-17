@@ -1,12 +1,12 @@
 import { Injectable, resource, type ResourceRef } from "@angular/core";
 import { hc } from "hono/client";
-import type { AppType } from "../../../apps/collection-api/hono";
+import type { AppType } from "../../../apps/collection-api/hono.ts";
 import {
   collectionCardDeckValidatorAndStripper,
   type CollectionCard,
   type CollectionCardDeck,
-} from "@collection/model/collection-card";
-import { CONFIG } from "@config";
+} from "#collection/model/collection-card.ts";
+import { CONFIG } from "#config/config.ts";
 import { ArkErrors } from "arktype";
 import type { WithId } from "mongodb";
 

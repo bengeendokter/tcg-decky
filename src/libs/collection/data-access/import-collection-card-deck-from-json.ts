@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import { collectionCardDeckValidator, type CollectionCardDeck } from '../model/collection-card';
+import { collectionCardDeckValidator, type CollectionCardDeck } from '../model/collection-card.ts';
 
 export function importCollectionCardDeckFromJson(jsonFilePath: string): CollectionCardDeck {
 	const jsonContent: string = fs.readFileSync(jsonFilePath, {

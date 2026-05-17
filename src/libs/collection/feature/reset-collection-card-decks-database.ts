@@ -1,15 +1,15 @@
 import type TCGdex from "@tcgdex/sdk";
 import type { Db } from "mongodb";
-import { CONFIG } from "@config";
-import { getTcgDex } from "@tcg-dex/data-access/get-tcg-dex";
-import { connectToDatabase } from "../data-access/connect-to-database";
-import { importPrebuildDeckFromJson } from "@prebuild/data-access/import-prebuild-deck-from-json";
-import type { PrebuildDeck } from "@prebuild/model/prebuild-deck";
-import type { CollectionCardDeck } from "../model/collection-card";
-import { convertPrebuildToCollectionCards } from "./convert-prebuild-to-collection-cards";
-import { closeDatabaseConnection } from "../data-access/close-database-connection";
-import { addCollectionCardDeck } from "../data-access/add-collection-card-deck";
-import { deleteAllCollectionCardDecks } from "../data-access/delete-all-collection-card-decks";
+import { CONFIG } from "#config/config.ts";
+import { getTcgDex } from "#tcg-dex/data-access/get-tcg-dex.ts";
+import { connectToDatabase } from "../data-access/connect-to-database.ts";
+import { importPrebuildDeckFromJson } from "#prebuild/data-access/import-prebuild-deck-from-json.ts";
+import type { PrebuildDeck } from "#prebuild/model/prebuild-deck.ts";
+import type { CollectionCardDeck } from "../model/collection-card.ts";
+import { convertPrebuildToCollectionCards } from "./convert-prebuild-to-collection-cards.ts";
+import { closeDatabaseConnection } from "../data-access/close-database-connection.ts";
+import { addCollectionCardDeck } from "../data-access/add-collection-card-deck.ts";
+import { deleteAllCollectionCardDecks } from "../data-access/delete-all-collection-card-decks.ts";
 
 export interface ResetCollectionCardDecksDatabaseParams {
   mongoDbDatabaseUrl?: string;

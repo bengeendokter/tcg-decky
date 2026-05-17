@@ -1,5 +1,5 @@
 import { ObjectId, type Collection, type Db, type WithId } from 'mongodb';
-import type { CollectionCardDeck } from '../model/collection-card';
+import type { CollectionCardDeck } from '../model/collection-card.ts';
 
 interface GetCollectionCardDeckParams {
 	id: string;

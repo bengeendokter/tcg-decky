@@ -1,4 +1,4 @@
-import type { PrebuildSetCard } from './prebuild-deck';
+import type { PrebuildSetCard } from './prebuild-deck.ts';
 
 export const ENERGY_TYPES = {
 	GRASS: 'Grass',

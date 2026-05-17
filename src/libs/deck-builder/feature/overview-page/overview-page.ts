@@ -10,27 +10,27 @@ import {
   type WritableSignal,
 } from "@angular/core";
 import { type FieldTree, form, required } from "@angular/forms/signals";
-import { TcgDex } from "../../data-access/tcg-dex";
-import type { TcgDexCollectionCard } from "../../model/tcg-dex-collection-card";
-import { CATEGORY, type LimitlessDeck } from "@limitless/model/limitless-deck";
-import type { CollectionCard, CollectionCardDeck } from "@collection/model/collection-card";
-import { ENERGY_IDS } from "@prebuild/model/energy";
-import { Collection } from "../../data-access/collection";
-import { converLimitlessDeckToImportString } from "@limitless/feature/convert-limitless-deck-to-import-string";
+import { TcgDex } from "../../data-access/tcg-dex.ts";
+import type { TcgDexCollectionCard } from "../../model/tcg-dex-collection-card.ts";
+import { CATEGORY, type LimitlessDeck } from "#limitless/model/limitless-deck.ts";
+import type { CollectionCard, CollectionCardDeck } from "#collection/model/collection-card.ts";
+import { ENERGY_IDS } from "#prebuild/model/energy.ts";
+import { Collection } from "../../data-access/collection.ts";
+import { converLimitlessDeckToImportString } from "#limitless/feature/convert-limitless-deck-to-import-string.ts";
 import type { WithId } from "mongodb";
-import type { DeckCard } from "../../model/deck-card";
-import { getQuantitySum } from "../../util/get-quantity-sum";
-import { CardDetail } from "../../ui/card-detail/card-detail";
-import { LoadDeckDialog } from "../../ui/load-deck-dialog/load-deck-dialog";
-import { ALL, type All, type PokemonType } from "../../model/pokemon-type";
-import { CollectionPane } from "../../ui/collection-pane/collection-pane";
-import { DeckPane } from "../../ui/deck-pane/deck-pane";
-import { CreateDeckDialog } from "../../ui/create-deck-dialog/create-deck-dialog";
-import { DeleteDeckDialog } from "../../ui/delete-deck-dialog/delete-deck-dialog";
-import { ResetDeckDialog } from "../../ui/reset-deck-dialog/reset-deck-dialog";
-import { ShareDeckDialog } from "../../ui/share-deck-dialog/share-deck-dialog";
-import { RenameDeckDialog } from "../../ui/rename-deck-dialog/rename-deck-dialog";
-import { convertCollectionToLimitlessDeck } from "@limitless/feature/convert-collection-to-limitless-deck";
+import type { DeckCard } from "../../model/deck-card.ts";
+import { getQuantitySum } from "../../util/get-quantity-sum.ts";
+import { CardDetail } from "../../ui/card-detail/card-detail.ts";
+import { LoadDeckDialog } from "../../ui/load-deck-dialog/load-deck-dialog.ts";
+import { ALL, type All, type PokemonType } from "../../model/pokemon-type.ts";
+import { CollectionPane } from "../../ui/collection-pane/collection-pane.ts";
+import { DeckPane } from "../../ui/deck-pane/deck-pane.ts";
+import { CreateDeckDialog } from "../../ui/create-deck-dialog/create-deck-dialog.ts";
+import { DeleteDeckDialog } from "../../ui/delete-deck-dialog/delete-deck-dialog.ts";
+import { ResetDeckDialog } from "../../ui/reset-deck-dialog/reset-deck-dialog.ts";
+import { ShareDeckDialog } from "../../ui/share-deck-dialog/share-deck-dialog.ts";
+import { RenameDeckDialog } from "../../ui/rename-deck-dialog/rename-deck-dialog.ts";
+import { convertCollectionToLimitlessDeck } from "#limitless/feature/convert-collection-to-limitless-deck.ts";
 
 const REGULATION_MARKS_IN_ROTAION = ["G", "H", "I"] as const satisfies string[];
 

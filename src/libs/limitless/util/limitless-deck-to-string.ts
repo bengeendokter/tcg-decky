@@ -1,4 +1,4 @@
-import type { LimitlessCard, LimitlessDeck } from '../model/limitless-deck';
+import type { LimitlessCard, LimitlessDeck } from '../model/limitless-deck.ts';
 
 interface LimitlessCardsToCategoryHeaderLineParams {
 	limitlessCards: LimitlessCard[];

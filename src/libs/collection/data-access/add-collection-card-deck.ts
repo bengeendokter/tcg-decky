@@ -1,5 +1,5 @@
 import type { Collection, Db, InsertOneResult } from 'mongodb';
-import type { CollectionCardDeck } from '../model/collection-card';
+import type { CollectionCardDeck } from '../model/collection-card.ts';
 
 interface AddCollectionCardDeckParams {
 	collectionCardDeck: CollectionCardDeck;

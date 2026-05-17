@@ -1,4 +1,4 @@
-import { ENVIRONMENT_CONFIG } from "./environment/environment";
+import { ENVIRONMENT_CONFIG } from "./environment/environment.ts";
 
 const PREBUILD_DECKS_URL = {
 	MEGA_GENGAR_EX_DECK:
