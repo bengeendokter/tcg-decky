@@ -8,9 +8,9 @@
 	"todo-tree.tree.scanMode": "workspace only",
 
 	// oxfmt
-	"oxc.fmt.configPath": ".oxfmtrc.json",
 	"editor.defaultFormatter": "oxc.oxc-vscode",
 	"editor.formatOnSave": true,
+	"editor.formatOnSaveMode": "file",
 
 	// oxlint
 	"editor.codeActionsOnSave": {
