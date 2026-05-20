@@ -109,10 +109,10 @@ class PaletteKeyHkt extends Hkt<[PaletteType]> {
 	declare body: `${this[0]}${PaletteValue}`;
 }
 
-const paletteKeyValidator: Generic<[['T', PaletteType]], PaletteKeyHkt> = generic(['T', paletteTypeValidator])(
-	(args) => type(`"${args.T.infer}${paletteValueValidator.infer}"`),
-	PaletteKeyHkt,
-);
+const paletteKeyValidator: Generic<[['T', PaletteType]], PaletteKeyHkt> = generic([
+	'T',
+	paletteTypeValidator,
+])((args) => type(`"${args.T.infer}${paletteValueValidator.infer}"`), PaletteKeyHkt);
 
 const primaryPaletteKeyValidator: Type<PaletteKey<'primary'>> = paletteKeyValidator("'primary'");
 
@@ -122,10 +122,10 @@ class SpecificPaletteHkt extends Hkt<[PaletteType]> {
 	declare body: Record<PaletteKey<this[0]>, Oklch>;
 }
 
-const specificPaletteValidator: Generic<[['T', PaletteType]], SpecificPaletteHkt> = generic(['T', paletteTypeValidator])(
-	(args) => type.Record(paletteKeyValidator(args.T), oklchValidator),
-	SpecificPaletteHkt,
-);
+const specificPaletteValidator: Generic<[['T', PaletteType]], SpecificPaletteHkt> = generic([
+	'T',
+	paletteTypeValidator,
+])((args) => type.Record(paletteKeyValidator(args.T), oklchValidator), SpecificPaletteHkt);
 
 type PalettePrimary = SpecificPalette<typeof PALETTE_TYPE.PRIMARY>;
 type PaletteSecondary = SpecificPalette<typeof PALETTE_TYPE.SECONDARY>;
@@ -142,24 +142,119 @@ type Palette =
 	| PaletteNeutralVariant
 	| PaletteError;
 
-function getPaletteValueOklch(palleteValue: PaletteValue, chromaFactor: ChromaFactor, baseColor: Oklch): Oklch {
+function getPaletteValueOklch(
+	palleteValue: PaletteValue,
+	chromaFactor: ChromaFactor,
+	baseColor: Oklch,
+): Oklch {
 	return {
 		l: PALETTE_VALUE_LIGHTNESS_MAP[palleteValue],
-		c: Math.sin(0.009 * palleteValue * Math.PI) * baseColor.c / chromaFactor,
+		c: (Math.sin(0.009 * palleteValue * Math.PI) * baseColor.c) / chromaFactor,
 		h: baseColor.h,
 	};
 }
 
-function getPalette<T extends PaletteType>(palleteType: T, baseColor: Oklch): SpecificPalette<T> {
+function getSecondaryBaseColor(themeBaseColor: Oklch): Oklch {
+	return {
+		l: themeBaseColor.l,
+		c: themeBaseColor.c / 3,
+		h: themeBaseColor.h,
+	};
+}
+
+function getTertiaryBaseColor(themeBaseColor: Oklch): Oklch {
+	return {
+		l: themeBaseColor.l,
+		c: themeBaseColor.c / 2,
+		h: themeBaseColor.h + 60,
+	};
+}
+
+function getNeutralBaseColor(themeBaseColor: Oklch): Oklch {
+	return {
+		l: themeBaseColor.l,
+		c: Math.min(themeBaseColor.c / 12, 0.01),
+		h: themeBaseColor.h,
+	};
+}
+
+function getNeutralVariantBaseColor(themeBaseColor: Oklch): Oklch {
+	return {
+		l: themeBaseColor.l,
+		c: Math.min(themeBaseColor.c / 6, 0.02),
+		h: themeBaseColor.h,
+	};
+}
+
+function getErrorBaseColor(themeBaseColor: Oklch): Oklch {
+	return {
+		l: themeBaseColor.l,
+		c: 0.2,
+		h: 25,
+	};
+}
+
+function getPaletteBaseColor(themeBaseColor: Oklch, paletteType: PaletteType): Oklch {
+	switch (paletteType) {
+		case PALETTE_TYPE.PRIMARY:
+			return themeBaseColor;
+		case PALETTE_TYPE.SECONDARY:
+			return getSecondaryBaseColor(themeBaseColor);
+		case PALETTE_TYPE.TERTIARY:
+			return getTertiaryBaseColor(themeBaseColor);
+		case PALETTE_TYPE.NEUTRAL:
+			return getNeutralBaseColor(themeBaseColor);
+		case PALETTE_TYPE.NEUTRAL_VARIANT:
+			return getNeutralVariantBaseColor(themeBaseColor);
+		case PALETTE_TYPE.ERROR:
+			return getErrorBaseColor(themeBaseColor);
+		default:
+			paletteType satisfies never;
+			return themeBaseColor;
+	}
+}
+
+function getPalette<T extends PaletteType>(
+	palleteType: T,
+	themeBaseColor: Oklch,
+): SpecificPalette<T> {
 	const palette: SpecificPalette<T> = PALETTE_VALUES.reduce(
 		(acc: Partial<SpecificPalette<T>>, value: PaletteValue) => {
 			return {
 				...acc,
-				[`${palleteType}${value}`]: getPaletteValueOklch(value, CHROMA_FACTOR[palleteType], baseColor),
+				[`${palleteType}${value}`]: getPaletteValueOklch(
+					value,
+					CHROMA_FACTOR[palleteType],
+					getPaletteBaseColor(themeBaseColor, palleteType),
+				),
 			};
 		},
 		{} satisfies Partial<SpecificPalette<T>>,
 	);
 
 	return palette;
+}
+
+function getPalettePrimary(themeBaseColor: Oklch): PalettePrimary {
+	return getPalette(PALETTE_TYPE.PRIMARY, themeBaseColor);
+}
+
+function getPaletteSecondary(themeBaseColor: Oklch): PaletteSecondary {
+	return getPalette(PALETTE_TYPE.SECONDARY, themeBaseColor);
+}
+
+function getPaletteTertiary(themeBaseColor: Oklch): PaletteTertiary {
+	return getPalette(PALETTE_TYPE.TERTIARY, themeBaseColor);
+}
+
+function getPaletteNeutral(themeBaseColor: Oklch): PaletteNeutral {
+	return getPalette(PALETTE_TYPE.NEUTRAL, themeBaseColor);
+}
+
+function getPaletteNeutralVariant(themeBaseColor: Oklch): PaletteNeutralVariant {
+	return getPalette(PALETTE_TYPE.NEUTRAL_VARIANT, themeBaseColor);
+}
+
+function getPaletteError(themeBaseColor: Oklch): PaletteError {
+	return getPalette(PALETTE_TYPE.ERROR, themeBaseColor);
 }
