@@ -1,4 +1,4 @@
-import { generic, Hkt, type, type Type } from 'arktype';
+import { Generic, generic, Hkt, type, type Type } from 'arktype';
 
 const PALETTE_TYPE = {
 	PRIMARY: 'primary',
@@ -105,22 +105,26 @@ const oklchValidator: Type<Oklch> = type({
 
 type PaletteKey<T extends PaletteType> = `${T}${PaletteValue}`;
 
-const paletteKeyValidator = generic(['T', paletteTypeValidator])(
+class PaletteKeyHkt extends Hkt<[PaletteType]> {
+	declare body: `${this[0]}${PaletteValue}`;
+}
+
+const paletteKeyValidator: Generic<[['T', PaletteType]], PaletteKeyHkt> = generic(['T', paletteTypeValidator])(
 	(args) => type(`"${args.T.infer}${paletteValueValidator.infer}"`),
-	class PaletteKeyHkt extends Hkt<[PaletteType]> {
-		declare body: `${this[0]}${PaletteValue}`;
-	},
+	PaletteKeyHkt,
 );
 
-const primaryPaletteKeyValidator = paletteKeyValidator("'primary'");
+const primaryPaletteKeyValidator: Type<PaletteKey<'primary'>> = paletteKeyValidator("'primary'");
 
 type SpecificPalette<T extends PaletteType> = Record<PaletteKey<T>, Oklch>;
 
-const specificPaletteValidator = generic(['T', paletteTypeValidator])(
+class SpecificPaletteHkt extends Hkt<[PaletteType]> {
+	declare body: Record<PaletteKey<this[0]>, Oklch>;
+}
+
+const specificPaletteValidator: Generic<[['T', PaletteType]], SpecificPaletteHkt> = generic(['T', paletteTypeValidator])(
 	(args) => type.Record(paletteKeyValidator(args.T), oklchValidator),
-	class SpecificPaletteHkt extends Hkt<[PaletteType]> {
-		declare body: Record<PaletteKey<this[0]>, Oklch>;
-	},
+	SpecificPaletteHkt,
 );
 
 type PalettePrimary = SpecificPalette<typeof PALETTE_TYPE.PRIMARY>;
