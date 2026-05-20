@@ -142,20 +142,20 @@ type Palette =
 	| PaletteNeutralVariant
 	| PaletteError;
 
-function getPaletteValueOklch(palleteValue: PaletteValue, chromaFactor: ChromaFactor): Oklch {
+function getPaletteValueOklch(palleteValue: PaletteValue, chromaFactor: ChromaFactor, baseColor: Oklch): Oklch {
 	return {
-		l: 0,
-		c: 0,
-		h: 0,
+		l: PALETTE_VALUE_LIGHTNESS_MAP[palleteValue],
+		c: Math.sin(0.009 * palleteValue * Math.PI) * baseColor.c / chromaFactor,
+		h: baseColor.h,
 	};
 }
 
-function getPalette<T extends PaletteType>(palleteType: T): SpecificPalette<T> {
+function getPalette<T extends PaletteType>(palleteType: T, baseColor: Oklch): SpecificPalette<T> {
 	const palette: SpecificPalette<T> = PALETTE_VALUES.reduce(
 		(acc: Partial<SpecificPalette<T>>, value: PaletteValue) => {
 			return {
 				...acc,
-				[`${palleteType}${value}`]: getPaletteValueOklch(value, CHROMA_FACTOR[palleteType]),
+				[`${palleteType}${value}`]: getPaletteValueOklch(value, CHROMA_FACTOR[palleteType], baseColor),
 			};
 		},
 		{} satisfies Partial<SpecificPalette<T>>,
