@@ -1,4 +1,4 @@
-// import { Generic, generic, Hkt, type, type Type } from 'arktype';
+import { Generic, generic, Hkt, type, type Type } from 'arktype';
 
 const PALETTE_TYPE = {
 	PRIMARY: 'primary',
@@ -11,16 +11,16 @@ const PALETTE_TYPE = {
 
 type PaletteType = (typeof PALETTE_TYPE)[keyof typeof PALETTE_TYPE];
 
-// const PALETTE_TYPES = [
-// 	PALETTE_TYPE.PRIMARY,
-// 	PALETTE_TYPE.SECONDARY,
-// 	PALETTE_TYPE.TERTIARY,
-// 	PALETTE_TYPE.NEUTRAL,
-// 	PALETTE_TYPE.NEUTRAL_VARIANT,
-// 	PALETTE_TYPE.ERROR,
-// ] as const satisfies PaletteType[];
+const PALETTE_TYPES = [
+	PALETTE_TYPE.PRIMARY,
+	PALETTE_TYPE.SECONDARY,
+	PALETTE_TYPE.TERTIARY,
+	PALETTE_TYPE.NEUTRAL,
+	PALETTE_TYPE.NEUTRAL_VARIANT,
+	PALETTE_TYPE.ERROR,
+] as const satisfies PaletteType[];
 
-// const paletteTypeValidator: Type<PaletteType> = type.enumerated(...PALETTE_TYPES);
+const paletteTypeValidator: Type<PaletteType> = type.enumerated(...PALETTE_TYPES);
 
 const PALETTE_VALUES = [
 	0, 2, 3, 4, 5, 6, 10, 11, 12, 15, 16, 17, 18, 20, 21, 22, 23, 24, 25, 26, 29, 30, 31, 34, 35, 36,
@@ -29,7 +29,7 @@ const PALETTE_VALUES = [
 
 type PaletteValue = (typeof PALETTE_VALUES)[number];
 
-// const paletteValueValidator: Type<PaletteValue> = type.enumerated(...PALETTE_VALUES);
+const paletteValueValidator: Type<PaletteValue> = type.enumerated(...PALETTE_VALUES);
 
 const PALETTE_VALUE_LIGHTNESS_MAP = {
 	0: 0,
@@ -97,30 +97,30 @@ interface Oklch {
 	h: number;
 }
 
-// const oklchValidator: Type<Oklch> = type({
-// 	l: 'number',
-// 	c: 'number',
-// 	h: 'number',
-// });
+const oklchValidator: Type<Oklch> = type({
+	l: 'number',
+	c: 'number',
+	h: 'number',
+});
 
 type PaletteKey<T extends PaletteType> = `${T}${PaletteValue}`;
 
-// class PaletteKeyHkt extends Hkt<[PaletteType]> {
-// 	declare body: `${this[0]}${PaletteValue}`;
-// }
+class PaletteKeyHkt extends Hkt<[PaletteType]> {
+	declare body: `${this[0]}${PaletteValue}`;
+}
 
-// const paletteKeyValidator: Generic<[['T', PaletteType]], PaletteKeyHkt> = generic([
-// 	'T',
-// 	paletteTypeValidator,
-// ])((args) => type(`"${args.T.infer}${paletteValueValidator.infer}"`), PaletteKeyHkt);
+const paletteKeyValidator: Generic<[['T', PaletteType]], PaletteKeyHkt> = generic([
+	'T',
+	paletteTypeValidator,
+])((args) => type(`"${args.T.infer}${paletteValueValidator.infer}"`), PaletteKeyHkt);
 
-// const primaryPaletteKeyValidator: Type<PaletteKey<'primary'>> = paletteKeyValidator("'primary'");
+const primaryPaletteKeyValidator: Type<PaletteKey<'primary'>> = paletteKeyValidator("'primary'");
 
 type SpecificPalette<T extends PaletteType> = Record<PaletteKey<T>, Oklch>;
 
-// class SpecificPaletteHkt extends Hkt<[PaletteType]> {
-// 	declare body: Record<PaletteKey<this[0]>, Oklch>;
-// }
+class SpecificPaletteHkt extends Hkt<[PaletteType]> {
+	declare body: Record<PaletteKey<this[0]>, Oklch>;
+}
 
 // const specificPaletteValidator: Generic<[['T', PaletteType]], SpecificPaletteHkt> = generic([
 // 	'T',
