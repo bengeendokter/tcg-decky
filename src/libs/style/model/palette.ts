@@ -1,4 +1,4 @@
-import { Generic, generic, Hkt, type, type Type } from 'arktype';
+import { type, type Type } from 'arktype';
 
 export const PALETTE_TYPE = {
 	PRIMARY: 'primary',
@@ -103,30 +103,10 @@ export const oklchValidator: Type<Oklch> = type({
 	h: 'number',
 });
 
+const Semver = type("/^(\\d+)\\.(\\d+)\\.(\\d+)$/")
+
 export type PaletteKey<T extends PaletteType> = `${T}${PaletteValue}`;
-
-class PaletteKeyHkt extends Hkt<[PaletteType]> {
-	declare body: `${this[0]}${PaletteValue}`;
-}
-
-export const paletteKeyValidator: Generic<[['T', PaletteType]], PaletteKeyHkt> = generic([
-	'T',
-	paletteTypeValidator,
-])((args) => type(`"${args.T.infer}${paletteValueValidator.infer}"`), PaletteKeyHkt);
-
-export const primaryPaletteKeyValidator: Type<PaletteKey<'primary'>> =
-	paletteKeyValidator("'primary'");
-
 export type SpecificPalette<T extends PaletteType> = Record<PaletteKey<T>, Oklch>;
-
-class SpecificPaletteHkt extends Hkt<[PaletteType]> {
-	declare body: Record<PaletteKey<this[0]>, Oklch>;
-}
-
-// const specificPaletteValidator: Generic<[['T', PaletteType]], SpecificPaletteHkt> = generic([
-// 	'T',
-// 	paletteTypeValidator,
-// ])((args) => type.Record(paletteKeyValidator(args.T), oklchValidator), SpecificPaletteHkt);
 
 export type PalettePrimary = SpecificPalette<typeof PALETTE_TYPE.PRIMARY>;
 export type PaletteSecondary = SpecificPalette<typeof PALETTE_TYPE.SECONDARY>;
@@ -260,20 +240,6 @@ export function getPaletteError(themeBaseColor: Oklch): PaletteError {
 	return getPalette(PALETTE_TYPE.ERROR, themeBaseColor);
 }
 
-console.log(getPalettePrimary({ l: 0.44, c: 0.16, h: 303.38 }));
-
-// {
-// 	"primary": {
-// 		"0": {
-// 			"$type": "color",
-// 			"$value": {
-// 				"colorSpace": "oklch",
-// 				"components": [0.7016, 0.3225, 328.363]
-// 		}
-// 		}
-// 	}
-// }
-
 type OklchPaletteColorTokens = {
 	[paletteType in PaletteType]?: {
 		[paletteValue in PaletteValue]?: {
@@ -284,7 +250,7 @@ type OklchPaletteColorTokens = {
 			};
 		};
 	};
-}
+};
 
 const oklchPaletteColorTokens: OklchPaletteColorTokens = {
 	primary: {
@@ -306,4 +272,14 @@ const oklchPaletteColorTokens: OklchPaletteColorTokens = {
 	},
 };
 
-console.log('oklchPaletteColorTokens', oklchPaletteColorTokens);
+// function paletteToTokens(palettes: Palette):OklchPaletteColorTokens {
+
+// 	return palettes;
+// }
+
+// function palettesToTokens(...palettes: Palette[]): OklchPaletteColorTokens {
+// 	return palettes.reduce((tokens: OklchPaletteColorTokens, palette: Palette) => {
+// 		const currentToken: OklchPaletteColorTokens = paletteToTokens(palette);
+// 		return {...tokens, ...currentToken};
+// 	}, {} satisfies OklchPaletteColorTokens);
+// }
