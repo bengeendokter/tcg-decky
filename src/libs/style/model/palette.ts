@@ -1,15 +1,16 @@
 import { type, type Type } from 'arktype';
 
-type BuildTuple<N extends number, Current extends number[] = []> =
-    Current['length'] extends N
-    ? Current
-    : BuildTuple<N, [...Current, Current['length']]>;
+type BuildTuple<N extends number, Current extends number[] = []> = Current['length'] extends N
+	? Current
+	: BuildTuple<N, [...Current, Current['length']]>;
 
-type ZeroToHundredTuple = BuildTuple<101>;
-
-export const PALETTE_VALUES = Array.from({ length: 101 }, (_, i) => i) as ZeroToHundredTuple;
+export const PALETTE_VALUES = Array.from({ length: 101 }, (_, i) => i) as BuildTuple<101>;
 
 export type PaletteValue = (typeof PALETTE_VALUES)[number];
+
+// const paletteValueValidator: Type<PaletteValue> = type(
+// 	'0 <= number.integer <= 100',
+// ).as<PaletteValue>();
 
 export const PALETTE_TYPE = {
 	PRIMARY: 'primary',
@@ -65,7 +66,7 @@ export const oklchValidator: Type<Oklch> = type({
 	h: 'number',
 });
 
-export type Palette = Partial<Record<PaletteValue, Oklch>>;
+export type Palette = Record<PaletteValue, Oklch>;
 
 export type ThemePalettes = {
 	[palleteType in PaletteType]: Palette;
@@ -144,18 +145,21 @@ export function getPaletteBaseColor(themeBaseColor: Oklch, paletteType: PaletteT
 }
 
 export function getPalette<T extends PaletteType>(palleteType: T, themeBaseColor: Oklch): Palette {
-	const palette: Palette = PALETTE_VALUES.reduce((acc: Palette, value: PaletteValue) => {
-		return {
-			...acc,
-			[value]: getPaletteValueOklch(
-				value,
-				CHROMA_FACTOR[palleteType],
-				getPaletteBaseColor(themeBaseColor, palleteType),
-			),
-		};
-	}, {} satisfies Palette);
+	const palette: Partial<Palette> = PALETTE_VALUES.reduce(
+		(acc: Partial<Palette>, value: PaletteValue) => {
+			return {
+				...acc,
+				[value]: getPaletteValueOklch(
+					value,
+					CHROMA_FACTOR[palleteType],
+					getPaletteBaseColor(themeBaseColor, palleteType),
+				),
+			};
+		},
+		{} satisfies Partial<Palette>,
+	);
 
-	return palette;
+	return palette as Palette;
 }
 
 export function getPalettePrimary(themeBaseColor: Oklch): Palette {
@@ -205,14 +209,6 @@ type OklchPaletteColorTokens = {
 	};
 };
 
-// function paletteToTokens(palettes: Palette):OklchPaletteColorTokens {
-
-// 	return palettes;
-// }
-
-// function palettesToTokens(...palettes: Palette[]): OklchPaletteColorTokens {
-// 	return palettes.reduce((tokens: OklchPaletteColorTokens, palette: Palette) => {
-// 		const currentToken: OklchPaletteColorTokens = paletteToTokens(palette);
-// 		return {...tokens, ...currentToken};
-// 	}, {} satisfies OklchPaletteColorTokens);
-// }
+function palettesToTokens(themePalettes: ThemePalettes): OklchPaletteColorTokens {
+	return undefined;
+}
