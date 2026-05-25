@@ -22,63 +22,13 @@ export const PALETTE_TYPES = [
 
 export const paletteTypeValidator: Type<PaletteType> = type.enumerated(...PALETTE_TYPES);
 
-export const PALETTE_VALUES = [
-	0, 2, 3, 4, 5, 6, 10, 11, 12, 15, 16, 17, 18, 20, 21, 22, 23, 24, 25, 26, 29, 30, 31, 34, 35, 36,
-	40, 46, 50, 60, 70, 72, 75, 79, 80, 84, 85, 87, 88, 90, 92, 94, 95, 96, 98, 100,
-] as const satisfies number[];
+function mapPaletteValueToLightness(paletteValue: number): number {
+	if (paletteValue === 0) {
+		return 0;
+	}
 
-export type PaletteValue = (typeof PALETTE_VALUES)[number];
-
-export const paletteValueValidator: Type<PaletteValue> = type.enumerated(...PALETTE_VALUES);
-
-export const PALETTE_VALUE_LIGHTNESS_MAP = {
-	0: 0,
-	2: 14,
-	3: 16,
-	4: 17,
-	5: 18,
-	6: 20,
-	10: 23,
-	11: 24,
-	12: 25,
-	15: 28,
-	16: 29,
-	17: 30,
-	18: 31,
-	20: 33,
-	21: 33,
-	22: 34,
-	23: 35,
-	24: 36,
-	25: 36,
-	26: 37,
-	29: 40,
-	30: 41,
-	31: 42,
-	34: 44,
-	35: 45,
-	36: 46,
-	40: 51,
-	46: 55,
-	50: 59,
-	60: 68,
-	70: 76,
-	72: 77,
-	75: 80,
-	79: 83,
-	80: 84,
-	84: 87,
-	85: 88,
-	87: 89,
-	88: 90,
-	90: 92,
-	92: 94,
-	94: 95,
-	95: 96,
-	96: 97,
-	98: 98,
-	100: 100,
-} as const satisfies Record<PaletteValue, number>;
+	return Math.min(0.88 * paletteValue + 15.2, 100);
+}
 
 export const CHROMA_FACTOR = {
 	[PALETTE_TYPE.PRIMARY]: 1.2,
@@ -103,10 +53,8 @@ export const oklchValidator: Type<Oklch> = type({
 	h: 'number',
 });
 
-const Semver = type("/^(\\d+)\\.(\\d+)\\.(\\d+)$/")
-
-export type PaletteKey<T extends PaletteType> = `${T}${PaletteValue}`;
-export type SpecificPalette<T extends PaletteType> = Record<PaletteKey<T>, Oklch>;
+export type PaletteKey<T extends PaletteType> = `${T}${number}`;
+export type SpecificPalette<T extends PaletteType> = Partial<Record<PaletteKey<T>, Oklch>>;
 
 export type PalettePrimary = SpecificPalette<typeof PALETTE_TYPE.PRIMARY>;
 export type PaletteSecondary = SpecificPalette<typeof PALETTE_TYPE.SECONDARY>;
@@ -124,12 +72,12 @@ export type Palette =
 	| PaletteError;
 
 export function getPaletteValueOklch(
-	palleteValue: PaletteValue,
+	palleteValue: number,
 	chromaFactor: ChromaFactor,
 	baseColor: Oklch,
 ): Oklch {
 	return {
-		l: PALETTE_VALUE_LIGHTNESS_MAP[palleteValue],
+		l: mapPaletteValueToLightness(palleteValue),
 		c: (Math.sin(0.009 * palleteValue * Math.PI) * baseColor.c) / chromaFactor,
 		h: baseColor.h,
 	};
@@ -199,8 +147,8 @@ export function getPalette<T extends PaletteType>(
 	palleteType: T,
 	themeBaseColor: Oklch,
 ): SpecificPalette<T> {
-	const palette: SpecificPalette<T> = PALETTE_VALUES.reduce(
-		(acc: Partial<SpecificPalette<T>>, value: PaletteValue) => {
+	const palette: SpecificPalette<T> = [...Array(101).keys()].reduce(
+		(acc: SpecificPalette<T>, value: number) => {
 			return {
 				...acc,
 				[`${palleteType}${value}`]: getPaletteValueOklch(
@@ -210,7 +158,7 @@ export function getPalette<T extends PaletteType>(
 				),
 			};
 		},
-		{} satisfies Partial<SpecificPalette<T>>,
+		{},
 	);
 
 	return palette;
@@ -242,7 +190,7 @@ export function getPaletteError(themeBaseColor: Oklch): PaletteError {
 
 type OklchPaletteColorTokens = {
 	[paletteType in PaletteType]?: {
-		[paletteValue in PaletteValue]?: {
+		[value: number]: {
 			$type: 'color';
 			$value: {
 				colorSpace: 'oklch';
