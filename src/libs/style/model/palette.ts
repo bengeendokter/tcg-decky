@@ -1,5 +1,16 @@
 import { type, type Type } from 'arktype';
 
+type BuildTuple<N extends number, Current extends number[] = []> =
+    Current['length'] extends N
+    ? Current
+    : BuildTuple<N, [...Current, Current['length']]>;
+
+type ZeroToHundredTuple = BuildTuple<101>;
+
+export const PALETTE_VALUES = Array.from({ length: 101 }, (_, i) => i) as ZeroToHundredTuple;
+
+export type PaletteValue = (typeof PALETTE_VALUES)[number];
+
 export const PALETTE_TYPE = {
 	PRIMARY: 'primary',
 	SECONDARY: 'secondary',
@@ -54,7 +65,7 @@ export const oklchValidator: Type<Oklch> = type({
 	h: 'number',
 });
 
-export type Palette = Partial<Record<number, Oklch>>;
+export type Palette = Partial<Record<PaletteValue, Oklch>>;
 
 export type ThemePalettes = {
 	[palleteType in PaletteType]: Palette;
@@ -132,23 +143,17 @@ export function getPaletteBaseColor(themeBaseColor: Oklch, paletteType: PaletteT
 	}
 }
 
-export function getPalette<T extends PaletteType>(
-	palleteType: T,
-	themeBaseColor: Oklch,
-): Palette {
-	const palette: Palette = [...Array(101).keys()].reduce(
-		(acc: Palette, value: number) => {
-			return {
-				...acc,
-				[`${palleteType}${value}`]: getPaletteValueOklch(
-					value,
-					CHROMA_FACTOR[palleteType],
-					getPaletteBaseColor(themeBaseColor, palleteType),
-				),
-			};
-		},
-		{} satisfies Palette,
-	);
+export function getPalette<T extends PaletteType>(palleteType: T, themeBaseColor: Oklch): Palette {
+	const palette: Palette = PALETTE_VALUES.reduce((acc: Palette, value: PaletteValue) => {
+		return {
+			...acc,
+			[value]: getPaletteValueOklch(
+				value,
+				CHROMA_FACTOR[palleteType],
+				getPaletteBaseColor(themeBaseColor, palleteType),
+			),
+		};
+	}, {} satisfies Palette);
 
 	return palette;
 }
@@ -183,14 +188,14 @@ export function getThemePalettes(themeBaseColor: Oklch): ThemePalettes {
 		secondary: getPaletteSecondary(themeBaseColor),
 		tertiary: getPaletteTertiary(themeBaseColor),
 		neutral: getPaletteNeutral(themeBaseColor),
-		"neutral-variant": getPaletteNeutralVariant(themeBaseColor),
+		'neutral-variant': getPaletteNeutralVariant(themeBaseColor),
 		error: getPaletteError(themeBaseColor),
-	}
+	};
 }
 
 type OklchPaletteColorTokens = {
-	[paletteType in PaletteType]?: {
-		[value: number]: {
+	[paletteType in PaletteType]: {
+		[value in PaletteValue]: {
 			$type: 'color';
 			$value: {
 				colorSpace: 'oklch';
@@ -198,26 +203,6 @@ type OklchPaletteColorTokens = {
 			};
 		};
 	};
-};
-
-const oklchPaletteColorTokens: OklchPaletteColorTokens = {
-	primary: {
-		0: {
-			$type: 'color',
-			$value: {
-				colorSpace: 'oklch',
-				components: [0.7016, 0.3225, 328.363],
-			},
-		},
-
-		2: {
-			$type: 'color',
-			$value: {
-				colorSpace: 'oklch',
-				components: [0.7016, 0.3225, 328.363],
-			},
-		},
-	},
 };
 
 // function paletteToTokens(palettes: Palette):OklchPaletteColorTokens {
