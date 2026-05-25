@@ -1,5 +1,29 @@
 import { type, type Type } from 'arktype';
 
+// function typeSafeObjectFromEntries<const T extends ReadonlyArray<readonly [PropertyKey, unknown]>>(
+// 	entries: T,
+// ): { [K in T[number] as K[0]]: K[1] } {
+// 	return Object.fromEntries(entries) as { [K in T[number] as K[0]]: K[1] };
+// }
+
+// const PALETTE_TYPE_ENTRIES = [
+// 	['PRIMARY', 'primary'],
+// 	['SECONDARY', 'secondary'],
+// 	['TERTIARY', 'tertiary'],
+// 	['NEUTRAL', 'neutral'],
+// 	['NEUTRAL_VARIANT', 'neutral-variant'],
+// 	['ERROR', 'error'],
+// ] as const satisfies [Uppercase<string>, Lowercase<string>][];
+
+// const PALETTE_TYPES2 = PALETTE_TYPE_ENTRIES.map((entry) => {
+// 	return entry[1];
+// });
+
+// const PALETTE_TYPE2 = typeSafeObjectFromEntries(PALETTE_TYPE_ENTRIES) satisfies Record<
+// 	Uppercase<string>,
+// 	Lowercase<string>
+// >;
+
 export const PALETTE_TYPE = {
 	PRIMARY: 'primary',
 	SECONDARY: 'secondary',
@@ -27,7 +51,8 @@ function mapPaletteValueToLightness(paletteValue: number): number {
 		return 0;
 	}
 
-	return Math.min(0.88 * paletteValue + 15.2, 100);
+	const calculatedResult: number = -0.000872 * paletteValue ** 2 + 0.9504 * paletteValue + 13.47;
+	return Math.min(calculatedResult, 100);
 }
 
 export const CHROMA_FACTOR = {
