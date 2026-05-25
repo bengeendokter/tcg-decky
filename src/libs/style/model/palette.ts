@@ -1,29 +1,5 @@
 import { type, type Type } from 'arktype';
 
-// function typeSafeObjectFromEntries<const T extends ReadonlyArray<readonly [PropertyKey, unknown]>>(
-// 	entries: T,
-// ): { [K in T[number] as K[0]]: K[1] } {
-// 	return Object.fromEntries(entries) as { [K in T[number] as K[0]]: K[1] };
-// }
-
-// const PALETTE_TYPE_ENTRIES = [
-// 	['PRIMARY', 'primary'],
-// 	['SECONDARY', 'secondary'],
-// 	['TERTIARY', 'tertiary'],
-// 	['NEUTRAL', 'neutral'],
-// 	['NEUTRAL_VARIANT', 'neutral-variant'],
-// 	['ERROR', 'error'],
-// ] as const satisfies [Uppercase<string>, Lowercase<string>][];
-
-// const PALETTE_TYPES2 = PALETTE_TYPE_ENTRIES.map((entry) => {
-// 	return entry[1];
-// });
-
-// const PALETTE_TYPE2 = typeSafeObjectFromEntries(PALETTE_TYPE_ENTRIES) satisfies Record<
-// 	Uppercase<string>,
-// 	Lowercase<string>
-// >;
-
 export const PALETTE_TYPE = {
 	PRIMARY: 'primary',
 	SECONDARY: 'secondary',
@@ -78,23 +54,11 @@ export const oklchValidator: Type<Oklch> = type({
 	h: 'number',
 });
 
-export type PaletteKey<T extends PaletteType> = `${T}${number}`;
-export type SpecificPalette<T extends PaletteType> = Partial<Record<PaletteKey<T>, Oklch>>;
+export type Palette = Partial<Record<number, Oklch>>;
 
-export type PalettePrimary = SpecificPalette<typeof PALETTE_TYPE.PRIMARY>;
-export type PaletteSecondary = SpecificPalette<typeof PALETTE_TYPE.SECONDARY>;
-export type PaletteTertiary = SpecificPalette<typeof PALETTE_TYPE.TERTIARY>;
-export type PaletteNeutral = SpecificPalette<typeof PALETTE_TYPE.NEUTRAL>;
-export type PaletteNeutralVariant = SpecificPalette<typeof PALETTE_TYPE.NEUTRAL_VARIANT>;
-export type PaletteError = SpecificPalette<typeof PALETTE_TYPE.ERROR>;
-
-export type Palette =
-	| PalettePrimary
-	| PaletteSecondary
-	| PaletteTertiary
-	| PaletteNeutral
-	| PaletteNeutralVariant
-	| PaletteError;
+export type ThemePalettes = {
+	[palleteType in PaletteType]: Palette;
+};
 
 export function getPaletteValueOklch(
 	palleteValue: number,
@@ -171,9 +135,9 @@ export function getPaletteBaseColor(themeBaseColor: Oklch, paletteType: PaletteT
 export function getPalette<T extends PaletteType>(
 	palleteType: T,
 	themeBaseColor: Oklch,
-): SpecificPalette<T> {
-	const palette: SpecificPalette<T> = [...Array(101).keys()].reduce(
-		(acc: SpecificPalette<T>, value: number) => {
+): Palette {
+	const palette: Palette = [...Array(101).keys()].reduce(
+		(acc: Palette, value: number) => {
 			return {
 				...acc,
 				[`${palleteType}${value}`]: getPaletteValueOklch(
@@ -183,34 +147,45 @@ export function getPalette<T extends PaletteType>(
 				),
 			};
 		},
-		{},
+		{} satisfies Palette,
 	);
 
 	return palette;
 }
 
-export function getPalettePrimary(themeBaseColor: Oklch): PalettePrimary {
+export function getPalettePrimary(themeBaseColor: Oklch): Palette {
 	return getPalette(PALETTE_TYPE.PRIMARY, themeBaseColor);
 }
 
-export function getPaletteSecondary(themeBaseColor: Oklch): PaletteSecondary {
+export function getPaletteSecondary(themeBaseColor: Oklch): Palette {
 	return getPalette(PALETTE_TYPE.SECONDARY, themeBaseColor);
 }
 
-export function getPaletteTertiary(themeBaseColor: Oklch): PaletteTertiary {
+export function getPaletteTertiary(themeBaseColor: Oklch): Palette {
 	return getPalette(PALETTE_TYPE.TERTIARY, themeBaseColor);
 }
 
-export function getPaletteNeutral(themeBaseColor: Oklch): PaletteNeutral {
+export function getPaletteNeutral(themeBaseColor: Oklch): Palette {
 	return getPalette(PALETTE_TYPE.NEUTRAL, themeBaseColor);
 }
 
-export function getPaletteNeutralVariant(themeBaseColor: Oklch): PaletteNeutralVariant {
+export function getPaletteNeutralVariant(themeBaseColor: Oklch): Palette {
 	return getPalette(PALETTE_TYPE.NEUTRAL_VARIANT, themeBaseColor);
 }
 
-export function getPaletteError(themeBaseColor: Oklch): PaletteError {
+export function getPaletteError(themeBaseColor: Oklch): Palette {
 	return getPalette(PALETTE_TYPE.ERROR, themeBaseColor);
+}
+
+export function getThemePalettes(themeBaseColor: Oklch): ThemePalettes {
+	return {
+		primary: getPalettePrimary(themeBaseColor),
+		secondary: getPaletteSecondary(themeBaseColor),
+		tertiary: getPaletteTertiary(themeBaseColor),
+		neutral: getPaletteNeutral(themeBaseColor),
+		"neutral-variant": getPaletteNeutralVariant(themeBaseColor),
+		error: getPaletteError(themeBaseColor),
+	}
 }
 
 type OklchPaletteColorTokens = {
