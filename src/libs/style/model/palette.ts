@@ -68,7 +68,7 @@ export const oklchValidator: Type<Oklch> = type({
 
 export type Palette = Record<PaletteValue, Oklch>;
 
-export type ThemePalettes = {
+export type FullPaletteCollection = {
 	[palleteType in PaletteType]: Palette;
 };
 
@@ -186,7 +186,7 @@ export function getPaletteError(themeBaseColor: Oklch): Palette {
 	return getPalette(PALETTE_TYPE.ERROR, themeBaseColor);
 }
 
-export function getThemePalettes(themeBaseColor: Oklch): ThemePalettes {
+export function getFullPaletteCollection(themeBaseColor: Oklch): FullPaletteCollection {
 	return {
 		primary: getPalettePrimary(themeBaseColor),
 		secondary: getPaletteSecondary(themeBaseColor),
@@ -197,18 +197,49 @@ export function getThemePalettes(themeBaseColor: Oklch): ThemePalettes {
 	};
 }
 
-type OklchPaletteColorTokens = {
-	[paletteType in PaletteType]: {
-		[value in PaletteValue]: {
-			$type: 'color';
-			$value: {
-				colorSpace: 'oklch';
-				components: [number, number, number];
-			};
-		};
+type ValueTokens = {
+	$type: 'color';
+	$value: {
+		colorSpace: 'oklch';
+		components: [number, number, number];
 	};
 };
 
-function palettesToTokens(themePalettes: ThemePalettes): OklchPaletteColorTokens {
-	return undefined;
+type PaletteTokens = {
+	[value in PaletteValue]: ValueTokens;
+};
+
+export type FullPaletteCollectionTokens = {
+	[paletteType in PaletteType]: PaletteTokens;
+};
+
+function getValueTokens(oklch: Oklch): ValueTokens {
+	return {
+		$type: 'color',
+		$value: {
+			colorSpace: 'oklch',
+			components: [oklch.l, oklch.c, oklch.h],
+		},
+	};
+}
+
+function getPaletteTokens(palette: Palette): PaletteTokens {
+	const paletteTokensEntries: (PaletteValue | ValueTokens)[][] = PALETTE_VALUES.map(
+		(paletteValue: PaletteValue) => [paletteValue, getValueTokens(palette[paletteValue])],
+	);
+
+	return Object.fromEntries(paletteTokensEntries);
+}
+
+export function getFullPaletteCollectionTokens(
+	fullPaletteCollection: FullPaletteCollection,
+): FullPaletteCollectionTokens {
+	const fullPaletteCollectionTokensEntries: (PaletteType | PaletteTokens)[][] = PALETTE_TYPES.map(
+		(paletteType: PaletteType) => [
+			paletteType,
+			getPaletteTokens(fullPaletteCollection[paletteType]),
+		],
+	);
+
+	return Object.fromEntries(fullPaletteCollectionTokensEntries);
 }

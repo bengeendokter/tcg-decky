@@ -1,15 +1,20 @@
 import { CONFIG } from '@config';
 
-import { getPalettePrimary, type Oklch, type Palette } from '../model/palette';
+import {
+	getFullPaletteCollection,
+	getFullPaletteCollectionTokens,
+	type Oklch,
+} from '../model/palette';
+import { exportFullPaletteCollectionTokensToJson } from '../data-access/export-full-palette-collection-tokens-to-json';
 
 const outputDirectory: string = CONFIG.DEFAULT_OUTPUT_DIRECTORY;
 
 const THEME_COLOR = { l: 0.44, c: 0.16, h: 303.38 } as const satisfies Oklch;
 
 export function main() {
-	const palette: Palette = getPalettePrimary(THEME_COLOR);
+	const fullPaletteCollection = getFullPaletteCollection(THEME_COLOR);
+	const fullPaletteCollectionTokens = getFullPaletteCollectionTokens(fullPaletteCollection);
 
-	console.log(palette);
+	console.log(fullPaletteCollectionTokens);
+	exportFullPaletteCollectionTokensToJson({ fullPaletteCollectionTokens, outputDirectory });
 }
-
-// exportPaletteToJson({ palette, outputDirectory });
