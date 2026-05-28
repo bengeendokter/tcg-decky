@@ -144,57 +144,27 @@ export function getPaletteBaseColor(themeBaseColor: Oklch, paletteType: PaletteT
 	}
 }
 
-export function getPalette<T extends PaletteType>(palleteType: T, themeBaseColor: Oklch): Palette {
-	const palette: Partial<Palette> = PALETTE_VALUES.reduce(
-		(acc: Partial<Palette>, value: PaletteValue) => {
-			return {
-				...acc,
-				[value]: getPaletteValueOklch(
-					value,
-					CHROMA_FACTOR[palleteType],
-					getPaletteBaseColor(themeBaseColor, palleteType),
-				),
-			};
-		},
-		{} satisfies Partial<Palette>,
+export function getPalette(palleteType: PaletteType, themeBaseColor: Oklch): Palette {
+	const paletteEntries: (PaletteValue | Oklch)[][] = PALETTE_VALUES.map(
+		(paletteValue: PaletteValue) => [
+			paletteValue,
+			getPaletteValueOklch(
+				paletteValue,
+				CHROMA_FACTOR[palleteType],
+				getPaletteBaseColor(themeBaseColor, palleteType),
+			),
+		],
 	);
 
-	return palette as Palette;
-}
-
-export function getPalettePrimary(themeBaseColor: Oklch): Palette {
-	return getPalette(PALETTE_TYPE.PRIMARY, themeBaseColor);
-}
-
-export function getPaletteSecondary(themeBaseColor: Oklch): Palette {
-	return getPalette(PALETTE_TYPE.SECONDARY, themeBaseColor);
-}
-
-export function getPaletteTertiary(themeBaseColor: Oklch): Palette {
-	return getPalette(PALETTE_TYPE.TERTIARY, themeBaseColor);
-}
-
-export function getPaletteNeutral(themeBaseColor: Oklch): Palette {
-	return getPalette(PALETTE_TYPE.NEUTRAL, themeBaseColor);
-}
-
-export function getPaletteNeutralVariant(themeBaseColor: Oklch): Palette {
-	return getPalette(PALETTE_TYPE.NEUTRAL_VARIANT, themeBaseColor);
-}
-
-export function getPaletteError(themeBaseColor: Oklch): Palette {
-	return getPalette(PALETTE_TYPE.ERROR, themeBaseColor);
+	return Object.fromEntries(paletteEntries);
 }
 
 export function getFullPaletteCollection(themeBaseColor: Oklch): FullPaletteCollection {
-	return {
-		primary: getPalettePrimary(themeBaseColor),
-		secondary: getPaletteSecondary(themeBaseColor),
-		tertiary: getPaletteTertiary(themeBaseColor),
-		neutral: getPaletteNeutral(themeBaseColor),
-		'neutral-variant': getPaletteNeutralVariant(themeBaseColor),
-		error: getPaletteError(themeBaseColor),
-	};
+	const fullPaletteCollectionEntries: (PaletteType | Palette)[][] = PALETTE_TYPES.map(
+		(paletteType: PaletteType) => [paletteType, getPalette(paletteType, themeBaseColor)],
+	);
+
+	return Object.fromEntries(fullPaletteCollectionEntries);
 }
 
 type ValueTokens = {
