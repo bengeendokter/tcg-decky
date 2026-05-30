@@ -102,7 +102,7 @@ export function getTheme(themeValueMap: ThemeValueMap): Theme {
 	return fromEntries([...neutralRoleKeyEntries, ...neutralVariantRoleKeyEntries]);
 }
 
-const lightThemeValueMap: ThemeValueMap = {
+const LIGHT_THEME_VALUE_MAP = {
 	primary: 40,
 	'on-primary': 100,
 	'primary-container': 90,
@@ -148,9 +148,9 @@ const lightThemeValueMap: ThemeValueMap = {
 	'surface-container': 94,
 	'surface-container-high': 92,
 	'surface-container-highest': 90,
-};
+} as const satisfies ThemeValueMap;
 
-const lightMediumContrastThemeValueMap: ThemeValueMap = {
+const LIGHT_MEDIUM_CONTRAST_THEME_VALUE_MAP = {
 	primary: 23,
 	'on-primary': 100,
 	'primary-container': 46,
@@ -196,9 +196,9 @@ const lightMediumContrastThemeValueMap: ThemeValueMap = {
 	'surface-container': 92,
 	'surface-container-high': 88,
 	'surface-container-highest': 84,
-};
+} as const satisfies ThemeValueMap;
 
-const lightHighContrastThemeValueMap: ThemeValueMap = {
+const LIGHT_HIGH_CONTRAST_THEME_VALUE_MAP = {
 	primary: 18,
 	'on-primary': 100,
 	'primary-container': 31,
@@ -244,9 +244,9 @@ const lightHighContrastThemeValueMap: ThemeValueMap = {
 	'surface-container': 90,
 	'surface-container-high': 85,
 	'surface-container-highest': 80,
-};
+} as const satisfies ThemeValueMap;
 
-const darkThemeValueMap: ThemeValueMap = {
+const DARK_THEME_VALUE_MAP = {
 	primary: 80,
 	'on-primary': 20,
 	'primary-container': 30,
@@ -292,9 +292,9 @@ const darkThemeValueMap: ThemeValueMap = {
 	'surface-container': 12,
 	'surface-container-high': 17,
 	'surface-container-highest': 22,
-};
+} as const satisfies ThemeValueMap;
 
-const darkMediumContrastThemeValueMap: ThemeValueMap = {
+const DARK_MEDIUM_CONTRAST_THEME_VALUE_MAP = {
 	primary: 88,
 	'on-primary': 15,
 	'primary-container': 60,
@@ -340,9 +340,9 @@ const darkMediumContrastThemeValueMap: ThemeValueMap = {
 	'surface-container': 16,
 	'surface-container-high': 21,
 	'surface-container-highest': 26,
-};
+} as const satisfies ThemeValueMap;
 
-const darkHighContrastThemeValueMap: ThemeValueMap = {
+const DARK_HIGH_CONTRAST_THEME_VALUE_MAP = {
 	primary: 95,
 	'on-primary': 0,
 	'primary-container': 79,
@@ -388,11 +388,11 @@ const darkHighContrastThemeValueMap: ThemeValueMap = {
 	'surface-container': 20,
 	'surface-container-high': 25,
 	'surface-container-highest': 30,
-};
+} as const satisfies ThemeValueMap;
 
-const lightTheme: Theme = getTheme(lightThemeValueMap);
-const lightMediumContrastTheme: Theme = getTheme(lightMediumContrastThemeValueMap);
-const lightHighContrastTheme: Theme = getTheme(lightHighContrastThemeValueMap);
-const darkTheme: Theme = getTheme(darkThemeValueMap);
-const darkMediumContrastTheme: Theme = getTheme(darkMediumContrastThemeValueMap);
-const darkHighContrastTheme: Theme = getTheme(darkHighContrastThemeValueMap);
+const lightTheme: Theme = getTheme(LIGHT_THEME_VALUE_MAP);
+const lightMediumContrastTheme: Theme = getTheme(LIGHT_MEDIUM_CONTRAST_THEME_VALUE_MAP);
+const lightHighContrastTheme: Theme = getTheme(LIGHT_HIGH_CONTRAST_THEME_VALUE_MAP);
+const darkTheme: Theme = getTheme(DARK_THEME_VALUE_MAP);
+const darkMediumContrastTheme: Theme = getTheme(DARK_MEDIUM_CONTRAST_THEME_VALUE_MAP);
+const darkHighContrastTheme: Theme = getTheme(DARK_HIGH_CONTRAST_THEME_VALUE_MAP);
