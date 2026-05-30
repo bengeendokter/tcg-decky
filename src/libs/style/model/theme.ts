@@ -1,4 +1,5 @@
 import { PALETTE_TYPE, type PaletteType, type PaletteValue } from './palette';
+import { fromEntries } from '@ark/util';
 
 interface PaletteTypeValue {
 	paletteType: PaletteType;
@@ -26,44 +27,49 @@ type FixedRoleKey<T extends AccentPaletteValue> =
 	| `on-${T}-fixed`
 	| `on-${T}-fixed-variant`;
 
-type PrimaryRolesKey =
+type PrimaryRoleKey =
 	| AccentRoleKey<typeof ACCENT_PALETTE_VALUE.PRIMARY>
-	| FixedRoleKey<typeof ACCENT_PALETTE_VALUE.PRIMARY>;
-type SecondaryRolesKey =
+	| FixedRoleKey<typeof ACCENT_PALETTE_VALUE.PRIMARY>
+	| 'inverse-primary';
+type SecondaryRoleKey =
 	| AccentRoleKey<typeof ACCENT_PALETTE_VALUE.SECONDARY>
 	| FixedRoleKey<typeof ACCENT_PALETTE_VALUE.SECONDARY>;
-type TertiaryRolesKey =
+type TertiaryRoleKey =
 	| AccentRoleKey<typeof ACCENT_PALETTE_VALUE.TERTIARY>
 	| FixedRoleKey<typeof ACCENT_PALETTE_VALUE.TERTIARY>;
-type ErrorRolesKey = AccentRoleKey<typeof ACCENT_PALETTE_VALUE.ERROR>;
-type SurfaceRoleKey =
-	| 'surface'
-	| 'surface-dim'
-	| 'surface-bright'
-	| 'surface-container-lowest'
-	| 'surface-container-low'
-	| 'surface-container'
-	| 'surface-container-high'
-	| 'surface-container-highest'
-	| 'on-surface'
-	| 'on-surface-variant';
+type ErrorRoleKey = AccentRoleKey<typeof ACCENT_PALETTE_VALUE.ERROR>;
+
+const SURFACE_ROLE_KEYS = [
+	'surface',
+	'surface-dim',
+	'surface-bright',
+	'surface-container-lowest',
+	'surface-container-low',
+	'surface-container',
+	'surface-container-high',
+	'surface-container-highest',
+	'on-surface',
+] as const;
+
+const INVERSE_ROLE_KEYS = ['inverse-surface', 'inverse-on-surface'] as const;
 
 const OUTLINE_ROLE_KEYS = ['outline', 'outline-variant'] as const;
 
-type OutlineRoleKey = (typeof OUTLINE_ROLE_KEYS)[number];
+const NEUTRAL_ROLE_KEYS = [...SURFACE_ROLE_KEYS, ...INVERSE_ROLE_KEYS, 'shadow', 'scrim'] as const;
 
-type InverseRoleKey = 'inverse-surface' | 'inverse-on-surface' | 'inverse-primary';
+type NeutralRoleKey = (typeof NEUTRAL_ROLE_KEYS)[number];
+
+const NEUTRAL_VARIANT_ROLE_KEYS = [...OUTLINE_ROLE_KEYS, 'on-surface-variant'] as const;
+
+type NeutralVariantRoleKey = (typeof NEUTRAL_VARIANT_ROLE_KEYS)[number];
 
 type ThemeKey =
-	| PrimaryRolesKey
-	| SecondaryRolesKey
-	| TertiaryRolesKey
-	| ErrorRolesKey
-	| SurfaceRoleKey
-	| OutlineRoleKey
-	| InverseRoleKey
-	| 'shadow'
-	| 'scrim';
+	| PrimaryRoleKey
+	| SecondaryRoleKey
+	| TertiaryRoleKey
+	| ErrorRoleKey
+	| NeutralRoleKey
+	| NeutralVariantRoleKey;
 
 type Theme = {
 	[key in ThemeKey]: PaletteTypeValue;
@@ -74,14 +80,26 @@ type ThemeValueMap = {
 };
 
 export function getTheme(themeValueMap: ThemeValueMap): Theme {
-	const outlineRoleEntries: (OutlineRoleKey | PaletteTypeValue)[][] = OUTLINE_ROLE_KEYS.map(
-		(outlineRoleKey: OutlineRoleKey) => [
-			outlineRoleKey,
-			{ paletteType: PALETTE_TYPE.NEUTRAL_VARIANT, paletteValue: themeValueMap[outlineRoleKey] },
+	const neutralRoleKeyEntries: [NeutralRoleKey, PaletteTypeValue][] = NEUTRAL_ROLE_KEYS.map(
+		(neutralRoleKey: NeutralRoleKey) => [
+			neutralRoleKey,
+			{
+				paletteType: PALETTE_TYPE.NEUTRAL,
+				paletteValue: themeValueMap[neutralRoleKey],
+			},
 		],
 	);
 
-	return Object.fromEntries(outlineRoleEntries);
+	const neutralVariantRoleKeyEntries: [NeutralVariantRoleKey, PaletteTypeValue][] =
+		NEUTRAL_VARIANT_ROLE_KEYS.map((neutralVariantRoleKey: NeutralVariantRoleKey) => [
+			neutralVariantRoleKey,
+			{
+				paletteType: PALETTE_TYPE.NEUTRAL_VARIANT,
+				paletteValue: themeValueMap[neutralVariantRoleKey],
+			},
+		]);
+
+	return fromEntries([...neutralRoleKeyEntries, ...neutralVariantRoleKeyEntries]);
 }
 
 const lightThemeValueMap: ThemeValueMap = {

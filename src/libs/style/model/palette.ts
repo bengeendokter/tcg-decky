@@ -1,3 +1,4 @@
+import { fromEntries } from '@ark/util';
 import { type, type Type } from 'arktype';
 
 type BuildTuple<N extends number, Current extends number[] = []> = Current['length'] extends N
@@ -7,10 +8,6 @@ type BuildTuple<N extends number, Current extends number[] = []> = Current['leng
 export const PALETTE_VALUES = Array.from({ length: 101 }, (_, i) => i) as BuildTuple<101>;
 
 export type PaletteValue = (typeof PALETTE_VALUES)[number];
-
-// const paletteValueValidator: Type<PaletteValue> = type(
-// 	'0 <= number.integer <= 100',
-// ).as<PaletteValue>();
 
 export const PALETTE_TYPE = {
 	PRIMARY: 'primary',
@@ -145,7 +142,7 @@ export function getPaletteBaseColor(themeBaseColor: Oklch, paletteType: PaletteT
 }
 
 export function getPalette(palleteType: PaletteType, themeBaseColor: Oklch): Palette {
-	const paletteEntries: (PaletteValue | Oklch)[][] = PALETTE_VALUES.map(
+	const paletteEntries: [PaletteValue, Oklch][] = PALETTE_VALUES.map(
 		(paletteValue: PaletteValue) => [
 			paletteValue,
 			getPaletteValueOklch(
@@ -156,15 +153,15 @@ export function getPalette(palleteType: PaletteType, themeBaseColor: Oklch): Pal
 		],
 	);
 
-	return Object.fromEntries(paletteEntries);
+	return fromEntries(paletteEntries);
 }
 
 export function getFullPaletteCollection(themeBaseColor: Oklch): FullPaletteCollection {
-	const fullPaletteCollectionEntries: (PaletteType | Palette)[][] = PALETTE_TYPES.map(
+	const fullPaletteCollectionEntries: [PaletteType, Palette][] = PALETTE_TYPES.map(
 		(paletteType: PaletteType) => [paletteType, getPalette(paletteType, themeBaseColor)],
 	);
 
-	return Object.fromEntries(fullPaletteCollectionEntries);
+	return fromEntries(fullPaletteCollectionEntries);
 }
 
 type ValueTokens = {
@@ -194,22 +191,22 @@ function getValueTokens(oklch: Oklch): ValueTokens {
 }
 
 function getPaletteTokens(palette: Palette): PaletteTokens {
-	const paletteTokensEntries: (PaletteValue | ValueTokens)[][] = PALETTE_VALUES.map(
+	const paletteTokensEntries: [PaletteValue, ValueTokens][] = PALETTE_VALUES.map(
 		(paletteValue: PaletteValue) => [paletteValue, getValueTokens(palette[paletteValue])],
 	);
 
-	return Object.fromEntries(paletteTokensEntries);
+	return fromEntries(paletteTokensEntries);
 }
 
 export function getFullPaletteCollectionTokens(
 	fullPaletteCollection: FullPaletteCollection,
 ): FullPaletteCollectionTokens {
-	const fullPaletteCollectionTokensEntries: (PaletteType | PaletteTokens)[][] = PALETTE_TYPES.map(
+	const fullPaletteCollectionTokensEntries: [PaletteType, PaletteTokens][] = PALETTE_TYPES.map(
 		(paletteType: PaletteType) => [
 			paletteType,
 			getPaletteTokens(fullPaletteCollection[paletteType]),
 		],
 	);
 
-	return Object.fromEntries(fullPaletteCollectionTokensEntries);
+	return fromEntries(fullPaletteCollectionTokensEntries);
 }
