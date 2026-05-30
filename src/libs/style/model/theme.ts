@@ -27,6 +27,11 @@ type FixedRoleKey<T extends AccentPaletteValue> =
 	| `on-${T}-fixed`
 	| `on-${T}-fixed-variant`;
 
+const PRIMARY_ROLE_KEYS = [] as const satisfies string[];
+const SECONDARY_ROLE_KEYS = [] as const satisfies string[];
+const TERTIARY_ROLE_KEYS = [] as const satisfies string[];
+const ERROR_ROLE_KEYS = [] as const satisfies string[];
+
 type PrimaryRoleKey =
 	| AccentRoleKey<typeof ACCENT_PALETTE_VALUE.PRIMARY>
 	| FixedRoleKey<typeof ACCENT_PALETTE_VALUE.PRIMARY>
@@ -49,17 +54,25 @@ const SURFACE_ROLE_KEYS = [
 	'surface-container-high',
 	'surface-container-highest',
 	'on-surface',
-] as const;
+] as const satisfies string[];
 
-const INVERSE_ROLE_KEYS = ['inverse-surface', 'inverse-on-surface'] as const;
+const INVERSE_ROLE_KEYS = ['inverse-surface', 'inverse-on-surface'] as const satisfies string[];
 
-const OUTLINE_ROLE_KEYS = ['outline', 'outline-variant'] as const;
+const OUTLINE_ROLE_KEYS = ['outline', 'outline-variant'] as const satisfies string[];
 
-const NEUTRAL_ROLE_KEYS = [...SURFACE_ROLE_KEYS, ...INVERSE_ROLE_KEYS, 'shadow', 'scrim'] as const;
+const NEUTRAL_ROLE_KEYS = [
+	...SURFACE_ROLE_KEYS,
+	...INVERSE_ROLE_KEYS,
+	'shadow',
+	'scrim',
+] as const satisfies string[];
 
 type NeutralRoleKey = (typeof NEUTRAL_ROLE_KEYS)[number];
 
-const NEUTRAL_VARIANT_ROLE_KEYS = [...OUTLINE_ROLE_KEYS, 'on-surface-variant'] as const;
+const NEUTRAL_VARIANT_ROLE_KEYS = [
+	...OUTLINE_ROLE_KEYS,
+	'on-surface-variant',
+] as const satisfies string[];
 
 type NeutralVariantRoleKey = (typeof NEUTRAL_VARIANT_ROLE_KEYS)[number];
 
@@ -94,6 +107,30 @@ function getRoleKeyEntries<T extends ThemeKey>(
 }
 
 export function getTheme(themeValueMap: ThemeValueMap): Theme {
+	const primaryRoleKeyEntries: [PrimaryRoleKey, PaletteTypeValue][] = getRoleKeyEntries(
+		PRIMARY_ROLE_KEYS,
+		PALETTE_TYPE.PRIMARY,
+		themeValueMap,
+	);
+
+	const secondaryRoleKeyEntries: [SecondaryRoleKey, PaletteTypeValue][] = getRoleKeyEntries(
+		SECONDARY_ROLE_KEYS,
+		PALETTE_TYPE.SECONDARY,
+		themeValueMap,
+	);
+
+	const tertiaryRoleKeyEntries: [TertiaryRoleKey, PaletteTypeValue][] = getRoleKeyEntries(
+		TERTIARY_ROLE_KEYS,
+		PALETTE_TYPE.TERTIARY,
+		themeValueMap,
+	);
+
+	const errorRoleKeyEntries: [ErrorRoleKey, PaletteTypeValue][] = getRoleKeyEntries(
+		ERROR_ROLE_KEYS,
+		PALETTE_TYPE.ERROR,
+		themeValueMap,
+	);
+
 	const neutralRoleKeyEntries: [NeutralRoleKey, PaletteTypeValue][] = getRoleKeyEntries(
 		NEUTRAL_ROLE_KEYS,
 		PALETTE_TYPE.NEUTRAL,
@@ -103,7 +140,14 @@ export function getTheme(themeValueMap: ThemeValueMap): Theme {
 	const neutralVariantRoleKeyEntries: [NeutralVariantRoleKey, PaletteTypeValue][] =
 		getRoleKeyEntries(NEUTRAL_VARIANT_ROLE_KEYS, PALETTE_TYPE.NEUTRAL_VARIANT, themeValueMap);
 
-	return fromEntries([...neutralRoleKeyEntries, ...neutralVariantRoleKeyEntries]);
+	return fromEntries([
+		...primaryRoleKeyEntries,
+		...secondaryRoleKeyEntries,
+		...tertiaryRoleKeyEntries,
+		...errorRoleKeyEntries,
+		...neutralRoleKeyEntries,
+		...neutralVariantRoleKeyEntries,
+	]);
 }
 
 const LIGHT_THEME_VALUE_MAP = {
