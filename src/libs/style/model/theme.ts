@@ -79,25 +79,29 @@ type ThemeValueMap = {
 	[key in ThemeKey]: PaletteValue;
 };
 
+function getRoleKeyEntries<T extends ThemeKey>(
+	roleKeys: readonly T[],
+	paletteType: PaletteType,
+	themeValueMap: ThemeValueMap,
+): [T, PaletteTypeValue][] {
+	return roleKeys.map((roleKey) => [
+		roleKey,
+		{
+			paletteType: paletteType,
+			paletteValue: themeValueMap[roleKey],
+		},
+	]);
+}
+
 export function getTheme(themeValueMap: ThemeValueMap): Theme {
-	const neutralRoleKeyEntries: [NeutralRoleKey, PaletteTypeValue][] = NEUTRAL_ROLE_KEYS.map(
-		(neutralRoleKey: NeutralRoleKey) => [
-			neutralRoleKey,
-			{
-				paletteType: PALETTE_TYPE.NEUTRAL,
-				paletteValue: themeValueMap[neutralRoleKey],
-			},
-		],
+	const neutralRoleKeyEntries: [NeutralRoleKey, PaletteTypeValue][] = getRoleKeyEntries(
+		NEUTRAL_ROLE_KEYS,
+		PALETTE_TYPE.NEUTRAL,
+		themeValueMap,
 	);
 
 	const neutralVariantRoleKeyEntries: [NeutralVariantRoleKey, PaletteTypeValue][] =
-		NEUTRAL_VARIANT_ROLE_KEYS.map((neutralVariantRoleKey: NeutralVariantRoleKey) => [
-			neutralVariantRoleKey,
-			{
-				paletteType: PALETTE_TYPE.NEUTRAL_VARIANT,
-				paletteValue: themeValueMap[neutralVariantRoleKey],
-			},
-		]);
+		getRoleKeyEntries(NEUTRAL_VARIANT_ROLE_KEYS, PALETTE_TYPE.NEUTRAL_VARIANT, themeValueMap);
 
 	return fromEntries([...neutralRoleKeyEntries, ...neutralVariantRoleKeyEntries]);
 }
