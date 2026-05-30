@@ -15,11 +15,14 @@ const ACCENT_PALETTE_VALUE = {
 
 export type AccentPaletteValue = (typeof ACCENT_PALETTE_VALUE)[keyof typeof ACCENT_PALETTE_VALUE];
 
-type AccentRoleKey<T extends AccentPaletteValue> =
-	| T
-	| `on-${T}`
-	| `${T}-container`
-	| `on-${T}-container`;
+type AccentRoleKeys<T extends AccentPaletteValue> = [
+	T,
+	`on-${T}`,
+	`${T}-container`,
+	`on-${T}-container`,
+];
+
+type AccentRoleKey<T extends AccentPaletteValue> = AccentRoleKeys<T>[number];
 
 type FixedRoleKey<T extends AccentPaletteValue> =
 	| `${T}-fixed`
@@ -27,10 +30,19 @@ type FixedRoleKey<T extends AccentPaletteValue> =
 	| `on-${T}-fixed`
 	| `on-${T}-fixed-variant`;
 
+function getAccentRoleKey<T extends AccentPaletteValue>(accentPaletteValue: T): AccentRoleKeys<T> {
+	return [
+		accentPaletteValue,
+		`on-${accentPaletteValue}`,
+		`${accentPaletteValue}-container`,
+		`on-${accentPaletteValue}-container`,
+	];
+}
+
 const PRIMARY_ROLE_KEYS = [] as const satisfies string[];
 const SECONDARY_ROLE_KEYS = [] as const satisfies string[];
 const TERTIARY_ROLE_KEYS = [] as const satisfies string[];
-const ERROR_ROLE_KEYS = [] as const satisfies string[];
+const ERROR_ROLE_KEYS = getAccentRoleKey(ACCENT_PALETTE_VALUE.ERROR) satisfies string[];
 
 type PrimaryRoleKey =
 	| AccentRoleKey<typeof ACCENT_PALETTE_VALUE.PRIMARY>
