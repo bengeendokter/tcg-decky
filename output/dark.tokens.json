@@ -1,178 +1,178 @@
 {
   "primary": {
     "$type": "color",
-    "$value": "{primary.80}"
+    "$value": "{palette.primary.80}"
   },
   "on-primary": {
     "$type": "color",
-    "$value": "{primary.20}"
+    "$value": "{palette.primary.20}"
   },
   "primary-container": {
     "$type": "color",
-    "$value": "{primary.30}"
+    "$value": "{palette.primary.30}"
   },
   "on-primary-container": {
     "$type": "color",
-    "$value": "{primary.90}"
+    "$value": "{palette.primary.90}"
   },
   "primary-fixed": {
     "$type": "color",
-    "$value": "{primary.90}"
+    "$value": "{palette.primary.90}"
   },
   "primary-fixed-dim": {
     "$type": "color",
-    "$value": "{primary.80}"
+    "$value": "{palette.primary.80}"
   },
   "on-primary-fixed": {
     "$type": "color",
-    "$value": "{primary.10}"
+    "$value": "{palette.primary.10}"
   },
   "on-primary-fixed-variant": {
     "$type": "color",
-    "$value": "{primary.30}"
+    "$value": "{palette.primary.30}"
   },
   "secondary": {
     "$type": "color",
-    "$value": "{secondary.80}"
+    "$value": "{palette.secondary.80}"
   },
   "on-secondary": {
     "$type": "color",
-    "$value": "{secondary.20}"
+    "$value": "{palette.secondary.20}"
   },
   "secondary-container": {
     "$type": "color",
-    "$value": "{secondary.30}"
+    "$value": "{palette.secondary.30}"
   },
   "on-secondary-container": {
     "$type": "color",
-    "$value": "{secondary.90}"
+    "$value": "{palette.secondary.90}"
   },
   "secondary-fixed": {
     "$type": "color",
-    "$value": "{secondary.90}"
+    "$value": "{palette.secondary.90}"
   },
   "secondary-fixed-dim": {
     "$type": "color",
-    "$value": "{secondary.80}"
+    "$value": "{palette.secondary.80}"
   },
   "on-secondary-fixed": {
     "$type": "color",
-    "$value": "{secondary.10}"
+    "$value": "{palette.secondary.10}"
   },
   "on-secondary-fixed-variant": {
     "$type": "color",
-    "$value": "{secondary.30}"
+    "$value": "{palette.secondary.30}"
   },
   "tertiary": {
     "$type": "color",
-    "$value": "{tertiary.80}"
+    "$value": "{palette.tertiary.80}"
   },
   "on-tertiary": {
     "$type": "color",
-    "$value": "{tertiary.20}"
+    "$value": "{palette.tertiary.20}"
   },
   "tertiary-container": {
     "$type": "color",
-    "$value": "{tertiary.30}"
+    "$value": "{palette.tertiary.30}"
   },
   "on-tertiary-container": {
     "$type": "color",
-    "$value": "{tertiary.90}"
+    "$value": "{palette.tertiary.90}"
   },
   "tertiary-fixed": {
     "$type": "color",
-    "$value": "{tertiary.90}"
+    "$value": "{palette.tertiary.90}"
   },
   "tertiary-fixed-dim": {
     "$type": "color",
-    "$value": "{tertiary.80}"
+    "$value": "{palette.tertiary.80}"
   },
   "on-tertiary-fixed": {
     "$type": "color",
-    "$value": "{tertiary.10}"
+    "$value": "{palette.tertiary.10}"
   },
   "on-tertiary-fixed-variant": {
     "$type": "color",
-    "$value": "{tertiary.30}"
+    "$value": "{palette.tertiary.30}"
   },
   "error": {
     "$type": "color",
-    "$value": "{error.80}"
+    "$value": "{palette.error.80}"
   },
   "on-error": {
     "$type": "color",
-    "$value": "{error.20}"
+    "$value": "{palette.error.20}"
   },
   "error-container": {
     "$type": "color",
-    "$value": "{error.30}"
+    "$value": "{palette.error.30}"
   },
   "on-error-container": {
     "$type": "color",
-    "$value": "{error.90}"
+    "$value": "{palette.error.90}"
   },
   "surface": {
     "$type": "color",
-    "$value": "{neutral.6}"
+    "$value": "{palette.neutral.6}"
   },
   "surface-dim": {
     "$type": "color",
-    "$value": "{neutral.6}"
+    "$value": "{palette.neutral.6}"
   },
   "surface-bright": {
     "$type": "color",
-    "$value": "{neutral.24}"
+    "$value": "{palette.neutral.24}"
   },
   "surface-container-lowest": {
     "$type": "color",
-    "$value": "{neutral.4}"
+    "$value": "{palette.neutral.4}"
   },
   "surface-container-low": {
     "$type": "color",
-    "$value": "{neutral.10}"
+    "$value": "{palette.neutral.10}"
   },
   "surface-container": {
     "$type": "color",
-    "$value": "{neutral.12}"
+    "$value": "{palette.neutral.12}"
   },
   "surface-container-high": {
     "$type": "color",
-    "$value": "{neutral.17}"
+    "$value": "{palette.neutral.17}"
   },
   "surface-container-highest": {
     "$type": "color",
-    "$value": "{neutral.22}"
+    "$value": "{palette.neutral.22}"
   },
   "on-surface": {
     "$type": "color",
-    "$value": "{neutral.90}"
+    "$value": "{palette.neutral.90}"
   },
   "inverse-surface": {
     "$type": "color",
-    "$value": "{neutral.90}"
+    "$value": "{palette.neutral.90}"
   },
   "inverse-on-surface": {
     "$type": "color",
-    "$value": "{neutral.20}"
+    "$value": "{palette.neutral.20}"
   },
   "shadow": {
     "$type": "color",
-    "$value": "{neutral.0}"
+    "$value": "{palette.neutral.0}"
   },
   "scrim": {
     "$type": "color",
-    "$value": "{neutral.0}"
+    "$value": "{palette.neutral.0}"
   },
   "outline": {
     "$type": "color",
-    "$value": "{neutral-variant.60}"
+    "$value": "{palette.neutral-variant.60}"
   },
   "outline-variant": {
     "$type": "color",
-    "$value": "{neutral-variant.30}"
+    "$value": "{palette.neutral-variant.30}"
   },
   "on-surface-variant": {
     "$type": "color",
-    "$value": "{neutral-variant.80}"
+    "$value": "{palette.neutral-variant.80}"
   }
 }

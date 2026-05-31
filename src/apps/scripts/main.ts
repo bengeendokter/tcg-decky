@@ -1,4 +1,5 @@
-// import { main } from "@style/feature/palette";
-import { main } from '@style/feature/theme';
+import { exportPaletteTokes } from '@style/feature/palette';
+import { exportThemeTokens } from '@style/feature/theme';
 
-main();
+exportPaletteTokes();
+exportThemeTokens();

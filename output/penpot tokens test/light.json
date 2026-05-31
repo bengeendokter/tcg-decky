@@ -1,0 +1,10 @@
+{
+  "primary": {
+    "$type": "color",
+    "$value": "{palette.primary.0}"
+  },
+  "on-primary": {
+    "$type": "color",
+    "$value": "{palette.primary.1}"
+  }
+}

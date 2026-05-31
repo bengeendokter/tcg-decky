@@ -1,0 +1,22 @@
+{
+  "primary": {
+    "0": {
+      "$type": "color",
+      "$value": "hsl(163 100% 34%)"
+    },
+    "1": {
+      "$type": "color",
+      "$value": "hsl(103 100% 34%)"
+    }
+  },
+  "secondary": {
+    "0": {
+      "$type": "color",
+      "$value": "hsl(43 100% 34%)"
+    },
+    "1": {
+      "$type": "color",
+      "$value": "hsl(203 100% 34%)"
+    }
+  }
+}
