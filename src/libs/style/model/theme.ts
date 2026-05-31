@@ -6,55 +6,77 @@ interface PaletteTypeValue {
 	paletteValue: PaletteValue;
 }
 
-const ACCENT_PALETTE_VALUE = {
-	PRIMARY: PALETTE_TYPE.PRIMARY,
-	SECONDARY: PALETTE_TYPE.SECONDARY,
-	TERTIARY: PALETTE_TYPE.TERTIARY,
-	ERROR: PALETTE_TYPE.ERROR,
-} as const satisfies Record<Uppercase<string>, PaletteType>;
+const { PRIMARY, SECONDARY, TERTIARY, ERROR } = PALETTE_TYPE;
+const ACCENT_PALETTE_TYPE = { PRIMARY, SECONDARY, TERTIARY, ERROR } satisfies Partial<
+	typeof PALETTE_TYPE
+>;
 
-export type AccentPaletteValue = (typeof ACCENT_PALETTE_VALUE)[keyof typeof ACCENT_PALETTE_VALUE];
+const FIXED_PALETTE_TYPE = { PRIMARY, SECONDARY, TERTIARY } satisfies Partial<typeof PALETTE_TYPE>;
 
-type AccentRoleKeys<T extends AccentPaletteValue> = [
+export type AccentPaletteType = (typeof ACCENT_PALETTE_TYPE)[keyof typeof ACCENT_PALETTE_TYPE];
+export type FixedPaletteType = (typeof FIXED_PALETTE_TYPE)[keyof typeof FIXED_PALETTE_TYPE];
+
+type AccentRoleKeys<T extends AccentPaletteType> = [
 	T,
 	`on-${T}`,
 	`${T}-container`,
 	`on-${T}-container`,
 ];
 
-type AccentRoleKey<T extends AccentPaletteValue> = AccentRoleKeys<T>[number];
+type AccentRoleKey<T extends AccentPaletteType> = AccentRoleKeys<T>[number];
 
-type FixedRoleKey<T extends AccentPaletteValue> =
-	| `${T}-fixed`
-	| `${T}-fixed-dim`
-	| `on-${T}-fixed`
-	| `on-${T}-fixed-variant`;
+type FixedRoleKeys<T extends FixedPaletteType> = [
+	`${T}-fixed`,
+	`${T}-fixed-dim`,
+	`on-${T}-fixed`,
+	`on-${T}-fixed-variant`,
+];
 
-function getAccentRoleKey<T extends AccentPaletteValue>(accentPaletteValue: T): AccentRoleKeys<T> {
+type FixedRoleKey<T extends FixedPaletteType> = FixedRoleKeys<T>[number];
+
+function getAccentRoleKey<T extends AccentPaletteType>(accentPaletteType: T): AccentRoleKeys<T> {
 	return [
-		accentPaletteValue,
-		`on-${accentPaletteValue}`,
-		`${accentPaletteValue}-container`,
-		`on-${accentPaletteValue}-container`,
+		accentPaletteType,
+		`on-${accentPaletteType}`,
+		`${accentPaletteType}-container`,
+		`on-${accentPaletteType}-container`,
 	];
 }
 
-const PRIMARY_ROLE_KEYS = [] as const satisfies string[];
-const SECONDARY_ROLE_KEYS = [] as const satisfies string[];
-const TERTIARY_ROLE_KEYS = [] as const satisfies string[];
-const ERROR_ROLE_KEYS = getAccentRoleKey(ACCENT_PALETTE_VALUE.ERROR) satisfies string[];
+function getFixedRoleKey<T extends FixedPaletteType>(fixedPaletteType: T): FixedRoleKeys<T> {
+	return [
+		`${fixedPaletteType}-fixed`,
+		`${fixedPaletteType}-fixed-dim`,
+		`on-${fixedPaletteType}-fixed`,
+		`on-${fixedPaletteType}-fixed-variant`,
+	];
+}
+
+const PRIMARY_ROLE_KEYS = [
+	...getAccentRoleKey(ACCENT_PALETTE_TYPE.PRIMARY),
+	...getFixedRoleKey(FIXED_PALETTE_TYPE.PRIMARY),
+] as const satisfies string[];
+const SECONDARY_ROLE_KEYS = [
+	...getAccentRoleKey(ACCENT_PALETTE_TYPE.SECONDARY),
+	...getFixedRoleKey(FIXED_PALETTE_TYPE.SECONDARY),
+] as const satisfies string[];
+const TERTIARY_ROLE_KEYS = [
+	...getAccentRoleKey(ACCENT_PALETTE_TYPE.TERTIARY),
+	...getFixedRoleKey(FIXED_PALETTE_TYPE.TERTIARY),
+] as const satisfies string[];
+const ERROR_ROLE_KEYS = getAccentRoleKey(ACCENT_PALETTE_TYPE.ERROR) satisfies string[];
 
 type PrimaryRoleKey =
-	| AccentRoleKey<typeof ACCENT_PALETTE_VALUE.PRIMARY>
-	| FixedRoleKey<typeof ACCENT_PALETTE_VALUE.PRIMARY>
+	| AccentRoleKey<typeof ACCENT_PALETTE_TYPE.PRIMARY>
+	| FixedRoleKey<typeof ACCENT_PALETTE_TYPE.PRIMARY>
 	| 'inverse-primary';
 type SecondaryRoleKey =
-	| AccentRoleKey<typeof ACCENT_PALETTE_VALUE.SECONDARY>
-	| FixedRoleKey<typeof ACCENT_PALETTE_VALUE.SECONDARY>;
+	| AccentRoleKey<typeof ACCENT_PALETTE_TYPE.SECONDARY>
+	| FixedRoleKey<typeof ACCENT_PALETTE_TYPE.SECONDARY>;
 type TertiaryRoleKey =
-	| AccentRoleKey<typeof ACCENT_PALETTE_VALUE.TERTIARY>
-	| FixedRoleKey<typeof ACCENT_PALETTE_VALUE.TERTIARY>;
-type ErrorRoleKey = AccentRoleKey<typeof ACCENT_PALETTE_VALUE.ERROR>;
+	| AccentRoleKey<typeof ACCENT_PALETTE_TYPE.TERTIARY>
+	| FixedRoleKey<typeof ACCENT_PALETTE_TYPE.TERTIARY>;
+type ErrorRoleKey = AccentRoleKey<typeof ACCENT_PALETTE_TYPE.ERROR>;
 
 const SURFACE_ROLE_KEYS = [
 	'surface',
