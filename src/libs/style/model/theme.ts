@@ -484,7 +484,7 @@ type ThemeValueToken = {
 	$value: `{${PaletteType}.${PaletteValue}}`;
 };
 
-type ThemeTokens = {
+export type ThemeTokens = {
 	[key in ThemeKey]: ThemeValueToken;
 };
 
