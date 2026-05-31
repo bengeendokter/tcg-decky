@@ -164,7 +164,7 @@ export function getFullPaletteCollection(themeBaseColor: Oklch): FullPaletteColl
 	return fromEntries(fullPaletteCollectionEntries);
 }
 
-type ValueTokens = {
+type PaletteValueToken = {
 	$type: 'color';
 	$value: {
 		colorSpace: 'oklch';
@@ -173,14 +173,14 @@ type ValueTokens = {
 };
 
 type PaletteTokens = {
-	[value in PaletteValue]: ValueTokens;
+	[value in PaletteValue]: PaletteValueToken;
 };
 
 export type FullPaletteCollectionTokens = {
 	[paletteType in PaletteType]: PaletteTokens;
 };
 
-function getValueTokens(oklch: Oklch): ValueTokens {
+function getValueTokens(oklch: Oklch): PaletteValueToken {
 	return {
 		$type: 'color',
 		$value: {
@@ -191,7 +191,7 @@ function getValueTokens(oklch: Oklch): ValueTokens {
 }
 
 function getPaletteTokens(palette: Palette): PaletteTokens {
-	const paletteTokensEntries: [PaletteValue, ValueTokens][] = PALETTE_VALUES.map(
+	const paletteTokensEntries: [PaletteValue, PaletteValueToken][] = PALETTE_VALUES.map(
 		(paletteValue: PaletteValue) => [paletteValue, getValueTokens(palette[paletteValue])],
 	);
 

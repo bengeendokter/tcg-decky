@@ -1,5 +1,5 @@
 import { PALETTE_TYPE, type PaletteType, type PaletteValue } from './palette';
-import { fromEntries } from '@ark/util';
+import { entriesOf, fromEntries } from '@ark/util';
 
 interface PaletteTypeValue {
 	paletteType: PaletteType;
@@ -472,9 +472,33 @@ const DARK_HIGH_CONTRAST_THEME_VALUE_MAP = {
 	'surface-container-highest': 30,
 } as const satisfies ThemeValueMap;
 
-const lightTheme: Theme = getTheme(LIGHT_THEME_VALUE_MAP);
-const lightMediumContrastTheme: Theme = getTheme(LIGHT_MEDIUM_CONTRAST_THEME_VALUE_MAP);
-const lightHighContrastTheme: Theme = getTheme(LIGHT_HIGH_CONTRAST_THEME_VALUE_MAP);
-const darkTheme: Theme = getTheme(DARK_THEME_VALUE_MAP);
-const darkMediumContrastTheme: Theme = getTheme(DARK_MEDIUM_CONTRAST_THEME_VALUE_MAP);
-const darkHighContrastTheme: Theme = getTheme(DARK_HIGH_CONTRAST_THEME_VALUE_MAP);
+export const lightTheme: Theme = getTheme(LIGHT_THEME_VALUE_MAP);
+export const lightMediumContrastTheme: Theme = getTheme(LIGHT_MEDIUM_CONTRAST_THEME_VALUE_MAP);
+export const lightHighContrastTheme: Theme = getTheme(LIGHT_HIGH_CONTRAST_THEME_VALUE_MAP);
+export const darkTheme: Theme = getTheme(DARK_THEME_VALUE_MAP);
+export const darkMediumContrastTheme: Theme = getTheme(DARK_MEDIUM_CONTRAST_THEME_VALUE_MAP);
+export const darkHighContrastTheme: Theme = getTheme(DARK_HIGH_CONTRAST_THEME_VALUE_MAP);
+
+type ThemeValueToken = {
+	$type: 'color';
+	$value: `{${PaletteType}.${PaletteValue}}`;
+};
+
+type ThemeTokens = {
+	[key in ThemeKey]: ThemeValueToken;
+};
+
+function getThemeValueToken(paletteTypeValue: PaletteTypeValue): ThemeValueToken {
+	return {
+		$type: 'color',
+		$value: `{${paletteTypeValue.paletteType}.${paletteTypeValue.paletteValue}}`,
+	};
+}
+
+export function getThemeTokens(theme: Theme): ThemeTokens {
+	const themeTokensEntries: [ThemeKey, ThemeValueToken][] = entriesOf(theme).map(
+		([themeKey, paletteTypeValue]) => [themeKey, getThemeValueToken(paletteTypeValue)],
+	);
+
+	return fromEntries(themeTokensEntries);
+}
