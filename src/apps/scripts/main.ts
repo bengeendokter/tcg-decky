@@ -1,5 +1,11 @@
-import { exportPaletteTokes } from '@style/feature/palette';
-import { exportThemeTokens } from '@style/feature/theme';
+import {
+	exportPaletteTokens,
+	exportPenpotPaletteTokens,
+} from '@style/feature/export-palette-tokens';
+import { exportPenpotThemeTokens, exportThemeTokens } from '@style/feature/export-theme-tokens';
 
-exportPaletteTokes();
+exportPaletteTokens();
 exportThemeTokens();
+
+exportPenpotPaletteTokens();
+exportPenpotThemeTokens();

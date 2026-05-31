@@ -15,3 +15,13 @@ export function exportFullPaletteCollectionTokensToJson({
 		encoding: 'utf-8',
 	});
 }
+
+export function exportPenpotFullPaletteCollectionTokensToJson({
+	fullPaletteCollectionTokens,
+	outputDirectory,
+}: ExportPrebuildDecksToJsonParams): void {
+	const paletteFileName = `${outputDirectory}/palette.json`;
+	fs.writeFileSync(paletteFileName, JSON.stringify(fullPaletteCollectionTokens, null, 2), {
+		encoding: 'utf-8',
+	});
+}
