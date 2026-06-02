@@ -1,0 +1,18 @@
+{
+  "tokenSetOrder": [
+    "palette",
+    "light",
+    "light-mc",
+    "light-hc",
+    "dark",
+    "dark-mc",
+    "dark-hc"
+  ],
+  "activeThemes": [
+    "Light"
+  ],
+  "activeSets": [
+    "palette",
+    "light"
+  ]
+}

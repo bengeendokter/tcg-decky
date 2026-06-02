@@ -1,3 +1,4 @@
+import { exportPenpotMetadata } from '@style/feature/export-penpot-metadata';
 import {
 	exportPaletteTokens,
 	exportPenpotPaletteTokens,
@@ -9,3 +10,4 @@ exportThemeTokens();
 
 exportPenpotPaletteTokens();
 exportPenpotThemeTokens();
+exportPenpotMetadata();
