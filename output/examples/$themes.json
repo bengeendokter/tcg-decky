@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Light",
+    "selectedTokenSets": {
+      "palette": "enabled",
+      "light": "enabled"
+    }
+  },
+  {
+    "name": "Dark",
+    "selectedTokenSets": {
+      "palette": "enabled",
+      "dark": "enabled"
+    }
+  }
+]
