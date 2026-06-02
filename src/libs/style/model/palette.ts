@@ -1,5 +1,6 @@
 import { fromEntries } from '@ark/util';
 import { type, type Type } from 'arktype';
+import Color from 'colorjs.io';
 
 type BuildTuple<N extends number, Current extends number[] = []> = Current['length'] extends N
 	? Current
@@ -37,7 +38,7 @@ function mapPaletteValueToLightness(paletteValue: number): number {
 	}
 
 	const calculatedResult: number = -0.000872 * paletteValue ** 2 + 0.9504 * paletteValue + 13.47;
-	return Math.min(calculatedResult, 100);
+	return Math.min(calculatedResult, 100) / 100;
 }
 
 export const CHROMA_FACTOR = {
@@ -207,6 +208,64 @@ export function getFullPaletteCollectionTokens(
 			getPaletteTokens(fullPaletteCollection[paletteType]),
 		],
 	);
+
+	return fromEntries(fullPaletteCollectionTokensEntries);
+}
+
+type PenpotPaletteValueToken = {
+	$type: 'color';
+	$value: `hsl(${number} ${number}% ${number}%)`;
+};
+
+type PenpotPaletteTokens = {
+	[value in PaletteValue]: PenpotPaletteValueToken;
+};
+
+export type PenpotFullPaletteCollectionTokens = {
+	[paletteType in PaletteType]: PenpotPaletteTokens;
+};
+
+export interface Hsl {
+	h: number;
+	s: number;
+	l: number;
+}
+
+function oklchToHsl(oklch: Oklch): Hsl {
+	const color: Color = new Color('oklch', [oklch.l, oklch.c, oklch.h]);
+	const h: number = color.hsl[0] ?? 0;
+	const s: number = color.hsl[1] ?? 0;
+	const l: number = color.hsl[2] ?? 0;
+
+	return { h, s, l };
+}
+
+function getPenpotValueTokens(hsl: Hsl): PenpotPaletteValueToken {
+	return {
+		$type: 'color',
+		$value: `hsl(${hsl.h} ${hsl.s}% ${hsl.l}%)`,
+	};
+}
+
+function getPenpotPaletteTokens(palette: Palette): PenpotPaletteTokens {
+	const paletteTokensEntries: [PaletteValue, PenpotPaletteValueToken][] = PALETTE_VALUES.map(
+		(paletteValue: PaletteValue) => [
+			paletteValue,
+			getPenpotValueTokens(oklchToHsl(palette[paletteValue])),
+		],
+	);
+
+	return fromEntries(paletteTokensEntries);
+}
+
+export function getPenpotFullPaletteCollectionTokens(
+	fullPaletteCollection: FullPaletteCollection,
+): PenpotFullPaletteCollectionTokens {
+	const fullPaletteCollectionTokensEntries: [PaletteType, PenpotPaletteTokens][] =
+		PALETTE_TYPES.map((paletteType: PaletteType) => [
+			paletteType,
+			getPenpotPaletteTokens(fullPaletteCollection[paletteType]),
+		]);
 
 	return fromEntries(fullPaletteCollectionTokensEntries);
 }

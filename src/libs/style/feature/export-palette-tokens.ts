@@ -3,6 +3,7 @@ import { CONFIG } from '@config';
 import {
 	getFullPaletteCollection,
 	getFullPaletteCollectionTokens,
+	getPenpotFullPaletteCollectionTokens,
 	type Oklch,
 } from '../model/palette';
 import {
@@ -25,7 +26,7 @@ export function exportPenpotPaletteTokens() {
 	const outputDirectory: string = `${CONFIG.DEFAULT_OUTPUT_DIRECTORY}/penpot`;
 
 	const fullPaletteCollection = getFullPaletteCollection(THEME_COLOR);
-	const fullPaletteCollectionTokens = getFullPaletteCollectionTokens(fullPaletteCollection);
+	const fullPaletteCollectionTokens = getPenpotFullPaletteCollectionTokens(fullPaletteCollection);
 
 	exportPenpotFullPaletteCollectionTokensToJson({ fullPaletteCollectionTokens, outputDirectory });
 }

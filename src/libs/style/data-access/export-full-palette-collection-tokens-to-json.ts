@@ -1,8 +1,11 @@
 import * as fs from 'fs';
-import type { FullPaletteCollectionTokens } from '../model/palette';
+import type {
+	FullPaletteCollectionTokens,
+	PenpotFullPaletteCollectionTokens,
+} from '../model/palette';
 
 export interface ExportPrebuildDecksToJsonParams {
-	fullPaletteCollectionTokens: FullPaletteCollectionTokens;
+	fullPaletteCollectionTokens: FullPaletteCollectionTokens | PenpotFullPaletteCollectionTokens;
 	outputDirectory: string;
 }
 
