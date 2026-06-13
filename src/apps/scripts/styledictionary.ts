@@ -1,3 +1,4 @@
+import { getThemeTokens, lightTheme } from '@style/model/theme';
 import { getPaletteTokens } from '@style/feature/export-palette-tokens';
 import StyleDictionary from 'style-dictionary';
 import {
@@ -35,6 +36,7 @@ import {
 const styleDictionary: StyleDictionary = new StyleDictionary({
 	tokens: {
 		palette: getPaletteTokens(),
+		... getThemeTokens(lightTheme),
 	},
 	platforms: {
 		css: {
