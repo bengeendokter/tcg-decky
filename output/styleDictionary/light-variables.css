@@ -1,0 +1,50 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --light-primary: var(--palette-primary-40);
+  --light-on-primary: var(--palette-primary-100);
+  --light-primary-container: var(--palette-primary-90);
+  --light-on-primary-container: var(--palette-primary-10);
+  --light-primary-fixed: var(--palette-primary-90);
+  --light-primary-fixed-dim: var(--palette-primary-80);
+  --light-on-primary-fixed: var(--palette-primary-10);
+  --light-on-primary-fixed-variant: var(--palette-primary-30);
+  --light-secondary: var(--palette-secondary-40);
+  --light-on-secondary: var(--palette-secondary-100);
+  --light-secondary-container: var(--palette-secondary-90);
+  --light-on-secondary-container: var(--palette-secondary-10);
+  --light-secondary-fixed: var(--palette-secondary-90);
+  --light-secondary-fixed-dim: var(--palette-secondary-80);
+  --light-on-secondary-fixed: var(--palette-secondary-10);
+  --light-on-secondary-fixed-variant: var(--palette-secondary-30);
+  --light-tertiary: var(--palette-tertiary-40);
+  --light-on-tertiary: var(--palette-tertiary-100);
+  --light-tertiary-container: var(--palette-tertiary-90);
+  --light-on-tertiary-container: var(--palette-tertiary-10);
+  --light-tertiary-fixed: var(--palette-tertiary-90);
+  --light-tertiary-fixed-dim: var(--palette-tertiary-80);
+  --light-on-tertiary-fixed: var(--palette-tertiary-10);
+  --light-on-tertiary-fixed-variant: var(--palette-tertiary-30);
+  --light-error: var(--palette-error-40);
+  --light-on-error: var(--palette-error-100);
+  --light-error-container: var(--palette-error-90);
+  --light-on-error-container: var(--palette-error-10);
+  --light-surface: var(--palette-neutral-98);
+  --light-surface-dim: var(--palette-neutral-87);
+  --light-surface-bright: var(--palette-neutral-98);
+  --light-surface-container-lowest: var(--palette-neutral-100);
+  --light-surface-container-low: var(--palette-neutral-96);
+  --light-surface-container: var(--palette-neutral-94);
+  --light-surface-container-high: var(--palette-neutral-92);
+  --light-surface-container-highest: var(--palette-neutral-90);
+  --light-on-surface: var(--palette-neutral-10);
+  --light-inverse-surface: var(--palette-neutral-20);
+  --light-inverse-on-surface: var(--palette-neutral-95);
+  --light-shadow: var(--palette-neutral-0);
+  --light-scrim: var(--palette-neutral-0);
+  --light-outline: var(--palette-neutral-variant-50);
+  --light-outline-variant: var(--palette-neutral-variant-80);
+  --light-on-surface-variant: var(--palette-neutral-variant-30);
+}

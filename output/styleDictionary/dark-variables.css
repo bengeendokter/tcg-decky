@@ -1,0 +1,50 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --dark-primary: var(--palette-primary-80);
+  --dark-on-primary: var(--palette-primary-20);
+  --dark-primary-container: var(--palette-primary-30);
+  --dark-on-primary-container: var(--palette-primary-90);
+  --dark-primary-fixed: var(--palette-primary-90);
+  --dark-primary-fixed-dim: var(--palette-primary-80);
+  --dark-on-primary-fixed: var(--palette-primary-10);
+  --dark-on-primary-fixed-variant: var(--palette-primary-30);
+  --dark-secondary: var(--palette-secondary-80);
+  --dark-on-secondary: var(--palette-secondary-20);
+  --dark-secondary-container: var(--palette-secondary-30);
+  --dark-on-secondary-container: var(--palette-secondary-90);
+  --dark-secondary-fixed: var(--palette-secondary-90);
+  --dark-secondary-fixed-dim: var(--palette-secondary-80);
+  --dark-on-secondary-fixed: var(--palette-secondary-10);
+  --dark-on-secondary-fixed-variant: var(--palette-secondary-30);
+  --dark-tertiary: var(--palette-tertiary-80);
+  --dark-on-tertiary: var(--palette-tertiary-20);
+  --dark-tertiary-container: var(--palette-tertiary-30);
+  --dark-on-tertiary-container: var(--palette-tertiary-90);
+  --dark-tertiary-fixed: var(--palette-tertiary-90);
+  --dark-tertiary-fixed-dim: var(--palette-tertiary-80);
+  --dark-on-tertiary-fixed: var(--palette-tertiary-10);
+  --dark-on-tertiary-fixed-variant: var(--palette-tertiary-30);
+  --dark-error: var(--palette-error-80);
+  --dark-on-error: var(--palette-error-20);
+  --dark-error-container: var(--palette-error-30);
+  --dark-on-error-container: var(--palette-error-90);
+  --dark-surface: var(--palette-neutral-6);
+  --dark-surface-dim: var(--palette-neutral-6);
+  --dark-surface-bright: var(--palette-neutral-24);
+  --dark-surface-container-lowest: var(--palette-neutral-4);
+  --dark-surface-container-low: var(--palette-neutral-10);
+  --dark-surface-container: var(--palette-neutral-12);
+  --dark-surface-container-high: var(--palette-neutral-17);
+  --dark-surface-container-highest: var(--palette-neutral-22);
+  --dark-on-surface: var(--palette-neutral-90);
+  --dark-inverse-surface: var(--palette-neutral-90);
+  --dark-inverse-on-surface: var(--palette-neutral-20);
+  --dark-shadow: var(--palette-neutral-0);
+  --dark-scrim: var(--palette-neutral-0);
+  --dark-outline: var(--palette-neutral-variant-60);
+  --dark-outline-variant: var(--palette-neutral-variant-30);
+  --dark-on-surface-variant: var(--palette-neutral-variant-80);
+}

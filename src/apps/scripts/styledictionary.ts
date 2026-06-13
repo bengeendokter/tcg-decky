@@ -1,6 +1,6 @@
-import { getThemeTokens, lightTheme } from '@style/model/theme';
+import { darkTheme, getThemeTokens, lightTheme } from '@style/model/theme';
 import { getPaletteTokens } from '@style/feature/export-palette-tokens';
-import StyleDictionary from 'style-dictionary';
+import StyleDictionary, { type TransformedToken } from 'style-dictionary';
 import {
 	formats,
 	transformGroups,
@@ -33,10 +33,24 @@ import {
 // 	},
 // });
 
+function generateComponentFiles(components: string[]) {
+	return components.map((comp) => ({
+		// output the component tokens in the right folder and file e.g. components/button/button-vars.css
+		destination: `${comp}-variables.css`,
+		format: formats.cssVariables,
+		// only include the tokens that are inside this component token group
+		filter: (token: TransformedToken) => token.path[0] === comp,
+		options: {
+			outputReferences: true,
+		},
+	}));
+}
+
 const styleDictionary: StyleDictionary = new StyleDictionary({
 	tokens: {
 		palette: getPaletteTokens(),
-		... getThemeTokens(lightTheme),
+		light: getThemeTokens(lightTheme),
+		dark: getThemeTokens(darkTheme),
 	},
 	platforms: {
 		css: {
@@ -46,10 +60,9 @@ const styleDictionary: StyleDictionary = new StyleDictionary({
 				{
 					destination: 'palette-variables.css',
 					format: formats.cssVariables,
-					options: {
-						outputReferences: true,
-					},
+					filter: (token) => token.path[0] === 'palette',
 				},
+				...generateComponentFiles(['light', 'dark']),
 			],
 		},
 	},
