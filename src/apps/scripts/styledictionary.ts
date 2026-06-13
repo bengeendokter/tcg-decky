@@ -8,30 +8,7 @@ import {
 	logVerbosityLevels,
 	logBrokenReferenceLevels,
 } from 'style-dictionary/enums';
-
-// Palette tokens
-// const styleDictionary: StyleDictionary = new StyleDictionary({
-// 	source: ['output/**/palette.tokens.json'],
-// 	platforms: {
-// 		css: {
-// 			transformGroup: transformGroups.css,
-// 			buildPath: 'output/styleDictionary/',
-// 			files: [
-// 				{
-// 					destination: 'palette-variables.css',
-// 					format: formats.cssVariables,
-// 				},
-// 			],
-// 		},
-// 	},
-// 	log: {
-// 		warnings: logWarningLevels.warn, // 'warn' | 'error' | 'disabled'
-// 		verbosity: logVerbosityLevels.verbose, // 'default' | 'silent' | 'verbose'
-// 		errors: {
-// 			brokenReferences: logBrokenReferenceLevels.throw, // 'throw' | 'console'
-// 		},
-// 	},
-// });
+import type { FormatFn } from 'style-dictionary/types';
 
 function generateComponentFiles(components: string[]) {
 	return components.map((comp) => ({
@@ -46,6 +23,11 @@ function generateComponentFiles(components: string[]) {
 	}));
 }
 
+const paletteFormat: FormatFn = ({ dictionary, file, options, platform }) => `html {
+${dictionary.allTokens.map((token) => `  --md-ref-${token.name}: ${token.$value};`).join('\n')}
+}
+`;
+
 const styleDictionary: StyleDictionary = new StyleDictionary({
 	tokens: {
 		palette: getPaletteTokens(),
@@ -59,7 +41,7 @@ const styleDictionary: StyleDictionary = new StyleDictionary({
 			files: [
 				{
 					destination: 'palette-variables.css',
-					format: formats.cssVariables,
+					format: 'paletteFormat',
 					filter: (token) => token.path[0] === 'palette',
 				},
 				...generateComponentFiles(['light', 'dark']),
@@ -73,6 +55,11 @@ const styleDictionary: StyleDictionary = new StyleDictionary({
 			brokenReferences: logBrokenReferenceLevels.throw, // 'throw' | 'console'
 		},
 	},
+});
+
+StyleDictionary.registerFormat({
+  name: 'paletteFormat',
+  format: paletteFormat,
 });
 
 await styleDictionary.buildPlatform(transformGroups.css);
