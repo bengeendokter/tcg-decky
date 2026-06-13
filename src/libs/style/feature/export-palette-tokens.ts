@@ -4,6 +4,7 @@ import {
 	getFullPaletteCollection,
 	getFullPaletteCollectionTokens,
 	getPenpotFullPaletteCollectionTokens,
+	type FullPaletteCollectionTokens,
 	type Oklch,
 } from '../model/palette';
 import {
@@ -13,11 +14,14 @@ import {
 
 const THEME_COLOR = { l: 0.44, c: 0.16, h: 303.38 } as const satisfies Oklch;
 
+export function getPaletteTokens(): FullPaletteCollectionTokens {
+	const fullPaletteCollection = getFullPaletteCollection(THEME_COLOR);
+	return getFullPaletteCollectionTokens(fullPaletteCollection);
+}
+
 export function exportPaletteTokens() {
 	const outputDirectory: string = CONFIG.DEFAULT_OUTPUT_DIRECTORY;
-
-	const fullPaletteCollection = getFullPaletteCollection(THEME_COLOR);
-	const fullPaletteCollectionTokens = getFullPaletteCollectionTokens(fullPaletteCollection);
+	const fullPaletteCollectionTokens = getPaletteTokens();
 
 	exportFullPaletteCollectionTokensToJson({ fullPaletteCollectionTokens, outputDirectory });
 }
