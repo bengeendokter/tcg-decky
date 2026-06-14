@@ -1,4 +1,3 @@
-import { darkTheme, getThemeTokens, lightTheme } from '@style/model/theme';
 import { getPaletteTokens } from '@style/feature/export-palette-tokens';
 import StyleDictionary, { type TransformedToken } from 'style-dictionary';
 import {
@@ -7,6 +6,8 @@ import {
 	logVerbosityLevels,
 	logBrokenReferenceLevels,
 	propertyFormatNames,
+	formats,
+	transforms,
 } from 'style-dictionary/enums';
 import type { FormatFn } from 'style-dictionary/types';
 import { fileHeader, formattedVariables } from 'style-dictionary/utils';
@@ -60,11 +61,9 @@ const themeFormat: FormatFn = async ({ dictionary, file, options }) => {
 						return [
 							key,
 							Object.fromEntries(
-								Object.entries(value as Record<string, TransformedToken>).map(
-									([key, value]) => {
-										return [key, { ...value, name: 'ref-' + value.name }];
-									},
-								),
+								Object.entries(value as Record<string, TransformedToken>).map(([key, value]) => {
+									return [key, { ...value, name: 'ref-' + value.name }];
+								}),
 							),
 						];
 					},
@@ -90,8 +89,8 @@ const themeFormat: FormatFn = async ({ dictionary, file, options }) => {
 function generateThemeFiles(themes: string[]) {
 	return themes.map((theme) => ({
 		destination: `${theme}.css`,
-		format: 'themeFormat',
-		filter: (token: TransformedToken) => token.path[0] === theme,
+		format: formats.cssVariables,
+		filter: (token: TransformedToken) => token.path[2] === 'color',
 		options: {
 			outputReferences: true,
 		},
@@ -100,21 +99,30 @@ function generateThemeFiles(themes: string[]) {
 
 const styleDictionary: StyleDictionary = new StyleDictionary({
 	tokens: {
-		palette: getPaletteTokens(),
-		light: getThemeTokens(lightTheme),
-		dark: getThemeTokens(darkTheme),
+		md: {
+			ref: {
+				palette: getPaletteTokens(),
+			},
+			// sys: {
+			// 	color: getThemeTokens(lightTheme),
+			// },
+		},
 	},
 	platforms: {
 		css: {
 			transformGroup: transformGroups.css,
+			transforms: [transforms.colorOklch],
 			buildPath: 'output/styleDictionary/',
+			options: {
+				selector: 'html',
+			},
 			files: [
 				{
 					destination: 'palette.css',
-					format: 'paletteFormat',
-					filter: (token) => token.path[0] === 'palette',
+					format: formats.cssVariables,
+					filter: (token) => token.path[2] === 'palette',
 				},
-				...generateThemeFiles(['light', 'dark']),
+				// ...generateThemeFiles(['light', 'dark']),
 			],
 		},
 	},
