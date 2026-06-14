@@ -1,6 +1,6 @@
-import { getThemeTokens, lightTheme } from '@style/model/theme';
+import { getThemeTokens, lightTheme, THEME_NAME_THEME_TOKENS_MAP } from '@style/model/theme';
 import { getPaletteTokens } from '@style/feature/export-palette-tokens';
-import StyleDictionary, { type TransformedToken } from 'style-dictionary';
+import StyleDictionary, { type LogConfig, type TransformedToken } from 'style-dictionary';
 import {
 	transformGroups,
 	logWarningLevels,
@@ -22,14 +22,21 @@ function generateThemeFile(theme: string) {
 	};
 }
 
-const styleDictionary: StyleDictionary = new StyleDictionary({
+const eee = THEME_NAME_THEME_TOKENS_MAP;
+
+const log: LogConfig = {
+	warnings: logWarningLevels.warn,
+	verbosity: logVerbosityLevels.verbose,
+	errors: {
+		brokenReferences: logBrokenReferenceLevels.throw,
+	},
+};
+
+const paletteStyleDictionary: StyleDictionary = new StyleDictionary({
 	tokens: {
 		md: {
 			ref: {
 				palette: getPaletteTokens(),
-			},
-			sys: {
-				color: getThemeTokens(lightTheme),
 			},
 		},
 	},
@@ -47,17 +54,33 @@ const styleDictionary: StyleDictionary = new StyleDictionary({
 						selector: 'html',
 					},
 				},
-				generateThemeFile('light'),
 			],
 		},
 	},
-	log: {
-		warnings: logWarningLevels.warn,
-		verbosity: logVerbosityLevels.verbose,
-		errors: {
-			brokenReferences: logBrokenReferenceLevels.throw,
-		},
-	},
+	log,
 });
 
-await styleDictionary.buildPlatform(transformGroups.css);
+const themeStyleDictionary: StyleDictionary = new StyleDictionary({
+	tokens: {
+		md: {
+			ref: {
+				palette: getPaletteTokens(),
+			},
+			sys: {
+				color: getThemeTokens(lightTheme),
+			},
+		},
+	},
+	platforms: {
+		css: {
+			transformGroup: transformGroups.css,
+			transforms: [transforms.colorOklch],
+			buildPath: 'output/styleDictionary/',
+			files: [generateThemeFile('light')],
+		},
+	},
+	log,
+});
+
+await paletteStyleDictionary.buildPlatform('css');
+await themeStyleDictionary.buildPlatform('css');
