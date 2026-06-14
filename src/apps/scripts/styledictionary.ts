@@ -12,19 +12,6 @@ import type { FormatFn } from 'style-dictionary/types';
 import { fileHeader } from 'style-dictionary/utils';
 import type { Oklch } from '@style/model/palette';
 
-function generateComponentFiles(components: string[]) {
-	return components.map((comp) => ({
-		// output the component tokens in the right folder and file e.g. components/button/button-vars.css
-		destination: `${comp}-variables.css`,
-		format: formats.cssVariables,
-		// only include the tokens that are inside this component token group
-		filter: (token: TransformedToken) => token.path[0] === comp,
-		options: {
-			outputReferences: true,
-		},
-	}));
-}
-
 interface GetPaletteCssVariableParams {
 	tokenName: string;
 	oklch: Oklch;
@@ -51,6 +38,17 @@ const paletteFormat: FormatFn = async ({ dictionary, file }) => {
 	return header + ['html {', ...allVariables, '}'].join('\n');
 };
 
+function generateThemeFiles(themes: string[]) {
+	return themes.map((theme) => ({
+		destination: `${theme}.css`,
+		format: formats.cssVariables,
+		filter: (token: TransformedToken) => token.path[0] === theme,
+		options: {
+			outputReferences: true,
+		},
+	}));
+}
+
 const styleDictionary: StyleDictionary = new StyleDictionary({
 	tokens: {
 		palette: getPaletteTokens(),
@@ -63,11 +61,11 @@ const styleDictionary: StyleDictionary = new StyleDictionary({
 			buildPath: 'output/styleDictionary/',
 			files: [
 				{
-					destination: 'palette-variables.css',
+					destination: 'palette.css',
 					format: 'paletteFormat',
 					filter: (token) => token.path[0] === 'palette',
 				},
-				...generateComponentFiles(['light', 'dark']),
+				...generateThemeFiles(['light', 'dark']),
 			],
 		},
 	},
