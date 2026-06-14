@@ -23,16 +23,12 @@ type AccentRoleKeys<T extends AccentPaletteType> = [
 	`on-${T}-container`,
 ];
 
-type AccentRoleKey<T extends AccentPaletteType> = AccentRoleKeys<T>[number];
-
 type FixedRoleKeys<T extends FixedPaletteType> = [
 	`${T}-fixed`,
 	`${T}-fixed-dim`,
 	`on-${T}-fixed`,
 	`on-${T}-fixed-variant`,
 ];
-
-type FixedRoleKey<T extends FixedPaletteType> = FixedRoleKeys<T>[number];
 
 function getAccentRoleKey<T extends AccentPaletteType>(accentPaletteType: T): AccentRoleKeys<T> {
 	return [
@@ -55,6 +51,7 @@ function getFixedRoleKey<T extends FixedPaletteType>(fixedPaletteType: T): Fixed
 const PRIMARY_ROLE_KEYS = [
 	...getAccentRoleKey(ACCENT_PALETTE_TYPE.PRIMARY),
 	...getFixedRoleKey(FIXED_PALETTE_TYPE.PRIMARY),
+	'inverse-primary'
 ] as const satisfies string[];
 const SECONDARY_ROLE_KEYS = [
 	...getAccentRoleKey(ACCENT_PALETTE_TYPE.SECONDARY),
@@ -66,17 +63,10 @@ const TERTIARY_ROLE_KEYS = [
 ] as const satisfies string[];
 const ERROR_ROLE_KEYS = getAccentRoleKey(ACCENT_PALETTE_TYPE.ERROR) satisfies string[];
 
-type PrimaryRoleKey =
-	| AccentRoleKey<typeof ACCENT_PALETTE_TYPE.PRIMARY>
-	| FixedRoleKey<typeof ACCENT_PALETTE_TYPE.PRIMARY>
-	| 'inverse-primary';
-type SecondaryRoleKey =
-	| AccentRoleKey<typeof ACCENT_PALETTE_TYPE.SECONDARY>
-	| FixedRoleKey<typeof ACCENT_PALETTE_TYPE.SECONDARY>;
-type TertiaryRoleKey =
-	| AccentRoleKey<typeof ACCENT_PALETTE_TYPE.TERTIARY>
-	| FixedRoleKey<typeof ACCENT_PALETTE_TYPE.TERTIARY>;
-type ErrorRoleKey = AccentRoleKey<typeof ACCENT_PALETTE_TYPE.ERROR>;
+type PrimaryRoleKey = typeof PRIMARY_ROLE_KEYS[number];
+type SecondaryRoleKey = typeof SECONDARY_ROLE_KEYS[number];
+type TertiaryRoleKey = typeof TERTIARY_ROLE_KEYS[number];
+type ErrorRoleKey = typeof ERROR_ROLE_KEYS[number];
 
 const SURFACE_ROLE_KEYS = [
 	'surface',

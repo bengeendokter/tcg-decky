@@ -11,6 +11,7 @@
   --md-sys-color-primary-fixed-dim: var(--md-ref-palette-primary-80);
   --md-sys-color-on-primary-fixed: var(--md-ref-palette-primary-5);
   --md-sys-color-on-primary-fixed-variant: var(--md-ref-palette-primary-23);
+  --md-sys-color-inverse-primary: var(--md-ref-palette-primary-31);
   --md-sys-color-secondary: var(--md-ref-palette-secondary-88);
   --md-sys-color-on-secondary: var(--md-ref-palette-secondary-15);
   --md-sys-color-secondary-container: var(--md-ref-palette-secondary-60);
