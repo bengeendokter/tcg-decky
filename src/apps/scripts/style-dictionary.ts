@@ -1,4 +1,9 @@
-import { getThemeTokens, lightTheme, THEME_NAME_THEME_TOKENS_MAP } from '@style/model/theme';
+import {
+	THEME_NAME_THEME_TOKENS_MAP,
+	THEME_NAMES,
+	type ThemeName,
+	type ThemeTokens,
+} from '@style/model/theme';
 import { getPaletteTokens } from '@style/feature/export-palette-tokens';
 import StyleDictionary, { type LogConfig, type TransformedToken } from 'style-dictionary';
 import {
@@ -21,8 +26,6 @@ function generateThemeFile(theme: string) {
 		},
 	};
 }
-
-const eee = THEME_NAME_THEME_TOKENS_MAP;
 
 const log: LogConfig = {
 	warnings: logWarningLevels.warn,
@@ -60,27 +63,36 @@ const paletteStyleDictionary: StyleDictionary = new StyleDictionary({
 	log,
 });
 
-const themeStyleDictionary: StyleDictionary = new StyleDictionary({
-	tokens: {
-		md: {
-			ref: {
-				palette: getPaletteTokens(),
-			},
-			sys: {
-				color: getThemeTokens(lightTheme),
+function getThemeStyleDictionary(themeName: ThemeName): StyleDictionary {
+	const themeTokens: ThemeTokens = THEME_NAME_THEME_TOKENS_MAP[themeName];
+
+	return new StyleDictionary({
+		tokens: {
+			md: {
+				ref: {
+					palette: getPaletteTokens(),
+				},
+				sys: {
+					color: themeTokens,
+				},
 			},
 		},
-	},
-	platforms: {
-		css: {
-			transformGroup: transformGroups.css,
-			transforms: [transforms.colorOklch],
-			buildPath: 'output/styleDictionary/',
-			files: [generateThemeFile('light')],
+		platforms: {
+			css: {
+				transformGroup: transformGroups.css,
+				transforms: [transforms.colorOklch],
+				buildPath: 'output/styleDictionary/',
+				files: [generateThemeFile(themeName)],
+			},
 		},
-	},
-	log,
-});
+		log,
+	});
+}
 
 await paletteStyleDictionary.buildPlatform('css');
-await themeStyleDictionary.buildPlatform('css');
+
+await Promise.all(
+	THEME_NAMES.map(async (themeName) => {
+		return await getThemeStyleDictionary(themeName).buildPlatform('css');
+	}),
+);

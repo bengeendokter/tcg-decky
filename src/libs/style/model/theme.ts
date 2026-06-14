@@ -514,6 +514,8 @@ export const THEME_NAME = {
 
 export type ThemeName = (typeof THEME_NAME)[keyof typeof THEME_NAME];
 
+export const THEME_NAMES = [THEME_NAME.LIGHT, THEME_NAME.LIGHT_MC, THEME_NAME.LIGHT_HC, THEME_NAME.DARK, THEME_NAME.DARK_MC, THEME_NAME.DARK_HC] as const satisfies ThemeName[];
+
 export const THEME_NAME_THEME_MAP = {
 	[THEME_NAME.LIGHT]: lightTheme,
 	[THEME_NAME.LIGHT_MC]: lightMediumContrastTheme,
