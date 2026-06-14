@@ -481,7 +481,7 @@ export const darkHighContrastTheme: Theme = getTheme(DARK_HIGH_CONTRAST_THEME_VA
 
 type ThemeValueToken = {
 	$type: 'color';
-	$value: `{palette.${PaletteType}.${PaletteValue}}`;
+	$value: `{md.ref.palette.${PaletteType}.${PaletteValue}}`;
 };
 
 export type ThemeTokens = {
@@ -491,7 +491,7 @@ export type ThemeTokens = {
 function getThemeValueToken(paletteTypeValue: PaletteTypeValue): ThemeValueToken {
 	return {
 		$type: 'color',
-		$value: `{palette.${paletteTypeValue.paletteType}.${paletteTypeValue.paletteValue}}`,
+		$value: `{md.ref.palette.${paletteTypeValue.paletteType}.${paletteTypeValue.paletteValue}}`,
 	};
 }
 
