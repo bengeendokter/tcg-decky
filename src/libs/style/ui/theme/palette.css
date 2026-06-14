@@ -5,1096 +5,1096 @@ html {
 	--chroma-factor: 1.2;
 	--palette-primary-base-color: var(--theme-base-color);
 
-	--md-ref-palette-primary0: oklch(from var(--palette-primary-base-color) 0 0 h);
-	--md-ref-palette-primary2: oklch(
+	--md-ref-palette-primary-0: oklch(from var(--palette-primary-base-color) 0 0 h);
+	--md-ref-palette-primary-2: oklch(
 		from var(--palette-primary-base-color) 14%
 			calc((sin(0.009 * 02 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary3: oklch(
+	--md-ref-palette-primary-3: oklch(
 		from var(--palette-primary-base-color) 16%
 			calc((sin(0.009 * 03 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary4: oklch(
+	--md-ref-palette-primary-4: oklch(
 		from var(--palette-primary-base-color) 17%
 			calc((sin(0.009 * 04 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary5: oklch(
+	--md-ref-palette-primary-5: oklch(
 		from var(--palette-primary-base-color) 18%
 			calc((sin(0.009 * 05 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary6: oklch(
+	--md-ref-palette-primary-6: oklch(
 		from var(--palette-primary-base-color) 20%
 			calc((sin(0.009 * 06 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary10: oklch(
+	--md-ref-palette-primary-10: oklch(
 		from var(--palette-primary-base-color) 23%
 			calc((sin(0.009 * 10 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary11: oklch(
+	--md-ref-palette-primary-11: oklch(
 		from var(--palette-primary-base-color) 24%
 			calc((sin(0.009 * 11 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary12: oklch(
+	--md-ref-palette-primary-12: oklch(
 		from var(--palette-primary-base-color) 25%
 			calc((sin(0.009 * 12 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary15: oklch(
+	--md-ref-palette-primary-15: oklch(
 		from var(--palette-primary-base-color) 28%
 			calc((sin(0.009 * 15 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary16: oklch(
+	--md-ref-palette-primary-16: oklch(
 		from var(--palette-primary-base-color) 29%
 			calc((sin(0.009 * 16 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary17: oklch(
+	--md-ref-palette-primary-17: oklch(
 		from var(--palette-primary-base-color) 30%
 			calc((sin(0.009 * 17 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary18: oklch(
+	--md-ref-palette-primary-18: oklch(
 		from var(--palette-primary-base-color) 31%
 			calc((sin(0.009 * 18 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary20: oklch(
+	--md-ref-palette-primary-20: oklch(
 		from var(--palette-primary-base-color) 33%
 			calc((sin(0.009 * 20 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary21: oklch(
+	--md-ref-palette-primary-21: oklch(
 		from var(--palette-primary-base-color) 33%
 			calc((sin(0.009 * 21 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary22: oklch(
+	--md-ref-palette-primary-22: oklch(
 		from var(--palette-primary-base-color) 34%
 			calc((sin(0.009 * 22 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary23: oklch(
+	--md-ref-palette-primary-23: oklch(
 		from var(--palette-primary-base-color) 35%
 			calc((sin(0.009 * 23 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary24: oklch(
+	--md-ref-palette-primary-24: oklch(
 		from var(--palette-primary-base-color) 36%
 			calc((sin(0.009 * 24 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary25: oklch(
+	--md-ref-palette-primary-25: oklch(
 		from var(--palette-primary-base-color) 36%
 			calc((sin(0.009 * 25 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary26: oklch(
+	--md-ref-palette-primary-26: oklch(
 		from var(--palette-primary-base-color) 37%
 			calc((sin(0.009 * 26 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary29: oklch(
+	--md-ref-palette-primary-29: oklch(
 		from var(--palette-primary-base-color) 40%
 			calc((sin(0.009 * 29 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary30: oklch(
+	--md-ref-palette-primary-30: oklch(
 		from var(--palette-primary-base-color) 41%
 			calc((sin(0.009 * 30 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary31: oklch(
+	--md-ref-palette-primary-31: oklch(
 		from var(--palette-primary-base-color) 42%
 			calc((sin(0.009 * 31 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary34: oklch(
+	--md-ref-palette-primary-34: oklch(
 		from var(--palette-primary-base-color) 44%
 			calc((sin(0.009 * 34 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary35: oklch(
+	--md-ref-palette-primary-35: oklch(
 		from var(--palette-primary-base-color) 45%
 			calc((sin(0.009 * 35 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary36: oklch(
+	--md-ref-palette-primary-36: oklch(
 		from var(--palette-primary-base-color) 46%
 			calc((sin(0.009 * 36 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary40: oklch(
+	--md-ref-palette-primary-40: oklch(
 		from var(--palette-primary-base-color) 51%
 			calc((sin(0.009 * 40 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary46: oklch(
+	--md-ref-palette-primary-46: oklch(
 		from var(--palette-primary-base-color) 55%
 			calc((sin(0.009 * 46 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary50: oklch(
+	--md-ref-palette-primary-50: oklch(
 		from var(--palette-primary-base-color) 59%
 			calc((sin(0.009 * 50 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary60: oklch(
+	--md-ref-palette-primary-60: oklch(
 		from var(--palette-primary-base-color) 68%
 			calc((sin(0.009 * 60 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary70: oklch(
+	--md-ref-palette-primary-70: oklch(
 		from var(--palette-primary-base-color) 76%
 			calc((sin(0.009 * 70 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary72: oklch(
+	--md-ref-palette-primary-72: oklch(
 		from var(--palette-primary-base-color) 77%
 			calc((sin(0.009 * 72 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary75: oklch(
+	--md-ref-palette-primary-75: oklch(
 		from var(--palette-primary-base-color) 80%
 			calc((sin(0.009 * 75 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary79: oklch(
+	--md-ref-palette-primary-79: oklch(
 		from var(--palette-primary-base-color) 83%
 			calc((sin(0.009 * 79 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary80: oklch(
+	--md-ref-palette-primary-80: oklch(
 		from var(--palette-primary-base-color) 84%
 			calc((sin(0.009 * 80 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary84: oklch(
+	--md-ref-palette-primary-84: oklch(
 		from var(--palette-primary-base-color) 87%
 			calc((sin(0.009 * 84 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary85: oklch(
+	--md-ref-palette-primary-85: oklch(
 		from var(--palette-primary-base-color) 88%
 			calc((sin(0.009 * 85 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary87: oklch(
+	--md-ref-palette-primary-87: oklch(
 		from var(--palette-primary-base-color) 89%
 			calc((sin(0.009 * 87 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary88: oklch(
+	--md-ref-palette-primary-88: oklch(
 		from var(--palette-primary-base-color) 90%
 			calc((sin(0.009 * 88 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary90: oklch(
+	--md-ref-palette-primary-90: oklch(
 		from var(--palette-primary-base-color) 92%
 			calc((sin(0.009 * 90 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary92: oklch(
+	--md-ref-palette-primary-92: oklch(
 		from var(--palette-primary-base-color) 94%
 			calc((sin(0.009 * 92 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary94: oklch(
+	--md-ref-palette-primary-94: oklch(
 		from var(--palette-primary-base-color) 95%
 			calc((sin(0.009 * 94 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary95: oklch(
+	--md-ref-palette-primary-95: oklch(
 		from var(--palette-primary-base-color) 96%
 			calc((sin(0.009 * 95 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary96: oklch(
+	--md-ref-palette-primary-96: oklch(
 		from var(--palette-primary-base-color) 97%
 			calc((sin(0.009 * 96 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary98: oklch(
+	--md-ref-palette-primary-98: oklch(
 		from var(--palette-primary-base-color) 98%
 			calc((sin(0.009 * 98 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-primary100: oklch(from var(--palette-primary-base-color) 1 0 h);
+	--md-ref-palette-primary-100: oklch(from var(--palette-primary-base-color) 1 0 h);
 
 	/* secondary */
 	--palette-secondary-base-color: oklch(from var(--theme-base-color) l calc(c / 3) h);
 
-	--md-ref-palette-secondary0: oklch(from var(--palette-secondary-base-color) 0 0 h);
-	--md-ref-palette-secondary2: oklch(
+	--md-ref-palette-secondary-0: oklch(from var(--palette-secondary-base-color) 0 0 h);
+	--md-ref-palette-secondary-2: oklch(
 		from var(--palette-secondary-base-color) 14%
 			calc((sin(0.009 * 02 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary3: oklch(
+	--md-ref-palette-secondary-3: oklch(
 		from var(--palette-secondary-base-color) 16%
 			calc((sin(0.009 * 03 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary4: oklch(
+	--md-ref-palette-secondary-4: oklch(
 		from var(--palette-secondary-base-color) 17%
 			calc((sin(0.009 * 04 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary5: oklch(
+	--md-ref-palette-secondary-5: oklch(
 		from var(--palette-secondary-base-color) 18%
 			calc((sin(0.009 * 05 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary6: oklch(
+	--md-ref-palette-secondary-6: oklch(
 		from var(--palette-secondary-base-color) 20%
 			calc((sin(0.009 * 06 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary10: oklch(
+	--md-ref-palette-secondary-10: oklch(
 		from var(--palette-secondary-base-color) 23%
 			calc((sin(0.009 * 10 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary11: oklch(
+	--md-ref-palette-secondary-11: oklch(
 		from var(--palette-secondary-base-color) 24%
 			calc((sin(0.009 * 11 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary12: oklch(
+	--md-ref-palette-secondary-12: oklch(
 		from var(--palette-secondary-base-color) 25%
 			calc((sin(0.009 * 12 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary15: oklch(
+	--md-ref-palette-secondary-15: oklch(
 		from var(--palette-secondary-base-color) 28%
 			calc((sin(0.009 * 15 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary16: oklch(
+	--md-ref-palette-secondary-16: oklch(
 		from var(--palette-secondary-base-color) 29%
 			calc((sin(0.009 * 16 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary17: oklch(
+	--md-ref-palette-secondary-17: oklch(
 		from var(--palette-secondary-base-color) 30%
 			calc((sin(0.009 * 17 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary18: oklch(
+	--md-ref-palette-secondary-18: oklch(
 		from var(--palette-secondary-base-color) 31%
 			calc((sin(0.009 * 18 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary20: oklch(
+	--md-ref-palette-secondary-20: oklch(
 		from var(--palette-secondary-base-color) 33%
 			calc((sin(0.009 * 20 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary21: oklch(
+	--md-ref-palette-secondary-21: oklch(
 		from var(--palette-secondary-base-color) 33%
 			calc((sin(0.009 * 21 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary22: oklch(
+	--md-ref-palette-secondary-22: oklch(
 		from var(--palette-secondary-base-color) 34%
 			calc((sin(0.009 * 22 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary23: oklch(
+	--md-ref-palette-secondary-23: oklch(
 		from var(--palette-secondary-base-color) 35%
 			calc((sin(0.009 * 23 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary24: oklch(
+	--md-ref-palette-secondary-24: oklch(
 		from var(--palette-secondary-base-color) 36%
 			calc((sin(0.009 * 24 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary25: oklch(
+	--md-ref-palette-secondary-25: oklch(
 		from var(--palette-secondary-base-color) 36%
 			calc((sin(0.009 * 25 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary26: oklch(
+	--md-ref-palette-secondary-26: oklch(
 		from var(--palette-secondary-base-color) 37%
 			calc((sin(0.009 * 26 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary29: oklch(
+	--md-ref-palette-secondary-29: oklch(
 		from var(--palette-secondary-base-color) 40%
 			calc((sin(0.009 * 29 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary30: oklch(
+	--md-ref-palette-secondary-30: oklch(
 		from var(--palette-secondary-base-color) 41%
 			calc((sin(0.009 * 30 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary31: oklch(
+	--md-ref-palette-secondary-31: oklch(
 		from var(--palette-secondary-base-color) 42%
 			calc((sin(0.009 * 31 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary34: oklch(
+	--md-ref-palette-secondary-34: oklch(
 		from var(--palette-secondary-base-color) 44%
 			calc((sin(0.009 * 34 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary35: oklch(
+	--md-ref-palette-secondary-35: oklch(
 		from var(--palette-secondary-base-color) 45%
 			calc((sin(0.009 * 35 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary36: oklch(
+	--md-ref-palette-secondary-36: oklch(
 		from var(--palette-secondary-base-color) 46%
 			calc((sin(0.009 * 36 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary40: oklch(
+	--md-ref-palette-secondary-40: oklch(
 		from var(--palette-secondary-base-color) 51%
 			calc((sin(0.009 * 40 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary46: oklch(
+	--md-ref-palette-secondary-46: oklch(
 		from var(--palette-secondary-base-color) 55%
 			calc((sin(0.009 * 46 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary50: oklch(
+	--md-ref-palette-secondary-50: oklch(
 		from var(--palette-secondary-base-color) 59%
 			calc((sin(0.009 * 50 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary60: oklch(
+	--md-ref-palette-secondary-60: oklch(
 		from var(--palette-secondary-base-color) 68%
 			calc((sin(0.009 * 60 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary70: oklch(
+	--md-ref-palette-secondary-70: oklch(
 		from var(--palette-secondary-base-color) 76%
 			calc((sin(0.009 * 70 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary72: oklch(
+	--md-ref-palette-secondary-72: oklch(
 		from var(--palette-secondary-base-color) 77%
 			calc((sin(0.009 * 72 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary75: oklch(
+	--md-ref-palette-secondary-75: oklch(
 		from var(--palette-secondary-base-color) 80%
 			calc((sin(0.009 * 75 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary79: oklch(
+	--md-ref-palette-secondary-79: oklch(
 		from var(--palette-secondary-base-color) 83%
 			calc((sin(0.009 * 79 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary80: oklch(
+	--md-ref-palette-secondary-80: oklch(
 		from var(--palette-secondary-base-color) 84%
 			calc((sin(0.009 * 80 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary84: oklch(
+	--md-ref-palette-secondary-84: oklch(
 		from var(--palette-secondary-base-color) 87%
 			calc((sin(0.009 * 84 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary85: oklch(
+	--md-ref-palette-secondary-85: oklch(
 		from var(--palette-secondary-base-color) 88%
 			calc((sin(0.009 * 85 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary87: oklch(
+	--md-ref-palette-secondary-87: oklch(
 		from var(--palette-secondary-base-color) 89%
 			calc((sin(0.009 * 87 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary88: oklch(
+	--md-ref-palette-secondary-88: oklch(
 		from var(--palette-secondary-base-color) 90%
 			calc((sin(0.009 * 88 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary90: oklch(
+	--md-ref-palette-secondary-90: oklch(
 		from var(--palette-secondary-base-color) 92%
 			calc((sin(0.009 * 90 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary92: oklch(
+	--md-ref-palette-secondary-92: oklch(
 		from var(--palette-secondary-base-color) 94%
 			calc((sin(0.009 * 92 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary94: oklch(
+	--md-ref-palette-secondary-94: oklch(
 		from var(--palette-secondary-base-color) 95%
 			calc((sin(0.009 * 94 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary95: oklch(
+	--md-ref-palette-secondary-95: oklch(
 		from var(--palette-secondary-base-color) 96%
 			calc((sin(0.009 * 95 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary96: oklch(
+	--md-ref-palette-secondary-96: oklch(
 		from var(--palette-secondary-base-color) 97%
 			calc((sin(0.009 * 96 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary98: oklch(
+	--md-ref-palette-secondary-98: oklch(
 		from var(--palette-secondary-base-color) 98%
 			calc((sin(0.009 * 98 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-secondary100: oklch(from var(--palette-secondary-base-color) 1 0 h);
+	--md-ref-palette-secondary-100: oklch(from var(--palette-secondary-base-color) 1 0 h);
 
 	/* tertiary */
 	--palette-tertiary-base-color: oklch(from var(--theme-base-color) l calc(c / 2) calc(h + 60));
 
-	--md-ref-palette-tertiary0: oklch(from var(--palette-tertiary-base-color) 0 0 h);
-	--md-ref-palette-tertiary2: oklch(
+	--md-ref-palette-tertiary-0: oklch(from var(--palette-tertiary-base-color) 0 0 h);
+	--md-ref-palette-tertiary-2: oklch(
 		from var(--palette-tertiary-base-color) 14%
 			calc((sin(0.009 * 02 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary3: oklch(
+	--md-ref-palette-tertiary-3: oklch(
 		from var(--palette-tertiary-base-color) 16%
 			calc((sin(0.009 * 03 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary4: oklch(
+	--md-ref-palette-tertiary-4: oklch(
 		from var(--palette-tertiary-base-color) 17%
 			calc((sin(0.009 * 04 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary5: oklch(
+	--md-ref-palette-tertiary-5: oklch(
 		from var(--palette-tertiary-base-color) 18%
 			calc((sin(0.009 * 05 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary6: oklch(
+	--md-ref-palette-tertiary-6: oklch(
 		from var(--palette-tertiary-base-color) 20%
 			calc((sin(0.009 * 06 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary10: oklch(
+	--md-ref-palette-tertiary-10: oklch(
 		from var(--palette-tertiary-base-color) 23%
 			calc((sin(0.009 * 10 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary11: oklch(
+	--md-ref-palette-tertiary-11: oklch(
 		from var(--palette-tertiary-base-color) 24%
 			calc((sin(0.009 * 11 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary12: oklch(
+	--md-ref-palette-tertiary-12: oklch(
 		from var(--palette-tertiary-base-color) 25%
 			calc((sin(0.009 * 12 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary15: oklch(
+	--md-ref-palette-tertiary-15: oklch(
 		from var(--palette-tertiary-base-color) 28%
 			calc((sin(0.009 * 15 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary16: oklch(
+	--md-ref-palette-tertiary-16: oklch(
 		from var(--palette-tertiary-base-color) 29%
 			calc((sin(0.009 * 16 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary17: oklch(
+	--md-ref-palette-tertiary-17: oklch(
 		from var(--palette-tertiary-base-color) 30%
 			calc((sin(0.009 * 17 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary18: oklch(
+	--md-ref-palette-tertiary-18: oklch(
 		from var(--palette-tertiary-base-color) 31%
 			calc((sin(0.009 * 18 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary20: oklch(
+	--md-ref-palette-tertiary-20: oklch(
 		from var(--palette-tertiary-base-color) 33%
 			calc((sin(0.009 * 20 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary21: oklch(
+	--md-ref-palette-tertiary-21: oklch(
 		from var(--palette-tertiary-base-color) 33%
 			calc((sin(0.009 * 21 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary22: oklch(
+	--md-ref-palette-tertiary-22: oklch(
 		from var(--palette-tertiary-base-color) 34%
 			calc((sin(0.009 * 22 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary23: oklch(
+	--md-ref-palette-tertiary-23: oklch(
 		from var(--palette-tertiary-base-color) 35%
 			calc((sin(0.009 * 23 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary24: oklch(
+	--md-ref-palette-tertiary-24: oklch(
 		from var(--palette-tertiary-base-color) 36%
 			calc((sin(0.009 * 24 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary25: oklch(
+	--md-ref-palette-tertiary-25: oklch(
 		from var(--palette-tertiary-base-color) 36%
 			calc((sin(0.009 * 25 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary26: oklch(
+	--md-ref-palette-tertiary-26: oklch(
 		from var(--palette-tertiary-base-color) 37%
 			calc((sin(0.009 * 26 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary29: oklch(
+	--md-ref-palette-tertiary-29: oklch(
 		from var(--palette-tertiary-base-color) 40%
 			calc((sin(0.009 * 29 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary30: oklch(
+	--md-ref-palette-tertiary-30: oklch(
 		from var(--palette-tertiary-base-color) 41%
 			calc((sin(0.009 * 30 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary31: oklch(
+	--md-ref-palette-tertiary-31: oklch(
 		from var(--palette-tertiary-base-color) 42%
 			calc((sin(0.009 * 31 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary34: oklch(
+	--md-ref-palette-tertiary-34: oklch(
 		from var(--palette-tertiary-base-color) 44%
 			calc((sin(0.009 * 34 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary35: oklch(
+	--md-ref-palette-tertiary-35: oklch(
 		from var(--palette-tertiary-base-color) 45%
 			calc((sin(0.009 * 35 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary36: oklch(
+	--md-ref-palette-tertiary-36: oklch(
 		from var(--palette-tertiary-base-color) 46%
 			calc((sin(0.009 * 36 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary40: oklch(
+	--md-ref-palette-tertiary-40: oklch(
 		from var(--palette-tertiary-base-color) 51%
 			calc((sin(0.009 * 40 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary46: oklch(
+	--md-ref-palette-tertiary-46: oklch(
 		from var(--palette-tertiary-base-color) 55%
 			calc((sin(0.009 * 46 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary50: oklch(
+	--md-ref-palette-tertiary-50: oklch(
 		from var(--palette-tertiary-base-color) 59%
 			calc((sin(0.009 * 50 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary60: oklch(
+	--md-ref-palette-tertiary-60: oklch(
 		from var(--palette-tertiary-base-color) 68%
 			calc((sin(0.009 * 60 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary70: oklch(
+	--md-ref-palette-tertiary-70: oklch(
 		from var(--palette-tertiary-base-color) 76%
 			calc((sin(0.009 * 70 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary72: oklch(
+	--md-ref-palette-tertiary-72: oklch(
 		from var(--palette-tertiary-base-color) 77%
 			calc((sin(0.009 * 72 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary75: oklch(
+	--md-ref-palette-tertiary-75: oklch(
 		from var(--palette-tertiary-base-color) 80%
 			calc((sin(0.009 * 75 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary79: oklch(
+	--md-ref-palette-tertiary-79: oklch(
 		from var(--palette-tertiary-base-color) 83%
 			calc((sin(0.009 * 79 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary80: oklch(
+	--md-ref-palette-tertiary-80: oklch(
 		from var(--palette-tertiary-base-color) 84%
 			calc((sin(0.009 * 80 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary84: oklch(
+	--md-ref-palette-tertiary-84: oklch(
 		from var(--palette-tertiary-base-color) 87%
 			calc((sin(0.009 * 84 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary85: oklch(
+	--md-ref-palette-tertiary-85: oklch(
 		from var(--palette-tertiary-base-color) 88%
 			calc((sin(0.009 * 85 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary87: oklch(
+	--md-ref-palette-tertiary-87: oklch(
 		from var(--palette-tertiary-base-color) 89%
 			calc((sin(0.009 * 87 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary88: oklch(
+	--md-ref-palette-tertiary-88: oklch(
 		from var(--palette-tertiary-base-color) 90%
 			calc((sin(0.009 * 88 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary90: oklch(
+	--md-ref-palette-tertiary-90: oklch(
 		from var(--palette-tertiary-base-color) 92%
 			calc((sin(0.009 * 90 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary92: oklch(
+	--md-ref-palette-tertiary-92: oklch(
 		from var(--palette-tertiary-base-color) 94%
 			calc((sin(0.009 * 92 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary94: oklch(
+	--md-ref-palette-tertiary-94: oklch(
 		from var(--palette-tertiary-base-color) 95%
 			calc((sin(0.009 * 94 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary95: oklch(
+	--md-ref-palette-tertiary-95: oklch(
 		from var(--palette-tertiary-base-color) 96%
 			calc((sin(0.009 * 95 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary96: oklch(
+	--md-ref-palette-tertiary-96: oklch(
 		from var(--palette-tertiary-base-color) 97%
 			calc((sin(0.009 * 96 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary98: oklch(
+	--md-ref-palette-tertiary-98: oklch(
 		from var(--palette-tertiary-base-color) 98%
 			calc((sin(0.009 * 98 * pi) * c / var(--chroma-factor))) h
 	);
-	--md-ref-palette-tertiary100: oklch(from var(--palette-tertiary-base-color) 1 0 h);
+	--md-ref-palette-tertiary-100: oklch(from var(--palette-tertiary-base-color) 1 0 h);
 
 	/* neutral */
 	--chroma-factor-neutral: 0.5;
 	--palette-neutral-base-color: oklch(from var(--theme-base-color) l min(calc(c / 12), 0.01) h);
 
-	--md-ref-palette-neutral0: oklch(from var(--palette-neutral-base-color) 0 0 h);
-	--md-ref-palette-neutral2: oklch(
+	--md-ref-palette-neutral-0: oklch(from var(--palette-neutral-base-color) 0 0 h);
+	--md-ref-palette-neutral-2: oklch(
 		from var(--palette-neutral-base-color) 14%
 			calc((sin(0.009 * 02 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral3: oklch(
+	--md-ref-palette-neutral-3: oklch(
 		from var(--palette-neutral-base-color) 16%
 			calc((sin(0.009 * 03 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral4: oklch(
+	--md-ref-palette-neutral-4: oklch(
 		from var(--palette-neutral-base-color) 17%
 			calc((sin(0.009 * 04 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral5: oklch(
+	--md-ref-palette-neutral-5: oklch(
 		from var(--palette-neutral-base-color) 18%
 			calc((sin(0.009 * 05 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral6: oklch(
+	--md-ref-palette-neutral-6: oklch(
 		from var(--palette-neutral-base-color) 20%
 			calc((sin(0.009 * 06 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral10: oklch(
+	--md-ref-palette-neutral-10: oklch(
 		from var(--palette-neutral-base-color) 23%
 			calc((sin(0.009 * 10 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral11: oklch(
+	--md-ref-palette-neutral-11: oklch(
 		from var(--palette-neutral-base-color) 24%
 			calc((sin(0.009 * 11 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral12: oklch(
+	--md-ref-palette-neutral-12: oklch(
 		from var(--palette-neutral-base-color) 25%
 			calc((sin(0.009 * 12 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral15: oklch(
+	--md-ref-palette-neutral-15: oklch(
 		from var(--palette-neutral-base-color) 28%
 			calc((sin(0.009 * 15 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral16: oklch(
+	--md-ref-palette-neutral-16: oklch(
 		from var(--palette-neutral-base-color) 29%
 			calc((sin(0.009 * 16 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral17: oklch(
+	--md-ref-palette-neutral-17: oklch(
 		from var(--palette-neutral-base-color) 30%
 			calc((sin(0.009 * 17 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral18: oklch(
+	--md-ref-palette-neutral-18: oklch(
 		from var(--palette-neutral-base-color) 31%
 			calc((sin(0.009 * 18 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral20: oklch(
+	--md-ref-palette-neutral-20: oklch(
 		from var(--palette-neutral-base-color) 33%
 			calc((sin(0.009 * 20 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral21: oklch(
+	--md-ref-palette-neutral-21: oklch(
 		from var(--palette-neutral-base-color) 33%
 			calc((sin(0.009 * 21 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral22: oklch(
+	--md-ref-palette-neutral-22: oklch(
 		from var(--palette-neutral-base-color) 34%
 			calc((sin(0.009 * 22 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral23: oklch(
+	--md-ref-palette-neutral-23: oklch(
 		from var(--palette-neutral-base-color) 35%
 			calc((sin(0.009 * 23 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral24: oklch(
+	--md-ref-palette-neutral-24: oklch(
 		from var(--palette-neutral-base-color) 36%
 			calc((sin(0.009 * 24 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral25: oklch(
+	--md-ref-palette-neutral-25: oklch(
 		from var(--palette-neutral-base-color) 36%
 			calc((sin(0.009 * 25 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral26: oklch(
+	--md-ref-palette-neutral-26: oklch(
 		from var(--palette-neutral-base-color) 37%
 			calc((sin(0.009 * 26 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral29: oklch(
+	--md-ref-palette-neutral-29: oklch(
 		from var(--palette-neutral-base-color) 40%
 			calc((sin(0.009 * 29 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral30: oklch(
+	--md-ref-palette-neutral-30: oklch(
 		from var(--palette-neutral-base-color) 41%
 			calc((sin(0.009 * 30 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral31: oklch(
+	--md-ref-palette-neutral-31: oklch(
 		from var(--palette-neutral-base-color) 42%
 			calc((sin(0.009 * 31 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral34: oklch(
+	--md-ref-palette-neutral-34: oklch(
 		from var(--palette-neutral-base-color) 44%
 			calc((sin(0.009 * 34 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral35: oklch(
+	--md-ref-palette-neutral-35: oklch(
 		from var(--palette-neutral-base-color) 45%
 			calc((sin(0.009 * 35 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral36: oklch(
+	--md-ref-palette-neutral-36: oklch(
 		from var(--palette-neutral-base-color) 46%
 			calc((sin(0.009 * 36 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral40: oklch(
+	--md-ref-palette-neutral-40: oklch(
 		from var(--palette-neutral-base-color) 51%
 			calc((sin(0.009 * 40 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral46: oklch(
+	--md-ref-palette-neutral-46: oklch(
 		from var(--palette-neutral-base-color) 55%
 			calc((sin(0.009 * 46 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral50: oklch(
+	--md-ref-palette-neutral-50: oklch(
 		from var(--palette-neutral-base-color) 59%
 			calc((sin(0.009 * 50 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral60: oklch(
+	--md-ref-palette-neutral-60: oklch(
 		from var(--palette-neutral-base-color) 68%
 			calc((sin(0.009 * 60 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral70: oklch(
+	--md-ref-palette-neutral-70: oklch(
 		from var(--palette-neutral-base-color) 76%
 			calc((sin(0.009 * 70 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral72: oklch(
+	--md-ref-palette-neutral-72: oklch(
 		from var(--palette-neutral-base-color) 77%
 			calc((sin(0.009 * 72 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral75: oklch(
+	--md-ref-palette-neutral-75: oklch(
 		from var(--palette-neutral-base-color) 80%
 			calc((sin(0.009 * 75 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral79: oklch(
+	--md-ref-palette-neutral-79: oklch(
 		from var(--palette-neutral-base-color) 83%
 			calc((sin(0.009 * 79 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral80: oklch(
+	--md-ref-palette-neutral-80: oklch(
 		from var(--palette-neutral-base-color) 84%
 			calc((sin(0.009 * 80 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral84: oklch(
+	--md-ref-palette-neutral-84: oklch(
 		from var(--palette-neutral-base-color) 87%
 			calc((sin(0.009 * 84 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral85: oklch(
+	--md-ref-palette-neutral-85: oklch(
 		from var(--palette-neutral-base-color) 88%
 			calc((sin(0.009 * 85 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral87: oklch(
+	--md-ref-palette-neutral-87: oklch(
 		from var(--palette-neutral-base-color) 89%
 			calc((sin(0.009 * 87 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral88: oklch(
+	--md-ref-palette-neutral-88: oklch(
 		from var(--palette-neutral-base-color) 90%
 			calc((sin(0.009 * 88 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral90: oklch(
+	--md-ref-palette-neutral-90: oklch(
 		from var(--palette-neutral-base-color) 92%
 			calc((sin(0.009 * 90 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral92: oklch(
+	--md-ref-palette-neutral-92: oklch(
 		from var(--palette-neutral-base-color) 94%
 			calc((sin(0.009 * 92 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral94: oklch(
+	--md-ref-palette-neutral-94: oklch(
 		from var(--palette-neutral-base-color) 95%
 			calc((sin(0.009 * 94 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral95: oklch(
+	--md-ref-palette-neutral-95: oklch(
 		from var(--palette-neutral-base-color) 96%
 			calc((sin(0.009 * 95 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral96: oklch(
+	--md-ref-palette-neutral-96: oklch(
 		from var(--palette-neutral-base-color) 97%
 			calc((sin(0.009 * 96 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral98: oklch(
+	--md-ref-palette-neutral-98: oklch(
 		from var(--palette-neutral-base-color) 98%
 			calc((sin(0.009 * 98 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral100: oklch(from var(--palette-neutral-base-color) 1 0 h);
+	--md-ref-palette-neutral-100: oklch(from var(--palette-neutral-base-color) 1 0 h);
 
 	/* neutral-variant */
 	--palette-neutral-variant-base-color: oklch(
 		from var(--theme-base-color) l min(calc(c / 6), 0.02) h
 	);
 
-	--md-ref-palette-neutral-variant0: oklch(from var(--palette-neutral-variant-base-color) 0 0 h);
-	--md-ref-palette-neutral-variant2: oklch(
+	--md-ref-palette-neutral-variant-0: oklch(from var(--palette-neutral-variant-base-color) 0 0 h);
+	--md-ref-palette-neutral-variant-2: oklch(
 		from var(--palette-neutral-variant-base-color) 14%
 			calc((sin(0.009 * 02 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant3: oklch(
+	--md-ref-palette-neutral-variant-3: oklch(
 		from var(--palette-neutral-variant-base-color) 16%
 			calc((sin(0.009 * 03 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant4: oklch(
+	--md-ref-palette-neutral-variant-4: oklch(
 		from var(--palette-neutral-variant-base-color) 17%
 			calc((sin(0.009 * 04 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant5: oklch(
+	--md-ref-palette-neutral-variant-5: oklch(
 		from var(--palette-neutral-variant-base-color) 18%
 			calc((sin(0.009 * 05 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant6: oklch(
+	--md-ref-palette-neutral-variant-6: oklch(
 		from var(--palette-neutral-variant-base-color) 20%
 			calc((sin(0.009 * 06 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant10: oklch(
+	--md-ref-palette-neutral-variant-10: oklch(
 		from var(--palette-neutral-variant-base-color) 23%
 			calc((sin(0.009 * 10 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant11: oklch(
+	--md-ref-palette-neutral-variant-11: oklch(
 		from var(--palette-neutral-variant-base-color) 24%
 			calc((sin(0.009 * 11 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant12: oklch(
+	--md-ref-palette-neutral-variant-12: oklch(
 		from var(--palette-neutral-variant-base-color) 25%
 			calc((sin(0.009 * 12 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant15: oklch(
+	--md-ref-palette-neutral-variant-15: oklch(
 		from var(--palette-neutral-variant-base-color) 28%
 			calc((sin(0.009 * 15 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant16: oklch(
+	--md-ref-palette-neutral-variant-16: oklch(
 		from var(--palette-neutral-variant-base-color) 29%
 			calc((sin(0.009 * 16 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant17: oklch(
+	--md-ref-palette-neutral-variant-17: oklch(
 		from var(--palette-neutral-variant-base-color) 30%
 			calc((sin(0.009 * 17 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant18: oklch(
+	--md-ref-palette-neutral-variant-18: oklch(
 		from var(--palette-neutral-variant-base-color) 31%
 			calc((sin(0.009 * 18 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant20: oklch(
+	--md-ref-palette-neutral-variant-20: oklch(
 		from var(--palette-neutral-variant-base-color) 33%
 			calc((sin(0.009 * 20 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant21: oklch(
+	--md-ref-palette-neutral-variant-21: oklch(
 		from var(--palette-neutral-variant-base-color) 33%
 			calc((sin(0.009 * 21 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant22: oklch(
+	--md-ref-palette-neutral-variant-22: oklch(
 		from var(--palette-neutral-variant-base-color) 34%
 			calc((sin(0.009 * 22 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant23: oklch(
+	--md-ref-palette-neutral-variant-23: oklch(
 		from var(--palette-neutral-variant-base-color) 35%
 			calc((sin(0.009 * 23 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant24: oklch(
+	--md-ref-palette-neutral-variant-24: oklch(
 		from var(--palette-neutral-variant-base-color) 36%
 			calc((sin(0.009 * 24 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant25: oklch(
+	--md-ref-palette-neutral-variant-25: oklch(
 		from var(--palette-neutral-variant-base-color) 36%
 			calc((sin(0.009 * 25 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant26: oklch(
+	--md-ref-palette-neutral-variant-26: oklch(
 		from var(--palette-neutral-variant-base-color) 37%
 			calc((sin(0.009 * 26 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant29: oklch(
+	--md-ref-palette-neutral-variant-29: oklch(
 		from var(--palette-neutral-variant-base-color) 40%
 			calc((sin(0.009 * 29 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant30: oklch(
+	--md-ref-palette-neutral-variant-30: oklch(
 		from var(--palette-neutral-variant-base-color) 41%
 			calc((sin(0.009 * 30 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant31: oklch(
+	--md-ref-palette-neutral-variant-31: oklch(
 		from var(--palette-neutral-variant-base-color) 42%
 			calc((sin(0.009 * 31 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant34: oklch(
+	--md-ref-palette-neutral-variant-34: oklch(
 		from var(--palette-neutral-variant-base-color) 44%
 			calc((sin(0.009 * 34 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant35: oklch(
+	--md-ref-palette-neutral-variant-35: oklch(
 		from var(--palette-neutral-variant-base-color) 45%
 			calc((sin(0.009 * 35 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant36: oklch(
+	--md-ref-palette-neutral-variant-36: oklch(
 		from var(--palette-neutral-variant-base-color) 46%
 			calc((sin(0.009 * 36 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant40: oklch(
+	--md-ref-palette-neutral-variant-40: oklch(
 		from var(--palette-neutral-variant-base-color) 51%
 			calc((sin(0.009 * 40 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant46: oklch(
+	--md-ref-palette-neutral-variant-46: oklch(
 		from var(--palette-neutral-variant-base-color) 55%
 			calc((sin(0.009 * 46 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant50: oklch(
+	--md-ref-palette-neutral-variant-50: oklch(
 		from var(--palette-neutral-variant-base-color) 59%
 			calc((sin(0.009 * 50 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant60: oklch(
+	--md-ref-palette-neutral-variant-60: oklch(
 		from var(--palette-neutral-variant-base-color) 68%
 			calc((sin(0.009 * 60 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant70: oklch(
+	--md-ref-palette-neutral-variant-70: oklch(
 		from var(--palette-neutral-variant-base-color) 76%
 			calc((sin(0.009 * 70 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant72: oklch(
+	--md-ref-palette-neutral-variant-72: oklch(
 		from var(--palette-neutral-variant-base-color) 77%
 			calc((sin(0.009 * 72 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant75: oklch(
+	--md-ref-palette-neutral-variant-75: oklch(
 		from var(--palette-neutral-variant-base-color) 80%
 			calc((sin(0.009 * 75 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant79: oklch(
+	--md-ref-palette-neutral-variant-79: oklch(
 		from var(--palette-neutral-variant-base-color) 83%
 			calc((sin(0.009 * 79 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant80: oklch(
+	--md-ref-palette-neutral-variant-80: oklch(
 		from var(--palette-neutral-variant-base-color) 84%
 			calc((sin(0.009 * 80 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant84: oklch(
+	--md-ref-palette-neutral-variant-84: oklch(
 		from var(--palette-neutral-variant-base-color) 87%
 			calc((sin(0.009 * 84 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant85: oklch(
+	--md-ref-palette-neutral-variant-85: oklch(
 		from var(--palette-neutral-variant-base-color) 88%
 			calc((sin(0.009 * 85 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant87: oklch(
+	--md-ref-palette-neutral-variant-87: oklch(
 		from var(--palette-neutral-variant-base-color) 89%
 			calc((sin(0.009 * 87 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant88: oklch(
+	--md-ref-palette-neutral-variant-88: oklch(
 		from var(--palette-neutral-variant-base-color) 90%
 			calc((sin(0.009 * 88 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant90: oklch(
+	--md-ref-palette-neutral-variant-90: oklch(
 		from var(--palette-neutral-variant-base-color) 92%
 			calc((sin(0.009 * 90 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant92: oklch(
+	--md-ref-palette-neutral-variant-92: oklch(
 		from var(--palette-neutral-variant-base-color) 94%
 			calc((sin(0.009 * 92 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant94: oklch(
+	--md-ref-palette-neutral-variant-94: oklch(
 		from var(--palette-neutral-variant-base-color) 95%
 			calc((sin(0.009 * 94 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant95: oklch(
+	--md-ref-palette-neutral-variant-95: oklch(
 		from var(--palette-neutral-variant-base-color) 96%
 			calc((sin(0.009 * 95 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant96: oklch(
+	--md-ref-palette-neutral-variant-96: oklch(
 		from var(--palette-neutral-variant-base-color) 97%
 			calc((sin(0.009 * 96 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant98: oklch(
+	--md-ref-palette-neutral-variant-98: oklch(
 		from var(--palette-neutral-variant-base-color) 98%
 			calc((sin(0.009 * 98 * pi) * c / var(--chroma-factor-neutral))) h
 	);
-	--md-ref-palette-neutral-variant100: oklch(from var(--palette-neutral-variant-base-color) 1 0 h);
+	--md-ref-palette-neutral-variant-100: oklch(from var(--palette-neutral-variant-base-color) 1 0 h);
 
 	/* error */
 	--chroma-factor-error: 1;
 	--palette-error-base-color: oklch(from var(--theme-base-color) l 0.2 25);
 
-	--md-ref-palette-error0: oklch(from var(--palette-error-base-color) 0 0 h);
-	--md-ref-palette-error2: oklch(
+	--md-ref-palette-error-0: oklch(from var(--palette-error-base-color) 0 0 h);
+	--md-ref-palette-error-2: oklch(
 		from var(--palette-error-base-color) 14%
 			calc((sin(0.009 * 02 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error3: oklch(
+	--md-ref-palette-error-3: oklch(
 		from var(--palette-error-base-color) 16%
 			calc((sin(0.009 * 03 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error4: oklch(
+	--md-ref-palette-error-4: oklch(
 		from var(--palette-error-base-color) 17%
 			calc((sin(0.009 * 04 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error5: oklch(
+	--md-ref-palette-error-5: oklch(
 		from var(--palette-error-base-color) 18%
 			calc((sin(0.009 * 05 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error6: oklch(
+	--md-ref-palette-error-6: oklch(
 		from var(--palette-error-base-color) 20%
 			calc((sin(0.009 * 06 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error10: oklch(
+	--md-ref-palette-error-10: oklch(
 		from var(--palette-error-base-color) 23%
 			calc((sin(0.009 * 10 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error11: oklch(
+	--md-ref-palette-error-11: oklch(
 		from var(--palette-error-base-color) 24%
 			calc((sin(0.009 * 11 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error12: oklch(
+	--md-ref-palette-error-12: oklch(
 		from var(--palette-error-base-color) 25%
 			calc((sin(0.009 * 12 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error15: oklch(
+	--md-ref-palette-error-15: oklch(
 		from var(--palette-error-base-color) 28%
 			calc((sin(0.009 * 15 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error16: oklch(
+	--md-ref-palette-error-16: oklch(
 		from var(--palette-error-base-color) 29%
 			calc((sin(0.009 * 16 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error17: oklch(
+	--md-ref-palette-error-17: oklch(
 		from var(--palette-error-base-color) 30%
 			calc((sin(0.009 * 17 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error18: oklch(
+	--md-ref-palette-error-18: oklch(
 		from var(--palette-error-base-color) 31%
 			calc((sin(0.009 * 18 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error20: oklch(
+	--md-ref-palette-error-20: oklch(
 		from var(--palette-error-base-color) 33%
 			calc((sin(0.009 * 20 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error21: oklch(
+	--md-ref-palette-error-21: oklch(
 		from var(--palette-error-base-color) 33%
 			calc((sin(0.009 * 21 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error22: oklch(
+	--md-ref-palette-error-22: oklch(
 		from var(--palette-error-base-color) 34%
 			calc((sin(0.009 * 22 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error23: oklch(
+	--md-ref-palette-error-23: oklch(
 		from var(--palette-error-base-color) 35%
 			calc((sin(0.009 * 23 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error24: oklch(
+	--md-ref-palette-error-24: oklch(
 		from var(--palette-error-base-color) 36%
 			calc((sin(0.009 * 24 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error25: oklch(
+	--md-ref-palette-error-25: oklch(
 		from var(--palette-error-base-color) 36%
 			calc((sin(0.009 * 25 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error26: oklch(
+	--md-ref-palette-error-26: oklch(
 		from var(--palette-error-base-color) 37%
 			calc((sin(0.009 * 26 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error29: oklch(
+	--md-ref-palette-error-29: oklch(
 		from var(--palette-error-base-color) 40%
 			calc((sin(0.009 * 29 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error30: oklch(
+	--md-ref-palette-error-30: oklch(
 		from var(--palette-error-base-color) 41%
 			calc((sin(0.009 * 30 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error31: oklch(
+	--md-ref-palette-error-31: oklch(
 		from var(--palette-error-base-color) 42%
 			calc((sin(0.009 * 31 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error34: oklch(
+	--md-ref-palette-error-34: oklch(
 		from var(--palette-error-base-color) 44%
 			calc((sin(0.009 * 34 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error35: oklch(
+	--md-ref-palette-error-35: oklch(
 		from var(--palette-error-base-color) 45%
 			calc((sin(0.009 * 35 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error36: oklch(
+	--md-ref-palette-error-36: oklch(
 		from var(--palette-error-base-color) 46%
 			calc((sin(0.009 * 36 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error40: oklch(
+	--md-ref-palette-error-40: oklch(
 		from var(--palette-error-base-color) 51%
 			calc((sin(0.009 * 40 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error46: oklch(
+	--md-ref-palette-error-46: oklch(
 		from var(--palette-error-base-color) 55%
 			calc((sin(0.009 * 46 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error50: oklch(
+	--md-ref-palette-error-50: oklch(
 		from var(--palette-error-base-color) 59%
 			calc((sin(0.009 * 50 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error60: oklch(
+	--md-ref-palette-error-60: oklch(
 		from var(--palette-error-base-color) 68%
 			calc((sin(0.009 * 60 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error70: oklch(
+	--md-ref-palette-error-70: oklch(
 		from var(--palette-error-base-color) 76%
 			calc((sin(0.009 * 70 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error72: oklch(
+	--md-ref-palette-error-72: oklch(
 		from var(--palette-error-base-color) 77%
 			calc((sin(0.009 * 72 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error75: oklch(
+	--md-ref-palette-error-75: oklch(
 		from var(--palette-error-base-color) 80%
 			calc((sin(0.009 * 75 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error79: oklch(
+	--md-ref-palette-error-79: oklch(
 		from var(--palette-error-base-color) 83%
 			calc((sin(0.009 * 79 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error80: oklch(
+	--md-ref-palette-error-80: oklch(
 		from var(--palette-error-base-color) 84%
 			calc((sin(0.009 * 80 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error84: oklch(
+	--md-ref-palette-error-84: oklch(
 		from var(--palette-error-base-color) 87%
 			calc((sin(0.009 * 84 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error85: oklch(
+	--md-ref-palette-error-85: oklch(
 		from var(--palette-error-base-color) 88%
 			calc((sin(0.009 * 85 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error87: oklch(
+	--md-ref-palette-error-87: oklch(
 		from var(--palette-error-base-color) 89%
 			calc((sin(0.009 * 87 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error88: oklch(
+	--md-ref-palette-error-88: oklch(
 		from var(--palette-error-base-color) 90%
 			calc((sin(0.009 * 88 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error90: oklch(
+	--md-ref-palette-error-90: oklch(
 		from var(--palette-error-base-color) 92%
 			calc((sin(0.009 * 90 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error92: oklch(
+	--md-ref-palette-error-92: oklch(
 		from var(--palette-error-base-color) 94%
 			calc((sin(0.009 * 92 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error94: oklch(
+	--md-ref-palette-error-94: oklch(
 		from var(--palette-error-base-color) 95%
 			calc((sin(0.009 * 94 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error95: oklch(
+	--md-ref-palette-error-95: oklch(
 		from var(--palette-error-base-color) 96%
 			calc((sin(0.009 * 95 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error96: oklch(
+	--md-ref-palette-error-96: oklch(
 		from var(--palette-error-base-color) 97%
 			calc((sin(0.009 * 96 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error98: oklch(
+	--md-ref-palette-error-98: oklch(
 		from var(--palette-error-base-color) 98%
 			calc((sin(0.009 * 98 * pi) * c / var(--chroma-factor-error))) h
 	);
-	--md-ref-palette-error100: oklch(from var(--palette-error-base-color) 1 0 h);
+	--md-ref-palette-error-100: oklch(from var(--palette-error-base-color) 1 0 h);
 }
