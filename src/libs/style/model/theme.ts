@@ -502,3 +502,32 @@ export function getThemeTokens(theme: Theme): ThemeTokens {
 
 	return fromEntries(themeTokensEntries);
 }
+
+export const THEME_NAME = {
+	LIGHT: 'light',
+	LIGHT_MC: 'light-mc',
+	LIGHT_HC: 'light-hc',
+	DARK: 'dark',
+	DARK_MC: 'dark-mc',
+	DARK_HC: 'dark-hc',
+} as const satisfies Record<Uppercase<string>, Lowercase<string>>;
+
+export type ThemeName = (typeof THEME_NAME)[keyof typeof THEME_NAME];
+
+export const THEME_NAME_THEME_MAP = {
+	[THEME_NAME.LIGHT]: lightTheme,
+	[THEME_NAME.LIGHT_MC]: lightMediumContrastTheme,
+	[THEME_NAME.LIGHT_HC]: lightHighContrastTheme,
+	[THEME_NAME.DARK]: darkTheme,
+	[THEME_NAME.DARK_MC]: darkMediumContrastTheme,
+	[THEME_NAME.DARK_HC]: darkHighContrastTheme,
+} as const satisfies Record<ThemeName, Theme>;
+
+export const THEME_NAME_THEME_TOKENS_MAP = {
+	[THEME_NAME.LIGHT]: getThemeTokens(THEME_NAME_THEME_MAP[THEME_NAME.LIGHT]),
+	[THEME_NAME.LIGHT_MC]: getThemeTokens(THEME_NAME_THEME_MAP[THEME_NAME.LIGHT_MC]),
+	[THEME_NAME.LIGHT_HC]: getThemeTokens(THEME_NAME_THEME_MAP[THEME_NAME.LIGHT_HC]),
+	[THEME_NAME.DARK]: getThemeTokens(THEME_NAME_THEME_MAP[THEME_NAME.DARK]),
+	[THEME_NAME.DARK_MC]: getThemeTokens(THEME_NAME_THEME_MAP[THEME_NAME.DARK_MC]),
+	[THEME_NAME.DARK_HC]: getThemeTokens(THEME_NAME_THEME_MAP[THEME_NAME.DARK_HC]),
+} as const satisfies Record<ThemeName, ThemeTokens>;

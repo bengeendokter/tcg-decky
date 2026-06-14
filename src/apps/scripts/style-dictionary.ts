@@ -38,14 +38,14 @@ const styleDictionary: StyleDictionary = new StyleDictionary({
 			transformGroup: transformGroups.css,
 			transforms: [transforms.colorOklch],
 			buildPath: 'output/styleDictionary/',
-			options: {
-				selector: 'html',
-			},
 			files: [
 				{
 					destination: 'palette.css',
 					format: formats.cssVariables,
 					filter: (token) => token.path[2] === 'palette',
+					options: {
+						selector: 'html',
+					},
 				},
 				generateThemeFile('light'),
 			],
