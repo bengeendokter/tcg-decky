@@ -1,4 +1,5 @@
 import {
+	THEME_NAME,
 	THEME_NAME_THEME_TOKENS_MAP,
 	THEME_NAMES,
 	type ThemeName,
@@ -15,14 +16,28 @@ import {
 	transforms,
 } from 'style-dictionary/enums';
 
-function generateThemeFile(theme: string) {
+const THEME_NAME_THEME_SELECTOR_MAP = {
+	[THEME_NAME.LIGHT]: '.light',
+	[THEME_NAME.LIGHT_MC]: '.light-medium-contrast',
+	[THEME_NAME.LIGHT_HC]: '.light-high-contrast',
+	[THEME_NAME.DARK]: '.dark',
+	[THEME_NAME.DARK_MC]: '.dark-medium-contrast',
+	[THEME_NAME.DARK_HC]: '.dark-high-contrast',
+} as const satisfies Record<ThemeName, string>;
+
+const TOKEN_PATH_KEY = {
+	COLOR: 'color',
+	PALETTE: 'palette',
+} as const satisfies Record<Uppercase<string>, Lowercase<string>>;
+
+function generateThemeFile(theme: ThemeName) {
 	return {
 		destination: `${theme}.css`,
 		format: formats.cssVariables,
-		filter: (token: TransformedToken) => token.path[2] === 'color',
+		filter: (token: TransformedToken) => token.path[2] === TOKEN_PATH_KEY.COLOR,
 		options: {
 			outputReferences: true,
-			selector: `.${theme}`,
+			selector: THEME_NAME_THEME_SELECTOR_MAP[theme],
 		},
 	};
 }
@@ -43,7 +58,7 @@ const paletteStyleDictionary: StyleDictionary = new StyleDictionary({
 	tokens: {
 		md: {
 			ref: {
-				palette: getPaletteTokens(),
+				[TOKEN_PATH_KEY.PALETTE]: getPaletteTokens(),
 			},
 		},
 	},
@@ -56,7 +71,7 @@ const paletteStyleDictionary: StyleDictionary = new StyleDictionary({
 				{
 					destination: 'palette.css',
 					format: formats.cssVariables,
-					filter: (token) => token.path[2] === 'palette',
+					filter: (token) => token.path[2] === TOKEN_PATH_KEY.PALETTE,
 					options: {
 						selector: 'html',
 					},
@@ -74,10 +89,10 @@ function getThemeStyleDictionary(themeName: ThemeName): StyleDictionary {
 		tokens: {
 			md: {
 				ref: {
-					palette: getPaletteTokens(),
+					[TOKEN_PATH_KEY.PALETTE]: getPaletteTokens(),
 				},
 				sys: {
-					color: themeTokens,
+					[TOKEN_PATH_KEY.COLOR]: themeTokens,
 				},
 			},
 		},
