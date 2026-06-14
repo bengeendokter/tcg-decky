@@ -10,6 +10,7 @@ import {
 } from 'style-dictionary/enums';
 import type { FormatFn } from 'style-dictionary/types';
 import { fileHeader } from 'style-dictionary/utils';
+import type { Oklch } from '@style/model/palette';
 
 function generateComponentFiles(components: string[]) {
 	return components.map((comp) => ({
@@ -24,24 +25,30 @@ function generateComponentFiles(components: string[]) {
 	}));
 }
 
-// https://styledictionary.com/reference/utils/format-helpers/
-
-const paletteFormat: FormatFn = async ({ dictionary, file, options, platform }) => {
-	const { outputReferences, sort } = options;
-	const header = await fileHeader({ file });
-
-	return (
-		header +
-		`html {
-${dictionary.allTokens
-	.map((token) => {
-		const [l, c, h] = token.original.$value.components;
-		return `  --md-ref-${token.name}: oklch(${l} ${c} ${h});`;
-	})
-	.join('\n')}
+interface GetPaletteCssVariableParams {
+	tokenName: string;
+	oklch: Oklch;
 }
-`
-	);
+
+function getPaletteCssVariableParams(token: TransformedToken): GetPaletteCssVariableParams {
+	const tokenName: string = token.name;
+	const [l, c, h] = token.original.$value.components;
+	const oklch: Oklch = { l, c, h };
+	return { tokenName, oklch };
+}
+
+function getPaletteCssVariable({ tokenName, oklch }: GetPaletteCssVariableParams) {
+	const { l, c, h } = oklch;
+	return `  --md-ref-${tokenName}: oklch(${l} ${c} ${h});`;
+}
+
+const paletteFormat: FormatFn = async ({ dictionary, file }) => {
+	const header = await fileHeader({ file });
+	const allVariables: string[] = dictionary.allTokens
+		.map(getPaletteCssVariableParams)
+		.map(getPaletteCssVariable);
+
+	return header + ['html {', ...allVariables, '}'].join('\n');
 };
 
 const styleDictionary: StyleDictionary = new StyleDictionary({
