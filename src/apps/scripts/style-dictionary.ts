@@ -52,6 +52,7 @@ const log: LogConfig = {
 
 const PLATFORM = {
 	CSS: 'css',
+	PENPOT: 'penpot',
 } as const satisfies Record<Uppercase<string>, Lowercase<string>>;
 
 const paletteStyleDictionary: StyleDictionary = new StyleDictionary({
@@ -75,6 +76,16 @@ const paletteStyleDictionary: StyleDictionary = new StyleDictionary({
 					options: {
 						selector: 'html',
 					},
+				},
+			],
+		},
+		[PLATFORM.PENPOT]: {
+			transforms: [transforms.colorHsl],
+			buildPath: 'output/styleDictionary/penpot',
+			files: [
+				{
+					destination: 'palette.json',
+					format: formats.json,
 				},
 			],
 		},
@@ -109,6 +120,7 @@ function getThemeStyleDictionary(themeName: ThemeName): StyleDictionary {
 }
 
 await paletteStyleDictionary.buildPlatform(PLATFORM.CSS);
+await paletteStyleDictionary.buildPlatform(PLATFORM.PENPOT);
 
 await Promise.all(
 	THEME_NAMES.map(async (themeName) => {
