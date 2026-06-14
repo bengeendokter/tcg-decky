@@ -35,6 +35,10 @@ const log: LogConfig = {
 	},
 };
 
+const PLATFORM = {
+	CSS: 'css',
+} as const satisfies Record<Uppercase<string>, Lowercase<string>>;
+
 const paletteStyleDictionary: StyleDictionary = new StyleDictionary({
 	tokens: {
 		md: {
@@ -44,7 +48,7 @@ const paletteStyleDictionary: StyleDictionary = new StyleDictionary({
 		},
 	},
 	platforms: {
-		css: {
+		[PLATFORM.CSS]: {
 			transformGroup: transformGroups.css,
 			transforms: [transforms.colorOklch],
 			buildPath: 'output/styleDictionary/',
@@ -78,7 +82,7 @@ function getThemeStyleDictionary(themeName: ThemeName): StyleDictionary {
 			},
 		},
 		platforms: {
-			css: {
+			[PLATFORM.CSS]: {
 				transformGroup: transformGroups.css,
 				transforms: [transforms.colorOklch],
 				buildPath: 'output/styleDictionary/',
@@ -89,10 +93,10 @@ function getThemeStyleDictionary(themeName: ThemeName): StyleDictionary {
 	});
 }
 
-await paletteStyleDictionary.buildPlatform('css');
+await paletteStyleDictionary.buildPlatform(PLATFORM.CSS);
 
 await Promise.all(
 	THEME_NAMES.map(async (themeName) => {
-		return await getThemeStyleDictionary(themeName).buildPlatform('css');
+		return await getThemeStyleDictionary(themeName).buildPlatform(PLATFORM.CSS);
 	}),
 );
