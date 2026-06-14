@@ -9,6 +9,7 @@ import {
 	logBrokenReferenceLevels,
 } from 'style-dictionary/enums';
 import type { FormatFn } from 'style-dictionary/types';
+import { fileHeader } from 'style-dictionary/utils';
 
 function generateComponentFiles(components: string[]) {
 	return components.map((comp) => ({
@@ -23,10 +24,25 @@ function generateComponentFiles(components: string[]) {
 	}));
 }
 
-const paletteFormat: FormatFn = ({ dictionary, file, options, platform }) => `html {
-${dictionary.allTokens.map((token) => `  --md-ref-${token.name}: ${token.$value};`).join('\n')}
+// https://styledictionary.com/reference/utils/format-helpers/
+
+const paletteFormat: FormatFn = async ({ dictionary, file, options, platform }) => {
+	const { outputReferences, sort } = options;
+	const header = await fileHeader({ file });
+
+	return (
+		header +
+		`html {
+${dictionary.allTokens
+	.map((token) => {
+		const [l, c, h] = token.original.$value.components;
+		return `  --md-ref-${token.name}: oklch(${l} ${c} ${h});`;
+	})
+	.join('\n')}
 }
-`;
+`
+	);
+};
 
 const styleDictionary: StyleDictionary = new StyleDictionary({
 	tokens: {
@@ -58,8 +74,8 @@ const styleDictionary: StyleDictionary = new StyleDictionary({
 });
 
 StyleDictionary.registerFormat({
-  name: 'paletteFormat',
-  format: paletteFormat,
+	name: 'paletteFormat',
+	format: paletteFormat,
 });
 
 await styleDictionary.buildPlatform(transformGroups.css);
