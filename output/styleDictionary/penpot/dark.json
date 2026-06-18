@@ -3,1129 +3,184 @@
     "sys": {
       "color": {
         "primary": {
-          "key": "{md.sys.color.primary}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.839212,
-              0.1027350990367719,
-              303.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.primary.80}",
-            "key": "{md.sys.color.primary}"
-          },
-          "name": "primary",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "primary"
-          ]
+          "$value": "{md.ref.palette.primary.80}"
         },
         "on-primary": {
-          "key": "{md.sys.color.on-primary}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.32129199999999997,
-              0.07144357266386624,
-              303.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.primary.20}",
-            "key": "{md.sys.color.on-primary}"
-          },
-          "name": "on-primary",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "on-primary"
-          ]
+          "$value": "{md.ref.palette.primary.20}"
         },
         "primary-container": {
-          "key": "{md.sys.color.primary-container}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.411972,
-              0.10001480928406126,
-              303.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.primary.30}",
-            "key": "{md.sys.color.primary-container}"
-          },
-          "name": "primary-container",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "primary-container"
-          ]
+          "$value": "{md.ref.palette.primary.30}"
         },
         "on-primary-container": {
-          "key": "{md.sys.color.on-primary-container}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.919428,
-              0.0749444503802841,
-              303.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.primary.90}",
-            "key": "{md.sys.color.on-primary-container}"
-          },
-          "name": "on-primary-container",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "on-primary-container"
-          ]
+          "$value": "{md.ref.palette.primary.90}"
         },
         "primary-fixed": {
-          "key": "{md.sys.color.primary-fixed}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.919428,
-              0.0749444503802841,
-              303.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.primary.90}",
-            "key": "{md.sys.color.primary-fixed}"
-          },
-          "name": "primary-fixed",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "primary-fixed"
-          ]
+          "$value": "{md.ref.palette.primary.90}"
         },
         "primary-fixed-dim": {
-          "key": "{md.sys.color.primary-fixed-dim}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.839212,
-              0.1027350990367719,
-              303.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.primary.80}",
-            "key": "{md.sys.color.primary-fixed-dim}"
-          },
-          "name": "primary-fixed-dim",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "primary-fixed-dim"
-          ]
+          "$value": "{md.ref.palette.primary.80}"
         },
         "on-primary-fixed": {
-          "key": "{md.sys.color.on-primary-fixed}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.22886800000000002,
-              0.03719881413856391,
-              303.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.primary.10}",
-            "key": "{md.sys.color.on-primary-fixed}"
-          },
-          "name": "on-primary-fixed",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "on-primary-fixed"
-          ]
+          "$value": "{md.ref.palette.primary.10}"
         },
         "on-primary-fixed-variant": {
-          "key": "{md.sys.color.on-primary-fixed-variant}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.411972,
-              0.10001480928406126,
-              303.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.primary.30}",
-            "key": "{md.sys.color.on-primary-fixed-variant}"
-          },
-          "name": "on-primary-fixed-variant",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "on-primary-fixed-variant"
-          ]
+          "$value": "{md.ref.palette.primary.30}"
         },
         "inverse-primary": {
-          "key": "{md.sys.color.inverse-primary}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.5009079999999999,
-              0.12064360699546929,
-              303.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.primary.40}",
-            "key": "{md.sys.color.inverse-primary}"
-          },
-          "name": "inverse-primary",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "inverse-primary"
-          ]
+          "$value": "{md.ref.palette.primary.40}"
         },
         "secondary": {
-          "key": "{md.sys.color.secondary}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.839212,
-              0.0342450330122573,
-              303.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.secondary.80}",
-            "key": "{md.sys.color.secondary}"
-          },
-          "name": "secondary",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "secondary"
-          ]
+          "$value": "{md.ref.palette.secondary.80}"
         },
         "on-secondary": {
-          "key": "{md.sys.color.on-secondary}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.32129199999999997,
-              0.02381452422128874,
-              303.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.secondary.20}",
-            "key": "{md.sys.color.on-secondary}"
-          },
-          "name": "on-secondary",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "on-secondary"
-          ]
+          "$value": "{md.ref.palette.secondary.20}"
         },
         "secondary-container": {
-          "key": "{md.sys.color.secondary-container}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.411972,
-              0.033338269761353755,
-              303.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.secondary.30}",
-            "key": "{md.sys.color.secondary-container}"
-          },
-          "name": "secondary-container",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "secondary-container"
-          ]
+          "$value": "{md.ref.palette.secondary.30}"
         },
         "on-secondary-container": {
-          "key": "{md.sys.color.on-secondary-container}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.919428,
-              0.024981483460094704,
-              303.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.secondary.90}",
-            "key": "{md.sys.color.on-secondary-container}"
-          },
-          "name": "on-secondary-container",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "on-secondary-container"
-          ]
+          "$value": "{md.ref.palette.secondary.90}"
         },
         "secondary-fixed": {
-          "key": "{md.sys.color.secondary-fixed}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.919428,
-              0.024981483460094704,
-              303.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.secondary.90}",
-            "key": "{md.sys.color.secondary-fixed}"
-          },
-          "name": "secondary-fixed",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "secondary-fixed"
-          ]
+          "$value": "{md.ref.palette.secondary.90}"
         },
         "secondary-fixed-dim": {
-          "key": "{md.sys.color.secondary-fixed-dim}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.839212,
-              0.0342450330122573,
-              303.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.secondary.80}",
-            "key": "{md.sys.color.secondary-fixed-dim}"
-          },
-          "name": "secondary-fixed-dim",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "secondary-fixed-dim"
-          ]
+          "$value": "{md.ref.palette.secondary.80}"
         },
         "on-secondary-fixed": {
-          "key": "{md.sys.color.on-secondary-fixed}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.22886800000000002,
-              0.012399604712854636,
-              303.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.secondary.10}",
-            "key": "{md.sys.color.on-secondary-fixed}"
-          },
-          "name": "on-secondary-fixed",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "on-secondary-fixed"
-          ]
+          "$value": "{md.ref.palette.secondary.10}"
         },
         "on-secondary-fixed-variant": {
-          "key": "{md.sys.color.on-secondary-fixed-variant}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.411972,
-              0.033338269761353755,
-              303.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.secondary.30}",
-            "key": "{md.sys.color.on-secondary-fixed-variant}"
-          },
-          "name": "on-secondary-fixed-variant",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "on-secondary-fixed-variant"
-          ]
+          "$value": "{md.ref.palette.secondary.30}"
         },
         "tertiary": {
-          "key": "{md.sys.color.tertiary}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.839212,
-              0.05136754951838595,
-              363.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.tertiary.80}",
-            "key": "{md.sys.color.tertiary}"
-          },
-          "name": "tertiary",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "tertiary"
-          ]
+          "$value": "{md.ref.palette.tertiary.80}"
         },
         "on-tertiary": {
-          "key": "{md.sys.color.on-tertiary}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.32129199999999997,
-              0.03572178633193312,
-              363.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.tertiary.20}",
-            "key": "{md.sys.color.on-tertiary}"
-          },
-          "name": "on-tertiary",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "on-tertiary"
-          ]
+          "$value": "{md.ref.palette.tertiary.20}"
         },
         "tertiary-container": {
-          "key": "{md.sys.color.tertiary-container}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.411972,
-              0.05000740464203063,
-              363.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.tertiary.30}",
-            "key": "{md.sys.color.tertiary-container}"
-          },
-          "name": "tertiary-container",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "tertiary-container"
-          ]
+          "$value": "{md.ref.palette.tertiary.30}"
         },
         "on-tertiary-container": {
-          "key": "{md.sys.color.on-tertiary-container}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.919428,
-              0.03747222519014205,
-              363.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.tertiary.90}",
-            "key": "{md.sys.color.on-tertiary-container}"
-          },
-          "name": "on-tertiary-container",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "on-tertiary-container"
-          ]
+          "$value": "{md.ref.palette.tertiary.90}"
         },
         "tertiary-fixed": {
-          "key": "{md.sys.color.tertiary-fixed}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.919428,
-              0.03747222519014205,
-              363.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.tertiary.90}",
-            "key": "{md.sys.color.tertiary-fixed}"
-          },
-          "name": "tertiary-fixed",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "tertiary-fixed"
-          ]
+          "$value": "{md.ref.palette.tertiary.90}"
         },
         "tertiary-fixed-dim": {
-          "key": "{md.sys.color.tertiary-fixed-dim}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.839212,
-              0.05136754951838595,
-              363.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.tertiary.80}",
-            "key": "{md.sys.color.tertiary-fixed-dim}"
-          },
-          "name": "tertiary-fixed-dim",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "tertiary-fixed-dim"
-          ]
+          "$value": "{md.ref.palette.tertiary.80}"
         },
         "on-tertiary-fixed": {
-          "key": "{md.sys.color.on-tertiary-fixed}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.22886800000000002,
-              0.018599407069281954,
-              363.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.tertiary.10}",
-            "key": "{md.sys.color.on-tertiary-fixed}"
-          },
-          "name": "on-tertiary-fixed",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "on-tertiary-fixed"
-          ]
+          "$value": "{md.ref.palette.tertiary.10}"
         },
         "on-tertiary-fixed-variant": {
-          "key": "{md.sys.color.on-tertiary-fixed-variant}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.411972,
-              0.05000740464203063,
-              363.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.tertiary.30}",
-            "key": "{md.sys.color.on-tertiary-fixed-variant}"
-          },
-          "name": "on-tertiary-fixed-variant",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "on-tertiary-fixed-variant"
-          ]
+          "$value": "{md.ref.palette.tertiary.30}"
         },
         "error": {
-          "key": "{md.sys.color.error}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.839212,
-              0.15410264855515787,
-              25
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.error.80}",
-            "key": "{md.sys.color.error}"
-          },
-          "name": "error",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "error"
-          ]
+          "$value": "{md.ref.palette.error.80}"
         },
         "on-error": {
-          "key": "{md.sys.color.on-error}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.32129199999999997,
-              0.10716535899579933,
-              25
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.error.20}",
-            "key": "{md.sys.color.on-error}"
-          },
-          "name": "on-error",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "on-error"
-          ]
+          "$value": "{md.ref.palette.error.20}"
         },
         "error-container": {
-          "key": "{md.sys.color.error-container}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.411972,
-              0.15002221392609189,
-              25
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.error.30}",
-            "key": "{md.sys.color.error-container}"
-          },
-          "name": "error-container",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "error-container"
-          ]
+          "$value": "{md.ref.palette.error.30}"
         },
         "on-error-container": {
-          "key": "{md.sys.color.on-error-container}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.919428,
-              0.11241667557042617,
-              25
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.error.90}",
-            "key": "{md.sys.color.on-error-container}"
-          },
-          "name": "on-error-container",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "on-error-container"
-          ]
+          "$value": "{md.ref.palette.error.90}"
         },
         "surface": {
-          "key": "{md.sys.color.surface}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.19141007999999998,
-              0.003376668894254677,
-              303.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.neutral.6}",
-            "key": "{md.sys.color.surface}"
-          },
-          "name": "surface",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "surface"
-          ]
+          "$value": "{md.ref.palette.neutral.6}"
         },
         "surface-dim": {
-          "key": "{md.sys.color.surface-dim}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.19141007999999998,
-              0.003376668894254677,
-              303.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.neutral.6}",
-            "key": "{md.sys.color.surface-dim}"
-          },
-          "name": "surface-dim",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "surface-dim"
-          ]
+          "$value": "{md.ref.palette.neutral.6}"
         },
         "surface-bright": {
-          "key": "{md.sys.color.surface-bright}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.35777327999999997,
-              0.012553827225814008,
-              303.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.neutral.24}",
-            "key": "{md.sys.color.surface-bright}"
-          },
-          "name": "surface-bright",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "surface-bright"
-          ]
+          "$value": "{md.ref.palette.neutral.24}"
         },
         "surface-container-lowest": {
-          "key": "{md.sys.color.surface-container-lowest}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.17257648,
-              0.0022571276974696335,
-              303.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.neutral.4}",
-            "key": "{md.sys.color.surface-container-lowest}"
-          },
-          "name": "surface-container-lowest",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "surface-container-lowest"
-          ]
+          "$value": "{md.ref.palette.neutral.4}"
         },
         "surface-container-low": {
-          "key": "{md.sys.color.surface-container-low}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.22886800000000002,
-              0.005579822120784585,
-              303.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.neutral.10}",
-            "key": "{md.sys.color.surface-container-low}"
-          },
-          "name": "surface-container-low",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "surface-container-low"
-          ]
+          "$value": "{md.ref.palette.neutral.10}"
         },
         "surface-container": {
-          "key": "{md.sys.color.surface-container}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.24749232,
-              0.006656390890459732,
-              303.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.neutral.12}",
-            "key": "{md.sys.color.surface-container}"
-          },
-          "name": "surface-container",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "surface-container"
-          ]
+          "$value": "{md.ref.palette.neutral.12}"
         },
         "surface-container-high": {
-          "key": "{md.sys.color.surface-container-high}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.29374792,
-              0.009247355020819836,
-              303.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.neutral.17}",
-            "key": "{md.sys.color.surface-container-high}"
-          },
-          "name": "surface-container-high",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "surface-container-high"
-          ]
+          "$value": "{md.ref.palette.neutral.17}"
         },
         "surface-container-highest": {
-          "key": "{md.sys.color.surface-container-highest}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.33956752,
-              0.01165380959337152,
-              303.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.neutral.22}",
-            "key": "{md.sys.color.surface-container-highest}"
-          },
-          "name": "surface-container-highest",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "surface-container-highest"
-          ]
+          "$value": "{md.ref.palette.neutral.22}"
         },
         "on-surface": {
-          "key": "{md.sys.color.on-surface}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.919428,
-              0.011241667557042615,
-              303.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.neutral.90}",
-            "key": "{md.sys.color.on-surface}"
-          },
-          "name": "on-surface",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "on-surface"
-          ]
+          "$value": "{md.ref.palette.neutral.90}"
         },
         "inverse-surface": {
-          "key": "{md.sys.color.inverse-surface}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.919428,
-              0.011241667557042615,
-              303.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.neutral.90}",
-            "key": "{md.sys.color.inverse-surface}"
-          },
-          "name": "inverse-surface",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "inverse-surface"
-          ]
+          "$value": "{md.ref.palette.neutral.90}"
         },
         "inverse-on-surface": {
-          "key": "{md.sys.color.inverse-on-surface}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.32129199999999997,
-              0.010716535899579934,
-              303.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.neutral.20}",
-            "key": "{md.sys.color.inverse-on-surface}"
-          },
-          "name": "inverse-on-surface",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "inverse-on-surface"
-          ]
+          "$value": "{md.ref.palette.neutral.20}"
         },
         "shadow": {
-          "key": "{md.sys.color.shadow}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0,
-              0,
-              303.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.neutral.0}",
-            "key": "{md.sys.color.shadow}"
-          },
-          "name": "shadow",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "shadow"
-          ]
+          "$value": "{md.ref.palette.neutral.0}"
         },
         "scrim": {
-          "key": "{md.sys.color.scrim}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0,
-              0,
-              303.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.neutral.0}",
-            "key": "{md.sys.color.scrim}"
-          },
-          "name": "scrim",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "scrim"
-          ]
+          "$value": "{md.ref.palette.neutral.0}"
         },
         "outline": {
-          "key": "{md.sys.color.outline}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.6735479999999999,
-              0.039684588052579114,
-              303.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.neutral-variant.60}",
-            "key": "{md.sys.color.outline}"
-          },
-          "name": "outline",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "outline"
-          ]
+          "$value": "{md.ref.palette.neutral-variant.60}"
         },
         "outline-variant": {
-          "key": "{md.sys.color.outline-variant}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.411972,
-              0.030004442785218376,
-              303.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.neutral-variant.30}",
-            "key": "{md.sys.color.outline-variant}"
-          },
-          "name": "outline-variant",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "outline-variant"
-          ]
+          "$value": "{md.ref.palette.neutral-variant.30}"
         },
         "on-surface-variant": {
-          "key": "{md.sys.color.on-surface-variant}",
           "$type": "color",
-          "$value": {
-            "colorSpace": "oklch",
-            "components": [
-              0.839212,
-              0.03082052971103157,
-              303.38
-            ]
-          },
-          "original": {
-            "$type": "color",
-            "$value": "{md.ref.palette.neutral-variant.80}",
-            "key": "{md.sys.color.on-surface-variant}"
-          },
-          "name": "on-surface-variant",
-          "attributes": {},
-          "path": [
-            "md",
-            "sys",
-            "color",
-            "on-surface-variant"
-          ]
+          "$value": "{md.ref.palette.neutral-variant.80}"
         }
       }
     }

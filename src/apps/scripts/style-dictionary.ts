@@ -17,6 +17,7 @@ import {
 } from 'style-dictionary/enums';
 import { exportPenpotMetadata } from '@style/feature/export-penpot-metadata';
 import type { Oklch } from '@style/model/palette';
+import { exportObjectToJson } from '@style/data-access/export-full-palette-collection-tokens-to-json';
 
 const BLUE_THEME_COLOR = { l: 0.63, c: 0.26, h: 29.23 } as const satisfies Oklch;
 
@@ -43,14 +44,6 @@ function generateThemeFile(theme: ThemeName) {
 			outputReferences: true,
 			selector: THEME_NAME_THEME_SELECTOR_MAP[theme],
 		},
-	};
-}
-
-function generatePenpotFile(theme: ThemeName) {
-	return {
-		destination: `${theme}.json`,
-		format: formats.json,
-		filter: (token: TransformedToken) => token.path[2] === TOKEN_PATH_KEY.COLOR,
 	};
 }
 
@@ -126,10 +119,6 @@ function getThemeStyleDictionary(themeName: ThemeName): StyleDictionary {
 				buildPath: 'output/styleDictionary/',
 				files: [generateThemeFile(themeName)],
 			},
-			[PLATFORM.PENPOT]: {
-				buildPath: 'output/styleDictionary/penpot',
-				files: [generatePenpotFile(themeName)],
-			},
 		},
 		log,
 	});
@@ -139,6 +128,16 @@ await paletteStyleDictionary.buildAllPlatforms();
 
 await Promise.all(
 	THEME_NAMES.map(async (themeName) => {
+		exportObjectToJson({
+			object: {
+				md: {
+					sys: {
+						[TOKEN_PATH_KEY.COLOR]: THEME_NAME_THEME_TOKENS_MAP[themeName],
+					},
+				},
+			},
+			destination: `output/styleDictionary/penpot/${themeName}.json`,
+		});
 		return await getThemeStyleDictionary(themeName).buildAllPlatforms();
 	}),
 );

@@ -28,3 +28,14 @@ export function exportPenpotFullPaletteCollectionTokensToJson({
 		encoding: 'utf-8',
 	});
 }
+
+export interface ExportObjectToJsonParams {
+	object: unknown;
+	destination: string;
+}
+
+export function exportObjectToJson({ object, destination }: ExportObjectToJsonParams): void {
+	fs.writeFileSync(destination, JSON.stringify(object, null, 2), {
+		encoding: 'utf-8',
+	});
+}
