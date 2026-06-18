@@ -3,28 +3,56 @@
     "name": "Purple",
     "group": "Brand",
     "selectedTokenSets": {
-      "palette-purple": "enabled"
+      "palette/palette-purple": "enabled"
     }
   },
   {
     "name": "Red",
     "group": "Brand",
     "selectedTokenSets": {
-      "palette-red": "enabled"
+      "palette/palette-red": "enabled"
     }
   },
   {
     "name": "Light",
     "group": "Color Scheme",
     "selectedTokenSets": {
-      "light": "enabled"
+      "color-scheme/light": "enabled"
+    }
+  },
+  {
+    "name": "Light Medium Contrast",
+    "group": "Color Scheme",
+    "selectedTokenSets": {
+      "color-scheme/light-mc": "enabled"
+    }
+  },
+  {
+    "name": "Light High Contrast",
+    "group": "Color Scheme",
+    "selectedTokenSets": {
+      "color-scheme/light-hc": "enabled"
     }
   },
   {
     "name": "Dark",
     "group": "Color Scheme",
     "selectedTokenSets": {
-      "dark": "enabled"
+      "color-scheme/dark": "enabled"
+    }
+  },
+  {
+    "name": "Dark Medium Contrast",
+    "group": "Color Scheme",
+    "selectedTokenSets": {
+      "color-scheme/dark-mc": "enabled"
+    }
+  },
+  {
+    "name": "Dark High Contrast",
+    "group": "Color Scheme",
+    "selectedTokenSets": {
+      "color-scheme/dark-hc": "enabled"
     }
   }
 ]

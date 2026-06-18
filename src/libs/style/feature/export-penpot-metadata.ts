@@ -11,14 +11,14 @@ export function exportPenpotMetadata() {
 
 	const metadata: Metadata = {
 		tokenSetOrder: [
-			SET_NAME.PALETTE_RED,
-			SET_NAME.PALETTE_PURPLE,
-			SET_NAME.LIGHT,
-			SET_NAME.LIGHT_MC,
-			SET_NAME.LIGHT_HC,
-			SET_NAME.DARK,
-			SET_NAME.DARK_MC,
-			SET_NAME.DARK_HC,
+			`palette/${SET_NAME.PALETTE_RED}`,
+			`palette/${SET_NAME.PALETTE_PURPLE}`,
+			`color-scheme/${SET_NAME.LIGHT}`,
+			`color-scheme/${SET_NAME.LIGHT_MC}`,
+			`color-scheme/${SET_NAME.LIGHT_HC}`,
+			`color-scheme/${SET_NAME.DARK}`,
+			`color-scheme/${SET_NAME.DARK_MC}`,
+			`color-scheme/${SET_NAME.DARK_HC}`,
 		],
 		activeThemes: ['Brand/Purple', 'Color Scheme/Light'],
 	};
@@ -28,28 +28,56 @@ export function exportPenpotMetadata() {
 			name: 'Purple',
 			group: THEME_GROUP_NAME.BRAND,
 			selectedTokenSets: {
-				[SET_NAME.PALETTE_PURPLE]: 'enabled',
+				[`palette/${SET_NAME.PALETTE_PURPLE}`]: 'enabled',
 			},
 		},
 		{
 			name: 'Red',
 			group: THEME_GROUP_NAME.BRAND,
 			selectedTokenSets: {
-				[SET_NAME.PALETTE_RED]: 'enabled',
+				[`palette/${SET_NAME.PALETTE_RED}`]: 'enabled',
 			},
 		},
 		{
 			name: 'Light',
 			group: THEME_GROUP_NAME.COLOR_SCHEME,
 			selectedTokenSets: {
-				[SET_NAME.LIGHT]: 'enabled',
+				[`color-scheme/${SET_NAME.LIGHT}`]: 'enabled',
+			},
+		},
+		{
+			name: 'Light Medium Contrast',
+			group: THEME_GROUP_NAME.COLOR_SCHEME,
+			selectedTokenSets: {
+				[`color-scheme/${SET_NAME.LIGHT_MC}`]: 'enabled',
+			},
+		},
+		{
+			name: 'Light High Contrast',
+			group: THEME_GROUP_NAME.COLOR_SCHEME,
+			selectedTokenSets: {
+				[`color-scheme/${SET_NAME.LIGHT_HC}`]: 'enabled',
 			},
 		},
 		{
 			name: 'Dark',
 			group: THEME_GROUP_NAME.COLOR_SCHEME,
 			selectedTokenSets: {
-				[SET_NAME.DARK]: 'enabled',
+				[`color-scheme/${SET_NAME.DARK}`]: 'enabled',
+			},
+		},
+		{
+			name: 'Dark Medium Contrast',
+			group: THEME_GROUP_NAME.COLOR_SCHEME,
+			selectedTokenSets: {
+				[`color-scheme/${SET_NAME.DARK_MC}`]: 'enabled',
+			},
+		},
+		{
+			name: 'Dark High Contrast',
+			group: THEME_GROUP_NAME.COLOR_SCHEME,
+			selectedTokenSets: {
+				[`color-scheme/${SET_NAME.DARK_HC}`]: 'enabled',
 			},
 		},
 	];

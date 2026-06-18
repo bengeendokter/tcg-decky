@@ -11,6 +11,8 @@ export const SET_NAME = {
 
 export type SetName = (typeof SET_NAME)[keyof typeof SET_NAME];
 
+export type SetFullName = `${'palette' | 'color-scheme'}/${SetName}`;
+
 export const THEME_GROUP_NAME = {
 	BRAND: 'Brand',
 	COLOR_SCHEME: 'Color Scheme',
@@ -29,7 +31,11 @@ export type BrandThemeFullName = `${typeof THEME_GROUP_NAME.BRAND}/${BrandTheme}
 
 export const COLOR_SCHEME_THEME = {
 	LIGHT: 'Light',
+	LIGHT_MC: 'Light Medium Contrast',
+	LIGHT_HC: 'Light High Contrast',
 	DARK: 'Dark',
+	DARK_MC: 'Dark Medium Contrast',
+	DARK_HC: 'Dark High Contrast',
 } as const satisfies Record<Uppercase<string>, string>;
 
 export type ColorSchemeTheme = (typeof COLOR_SCHEME_THEME)[keyof typeof COLOR_SCHEME_THEME];
@@ -50,15 +56,15 @@ export const THEME_GROUP = {
 } as const satisfies Record<ThemeGroupName, Record<Uppercase<string>, string>>;
 
 export interface Metadata {
-	tokenSetOrder: SetName[];
+	tokenSetOrder: SetFullName[];
 	activeThemes: ThemeFullName[];
-	activeSets?: SetName[];
+	activeSets?: SetFullName[];
 }
 
 export interface ThemeMetadata {
 	name: ThemeShortName;
 	group: ThemeGroupName;
 	selectedTokenSets: {
-		[key in SetName]?: 'enabled' | 'disabled';
+		[key in SetFullName]?: 'enabled' | 'disabled';
 	};
 }
