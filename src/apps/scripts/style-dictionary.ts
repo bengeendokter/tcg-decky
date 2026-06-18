@@ -15,6 +15,7 @@ import {
 	formats,
 	transforms,
 } from 'style-dictionary/enums';
+import { exportPenpotMetadata } from '@style/feature/export-penpot-metadata';
 
 const THEME_NAME_THEME_SELECTOR_MAP = {
 	[THEME_NAME.LIGHT]: '.light',
@@ -138,3 +139,5 @@ await Promise.all(
 		return await getThemeStyleDictionary(themeName).buildAllPlatforms();
 	}),
 );
+
+exportPenpotMetadata();

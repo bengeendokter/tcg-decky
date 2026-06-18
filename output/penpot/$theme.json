@@ -1,15 +1,22 @@
 [
   {
-    "name": "Light",
+    "name": "Purple",
+    "group": "Brand",
     "selectedTokenSets": {
-      "palette": "enabled",
+      "palette": "enabled"
+    }
+  },
+  {
+    "name": "Light",
+    "group": "Color Scheme",
+    "selectedTokenSets": {
       "light": "enabled"
     }
   },
   {
     "name": "Dark",
+    "group": "Color Scheme",
     "selectedTokenSets": {
-      "palette": "enabled",
       "dark": "enabled"
     }
   }

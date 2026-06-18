@@ -17,7 +17,7 @@ export function exportPenpotMetadataToJson({
 		encoding: 'utf-8',
 	});
 
-	const themeMetadataFileName: string = `${outputDirectory}/$theme.json`;
+	const themeMetadataFileName: string = `${outputDirectory}/$themes.json`;
 	fs.writeFileSync(themeMetadataFileName, JSON.stringify(themeMetadata, null, 2), {
 		encoding: 'utf-8',
 	});

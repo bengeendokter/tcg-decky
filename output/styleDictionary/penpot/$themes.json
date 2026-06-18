@@ -8,14 +8,14 @@
   },
   {
     "name": "Light",
-    "group": "Color Theme",
+    "group": "Color Scheme",
     "selectedTokenSets": {
       "light": "enabled"
     }
   },
   {
     "name": "Dark",
-    "group": "Color Theme",
+    "group": "Color Scheme",
     "selectedTokenSets": {
       "dark": "enabled"
     }
