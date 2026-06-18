@@ -1,6 +1,6 @@
 import { CONFIG } from '@config';
 import { exportPenpotMetadataToJson } from '../data-access/export-penpot-metadata-to-json';
-import { SET_NAME, THEME_NAME, type Metadata, type ThemeMetadata } from '../model/penpot-metadata';
+import { SET_NAME, THEME_GROUP, THEME_GROUP_NAME, type Metadata, type ThemeMetadata } from '../model/penpot-metadata';
 
 export function exportPenpotMetadata() {
 	const outputDirectory: string = `${CONFIG.DEFAULT_OUTPUT_DIRECTORY}/penpot`;
@@ -15,20 +15,30 @@ export function exportPenpotMetadata() {
 			SET_NAME.DARK_MC,
 			SET_NAME.DARK_HC,
 		],
-		activeThemes: [THEME_NAME.LIGHT],
+		activeThemes: ["Brand/Purple", 'Color Scheme/Light'],
 		activeSets: [SET_NAME.PALETTE, SET_NAME.LIGHT],
 	};
 
 	const themeMetadata: ThemeMetadata[] = [
 		{
-			name: THEME_NAME.LIGHT,
+			name: "Purple",
+			group: THEME_GROUP_NAME.BRAND,
 			selectedTokenSets: {
 				[SET_NAME.PALETTE]: 'enabled',
 				[SET_NAME.LIGHT]: 'enabled',
 			},
 		},
 		{
-			name: THEME_NAME.DARK,
+			name: "Light",
+			group: THEME_GROUP_NAME.COLOR_SCHEME,
+			selectedTokenSets: {
+				[SET_NAME.PALETTE]: 'enabled',
+				[SET_NAME.DARK]: 'enabled',
+			},
+		},
+		{
+			name: "Dark",
+			group: THEME_GROUP_NAME.COLOR_SCHEME,
 			selectedTokenSets: {
 				[SET_NAME.PALETTE]: 'enabled',
 				[SET_NAME.DARK]: 'enabled',
