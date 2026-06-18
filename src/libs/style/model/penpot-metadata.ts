@@ -1,5 +1,6 @@
 export const SET_NAME = {
-	PALETTE: 'palette',
+	PALETTE_RED: 'palette-red',
+	PALETTE_PURPLE: 'palette-purple',
 	LIGHT: 'light',
 	LIGHT_MC: 'light-mc',
 	LIGHT_HC: 'light-hc',
@@ -19,6 +20,7 @@ export type ThemeGroupName = (typeof THEME_GROUP_NAME)[keyof typeof THEME_GROUP_
 
 export const BRAND_THEME = {
 	PURPLE: 'Purple',
+	RED: 'Red',
 } as const satisfies Record<Uppercase<string>, string>;
 
 export type BrandTheme = (typeof BRAND_THEME)[keyof typeof BRAND_THEME];

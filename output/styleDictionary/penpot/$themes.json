@@ -3,7 +3,14 @@
     "name": "Purple",
     "group": "Brand",
     "selectedTokenSets": {
-      "palette": "enabled"
+      "palette-purple": "enabled"
+    }
+  },
+  {
+    "name": "Red",
+    "group": "Brand",
+    "selectedTokenSets": {
+      "palette-red": "enabled"
     }
   },
   {

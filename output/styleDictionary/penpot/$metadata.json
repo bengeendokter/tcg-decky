@@ -1,6 +1,7 @@
 {
   "tokenSetOrder": [
-    "palette",
+    "palette-red",
+    "palette-purple",
     "light",
     "light-mc",
     "light-hc",
