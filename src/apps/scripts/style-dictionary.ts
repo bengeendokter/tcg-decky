@@ -73,7 +73,7 @@ function getPaletteStyleDictionary(paletteName: string, themeColor: Oklch): Styl
 			[PLATFORM.CSS]: {
 				transformGroup: transformGroups.css,
 				transforms: [transforms.colorOklch],
-				buildPath: 'output/styleDictionary/',
+				buildPath: 'output/style-dictionary/',
 				files: [
 					{
 						destination: `palette-${paletteName}.css`,
@@ -87,7 +87,7 @@ function getPaletteStyleDictionary(paletteName: string, themeColor: Oklch): Styl
 			},
 			[PLATFORM.PENPOT]: {
 				transforms: [transforms.colorHsl],
-				buildPath: 'output/styleDictionary/penpot',
+				buildPath: 'output/style-dictionary/penpot/palette',
 				files: [
 					{
 						destination: `palette-${paletteName}.json`,
@@ -118,7 +118,7 @@ function getThemeStyleDictionary(themeName: ThemeName): StyleDictionary {
 			[PLATFORM.CSS]: {
 				transformGroup: transformGroups.css,
 				transforms: [transforms.colorOklch],
-				buildPath: 'output/styleDictionary/',
+				buildPath: 'output/style-dictionary/',
 				files: [generateThemeFile(themeName)],
 			},
 		},
@@ -147,7 +147,7 @@ await Promise.all(
 					},
 				},
 			},
-			destination: `output/styleDictionary/penpot/${themeName}.json`,
+			destination: `output/style-dictionary/penpot/color-scheme/${themeName}.json`,
 		});
 		return await getThemeStyleDictionary(themeName).buildAllPlatforms();
 	}),

@@ -7,7 +7,7 @@ import {
 } from '../model/penpot-metadata';
 
 export function exportPenpotMetadata() {
-	const outputDirectory: string = `output/styleDictionary/penpot`;
+	const outputDirectory: string = `output/style-dictionary/penpot`;
 
 	const metadata: Metadata = {
 		tokenSetOrder: [
