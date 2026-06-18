@@ -16,6 +16,9 @@ import {
 	transforms,
 } from 'style-dictionary/enums';
 import { exportPenpotMetadata } from '@style/feature/export-penpot-metadata';
+import type { Oklch } from '@style/model/palette';
+
+const BLUE_THEME_COLOR = { l: 0.63, c: 0.26, h: 29.23 } as const satisfies Oklch;
 
 const THEME_NAME_THEME_SELECTOR_MAP = {
 	[THEME_NAME.LIGHT]: '.light',
@@ -68,7 +71,7 @@ const paletteStyleDictionary: StyleDictionary = new StyleDictionary({
 	tokens: {
 		md: {
 			ref: {
-				[TOKEN_PATH_KEY.PALETTE]: getPaletteTokens(),
+				[TOKEN_PATH_KEY.PALETTE]: getPaletteTokens(BLUE_THEME_COLOR),
 			},
 		},
 	},
