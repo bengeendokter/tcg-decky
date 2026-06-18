@@ -50,7 +50,7 @@ export const THEME_GROUP = {
 export interface Metadata {
 	tokenSetOrder: SetName[];
 	activeThemes: ThemeFullName[];
-	activeSets: SetName[];
+	activeSets?: SetName[];
 }
 
 export interface ThemeMetadata {

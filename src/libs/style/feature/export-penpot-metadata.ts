@@ -15,7 +15,6 @@ export function exportPenpotMetadata() {
 			SET_NAME.DARK_HC,
 		],
 		activeThemes: ["Brand/Purple", 'Color Scheme/Light'],
-		activeSets: [SET_NAME.PALETTE, SET_NAME.LIGHT],
 	};
 
 	const themeMetadata: ThemeMetadata[] = [
