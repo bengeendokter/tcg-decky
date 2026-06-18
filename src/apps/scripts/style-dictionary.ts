@@ -42,6 +42,14 @@ function generateThemeFile(theme: ThemeName) {
 	};
 }
 
+function generatePenpotFile(theme: ThemeName) {
+	return {
+		destination: `${theme}.json`,
+		format: formats.json,
+		filter: (token: TransformedToken) => token.path[2] === TOKEN_PATH_KEY.COLOR,
+	};
+}
+
 const log: LogConfig = {
 	warnings: logWarningLevels.warn,
 	verbosity: logVerbosityLevels.verbose,
@@ -114,16 +122,19 @@ function getThemeStyleDictionary(themeName: ThemeName): StyleDictionary {
 				buildPath: 'output/styleDictionary/',
 				files: [generateThemeFile(themeName)],
 			},
+			[PLATFORM.PENPOT]: {
+				buildPath: 'output/styleDictionary/penpot',
+				files: [generatePenpotFile(themeName)],
+			},
 		},
 		log,
 	});
 }
 
-await paletteStyleDictionary.buildPlatform(PLATFORM.CSS);
-await paletteStyleDictionary.buildPlatform(PLATFORM.PENPOT);
+await paletteStyleDictionary.buildAllPlatforms();
 
 await Promise.all(
 	THEME_NAMES.map(async (themeName) => {
-		return await getThemeStyleDictionary(themeName).buildPlatform(PLATFORM.CSS);
+		return await getThemeStyleDictionary(themeName).buildAllPlatforms();
 	}),
 );

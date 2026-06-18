@@ -1,0 +1,19 @@
+{
+  "tokenSetOrder": [
+    "palette",
+    "light",
+    "light-mc",
+    "light-hc",
+    "dark",
+    "dark-mc",
+    "dark-hc"
+  ],
+  "activeThemes": [
+    "Brand/Purple",
+    "Color Theme/Light"
+  ],
+  "activeSets": [
+    "palette",
+    "light"
+  ]
+}
