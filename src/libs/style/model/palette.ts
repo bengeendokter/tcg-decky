@@ -1,6 +1,7 @@
 import { fromEntries } from '@ark/util';
 import { type, type Type } from 'arktype';
 import Color from 'colorjs.io';
+import type { UnionToTuple } from 'type-fest';
 
 type BuildTuple<N extends number, Current extends number[] = []> = Current['length'] extends N
 	? Current
@@ -28,7 +29,7 @@ export const PALETTE_TYPES = [
 	PALETTE_TYPE.NEUTRAL,
 	PALETTE_TYPE.NEUTRAL_VARIANT,
 	PALETTE_TYPE.ERROR,
-] as const satisfies PaletteType[];
+] as const satisfies UnionToTuple<PaletteType>;
 
 export const paletteTypeValidator: Type<PaletteType> = type.enumerated(...PALETTE_TYPES);
 
