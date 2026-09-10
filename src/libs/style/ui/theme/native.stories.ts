@@ -2,14 +2,14 @@ import { html } from 'lit';
 import preview from '#.storybook/preview';
 
 const meta = preview.meta({
-	title: 'Kitchensink',
+	title: 'Native',
 });
 
 export const Primary = meta.story({
 	render: () => html`<main>
 		<section>
 			<hgroup>
-				<h1>h1 HTML5 Kitchen Sink</h1>
+				<h1>h1 Native</h1>
 				<h2>h2 Back in my quaint <a href="#">garden</a></h2>
 				<h3>h3 Jaunty <a href="#">zinnias</a> vie with flaunting phlox</h3>
 				<h4>h4 Five or six big jet planes zoomed quickly by the new tower.</h4>
