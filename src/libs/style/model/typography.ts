@@ -41,6 +41,11 @@ export const TYPEFACE = {
 
 export type Typeface = (typeof TYPEFACE)[keyof typeof TYPEFACE];
 
+export const TYPEFACE_FONT_FAMILY_MAP = {
+	[TYPEFACE.BRAND]: 'sans-serif',
+	[TYPEFACE.PLAIN]: 'sans-serif',
+} as const satisfies Record<Typeface, string>;
+
 export const TYPESCALE_TYPE_TYPEFACE_MAP = {
 	[TYPESCALE_TYPE.DISPLAY]: TYPEFACE.BRAND,
 	[TYPESCALE_TYPE.HEADLINE]: TYPEFACE.BRAND,
@@ -106,6 +111,16 @@ const TYPESCALE_NUMBER_PROPERTY_VALUE_MAP = {
 	'label-small-line-height': 16,
 } as const satisfies Record<TypescaleNumberProperty, number>;
 
+type FontFamilyToken = {
+	$type: 'fontFamily';
+	$value: string;
+};
+
+type FontWeightToken = {
+	$type: 'fontWeight';
+	$value: number;
+};
+
 export type TypographyToken = {
 	$type: 'typography';
 	$value: {
@@ -122,6 +137,20 @@ export type TypographyToken = {
 export type TypographyTokens = {
 	[key in Typescale]: TypographyToken;
 };
+
+function getFontFamilyToken(typeface: Typeface): FontFamilyToken {
+	return {
+		$type: 'fontFamily',
+		$value: TYPEFACE_FONT_FAMILY_MAP[typeface],
+	};
+}
+
+function getFontWeightToken(fontWeightType: FontWeightType): FontWeightToken {
+	return {
+		$type: 'fontWeight',
+		$value: FONT_WEIGHT_VALUE_MAP[fontWeightType],
+	};
+}
 
 function getTypographyToken(
 	typescaleType: TypescaleType,
