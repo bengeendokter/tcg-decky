@@ -26,7 +26,7 @@ export const FONT_WEIGHT_TYPE = {
 
 export type FontWeightType = (typeof FONT_WEIGHT_TYPE)[keyof typeof FONT_WEIGHT_TYPE];
 
-export const FONT_WEIGHT_VALUE_MAP = {
+const FONT_WEIGHT_VALUE_MAP = {
 	[FONT_WEIGHT_TYPE.REGULAR]: 400,
 	[FONT_WEIGHT_TYPE.MEDIUM]: 500,
 	[FONT_WEIGHT_TYPE.BOLD]: 700,
@@ -61,44 +61,68 @@ export const TYPEFACE_PROPERTY_TYPE = {
 	FONT: 'font',
 	WEIGHT: 'weight',
 	SIZE: 'size',
-	LINE_HEIGHT: 'line-height'
+	LINE_HEIGHT: 'line-height',
 } as const satisfies Record<Uppercase<string>, Lowercase<string>>;
 
-export type TypefacePropertyType = (typeof TYPEFACE_PROPERTY_TYPE)[keyof typeof TYPEFACE_PROPERTY_TYPE];
-export type TypefacePropertyNumberType = Exclude<TypefacePropertyType, typeof TYPEFACE_PROPERTY_TYPE.FONT | typeof TYPEFACE_PROPERTY_TYPE.WEIGHT>;
+export type TypefacePropertyType =
+	(typeof TYPEFACE_PROPERTY_TYPE)[keyof typeof TYPEFACE_PROPERTY_TYPE];
+export type TypefacePropertyNumberType = Exclude<
+	TypefacePropertyType,
+	typeof TYPEFACE_PROPERTY_TYPE.FONT | typeof TYPEFACE_PROPERTY_TYPE.WEIGHT
+>;
 
 type TypescaleNumberProperty = `${Typescale}-${TypefacePropertyNumberType}`;
 
 const TYPESCALE_NUMBER_PROPERTY_VALUE_MAP = {
-	"display-large-size": 57,
-	"display-large-line-height": 64,
-	"display-medium-size": 45,
-	"display-medium-line-height": 52,
-	"display-small-size": 36,
-	"display-small-line-height": 44,
-	"headline-large-size": 32,
-	"headline-large-line-height": 40,
-	"headline-medium-size": 28,
-	"headline-medium-line-height": 36,
-	"headline-small-size": 24,
-	"headline-small-line-height": 32,
-	"title-large-size": 22,
-	"title-large-line-height": 28,
-	"title-medium-size": 16,
-	"title-medium-line-height": 24,
-	"title-small-size": 14,
-	"title-small-line-height": 20,
-	"body-large-size": 16,
-	"body-large-line-height": 24,
-	"body-medium-size": 14,
-	"body-medium-line-height": 20,
-	"body-small-size": 12,
-	"body-small-line-height": 16,
-	"label-large-size": 14,
-	"label-large-line-height": 20,
-	"label-medium-size": 12,
-	"label-medium-line-height": 16,
-	"label-small-size": 11,
-	"label-small-line-height": 16,
-
+	'display-large-size': 57,
+	'display-large-line-height': 64,
+	'display-medium-size': 45,
+	'display-medium-line-height': 52,
+	'display-small-size': 36,
+	'display-small-line-height': 44,
+	'headline-large-size': 32,
+	'headline-large-line-height': 40,
+	'headline-medium-size': 28,
+	'headline-medium-line-height': 36,
+	'headline-small-size': 24,
+	'headline-small-line-height': 32,
+	'title-large-size': 22,
+	'title-large-line-height': 28,
+	'title-medium-size': 16,
+	'title-medium-line-height': 24,
+	'title-small-size': 14,
+	'title-small-line-height': 20,
+	'body-large-size': 16,
+	'body-large-line-height': 24,
+	'body-medium-size': 14,
+	'body-medium-line-height': 20,
+	'body-small-size': 12,
+	'body-small-line-height': 16,
+	'label-large-size': 14,
+	'label-large-line-height': 20,
+	'label-medium-size': 12,
+	'label-medium-line-height': 16,
+	'label-small-size': 11,
+	'label-small-line-height': 16,
 } as const satisfies Record<TypescaleNumberProperty, number>;
+
+export interface TypographyToken {
+	$type: 'typography';
+	$value: {
+		fontFamily: string;
+		fontSize: {
+			value: number;
+			unit: 'px';
+		};
+		fontWeight: number;
+		letterSpacing: {
+			value: number;
+			unit: 'px';
+		};
+		lineHeight: number;
+	};
+}
+
+export type TypographyTokens = {
+	[key in Typescale]: TypographyToken;
+}
