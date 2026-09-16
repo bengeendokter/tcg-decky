@@ -223,7 +223,10 @@ function getTypographyToken(
 
 export function getTypographyTokens(): TypographyTokens {
 	const typescales: [TypescaleType, TypescaleSize][] = TYPESCALE_TYPES.flatMap((typescaleType) =>
-		TYPESCALE_SIZES.map((typescaleSize) => [typescaleType, typescaleSize]),
+		TYPESCALE_SIZES.map((typescaleSize): [TypescaleType, TypescaleSize] => [
+			typescaleType,
+			typescaleSize,
+		]),
 	);
 
 	const typescaleTokensEntries: [Typescale, TypographyToken][] = typescales.map(
