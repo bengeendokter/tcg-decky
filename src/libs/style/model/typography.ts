@@ -106,23 +106,38 @@ const TYPESCALE_NUMBER_PROPERTY_VALUE_MAP = {
 	'label-small-line-height': 16,
 } as const satisfies Record<TypescaleNumberProperty, number>;
 
-export interface TypographyToken {
+export type TypographyToken = {
 	$type: 'typography';
 	$value: {
-		fontFamily: string;
+		fontFamily: `{md.ref.typeface.${Typeface}}`;
 		fontSize: {
 			value: number;
 			unit: 'px';
 		};
-		fontWeight: number;
-		letterSpacing: {
-			value: number;
-			unit: 'px';
-		};
+		fontWeight: `{md.ref.typeface.weight.${FontWeightType}}`;
 		lineHeight: number;
 	};
-}
+};
 
 export type TypographyTokens = {
 	[key in Typescale]: TypographyToken;
+};
+
+function getTypographyToken(
+	typescaleType: TypescaleType,
+	typescaleSize: TypescaleSize,
+): TypographyToken {
+	return {
+		$type: 'typography',
+		$value: {
+			fontFamily: `{md.ref.typeface.${TYPESCALE_TYPE_TYPEFACE_MAP[typescaleType]}}`,
+			fontSize: {
+				value: TYPESCALE_NUMBER_PROPERTY_VALUE_MAP[`${typescaleType}-${typescaleSize}-size`],
+				unit: 'px',
+			},
+			fontWeight: `{md.ref.typeface.weight.${TYPESCALE_TYPE_FONT_WEIGHT_TYPE_MAP[typescaleType]}}`,
+			lineHeight:
+				TYPESCALE_NUMBER_PROPERTY_VALUE_MAP[`${typescaleType}-${typescaleSize}-line-height`],
+		},
+	};
 }
