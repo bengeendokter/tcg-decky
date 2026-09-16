@@ -1,3 +1,6 @@
+import { fromEntries } from '@ark/util';
+import type { UnionToTuple } from 'type-fest';
+
 export const TYPESCALE_SIZE = {
 	LARGE: 'large',
 	MEDIUM: 'medium',
@@ -5,6 +8,12 @@ export const TYPESCALE_SIZE = {
 } as const satisfies Record<Uppercase<string>, Lowercase<string>>;
 
 export type TypescaleSize = (typeof TYPESCALE_SIZE)[keyof typeof TYPESCALE_SIZE];
+
+export const TYPESCALE_SIZES = [
+	TYPESCALE_SIZE.LARGE,
+	TYPESCALE_SIZE.MEDIUM,
+	TYPESCALE_SIZE.SMALL,
+] as const satisfies UnionToTuple<TypescaleSize>;
 
 export const TYPESCALE_TYPE = {
 	DISPLAY: 'display',
@@ -16,6 +25,14 @@ export const TYPESCALE_TYPE = {
 
 export type TypescaleType = (typeof TYPESCALE_TYPE)[keyof typeof TYPESCALE_TYPE];
 
+export const TYPESCALE_TYPES = [
+	TYPESCALE_TYPE.DISPLAY,
+	TYPESCALE_TYPE.HEADLINE,
+	TYPESCALE_TYPE.TITLE,
+	TYPESCALE_TYPE.LABEL,
+	TYPESCALE_TYPE.BODY,
+] as const satisfies UnionToTuple<TypescaleType>;
+
 export type Typescale = `${TypescaleType}-${TypescaleSize}`;
 
 export const FONT_WEIGHT_TYPE = {
@@ -25,6 +42,12 @@ export const FONT_WEIGHT_TYPE = {
 } as const satisfies Record<Uppercase<string>, Lowercase<string>>;
 
 export type FontWeightType = (typeof FONT_WEIGHT_TYPE)[keyof typeof FONT_WEIGHT_TYPE];
+
+export const FONT_WEIGHT_TYPES = [
+	FONT_WEIGHT_TYPE.MEDIUM,
+	FONT_WEIGHT_TYPE.REGULAR,
+	FONT_WEIGHT_TYPE.BOLD,
+] as const satisfies UnionToTuple<FontWeightType>;
 
 const FONT_WEIGHT_VALUE_MAP = {
 	[FONT_WEIGHT_TYPE.REGULAR]: 400,
@@ -40,6 +63,8 @@ export const TYPEFACE = {
 } as const satisfies Record<Uppercase<string>, Lowercase<string>>;
 
 export type Typeface = (typeof TYPEFACE)[keyof typeof TYPEFACE];
+
+export const TYPEFACES = [TYPEFACE.BRAND, TYPEFACE.PLAIN] as const satisfies UnionToTuple<Typeface>;
 
 export const TYPEFACE_FONT_FAMILY_MAP = {
 	[TYPEFACE.BRAND]: 'sans-serif',
@@ -111,14 +136,22 @@ const TYPESCALE_NUMBER_PROPERTY_VALUE_MAP = {
 	'label-small-line-height': 16,
 } as const satisfies Record<TypescaleNumberProperty, number>;
 
-type FontFamilyToken = {
+export type FontFamilyToken = {
 	$type: 'fontFamily';
 	$value: string;
 };
 
-type FontWeightToken = {
+export type FontFamilyTokens = {
+	[key in `{md.ref.typeface.${Typeface}}`]: FontFamilyToken;
+};
+
+export type FontWeightToken = {
 	$type: 'fontWeight';
 	$value: number;
+};
+
+export type FontWeightTokens = {
+	[key in `{md.ref.typeface.weight.${FontWeightType}}`]: FontWeightToken;
 };
 
 export type TypographyToken = {
@@ -145,11 +178,28 @@ function getFontFamilyToken(typeface: Typeface): FontFamilyToken {
 	};
 }
 
+export function getFontFamilyTokens(): FontFamilyTokens {
+	const fontFamilyTokensEntries: [`{md.ref.typeface.${Typeface}}`, FontFamilyToken][] =
+		TYPEFACES.map((typeface) => [`{md.ref.typeface.${typeface}}`, getFontFamilyToken(typeface)]);
+
+	return fromEntries(fontFamilyTokensEntries);
+}
+
 function getFontWeightToken(fontWeightType: FontWeightType): FontWeightToken {
 	return {
 		$type: 'fontWeight',
 		$value: FONT_WEIGHT_VALUE_MAP[fontWeightType],
 	};
+}
+
+export function getFontWeightTokens(): FontWeightTokens {
+	const fontWeightTokensEntries: [`{md.ref.typeface.weight.${FontWeightType}}`, FontWeightToken][] =
+		FONT_WEIGHT_TYPES.map((fontWeightType) => [
+			`{md.ref.typeface.weight.${fontWeightType}}`,
+			getFontWeightToken(fontWeightType),
+		]);
+
+	return fromEntries(fontWeightTokensEntries);
 }
 
 function getTypographyToken(
@@ -169,4 +219,8 @@ function getTypographyToken(
 				TYPESCALE_NUMBER_PROPERTY_VALUE_MAP[`${typescaleType}-${typescaleSize}-line-height`],
 		},
 	};
+}
+
+export function getTypographyTokens(): TypographyTokens {
+	
 }
