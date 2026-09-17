@@ -35,6 +35,13 @@ export const TYPESCALE_TYPES = [
 
 export type Typescale = `${TypescaleType}-${TypescaleSize}`;
 
+const typescales: [TypescaleType, TypescaleSize][] = TYPESCALE_TYPES.flatMap((typescaleType) =>
+	TYPESCALE_SIZES.map((typescaleSize): [TypescaleType, TypescaleSize] => [
+		typescaleType,
+		typescaleSize,
+	]),
+);
+
 export const FONT_WEIGHT_TYPE = {
 	REGULAR: 'regular',
 	MEDIUM: 'medium',
@@ -146,7 +153,19 @@ export type FontFamilyTokens = {
 };
 
 export type TypescaleFontFamilyTokens = {
-	[key in `${Typescale}`]: `{md.ref.typeface.font-family.${Typeface}}`;
+	[key in `${Typescale}-font`]: `{md.ref.typeface.font.${Typeface}}`;
+};
+
+export function getTypescaleFontFamilyTokens(): TypescaleFontFamilyTokens {
+	const typescaleFontFamilyTokensEntries: [
+		`${Typescale}-font`,
+		`{md.ref.typeface.font.${Typeface}}`,
+	][] = typescales.map(([typescaleType, typescaleSize]) => [
+		`${typescaleType}-${typescaleSize}-font`,
+		`{md.ref.typeface.font.${TYPESCALE_TYPE_TYPEFACE_MAP[typescaleType]}}`,
+	]);
+
+	return fromEntries(typescaleFontFamilyTokensEntries);
 }
 
 export type FontWeightToken = {
@@ -159,7 +178,19 @@ export type FontWeightTokens = {
 };
 
 export type TypescaleFontWeightTokens = {
-	[key in `${Typescale}`]: `{md.ref.typeface.weight.${FontWeightType}}`;
+	[key in `${Typescale}-weight`]: `{md.ref.typeface.weight.${FontWeightType}}`;
+};
+
+export function getTypescaleFontWeightTokens(): TypescaleFontWeightTokens {
+	const typescaleFontWeightTokensEntries: [
+		`${Typescale}-weight`,
+		`{md.ref.typeface.weight.${FontWeightType}}`,
+	][] = typescales.map(([typescaleType, typescaleSize]) => [
+		`${typescaleType}-${typescaleSize}-weight`,
+		`{md.ref.typeface.weight.${TYPESCALE_TYPE_FONT_WEIGHT_TYPE_MAP[typescaleType]}}`,
+	]);
+
+	return fromEntries(typescaleFontWeightTokensEntries);
 }
 
 export type FontSizeToken = {
@@ -171,8 +202,8 @@ export type FontSizeToken = {
 };
 
 export type TypescaleFontSizeTokens = {
-	[key in `${Typescale}`]: FontSizeToken;
-}
+	[key in `${Typescale}-size`]: FontSizeToken;
+};
 
 export type LineHeightToken = {
 	$type: 'dimension';
@@ -183,22 +214,16 @@ export type LineHeightToken = {
 };
 
 export type TypescaleLineHeightTokens = {
-	[key in `${Typescale}`]: LineHeightToken;
-}
+	[key in `${Typescale}-line-height`]: LineHeightToken;
+};
 
 export type TypographyToken = {
 	$type: 'typography';
 	$value: {
-		fontFamily: `{md.ref.typeface.font-family.${Typeface}}`;
-		fontSize: {
-			value: number;
-			unit: 'px';
-		};
-		fontWeight: `{md.ref.typeface.weight.${FontWeightType}}`;
-		lineHeight: {
-			value: number;
-			unit: 'px';
-		};
+		fontFamily: `{md.sys.typescale.${Typescale}-font}`;
+		fontSize: `{md.sys.typescale.${Typescale}-size}`;
+		fontWeight: `{md.sys.typescale.${Typescale}-weight}`;
+		lineHeight: `{md.sys.typescale.${Typescale}-line-height}`;
 	};
 };
 
@@ -244,28 +269,15 @@ function getTypographyToken(
 	return {
 		$type: 'typography',
 		$value: {
-			fontFamily: `{md.ref.typeface.font-family.${TYPESCALE_TYPE_TYPEFACE_MAP[typescaleType]}}`,
-			fontSize: {
-				value: TYPESCALE_NUMBER_PROPERTY_VALUE_MAP[`${typescaleType}-${typescaleSize}-size`],
-				unit: 'px',
-			},
-			fontWeight: `{md.ref.typeface.weight.${TYPESCALE_TYPE_FONT_WEIGHT_TYPE_MAP[typescaleType]}}`,
-			lineHeight: {
-				value: TYPESCALE_NUMBER_PROPERTY_VALUE_MAP[`${typescaleType}-${typescaleSize}-line-height`],
-				unit: 'px',
-			},
+			fontFamily: `{md.sys.typescale.${typescaleType}-${typescaleSize}-font}`,
+			fontSize: `{md.sys.typescale.${typescaleType}-${typescaleSize}-size}`,
+			fontWeight: `{md.sys.typescale.${typescaleType}-${typescaleSize}-weight}`,
+			lineHeight: `{md.sys.typescale.${typescaleType}-${typescaleSize}-line-height}`,
 		},
 	};
 }
 
 export function getTypographyTokens(): TypographyTokens {
-	const typescales: [TypescaleType, TypescaleSize][] = TYPESCALE_TYPES.flatMap((typescaleType) =>
-		TYPESCALE_SIZES.map((typescaleSize): [TypescaleType, TypescaleSize] => [
-			typescaleType,
-			typescaleSize,
-		]),
-	);
-
 	const typescaleTokensEntries: [Typescale, TypographyToken][] = typescales.map(
 		([typescaleType, typescaleSize]: [TypescaleType, TypescaleSize]) => [
 			`${typescaleType}-${typescaleSize}`,
