@@ -142,7 +142,7 @@ export type FontFamilyToken = {
 };
 
 export type FontFamilyTokens = {
-	[key in `{md.ref.typeface.${Typeface}}`]: FontFamilyToken;
+	[key in Typeface]: FontFamilyToken;
 };
 
 export type FontWeightToken = {
@@ -151,13 +151,13 @@ export type FontWeightToken = {
 };
 
 export type FontWeightTokens = {
-	[key in `{md.ref.typeface.weight.${FontWeightType}}`]: FontWeightToken;
+	[key in FontWeightType]: FontWeightToken;
 };
 
 export type TypographyToken = {
 	$type: 'typography';
 	$value: {
-		fontFamily: `{md.ref.typeface.${Typeface}}`;
+		fontFamily: `{md.ref.typeface.font-family.${Typeface}}`;
 		fontSize: {
 			value: number;
 			unit: 'px';
@@ -179,8 +179,8 @@ function getFontFamilyToken(typeface: Typeface): FontFamilyToken {
 }
 
 export function getFontFamilyTokens(): FontFamilyTokens {
-	const fontFamilyTokensEntries: [`{md.ref.typeface.${Typeface}}`, FontFamilyToken][] =
-		TYPEFACES.map((typeface) => [`{md.ref.typeface.${typeface}}`, getFontFamilyToken(typeface)]);
+	const fontFamilyTokensEntries: [Typeface, FontFamilyToken][] =
+		TYPEFACES.map((typeface) => [typeface, getFontFamilyToken(typeface)]);
 
 	return fromEntries(fontFamilyTokensEntries);
 }
@@ -193,9 +193,9 @@ function getFontWeightToken(fontWeightType: FontWeightType): FontWeightToken {
 }
 
 export function getFontWeightTokens(): FontWeightTokens {
-	const fontWeightTokensEntries: [`{md.ref.typeface.weight.${FontWeightType}}`, FontWeightToken][] =
+	const fontWeightTokensEntries: [FontWeightType, FontWeightToken][] =
 		FONT_WEIGHT_TYPES.map((fontWeightType) => [
-			`{md.ref.typeface.weight.${fontWeightType}}`,
+			fontWeightType,
 			getFontWeightToken(fontWeightType),
 		]);
 
@@ -209,7 +209,7 @@ function getTypographyToken(
 	return {
 		$type: 'typography',
 		$value: {
-			fontFamily: `{md.ref.typeface.${TYPESCALE_TYPE_TYPEFACE_MAP[typescaleType]}}`,
+			fontFamily: `{md.ref.typeface.font-family.${TYPESCALE_TYPE_TYPEFACE_MAP[typescaleType]}}`,
 			fontSize: {
 				value: TYPESCALE_NUMBER_PROPERTY_VALUE_MAP[`${typescaleType}-${typescaleSize}-size`],
 				unit: 'px',
