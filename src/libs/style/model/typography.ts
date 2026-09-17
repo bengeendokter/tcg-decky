@@ -163,7 +163,10 @@ export type TypographyToken = {
 			unit: 'px';
 		};
 		fontWeight: `{md.ref.typeface.weight.${FontWeightType}}`;
-		lineHeight: number;
+		lineHeight: {
+			value: number;
+			unit: 'px';
+		};
 	};
 };
 
@@ -179,8 +182,10 @@ function getFontFamilyToken(typeface: Typeface): FontFamilyToken {
 }
 
 export function getFontFamilyTokens(): FontFamilyTokens {
-	const fontFamilyTokensEntries: [Typeface, FontFamilyToken][] =
-		TYPEFACES.map((typeface) => [typeface, getFontFamilyToken(typeface)]);
+	const fontFamilyTokensEntries: [Typeface, FontFamilyToken][] = TYPEFACES.map((typeface) => [
+		typeface,
+		getFontFamilyToken(typeface),
+	]);
 
 	return fromEntries(fontFamilyTokensEntries);
 }
@@ -193,11 +198,9 @@ function getFontWeightToken(fontWeightType: FontWeightType): FontWeightToken {
 }
 
 export function getFontWeightTokens(): FontWeightTokens {
-	const fontWeightTokensEntries: [FontWeightType, FontWeightToken][] =
-		FONT_WEIGHT_TYPES.map((fontWeightType) => [
-			fontWeightType,
-			getFontWeightToken(fontWeightType),
-		]);
+	const fontWeightTokensEntries: [FontWeightType, FontWeightToken][] = FONT_WEIGHT_TYPES.map(
+		(fontWeightType) => [fontWeightType, getFontWeightToken(fontWeightType)],
+	);
 
 	return fromEntries(fontWeightTokensEntries);
 }
@@ -215,8 +218,10 @@ function getTypographyToken(
 				unit: 'px',
 			},
 			fontWeight: `{md.ref.typeface.weight.${TYPESCALE_TYPE_FONT_WEIGHT_TYPE_MAP[typescaleType]}}`,
-			lineHeight:
-				TYPESCALE_NUMBER_PROPERTY_VALUE_MAP[`${typescaleType}-${typescaleSize}-line-height`],
+			lineHeight: {
+				value: TYPESCALE_NUMBER_PROPERTY_VALUE_MAP[`${typescaleType}-${typescaleSize}-line-height`],
+				unit: 'px',
+			},
 		},
 	};
 }

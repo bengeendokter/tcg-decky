@@ -17,7 +17,11 @@ import {
 
 import type { Oklch } from '@style/model/palette';
 
-import { getFontFamilyTokens, getFontWeightTokens } from '@style/model/typography';
+import {
+	getFontFamilyTokens,
+	getFontWeightTokens,
+	getTypographyTokens,
+} from '@style/model/typography';
 
 const BLUE_THEME_COLOR = { l: 0.63, c: 0.26, h: 29.23 } as const satisfies Oklch;
 
@@ -136,17 +140,22 @@ function getTypographyStyleDictionary(): StyleDictionary {
 						weight: getFontWeightTokens(),
 					},
 				},
+				sys: {
+					typescale: getTypographyTokens(),
+				},
 			},
 		},
 		platforms: {
 			[PLATFORM.CSS]: {
 				transformGroup: transformGroups.css,
+				transforms: [transforms.sizePxToRem],
 				buildPath: 'output/style-dictionary/',
 				files: [
 					{
 						destination: `typeface.css`,
 						format: formats.cssVariables,
 						options: {
+							outputReferences: true,
 							selector: 'html',
 						},
 					},
