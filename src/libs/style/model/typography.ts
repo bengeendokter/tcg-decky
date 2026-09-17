@@ -145,6 +145,10 @@ export type FontFamilyTokens = {
 	[key in Typeface]: FontFamilyToken;
 };
 
+export type TypescaleFontFamilyTokens = {
+	[key in `${Typescale}`]: `{md.ref.typeface.font-family.${Typeface}}`;
+}
+
 export type FontWeightToken = {
 	$type: 'fontWeight';
 	$value: number;
@@ -153,6 +157,34 @@ export type FontWeightToken = {
 export type FontWeightTokens = {
 	[key in FontWeightType]: FontWeightToken;
 };
+
+export type TypescaleFontWeightTokens = {
+	[key in `${Typescale}`]: `{md.ref.typeface.weight.${FontWeightType}}`;
+}
+
+export type FontSizeToken = {
+	$type: 'dimension';
+	$value: {
+		value: number;
+		unit: 'px';
+	};
+};
+
+export type TypescaleFontSizeTokens = {
+	[key in `${Typescale}`]: FontSizeToken;
+}
+
+export type LineHeightToken = {
+	$type: 'dimension';
+	$value: {
+		value: number;
+		unit: 'px';
+	};
+};
+
+export type TypescaleLineHeightTokens = {
+	[key in `${Typescale}`]: LineHeightToken;
+}
 
 export type TypographyToken = {
 	$type: 'typography';
