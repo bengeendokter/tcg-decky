@@ -1,6 +1,7 @@
 import { fromEntries } from '@ark/util';
 import type { UnionToTuple } from 'type-fest';
 import type { DimensionToken } from './design-token';
+import type { PenpotDimensionToken } from './penpot-tokens';
 
 export const TYPESCALE_SIZE = {
 	LARGE: 'large',
@@ -212,11 +213,6 @@ export function getTypescaleFontWeightTokens(): TypescaleFontWeightTokens {
 
 	return fromEntries(typescaleFontWeightTokensEntries);
 }
-
-export type PenpotDimensionToken = {
-	$type: 'dimension';
-	$value: `${number}px`;
-};
 
 export type TypescaleFontSizeTokens = {
 	[key in `${Typescale}-size`]: DimensionToken;

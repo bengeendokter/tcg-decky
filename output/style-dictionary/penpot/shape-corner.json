@@ -1,0 +1,48 @@
+{
+  "md": {
+    "sys": {
+      "shape-corner": {
+        "none": {
+          "$type": "dimension",
+          "$value": "0px"
+        },
+        "extra-small": {
+          "$type": "dimension",
+          "$value": "4px"
+        },
+        "small": {
+          "$type": "dimension",
+          "$value": "8px"
+        },
+        "medium": {
+          "$type": "dimension",
+          "$value": "12px"
+        },
+        "large": {
+          "$type": "dimension",
+          "$value": "16px"
+        },
+        "large-increased": {
+          "$type": "dimension",
+          "$value": "20px"
+        },
+        "extra-large": {
+          "$type": "dimension",
+          "$value": "28px"
+        },
+        "extra-large-increased": {
+          "$type": "dimension",
+          "$value": "32px"
+        },
+        "extra-extra-large": {
+          "$type": "dimension",
+          "$value": "48px"
+        },
+        "full": {
+          "$type": "dimension",
+          "$value": "100000px"
+        }
+      }
+    }
+  }
+}

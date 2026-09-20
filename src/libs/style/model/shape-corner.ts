@@ -1,6 +1,7 @@
 import type { UnionToTuple } from 'type-fest';
 import type { DimensionToken } from './design-token';
 import { fromEntries } from '@ark/util';
+import type { PenpotDimensionToken } from './penpot-tokens';
 
 const SHAPE_CORNER = {
 	NONE: 'none',
@@ -63,4 +64,23 @@ export function getShapeCornerTokens(): ShapeCornerTokens {
 	);
 
 	return fromEntries(shapeCornerTokensEntries);
+}
+
+export type PenpotShapeCornerTokens = {
+	[key in ShapeCorner]: PenpotDimensionToken;
+};
+
+export function getPenpotShapeCornerToken(shapeCorner: ShapeCorner): PenpotDimensionToken {
+	return {
+		$type: 'dimension',
+		$value: `${SHAPE_CORNER_VALUE_MAP[shapeCorner]}px`,
+	};
+}
+
+export function getPenpotShapeCornerTokens(): PenpotShapeCornerTokens {
+	const penpotShapeCornerTokensEntries: [ShapeCorner, PenpotDimensionToken][] = SHAPE_CORNERS.map(
+		(shapeCorner) => [shapeCorner, getPenpotShapeCornerToken(shapeCorner)],
+	);
+
+	return fromEntries(penpotShapeCornerTokensEntries);
 }
