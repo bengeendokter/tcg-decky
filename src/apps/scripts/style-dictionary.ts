@@ -7,6 +7,7 @@ import {
 } from '@style/model/theme';
 import { getPaletteTokens, PURPLE_THEME_COLOR } from '@style/feature/export-palette-tokens';
 import StyleDictionary, { type LogConfig, type TransformedToken } from 'style-dictionary';
+import { type DesignTokens } from 'style-dictionary/types';
 import {
 	transformGroups,
 	logWarningLevels,
@@ -137,27 +138,29 @@ function getThemeStyleDictionary(themeName: ThemeName): StyleDictionary {
 	});
 }
 
-function getTypographyStyleDictionary(): StyleDictionary {
-	return new StyleDictionary({
-		tokens: {
-			md: {
-				ref: {
-					typeface: {
-						font: getFontFamilyTokens(),
-						weight: getFontWeightTokens(),
-					},
-				},
-				sys: {
-					typescale: {
-						...getTypescaleFontFamilyTokens(),
-						...getTypescaleFontSizeTokens(),
-						...getTypescaleFontWeightTokens(),
-						...getTypescaleLineHeightTokens(),
-						...getTypographyTokens(),
-					},
-				},
+const typographyTokens: DesignTokens = {
+	md: {
+		ref: {
+			typeface: {
+				font: getFontFamilyTokens(),
+				weight: getFontWeightTokens(),
 			},
 		},
+		sys: {
+			typescale: {
+				...getTypescaleFontFamilyTokens(),
+				...getTypescaleFontSizeTokens(),
+				...getTypescaleFontWeightTokens(),
+				...getTypescaleLineHeightTokens(),
+				...getTypographyTokens(),
+			},
+		},
+	},
+};
+
+function getTypographyStyleDictionary(): StyleDictionary {
+	return new StyleDictionary({
+		tokens: typographyTokens,
 		platforms: {
 			[PLATFORM.CSS]: {
 				transformGroup: transformGroups.css,
@@ -165,7 +168,7 @@ function getTypographyStyleDictionary(): StyleDictionary {
 				buildPath: 'output/style-dictionary/',
 				files: [
 					{
-						destination: `typeface.css`,
+						destination: `typography.css`,
 						format: formats.cssVariables,
 						options: {
 							outputReferences: true,
@@ -209,3 +212,8 @@ await Promise.all(
 exportPenpotMetadata();
 
 await getTypographyStyleDictionary().buildAllPlatforms();
+
+exportObjectToJson({
+	object: typographyTokens,
+	destination: `output/style-dictionary/penpot/typography.json`,
+});
