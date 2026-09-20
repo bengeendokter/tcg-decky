@@ -21,5 +21,5 @@
 	display: grid;
 	align-content: center;
 	justify-content: center;
-	border-radius: var(--md-sys-shape-corner-value-small);
+	border-radius: var(--md-sys-shape-corner-small);
 }

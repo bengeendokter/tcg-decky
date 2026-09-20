@@ -6,7 +6,7 @@
 	margin-inline: 16px;
 	background-color: var(--md-sys-color-inverse-surface);
 	color: var(--md-sys-color-inverse-on-surface);
-	border-radius: var(--md-sys-shape-corner-value-extra-small);
+	border-radius: var(--md-sys-shape-corner-extra-small);
 	user-select: none;
 
 	position: absolute;

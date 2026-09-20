@@ -1,5 +1,6 @@
 import { fromEntries } from '@ark/util';
 import type { UnionToTuple } from 'type-fest';
+import type { DimensionToken } from './design-token';
 
 export const TYPESCALE_SIZE = {
 	LARGE: 'large',
@@ -212,29 +213,21 @@ export function getTypescaleFontWeightTokens(): TypescaleFontWeightTokens {
 	return fromEntries(typescaleFontWeightTokensEntries);
 }
 
-export type FontSizeToken = {
-	$type: 'dimension';
-	$value: {
-		value: number;
-		unit: 'px';
-	};
-};
-
-export type PenpotPxToken = {
+export type PenpotDimensionToken = {
 	$type: 'dimension';
 	$value: `${number}px`;
 };
 
 export type TypescaleFontSizeTokens = {
-	[key in `${Typescale}-size`]: FontSizeToken;
+	[key in `${Typescale}-size`]: DimensionToken;
 };
 
 export type PenpotTypescaleFontSizeTokens = {
-	[key in `${Typescale}-size`]: PenpotPxToken;
+	[key in `${Typescale}-size`]: PenpotDimensionToken;
 };
 
 export function getTypescaleFontSizeTokens(): TypescaleFontSizeTokens {
-	const typescaleFontSizeTokensEntries: [`${Typescale}-size`, FontSizeToken][] = typescales.map(
+	const typescaleFontSizeTokensEntries: [`${Typescale}-size`, DimensionToken][] = typescales.map(
 		([typescaleType, typescaleSize]) => [
 			`${typescaleType}-${typescaleSize}-size`,
 			{
@@ -251,7 +244,7 @@ export function getTypescaleFontSizeTokens(): TypescaleFontSizeTokens {
 }
 
 export function getPenpotTypescaleFontSizeTokens(): PenpotTypescaleFontSizeTokens {
-	const typescaleFontSizeTokensEntries: [`${Typescale}-size`, PenpotPxToken][] = typescales.map(
+	const typescaleFontSizeTokensEntries: [`${Typescale}-size`, PenpotDimensionToken][] = typescales.map(
 		([typescaleType, typescaleSize]) => [
 			`${typescaleType}-${typescaleSize}-size`,
 			{
@@ -264,24 +257,16 @@ export function getPenpotTypescaleFontSizeTokens(): PenpotTypescaleFontSizeToken
 	return fromEntries(typescaleFontSizeTokensEntries);
 }
 
-export type LineHeightToken = {
-	$type: 'dimension';
-	$value: {
-		value: number;
-		unit: 'px';
-	};
-};
-
 export type TypescaleLineHeightTokens = {
-	[key in `${Typescale}-line-height`]: LineHeightToken;
+	[key in `${Typescale}-line-height`]: DimensionToken;
 };
 
 export type PenpotTypescaleLineHeightTokens = {
-	[key in `${Typescale}-line-height`]: PenpotPxToken;
+	[key in `${Typescale}-line-height`]: PenpotDimensionToken;
 };
 
 export function getTypescaleLineHeightTokens(): TypescaleLineHeightTokens {
-	const typescaleLineHeightTokensEntries: [`${Typescale}-line-height`, LineHeightToken][] =
+	const typescaleLineHeightTokensEntries: [`${Typescale}-line-height`, DimensionToken][] =
 		typescales.map(([typescaleType, typescaleSize]) => [
 			`${typescaleType}-${typescaleSize}-line-height`,
 			{
@@ -297,7 +282,7 @@ export function getTypescaleLineHeightTokens(): TypescaleLineHeightTokens {
 }
 
 export function getPenpotTypescaleLineHeightTokens(): PenpotTypescaleLineHeightTokens {
-	const typescaleLineHeightTokensEntries: [`${Typescale}-line-height`, PenpotPxToken][] =
+	const typescaleLineHeightTokensEntries: [`${Typescale}-line-height`, PenpotDimensionToken][] =
 		typescales.map(([typescaleType, typescaleSize]) => [
 			`${typescaleType}-${typescaleSize}-line-height`,
 			{
