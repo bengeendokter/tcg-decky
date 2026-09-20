@@ -20,6 +20,10 @@ import type { Oklch } from '@style/model/palette';
 import {
 	getFontFamilyTokens,
 	getFontWeightTokens,
+	getTypescaleFontFamilyTokens,
+	getTypescaleFontSizeTokens,
+	getTypescaleFontWeightTokens,
+	getTypescaleLineHeightTokens,
 	getTypographyTokens,
 } from '@style/model/typography';
 
@@ -141,7 +145,13 @@ function getTypographyStyleDictionary(): StyleDictionary {
 					},
 				},
 				sys: {
-					typescale: getTypographyTokens(),
+					typescale: {
+						...getTypescaleFontFamilyTokens(),
+						...getTypescaleFontSizeTokens(),
+						...getTypescaleFontWeightTokens(),
+						...getTypescaleLineHeightTokens(),
+						// ...getTypographyTokens()
+					},
 				},
 			},
 		},
