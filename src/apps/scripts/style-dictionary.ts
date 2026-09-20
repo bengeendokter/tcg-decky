@@ -22,6 +22,8 @@ import type { Oklch } from '@style/model/palette';
 import {
 	getFontFamilyTokens,
 	getFontWeightTokens,
+	getPenpotTypescaleFontSizeTokens,
+	getPenpotTypescaleLineHeightTokens,
 	getTypescaleFontFamilyTokens,
 	getTypescaleFontSizeTokens,
 	getTypescaleFontWeightTokens,
@@ -158,6 +160,26 @@ const typographyTokens: DesignTokens = {
 	},
 };
 
+const penpotTypographyTokens: DesignTokens = {
+	md: {
+		ref: {
+			typeface: {
+				font: getFontFamilyTokens(),
+				weight: getFontWeightTokens(),
+			},
+		},
+		sys: {
+			typescale: {
+				...getTypescaleFontFamilyTokens(),
+				...getPenpotTypescaleFontSizeTokens(),
+				...getTypescaleFontWeightTokens(),
+				...getPenpotTypescaleLineHeightTokens(),
+				...getTypographyTokens(),
+			},
+		},
+	},
+};
+
 function getTypographyStyleDictionary(): StyleDictionary {
 	return new StyleDictionary({
 		tokens: typographyTokens,
@@ -214,6 +236,6 @@ exportPenpotMetadata();
 await getTypographyStyleDictionary().buildAllPlatforms();
 
 exportObjectToJson({
-	object: typographyTokens,
+	object: penpotTypographyTokens,
 	destination: `output/style-dictionary/penpot/typography.json`,
 });

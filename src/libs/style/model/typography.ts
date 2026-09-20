@@ -220,8 +220,17 @@ export type FontSizeToken = {
 	};
 };
 
+export type PenpotPxToken = {
+	$type: 'dimension';
+	$value: `${number}px`;
+};
+
 export type TypescaleFontSizeTokens = {
 	[key in `${Typescale}-size`]: FontSizeToken;
+};
+
+export type PenpotTypescaleFontSizeTokens = {
+	[key in `${Typescale}-size`]: PenpotPxToken;
 };
 
 export function getTypescaleFontSizeTokens(): TypescaleFontSizeTokens {
@@ -241,6 +250,20 @@ export function getTypescaleFontSizeTokens(): TypescaleFontSizeTokens {
 	return fromEntries(typescaleFontSizeTokensEntries);
 }
 
+export function getPenpotTypescaleFontSizeTokens(): PenpotTypescaleFontSizeTokens {
+	const typescaleFontSizeTokensEntries: [`${Typescale}-size`, PenpotPxToken][] = typescales.map(
+		([typescaleType, typescaleSize]) => [
+			`${typescaleType}-${typescaleSize}-size`,
+			{
+				$type: 'dimension',
+				$value: `${TYPESCALE_FONT_SIZE_MAP[`${typescaleType}-${typescaleSize}-size`]}px`,
+			},
+		],
+	);
+
+	return fromEntries(typescaleFontSizeTokensEntries);
+}
+
 export type LineHeightToken = {
 	$type: 'dimension';
 	$value: {
@@ -253,6 +276,10 @@ export type TypescaleLineHeightTokens = {
 	[key in `${Typescale}-line-height`]: LineHeightToken;
 };
 
+export type PenpotTypescaleLineHeightTokens = {
+	[key in `${Typescale}-line-height`]: PenpotPxToken;
+};
+
 export function getTypescaleLineHeightTokens(): TypescaleLineHeightTokens {
 	const typescaleLineHeightTokensEntries: [`${Typescale}-line-height`, LineHeightToken][] =
 		typescales.map(([typescaleType, typescaleSize]) => [
@@ -263,6 +290,19 @@ export function getTypescaleLineHeightTokens(): TypescaleLineHeightTokens {
 					value: TYPESCALE_LINE_HEIGHT_MAP[`${typescaleType}-${typescaleSize}-line-height`],
 					unit: 'px',
 				},
+			},
+		]);
+
+	return fromEntries(typescaleLineHeightTokensEntries);
+}
+
+export function getPenpotTypescaleLineHeightTokens(): PenpotTypescaleLineHeightTokens {
+	const typescaleLineHeightTokensEntries: [`${Typescale}-line-height`, PenpotPxToken][] =
+		typescales.map(([typescaleType, typescaleSize]) => [
+			`${typescaleType}-${typescaleSize}-line-height`,
+			{
+				$type: 'dimension',
+				$value: `${TYPESCALE_LINE_HEIGHT_MAP[`${typescaleType}-${typescaleSize}-line-height`]}px`,
 			},
 		]);
 

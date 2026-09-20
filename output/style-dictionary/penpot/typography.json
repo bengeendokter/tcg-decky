@@ -92,108 +92,63 @@
         },
         "display-large-size": {
           "$type": "dimension",
-          "$value": {
-            "value": 57,
-            "unit": "px"
-          }
+          "$value": "57px"
         },
         "display-medium-size": {
           "$type": "dimension",
-          "$value": {
-            "value": 45,
-            "unit": "px"
-          }
+          "$value": "45px"
         },
         "display-small-size": {
           "$type": "dimension",
-          "$value": {
-            "value": 36,
-            "unit": "px"
-          }
+          "$value": "36px"
         },
         "headline-large-size": {
           "$type": "dimension",
-          "$value": {
-            "value": 32,
-            "unit": "px"
-          }
+          "$value": "32px"
         },
         "headline-medium-size": {
           "$type": "dimension",
-          "$value": {
-            "value": 28,
-            "unit": "px"
-          }
+          "$value": "28px"
         },
         "headline-small-size": {
           "$type": "dimension",
-          "$value": {
-            "value": 24,
-            "unit": "px"
-          }
+          "$value": "24px"
         },
         "title-large-size": {
           "$type": "dimension",
-          "$value": {
-            "value": 22,
-            "unit": "px"
-          }
+          "$value": "22px"
         },
         "title-medium-size": {
           "$type": "dimension",
-          "$value": {
-            "value": 16,
-            "unit": "px"
-          }
+          "$value": "16px"
         },
         "title-small-size": {
           "$type": "dimension",
-          "$value": {
-            "value": 14,
-            "unit": "px"
-          }
+          "$value": "14px"
         },
         "label-large-size": {
           "$type": "dimension",
-          "$value": {
-            "value": 14,
-            "unit": "px"
-          }
+          "$value": "14px"
         },
         "label-medium-size": {
           "$type": "dimension",
-          "$value": {
-            "value": 12,
-            "unit": "px"
-          }
+          "$value": "12px"
         },
         "label-small-size": {
           "$type": "dimension",
-          "$value": {
-            "value": 11,
-            "unit": "px"
-          }
+          "$value": "11px"
         },
         "body-large-size": {
           "$type": "dimension",
-          "$value": {
-            "value": 16,
-            "unit": "px"
-          }
+          "$value": "16px"
         },
         "body-medium-size": {
           "$type": "dimension",
-          "$value": {
-            "value": 14,
-            "unit": "px"
-          }
+          "$value": "14px"
         },
         "body-small-size": {
           "$type": "dimension",
-          "$value": {
-            "value": 12,
-            "unit": "px"
-          }
+          "$value": "12px"
         },
         "display-large-weight": {
           "$type": "fontWeight",
@@ -257,108 +212,63 @@
         },
         "display-large-line-height": {
           "$type": "dimension",
-          "$value": {
-            "value": 64,
-            "unit": "px"
-          }
+          "$value": "64px"
         },
         "display-medium-line-height": {
           "$type": "dimension",
-          "$value": {
-            "value": 52,
-            "unit": "px"
-          }
+          "$value": "52px"
         },
         "display-small-line-height": {
           "$type": "dimension",
-          "$value": {
-            "value": 44,
-            "unit": "px"
-          }
+          "$value": "44px"
         },
         "headline-large-line-height": {
           "$type": "dimension",
-          "$value": {
-            "value": 40,
-            "unit": "px"
-          }
+          "$value": "40px"
         },
         "headline-medium-line-height": {
           "$type": "dimension",
-          "$value": {
-            "value": 36,
-            "unit": "px"
-          }
+          "$value": "36px"
         },
         "headline-small-line-height": {
           "$type": "dimension",
-          "$value": {
-            "value": 32,
-            "unit": "px"
-          }
+          "$value": "32px"
         },
         "title-large-line-height": {
           "$type": "dimension",
-          "$value": {
-            "value": 28,
-            "unit": "px"
-          }
+          "$value": "28px"
         },
         "title-medium-line-height": {
           "$type": "dimension",
-          "$value": {
-            "value": 24,
-            "unit": "px"
-          }
+          "$value": "24px"
         },
         "title-small-line-height": {
           "$type": "dimension",
-          "$value": {
-            "value": 20,
-            "unit": "px"
-          }
+          "$value": "20px"
         },
         "label-large-line-height": {
           "$type": "dimension",
-          "$value": {
-            "value": 20,
-            "unit": "px"
-          }
+          "$value": "20px"
         },
         "label-medium-line-height": {
           "$type": "dimension",
-          "$value": {
-            "value": 16,
-            "unit": "px"
-          }
+          "$value": "16px"
         },
         "label-small-line-height": {
           "$type": "dimension",
-          "$value": {
-            "value": 16,
-            "unit": "px"
-          }
+          "$value": "16px"
         },
         "body-large-line-height": {
           "$type": "dimension",
-          "$value": {
-            "value": 24,
-            "unit": "px"
-          }
+          "$value": "24px"
         },
         "body-medium-line-height": {
           "$type": "dimension",
-          "$value": {
-            "value": 20,
-            "unit": "px"
-          }
+          "$value": "20px"
         },
         "body-small-line-height": {
           "$type": "dimension",
-          "$value": {
-            "value": 16,
-            "unit": "px"
-          }
+          "$value": "16px"
         },
         "display-large": {
           "$type": "typography",
