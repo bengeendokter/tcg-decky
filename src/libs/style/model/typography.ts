@@ -126,6 +126,24 @@ const TYPESCALE_FONT_SIZE_MAP = {
 	'label-small-size': 11,
 } as const satisfies Record<`${Typescale}-size`, number>;
 
+const TYPESCALE_LINE_HEIGHT_MAP = {
+	'display-large-line-height': 64,
+	'display-medium-line-height': 52,
+	'display-small-line-height': 44,
+	'headline-large-line-height': 40,
+	'headline-medium-line-height': 36,
+	'headline-small-line-height': 32,
+	'title-large-line-height': 28,
+	'title-medium-line-height': 24,
+	'title-small-line-height': 20,
+	'body-large-line-height': 24,
+	'body-medium-line-height': 20,
+	'body-small-line-height': 16,
+	'label-large-line-height': 20,
+	'label-medium-line-height': 16,
+	'label-small-line-height': 16,
+} as const satisfies Record<`${Typescale}-line-height`, number>;
+
 export type FontFamilyToken = {
 	$type: 'fontFamily';
 	$value: string;
@@ -216,6 +234,23 @@ export type LineHeightToken = {
 export type TypescaleLineHeightTokens = {
 	[key in `${Typescale}-line-height`]: LineHeightToken;
 };
+
+export function getTypescaleLineHeightTokens(): TypescaleLineHeightTokens {
+	const typescaleLineHeightTokensEntries: [`${Typescale}-line-height`, LineHeightToken][] = typescales.map(
+		([typescaleType, typescaleSize]) => [
+			`${typescaleType}-${typescaleSize}-line-height`,
+			{
+				$type: 'dimension',
+				$value: {
+					value: TYPESCALE_LINE_HEIGHT_MAP[`${typescaleType}-${typescaleSize}-line-height`],
+					unit: 'px',
+				},
+			},
+		],
+	);
+
+	return fromEntries(typescaleLineHeightTokensEntries);
+}
 
 export type TypographyToken = {
 	$type: 'typography';
