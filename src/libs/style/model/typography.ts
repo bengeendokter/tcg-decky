@@ -108,40 +108,23 @@ export type TypefacePropertyNumberType = Exclude<
 	typeof TYPEFACE_PROPERTY_TYPE.FONT | typeof TYPEFACE_PROPERTY_TYPE.WEIGHT
 >;
 
-type TypescaleNumberProperty = `${Typescale}-${TypefacePropertyNumberType}`;
-
-const TYPESCALE_NUMBER_PROPERTY_VALUE_MAP = {
+const TYPESCALE_FONT_SIZE_MAP = {
 	'display-large-size': 57,
-	'display-large-line-height': 64,
 	'display-medium-size': 45,
-	'display-medium-line-height': 52,
 	'display-small-size': 36,
-	'display-small-line-height': 44,
 	'headline-large-size': 32,
-	'headline-large-line-height': 40,
 	'headline-medium-size': 28,
-	'headline-medium-line-height': 36,
 	'headline-small-size': 24,
-	'headline-small-line-height': 32,
 	'title-large-size': 22,
-	'title-large-line-height': 28,
 	'title-medium-size': 16,
-	'title-medium-line-height': 24,
 	'title-small-size': 14,
-	'title-small-line-height': 20,
 	'body-large-size': 16,
-	'body-large-line-height': 24,
 	'body-medium-size': 14,
-	'body-medium-line-height': 20,
 	'body-small-size': 12,
-	'body-small-line-height': 16,
 	'label-large-size': 14,
-	'label-large-line-height': 20,
 	'label-medium-size': 12,
-	'label-medium-line-height': 16,
 	'label-small-size': 11,
-	'label-small-line-height': 16,
-} as const satisfies Record<TypescaleNumberProperty, number>;
+} as const satisfies Record<`${Typescale}-size`, number>;
 
 export type FontFamilyToken = {
 	$type: 'fontFamily';
@@ -204,6 +187,23 @@ export type FontSizeToken = {
 export type TypescaleFontSizeTokens = {
 	[key in `${Typescale}-size`]: FontSizeToken;
 };
+
+export function getTypescaleFontSizeTokens(): TypescaleFontSizeTokens {
+	const typescaleFontSizeTokensEntries: [`${Typescale}-size`, FontSizeToken][] = typescales.map(
+		([typescaleType, typescaleSize]) => [
+			`${typescaleType}-${typescaleSize}-size`,
+			{
+				$type: 'dimension',
+				$value: {
+					value: TYPESCALE_FONT_SIZE_MAP[`${typescaleType}-${typescaleSize}-size`],
+					unit: 'px',
+				},
+			},
+		],
+	);
+
+	return fromEntries(typescaleFontSizeTokensEntries);
+}
 
 export type LineHeightToken = {
 	$type: 'dimension';
