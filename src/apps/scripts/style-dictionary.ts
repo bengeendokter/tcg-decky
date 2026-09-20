@@ -140,7 +140,7 @@ function getTypographyStyleDictionary(): StyleDictionary {
 			md: {
 				ref: {
 					typeface: {
-						'font-family': getFontFamilyTokens(),
+						font: getFontFamilyTokens(),
 						weight: getFontWeightTokens(),
 					},
 				},
@@ -150,7 +150,7 @@ function getTypographyStyleDictionary(): StyleDictionary {
 						...getTypescaleFontSizeTokens(),
 						...getTypescaleFontWeightTokens(),
 						...getTypescaleLineHeightTokens(),
-						// ...getTypographyTokens()
+						...getTypographyTokens(),
 					},
 				},
 			},
@@ -172,6 +172,7 @@ function getTypographyStyleDictionary(): StyleDictionary {
 				],
 			},
 		},
+		log,
 	});
 }
 

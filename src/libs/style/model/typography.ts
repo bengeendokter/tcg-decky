@@ -154,16 +154,25 @@ export type FontFamilyTokens = {
 };
 
 export type TypescaleFontFamilyTokens = {
-	[key in `${Typescale}-font`]: `{md.ref.typeface.font.${Typeface}}`;
+	[key in `${Typescale}-font`]: {
+		$type: 'fontFamily';
+		$value: `{md.ref.typeface.font.${Typeface}}`;
+	};
 };
 
 export function getTypescaleFontFamilyTokens(): TypescaleFontFamilyTokens {
 	const typescaleFontFamilyTokensEntries: [
 		`${Typescale}-font`,
-		`{md.ref.typeface.font.${Typeface}}`,
+		{
+			$type: 'fontFamily';
+			$value: `{md.ref.typeface.font.${Typeface}}`;
+		},
 	][] = typescales.map(([typescaleType, typescaleSize]) => [
 		`${typescaleType}-${typescaleSize}-font`,
-		`{md.ref.typeface.font.${TYPESCALE_TYPE_TYPEFACE_MAP[typescaleType]}}`,
+		{
+			$type: 'fontFamily',
+			$value: `{md.ref.typeface.font.${TYPESCALE_TYPE_TYPEFACE_MAP[typescaleType]}}`,
+		},
 	]);
 
 	return fromEntries(typescaleFontFamilyTokensEntries);
@@ -179,16 +188,25 @@ export type FontWeightTokens = {
 };
 
 export type TypescaleFontWeightTokens = {
-	[key in `${Typescale}-weight`]: `{md.ref.typeface.weight.${FontWeightType}}`;
+	[key in `${Typescale}-weight`]: {
+		$type: 'fontWeight';
+		$value: `{md.ref.typeface.weight.${FontWeightType}}`;
+	};
 };
 
 export function getTypescaleFontWeightTokens(): TypescaleFontWeightTokens {
 	const typescaleFontWeightTokensEntries: [
 		`${Typescale}-weight`,
-		`{md.ref.typeface.weight.${FontWeightType}}`,
+		{
+			$type: 'fontWeight';
+			$value: `{md.ref.typeface.weight.${FontWeightType}}`;
+		},
 	][] = typescales.map(([typescaleType, typescaleSize]) => [
 		`${typescaleType}-${typescaleSize}-weight`,
-		`{md.ref.typeface.weight.${TYPESCALE_TYPE_FONT_WEIGHT_TYPE_MAP[typescaleType]}}`,
+		{
+			$type: 'fontWeight',
+			$value: `{md.ref.typeface.weight.${TYPESCALE_TYPE_FONT_WEIGHT_TYPE_MAP[typescaleType]}}`,
+		},
 	]);
 
 	return fromEntries(typescaleFontWeightTokensEntries);
@@ -236,8 +254,8 @@ export type TypescaleLineHeightTokens = {
 };
 
 export function getTypescaleLineHeightTokens(): TypescaleLineHeightTokens {
-	const typescaleLineHeightTokensEntries: [`${Typescale}-line-height`, LineHeightToken][] = typescales.map(
-		([typescaleType, typescaleSize]) => [
+	const typescaleLineHeightTokensEntries: [`${Typescale}-line-height`, LineHeightToken][] =
+		typescales.map(([typescaleType, typescaleSize]) => [
 			`${typescaleType}-${typescaleSize}-line-height`,
 			{
 				$type: 'dimension',
@@ -246,8 +264,7 @@ export function getTypescaleLineHeightTokens(): TypescaleLineHeightTokens {
 					unit: 'px',
 				},
 			},
-		],
-	);
+		]);
 
 	return fromEntries(typescaleLineHeightTokensEntries);
 }
