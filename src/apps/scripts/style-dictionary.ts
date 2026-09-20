@@ -1,6 +1,7 @@
 import {
 	THEME_NAME,
 	THEME_NAME_THEME_TOKENS_MAP,
+	THEME_NAMES,
 	type ThemeName,
 	type ThemeTokens,
 } from '@style/model/theme';
@@ -26,6 +27,8 @@ import {
 	getTypescaleLineHeightTokens,
 	getTypographyTokens,
 } from '@style/model/typography';
+import { exportObjectToJson } from '@style/data-access/export-full-palette-collection-tokens-to-json';
+import { exportPenpotMetadata } from '@style/feature/export-penpot-metadata';
 
 const BLUE_THEME_COLOR = { l: 0.63, c: 0.26, h: 29.23 } as const satisfies Oklch;
 
@@ -181,28 +184,28 @@ const PALETTE_PARAMS = [
 	['purple', PURPLE_THEME_COLOR],
 ] as const satisfies [string, Oklch][];
 
-// await Promise.all(
-// 	PALETTE_PARAMS.map(async ([name, color]) => {
-// 		return await getPaletteStyleDictionary(name, color).buildAllPlatforms();
-// 	}),
-// );
+await Promise.all(
+	PALETTE_PARAMS.map(async ([name, color]) => {
+		return await getPaletteStyleDictionary(name, color).buildAllPlatforms();
+	}),
+);
 
-// await Promise.all(
-// 	THEME_NAMES.map(async (themeName) => {
-// 		exportObjectToJson({
-// 			object: {
-// 				md: {
-// 					sys: {
-// 						[TOKEN_PATH_KEY.COLOR]: THEME_NAME_THEME_TOKENS_MAP[themeName],
-// 					},
-// 				},
-// 			},
-// 			destination: `output/style-dictionary/penpot/color-scheme/${themeName}.json`,
-// 		});
-// 		return await getThemeStyleDictionary(themeName).buildAllPlatforms();
-// 	}),
-// );
-//
-// exportPenpotMetadata();
+await Promise.all(
+	THEME_NAMES.map(async (themeName) => {
+		exportObjectToJson({
+			object: {
+				md: {
+					sys: {
+						[TOKEN_PATH_KEY.COLOR]: THEME_NAME_THEME_TOKENS_MAP[themeName],
+					},
+				},
+			},
+			destination: `output/style-dictionary/penpot/color-scheme/${themeName}.json`,
+		});
+		return await getThemeStyleDictionary(themeName).buildAllPlatforms();
+	}),
+);
+
+exportPenpotMetadata();
 
 await getTypographyStyleDictionary().buildAllPlatforms();
