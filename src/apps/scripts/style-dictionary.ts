@@ -32,6 +32,7 @@ import {
 } from '@style/model/typography';
 import { exportObjectToJson } from '@style/data-access/export-full-palette-collection-tokens-to-json';
 import { exportPenpotMetadata } from '@style/feature/export-penpot-metadata';
+import { getShapeCornerTokens } from '@style/model/shape-corner';
 
 const BLUE_THEME_COLOR = { l: 0.63, c: 0.26, h: 29.23 } as const satisfies Oklch;
 
@@ -204,6 +205,37 @@ function getTypographyStyleDictionary(): StyleDictionary {
 	});
 }
 
+const shapeCornerTokens: DesignTokens = {
+	md: {
+		sys: {
+			"shape-corner": getShapeCornerTokens(),
+		},
+	},
+};
+
+function getShapeCornerStyleDictionary(): StyleDictionary {
+	return new StyleDictionary({
+		tokens: shapeCornerTokens,
+		platforms: {
+			[PLATFORM.CSS]: {
+				transformGroup: transformGroups.css,
+				buildPath: 'output/style-dictionary/',
+				files: [
+					{
+						destination: `shape-corner.css`,
+						format: formats.cssVariables,
+						options: {
+							outputReferences: true,
+							selector: 'html',
+						},
+					},
+				],
+			},
+		},
+		log,
+	});
+}
+
 const PALETTE_PARAMS = [
 	['red', BLUE_THEME_COLOR],
 	['purple', PURPLE_THEME_COLOR],
@@ -239,3 +271,5 @@ exportObjectToJson({
 	object: penpotTypographyTokens,
 	destination: `output/style-dictionary/penpot/typography.json`,
 });
+
+await getShapeCornerStyleDictionary().buildAllPlatforms();
