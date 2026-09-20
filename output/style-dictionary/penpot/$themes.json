@@ -1,5 +1,11 @@
 [
   {
+    "name": "Typography",
+    "selectedTokenSets": {
+      "typography": "enabled"
+    }
+  },
+  {
     "name": "Purple",
     "group": "Brand",
     "selectedTokenSets": {

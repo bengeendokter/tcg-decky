@@ -19,11 +19,18 @@ export function exportPenpotMetadata() {
 			`color-scheme/${SET_NAME.DARK}`,
 			`color-scheme/${SET_NAME.DARK_MC}`,
 			`color-scheme/${SET_NAME.DARK_HC}`,
+			'typography',
 		],
-		activeThemes: ['Brand/Purple', 'Color Scheme/Light'],
+		activeThemes: ['Brand/Purple', 'Color Scheme/Light', 'Typography'],
 	};
 
 	const themeMetadata: ThemeMetadata[] = [
+		{
+			name: 'Typography',
+			selectedTokenSets: {
+				typography: 'enabled',
+			},
+		},
 		{
 			name: 'Purple',
 			group: THEME_GROUP_NAME.BRAND,

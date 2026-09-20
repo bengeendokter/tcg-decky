@@ -11,7 +11,7 @@ export const SET_NAME = {
 
 export type SetName = (typeof SET_NAME)[keyof typeof SET_NAME];
 
-export type SetFullName = `${'palette' | 'color-scheme'}/${SetName}`;
+export type SetFullName = `${'palette' | 'color-scheme'}/${SetName}` | 'typography';
 
 export const THEME_GROUP_NAME = {
 	BRAND: 'Brand',
@@ -43,12 +43,12 @@ export type ColorSchemeTheme = (typeof COLOR_SCHEME_THEME)[keyof typeof COLOR_SC
 export type ColorSchemeThemeFullName =
 	`${typeof THEME_GROUP_NAME.COLOR_SCHEME}/${ColorSchemeTheme}`;
 
-export type ThemeFullName = BrandThemeFullName | ColorSchemeThemeFullName;
+export type ThemeFullName = BrandThemeFullName | ColorSchemeThemeFullName | 'Typography';
 
 export type ThemeShortNameGeneric<T = ThemeFullName> =
 	T extends `${ThemeGroupName}/${infer ShortName}` ? ShortName : never;
 
-export type ThemeShortName = ThemeShortNameGeneric;
+export type ThemeShortName = ThemeShortNameGeneric | 'Typography';
 
 export const THEME_GROUP = {
 	[THEME_GROUP_NAME.BRAND]: BRAND_THEME,
@@ -63,7 +63,7 @@ export interface Metadata {
 
 export interface ThemeMetadata {
 	name: ThemeShortName;
-	group: ThemeGroupName;
+	group?: ThemeGroupName;
 	selectedTokenSets: {
 		[key in SetFullName]?: 'enabled' | 'disabled';
 	};

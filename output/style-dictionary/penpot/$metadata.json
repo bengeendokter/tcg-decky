@@ -7,10 +7,12 @@
     "color-scheme/light-hc",
     "color-scheme/dark",
     "color-scheme/dark-mc",
-    "color-scheme/dark-hc"
+    "color-scheme/dark-hc",
+    "typography"
   ],
   "activeThemes": [
     "Brand/Purple",
-    "Color Scheme/Light"
+    "Color Scheme/Light",
+    "Typography"
   ]
 }
